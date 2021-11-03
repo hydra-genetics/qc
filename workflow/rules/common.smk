@@ -45,9 +45,10 @@ wildcard_constraints:
     unit="N|T|R",
 
 
-def compile_output_list(wildcards):
+def compile_output_list(wildcards: snakemake.io.Wildcards):
     return [
-        "qc/dummy/%s_%s.dummy.txt" % (sample, t)
+        "qc/fastqc/%s_%s_%s_fastqc.html" % (sample, t, read)
+        for read in ["fastq1", "fastq2"]
         for sample in get_samples(samples)
         for t in get_unit_types(units, sample)
     ]

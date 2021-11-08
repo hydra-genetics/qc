@@ -22,5 +22,45 @@ properties:
         type: string
         description: default max execution time for 'fastqc'
 
+  picard_duplication_metrics:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: default number of threads that will be used by 'picard_duplication_metrics'
+      time:
+        type: string
+        description: default max execution time for 'picard_duplication_metrics'
+
+  picard_alignment_summary_metrics:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: default number of threads that will be used by 'picard_alignment_summary_metrics'
+      time:
+        type: string
+        description: default max execution time for 'picard_alignment_summary_metrics'
+
+  picard_hs_metrics:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: default number of threads that will be used by 'picard_hs_metrics'
+      time:
+        type: string
+        description: default max execution time for 'picard_hs_metrics'
+
+  picard_insert_size:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: default number of threads that will be used by 'picard_insert_size'
+      time:
+        type: string
+        description: default max execution time for 'picard_insert_size'
+
   required:
     - default_resources

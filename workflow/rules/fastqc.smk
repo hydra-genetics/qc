@@ -21,7 +21,10 @@ rule fastqc:
         "qc/fastqc/{sample}_{type}_{read}.fastqc.log",
     benchmark:
         repeat("qc/fastqc/{sample}_{type}_{read}.fastqc.benchmark.tsv", config.get("fastqc", {}).get("benchmark_repeats", 1))
-    threads: config.get("fastqc", config["default_resources"]).get("threads", config["default_resources"]["threads"])
+    threads: config.get("fastqc", {}).get("threads", config["default_resources"]["threads"])
+    resources:
+        threads=config.get("fastqc", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("fastqc", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("fastqc", {}).get("container", config["default_container"])
     conda:

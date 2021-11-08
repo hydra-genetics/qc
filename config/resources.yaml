@@ -4,3 +4,4 @@ default_resources:
 
 fastqc:
   threads: 10
+  time: "02:00:00"

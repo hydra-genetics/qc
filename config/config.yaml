@@ -1,9 +1,8 @@
----
+resources: "resources.yaml"
+samples: "samples.tsv"
+units: "units.tsv"
 
- resources: "resources.yaml"
- samples: "samples.tsv"
- units: "units.tsv"
+default_container: "docker://hydra/common:0.0.1"
 
- default_container: "docker://marrip/common:1.1.0"
-
- 
+fastqc:
+  container: "docker://hydra/fastqc:0.11.9"

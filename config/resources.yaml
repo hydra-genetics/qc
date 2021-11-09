@@ -1,0 +1,7 @@
+default_resources:
+  threads: 1
+  time: "12:00:00"
+
+fastqc:
+  threads: 10
+  time: "02:00:00"

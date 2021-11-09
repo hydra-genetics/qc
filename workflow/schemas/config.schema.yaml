@@ -21,9 +21,13 @@ properties:
       design_intervals:
         type: string
         description: picard style bed file for design regions
+      design_bed:
+        type: string
+        description: bed file for design regions
     required:
       - fasta
       - design_intervals
+      - design_bed
   required:
     - samples
     - units
@@ -94,3 +98,16 @@ properties:
       extra:
         type: string
         description: extra parameters to picard_insert_size
+
+  samtools_stats:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for samtools_stats
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra parameters to samtools_stats

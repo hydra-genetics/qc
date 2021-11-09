@@ -15,7 +15,7 @@ rule samtools_stats:
     params:
         extra="%s -t %s" % (
             config.get("samtools_stats", {}).get("extra", ""),
-            config.get("reference", {}).get("design_bed", "")
+            config.get("reference", {}).get("design_bed", ""),
         ),
     log:
         "qc/samtools_stats/{sample}_{type}.log",

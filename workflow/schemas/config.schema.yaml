@@ -12,6 +12,18 @@ properties:
   default_container:
     type: string
     description: name or path to a default docker/singularity container
+  reference:
+    type: object
+    properties:
+      fasta:
+        type: string
+        description: fasta reference file
+      design_intervals:
+        type: string
+        description: picard style bed file for design regions
+    required:
+      - fasta
+      - design_intervals
   required:
     - samples
     - units
@@ -27,3 +39,58 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
+      outdir:
+        type: string
+        description: path to outdir directory
+      tmp:
+        type: string
+        description: path to temporary directory
+
+  picard_duplication_metrics:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for picard_duplication_metrics
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  picard_alignment_summary_metrics:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for picard_alignment_summary_metrics
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra parameters to picard_alignment_summary_metrics
+
+  picard_hs_metrics:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for picard_hs_metrics
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra parameters to picard_hs_metrics
+
+  picard_insert_size:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for picard_insert_size
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra parameters to picard_insert_size

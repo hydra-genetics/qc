@@ -9,4 +9,4 @@ reference:
   design_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
 
 fastqc:
-  container: "docker://hydra/fastqc:0.11.9"
+  container: "docker://hydragenetics/fastqc:0.11.9"

@@ -14,3 +14,15 @@ fastqc:
 
 samtools_stats:
   extra: "-t reference/twist_DNA_solid.HES45.annotated.bed"
+  
+picard_alignment_summary_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+  
+picard_duplication_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+  
+picard_hs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+  
+picard_insert_size:
+  container: "docker://hydragenetics/picard:2.25.0"

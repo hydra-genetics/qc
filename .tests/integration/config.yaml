@@ -2,7 +2,7 @@ resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
-default_container: "docker://gmsuppsala/somatic:develop"
+default_container: "docker://hydragenetics/common:0.0.1"
 
 reference:
   fasta: "reference/HES45.fna"
@@ -14,15 +14,16 @@ fastqc:
 
 samtools_stats:
   extra: "-t reference/twist_DNA_solid.HES45.annotated.bed"
-  
+  container: "docker://gmsuppsala/somatic:develop"
+
 picard_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
-  
+
 picard_duplication_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
-  
+
 picard_hs_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
-  
+
 picard_insert_size:
   container: "docker://hydragenetics/picard:2.25.0"

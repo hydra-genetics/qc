@@ -12,7 +12,7 @@ properties:
         type: string
         description: default max execution time for a rule
       mem_mb:
-        type: string
+        type: integer
         description: default memory used for a rule
 
   fastqc:
@@ -35,7 +35,7 @@ properties:
         type: string
         description: max execution time for 'picard_duplication_metrics'
       mem_mb:
-        type: string
+        type: integer
         description: memory used for 'picard_duplication_metrics'
 
   picard_alignment_summary_metrics:
@@ -48,7 +48,7 @@ properties:
         type: string
         description: max execution time for 'picard_alignment_summary_metrics'
       mem_mb:
-        type: string
+        type: integer
         description: memory used for 'picard_alignment_summary_metrics'
 
   picard_hs_metrics:
@@ -61,7 +61,7 @@ properties:
         type: string
         description: max execution time for 'picard_hs_metrics'
       mem_mb:
-        type: string
+        type: integer
         description: memory used for 'picard_hs_metrics'
 
   picard_insert_size:
@@ -74,7 +74,7 @@ properties:
         type: string
         description: max execution time for 'picard_insert_size'
       mem_mb:
-        type: string
+        type: integer
         description: memory used for 'picard_insert_size'
 
   required:

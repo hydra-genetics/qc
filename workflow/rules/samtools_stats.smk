@@ -13,7 +13,7 @@ rule samtools_stats:
     output:
         temp("qc/samtools_stats/{sample}_{type}.samtools-stats.txt"),
     params:
-        extra=config.get("samtools_stats", {}).get("extra", ""),
+        extra="%s -t %s" % (config.get("samtools_stats", {}).get("extra", ""), config.get("reference", {}).get("design_bed", "")),
     log:
         "qc/samtools_stats/{sample}_{type}.log",
     benchmark:

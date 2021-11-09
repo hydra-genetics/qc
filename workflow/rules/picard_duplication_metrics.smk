@@ -23,7 +23,7 @@ rule picard_duplication_metrics:
     resources:
         threads=config.get("picard_duplication_metrics", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("picard_duplication_metrics", {}).get("time", config["default_resources"]["time"]),
-        mem_mb=config.get("picard_alignment_summary_metrics", {}).get("mem_mb", 1024),
+        mem_mb=config.get("picard_alignment_summary_metrics", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
     container:
         config.get("picard_duplication_metrics", {}).get("container", config["default_container"])
     conda:

@@ -26,7 +26,7 @@ rule picard_insert_size:
     resources:
         threads=config.get("picard_insert_size", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("picard_insert_size", {}).get("time", config["default_resources"]["time"]),
-        mem_mb=config.get("picard_insert_size", {}).get("mem_mb", 1024),
+        mem_mb=config.get("picard_insert_size", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
     container:
         config.get("picard_insert_size", {}).get("container", config["default_container"])
     conda:

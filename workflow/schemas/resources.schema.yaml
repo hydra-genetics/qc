@@ -11,6 +11,9 @@ properties:
       time:
         type: string
         description: default max execution time for a rule
+      mem_mb:
+        type: string
+        description: default memory used for a rule
 
   fastqc:
     type: object

@@ -77,5 +77,18 @@ properties:
         type: integer
         description: memory used for 'picard_insert_size'
 
+  samtools_stats:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'samtools_stats'
+      time:
+        type: string
+        description: max execution time for 'samtools_stats'
+      mem_mb:
+        type: integer
+        description: memory used for 'samtools_stats'
+
   required:
     - default_resources

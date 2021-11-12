@@ -8,6 +8,8 @@ reference:
   fasta: "reference/HES45.fna"
   design_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
   design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
+  hotspots: "reference/hotspots_small.csv"
+  background: "reference/background_panel_small.tsv"
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
@@ -26,3 +28,6 @@ picard_hs_metrics:
 
 picard_insert_size:
   container: "docker://hydragenetics/picard:2.25.0"
+
+hotspot_info:
+  container: "docker://hydragenetics/common:0.0.1"

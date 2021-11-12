@@ -90,5 +90,24 @@ properties:
         type: integer
         description: memory used for 'samtools_stats'
 
+  hotspot_info:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'hotspot_info'
+      time:
+        type: string
+        description: max execution time for 'hotspot_info'
+      mem_mb:
+        type: integer
+        description: memory used for 'hotspot_info'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'hotspot_info'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'hotspot_info'
+
   required:
     - default_resources

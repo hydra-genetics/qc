@@ -42,7 +42,7 @@ for line in bed:
     Report = lline[6]
     if Report == "region":
         continue
-    chrom = lline[0].split(".")[0].split("0")[-1]
+    chrom = str(int(lline[0].split(".")[0].split("_")[1]))
     start_pos = lline[1]
     end_pos = lline[2]
     gene = lline[3]

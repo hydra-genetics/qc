@@ -37,6 +37,14 @@ validate(samples, schema="../schemas/samples.schema.yaml")
 units = pandas.read_table(config["units"], dtype=str).set_index(["sample", "type", "run", "lane"], drop=False)
 validate(units, schema="../schemas/units.schema.yaml")
 
+
+def get_run(units, wildcards):
+    runs = set([u.run for u in get_units(units, wildcards)])
+    if len(runs) > 1:
+        raise ValueError("Sample type combination from different sequence runs")
+    return runs.pop()
+
+
 ### Set wildcard constraints
 
 
@@ -83,6 +91,13 @@ def compile_output_list(wildcards: snakemake.io.Wildcards):
     output.append(
         [
             "qc/samtools_stats/%s_%s.samtools-stats.txt" % (sample, t)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+        ]
+    )
+    output.append(
+        [
+            "qc/hotspot_info/%s_%s.hotspot_info.tsv" % (sample, t)
             for sample in get_samples(samples)
             for t in get_unit_types(units, sample)
         ]

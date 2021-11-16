@@ -24,10 +24,15 @@ properties:
       design_bed:
         type: string
         description: bed file for design regions
+      hotspots:
+        type: string
+        description: file listing all hotspot positions
+      background:
+        type: string
+        description: background info for all positions in design
     required:
       - fasta
-      - design_intervals
-      - design_bed
+
   required:
     - samples
     - units
@@ -111,3 +116,16 @@ properties:
       extra:
         type: string
         description: extra parameters to samtools_stats
+
+  hotspot_info:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for hotspot_info
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      min_coverage:
+        type: integer
+        description: coverage under which hotspot positions should be reported

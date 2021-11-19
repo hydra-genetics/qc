@@ -25,6 +25,9 @@ rule fastqc:
     resources:
         threads=config.get("fastqc", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("fastqc", {}).get("time", config["default_resources"]["time"]),
+        mem_mb=config.get("fastqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("fastqc", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("fastqc", {}).get("partition", config["default_resources"]["partition"]),
     container:
         config.get("fastqc", {}).get("container", config["default_container"])
     conda:

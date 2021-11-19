@@ -14,6 +14,12 @@ properties:
       mem_mb:
         type: integer
         description: default memory used for a rule
+      mem_per_cpu:
+        type: integer
+        description: default memory used per cpu for a rule
+      partition:
+        type: string
+        description: default partition to use on the cluster for a rule
 
   fastqc:
     type: object
@@ -24,6 +30,15 @@ properties:
       time:
         type: string
         description: max execution time for 'fastqc'
+      mem_mb:
+        type: integer
+        description: memory used for 'fastqc'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'fastqc'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'fastqc'
 
   picard_duplication_metrics:
     type: object
@@ -37,6 +52,12 @@ properties:
       mem_mb:
         type: integer
         description: memory used for 'picard_duplication_metrics'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'picard_duplication_metrics'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'picard_duplication_metrics'
 
   picard_alignment_summary_metrics:
     type: object
@@ -50,6 +71,12 @@ properties:
       mem_mb:
         type: integer
         description: memory used for 'picard_alignment_summary_metrics'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'picard_alignment_summary_metrics'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'picard_alignment_summary_metrics'
 
   picard_hs_metrics:
     type: object
@@ -63,6 +90,12 @@ properties:
       mem_mb:
         type: integer
         description: memory used for 'picard_hs_metrics'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'picard_hs_metrics'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'picard_hs_metrics'
 
   picard_insert_size:
     type: object
@@ -76,6 +109,12 @@ properties:
       mem_mb:
         type: integer
         description: memory used for 'picard_insert_size'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'picard_insert_size'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'picard_insert_size'
 
   samtools_stats:
     type: object
@@ -89,6 +128,12 @@ properties:
       mem_mb:
         type: integer
         description: memory used for 'samtools_stats'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'samtools_stats'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'samtools_stats'
 
   hotspot_info:
     type: object

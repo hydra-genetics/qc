@@ -26,6 +26,8 @@ rule samtools_stats:
         threads=config.get("samtools_stats", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("samtools_stats", {}).get("time", config["default_resources"]["time"]),
         mem_mb=config.get("samtools_stats", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("samtools_stats", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("samtools_stats", {}).get("partition", config["default_resources"]["partition"]),
     container:
         config.get("samtools_stats", {}).get("container", config["default_container"])
     conda:

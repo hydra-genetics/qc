@@ -28,6 +28,8 @@ rule picard_hs_metrics:
         threads=config.get("picard_hs_metrics", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("picard_hs_metrics", {}).get("time", config["default_resources"]["time"]),
         mem_mb=config.get("picard_hs_metrics", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("picard_hs_metrics", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("picard_hs_metrics", {}).get("partition", config["default_resources"]["partition"]),
     container:
         config.get("picard_hs_metrics", {}).get("container", config["default_container"])
     conda:

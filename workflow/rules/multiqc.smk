@@ -22,7 +22,7 @@ rule multiqc:
         ],
     output:
         temp("qc/multiqc/MultiQC.html"),
-        temp("qc/multiqc/multiqc_data"),
+        temp(directory("qc/multiqc/multiqc_data")),
     params:
         "{} {}".format(
             config.get("multiqc", {}).get("extra", ""),

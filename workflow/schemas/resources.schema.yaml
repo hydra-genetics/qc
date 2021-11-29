@@ -40,6 +40,25 @@ properties:
         type: string
         description: partition to use on the cluster for 'fastqc'
 
+  multiqc:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'multiqc'
+      time:
+        type: string
+        description: max execution time for 'multiqc'
+      mem_mb:
+        type: integer
+        description: memory used for 'multiqc'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'multiqc'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'multiqc'
+
   picard_duplication_metrics:
     type: object
     properties:

@@ -39,6 +39,27 @@ properties:
     - resources
     - default_container
 
+  multiqc:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for fastqc
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      config:
+        type: string
+        description: path to multiqc_config.yaml
+      extra:
+        type: string
+        description: extra parameters to multiqc
+      qc_files:
+        type: array
+        items:
+            type: string
+        description: list with path to qc-files that will be used to generate a MultiQC report.
+
   fastqc:
     type: object
     properties:

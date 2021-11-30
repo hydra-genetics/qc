@@ -6,3 +6,14 @@ default_container: "docker://hydragenetics/common:0.0.1"
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
+  
+  
+multiqc:
+  container: "docker://hydragenetics/multiqc:1.11"
+  qc_files:
+    - "qc/picard_hs_metrics/{sample}_{type}.HsMetrics.txt"
+    - "qc/picard_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+    - "qc/fastqc/{sample}_{type}_fastq1_fastqc.zip"
+    - "qc/fastqc/{sample}_{type}_fastq2_fastqc.zip"
+    - "qc/picard_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
+    - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"

@@ -24,7 +24,7 @@ rule multiqc:
             " -c {}".format(config["multiqc"]["config"]) if "config" in config.get("multiqc", {}) else "",
         ),
     log:
-        temp("qc/multiqc/MultiQC.html"),
+        "qc/multiqc/multiqc.log",
     benchmark:
         repeat("qc/multiqc/multiqc.benchmark.tsv", config.get("multiqc", {}).get("benchmark_repeats", 1))
     threads: config.get("multiqc", {}).get("threads", config["default_resources"]["threads"])

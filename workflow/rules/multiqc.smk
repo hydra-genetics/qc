@@ -11,12 +11,7 @@ rule multiqc:
     input:
         [
             file.format(sample=sample, type=t)
-            for file in config.get("multiqc", {}).get(
-                "qc_files",
-                [
-                    "qc/picard_hs_metrics/{sample}_{type}.HsMetrics.txt",
-                ],
-            )
+            for file in config["multiqc"]["qc_files"]
             for sample in get_samples(samples)
             for t in get_unit_types(units, sample)
         ],

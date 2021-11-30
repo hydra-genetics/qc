@@ -59,6 +59,8 @@ properties:
         items:
             type: string
         description: list with path to qc-files that will be used to generate a MultiQC report.
+    required:
+      - qc_files
 
   fastqc:
     type: object
@@ -150,3 +152,6 @@ properties:
       min_coverage:
         type: integer
         description: coverage under which hotspot positions should be reported
+
+  required:
+    - multiqc

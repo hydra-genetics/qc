@@ -14,8 +14,23 @@ reference:
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
-samtools_stats:
+hotspot_info:
   container: "docker://hydragenetics/common:0.0.1"
+
+mosdepth:
+  by: "500"
+  container: "docker://hydragenetics/mosdepth:0.3.2"
+  extra: "--fast-mode --no-per-base"
+
+multiqc:
+  container: "docker://hydragenetics/multiqc:1.11"
+  qc_files:
+    - "qc/picard_hs_metrics/{sample}_{type}.HsMetrics.txt"
+    - "qc/picard_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+    - "qc/fastqc/{sample}_{type}_fastq1_fastqc.zip"
+    - "qc/fastqc/{sample}_{type}_fastq2_fastqc.zip"
+    - "qc/picard_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
+    - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
 
 picard_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
@@ -29,15 +44,5 @@ picard_hs_metrics:
 picard_insert_size:
   container: "docker://hydragenetics/picard:2.25.0"
 
-hotspot_info:
+samtools_stats:
   container: "docker://hydragenetics/common:0.0.1"
-
-multiqc:
-  container: "docker://hydragenetics/multiqc:1.11"
-  qc_files:
-    - "qc/picard_hs_metrics/{sample}_{type}.HsMetrics.txt"
-    - "qc/picard_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
-    - "qc/fastqc/{sample}_{type}_fastq1_fastqc.zip"
-    - "qc/fastqc/{sample}_{type}_fastq2_fastqc.zip"
-    - "qc/picard_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
-    - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"

@@ -9,7 +9,7 @@ fastqc:
 
 mosdepth:
   by: ""
-  container: "docker://marrip/mosdepth:0.3.2"
+  container: "docker://hydragenetics/mosdepth:0.3.2"
   extra: ""
   
 multiqc:

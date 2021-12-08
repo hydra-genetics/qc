@@ -6,7 +6,11 @@ default_container: "docker://hydragenetics/common:0.0.1"
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
-  
+
+mosdepth:
+  by: ""
+  container: "docker://marrip/mosdepth:0.3.2"
+  extra: ""
   
 multiqc:
   container: "docker://hydragenetics/multiqc:1.11"

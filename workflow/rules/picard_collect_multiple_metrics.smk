@@ -11,7 +11,7 @@ rule picard_collect_multiple_metrics:
     output:
         expand(
             "qc/picard_collect_multiple_metrics/{{sample}}_{{type}}.{ext}",
-            ext=config.get("picard_collect_multiple_metrics", {}).get("output_ext", "")
+            ext=config.get("picard_collect_multiple_metrics", {}).get("output_ext", ""),
         ),
     params:
         extra=config.get("picard_collect_multiple_metrics", {}).get("extra", ""),
@@ -39,4 +39,3 @@ rule picard_collect_multiple_metrics:
         "{rule}: Calculate multiple metrics using picard: qc/{rule}/{wildcards.sample}_{wildcards.type}"
     wrapper:
         "0.80.2/bio/picard/collectmultiplemetrics"
-

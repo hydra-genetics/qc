@@ -230,6 +230,25 @@ properties:
         type: string
         description: partition to use on the cluster for 'picard_collect_multiple_metrics'
 
+  picard_collect_wgs_metrics:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'picard_collect_wgs_metrics'
+      time:
+        type: string
+        description: max execution time for 'picard_collect_wgs_metrics'
+      mem_mb:
+        type: integer
+        description: memory used for 'picard_collect_wgs_metrics'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'picard_collect_wgs_metrics'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'picard_collect_wgs_metrics'
+
   samtools_stats:
     type: object
     properties:

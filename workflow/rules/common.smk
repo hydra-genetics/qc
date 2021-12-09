@@ -105,6 +105,13 @@ def compile_output_list(wildcards: snakemake.io.Wildcards):
     )
     output.append(
         [
+            "qc/picard_collect_wgs_metrics/%s_%s.txt" % (sample, t)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+        ]
+    )
+    output.append(
+        [
             "qc/samtools_stats/%s_%s.samtools-stats.txt" % (sample, t)
             for sample in get_samples(samples)
             for t in get_unit_types(units, sample)

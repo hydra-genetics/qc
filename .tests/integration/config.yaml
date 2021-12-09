@@ -20,6 +20,11 @@ samtools_stats:
 picard_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 
+picard_collect_multiple_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+  output_ext:
+    - "gc_bias.pdf"
+
 picard_duplication_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 

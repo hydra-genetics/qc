@@ -40,6 +40,44 @@ properties:
         type: string
         description: partition to use on the cluster for 'fastqc'
 
+  hotspot_info:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'hotspot_info'
+      time:
+        type: string
+        description: max execution time for 'hotspot_info'
+      mem_mb:
+        type: integer
+        description: memory used for 'hotspot_info'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'hotspot_info'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'hotspot_info'
+
+  mosdepth:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'mosdepth'
+      time:
+        type: string
+        description: max execution time for 'mosdepth'
+      mem_mb:
+        type: integer
+        description: memory used for 'mosdepth'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'mosdepth'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'mosdepth'
+
   multiqc:
     type: object
     properties:
@@ -59,25 +97,6 @@ properties:
         type: string
         description: partition to use on the cluster for 'multiqc'
 
-  picard_duplication_metrics:
-    type: object
-    properties:
-      threads:
-        type: integer
-        description: number of threads that will be used by 'picard_duplication_metrics'
-      time:
-        type: string
-        description: max execution time for 'picard_duplication_metrics'
-      mem_mb:
-        type: integer
-        description: memory used for 'picard_duplication_metrics'
-      mem_per_cpu:
-        type: integer
-        description: memory used per cpu for 'picard_duplication_metrics'
-      partition:
-        type: string
-        description: partition to use on the cluster for 'picard_duplication_metrics'
-
   picard_alignment_summary_metrics:
     type: object
     properties:
@@ -96,6 +115,25 @@ properties:
       partition:
         type: string
         description: partition to use on the cluster for 'picard_alignment_summary_metrics'
+
+  picard_duplication_metrics:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'picard_duplication_metrics'
+      time:
+        type: string
+        description: max execution time for 'picard_duplication_metrics'
+      mem_mb:
+        type: integer
+        description: memory used for 'picard_duplication_metrics'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'picard_duplication_metrics'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'picard_duplication_metrics'
 
   picard_hs_metrics:
     type: object
@@ -153,25 +191,6 @@ properties:
       partition:
         type: string
         description: partition to use on the cluster for 'samtools_stats'
-
-  hotspot_info:
-    type: object
-    properties:
-      threads:
-        type: integer
-        description: number of threads that will be used by 'hotspot_info'
-      time:
-        type: string
-        description: max execution time for 'hotspot_info'
-      mem_mb:
-        type: integer
-        description: memory used for 'hotspot_info'
-      mem_per_cpu:
-        type: integer
-        description: memory used per cpu for 'hotspot_info'
-      partition:
-        type: string
-        description: partition to use on the cluster for 'hotspot_info'
 
   required:
     - default_resources

@@ -13,7 +13,7 @@ rule hotspot_info:
         bai="alignment/merge_bam/{sample}_{type}.bam.bai",
         vcf="snv_indels/ensemble_vcf/{sample}_{type}.ensembled.vep_annotated.vcf",
         hotspots=config.get("reference", {}).get("hotspots", ""),
-        background_panel=config["reference"]["background"],
+        background_panel=config.get("reference", {}).get("background", ""),
         background_run=lambda wildcards: "annotation/calculate_seqrun_background/%s_seqrun_background.tsv"
         % get_run(units, wildcards),
         gvcf="snv_indels/mutect2_gvcf/{sample}_{type}.merged.gvcf.gz",

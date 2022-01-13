@@ -90,6 +90,13 @@ def compile_output_list(wildcards: snakemake.io.Wildcards):
     )
     output.append(
         [
+            "qc/picard_collect_gc_bias_metrics/%s_%s.gc_bias.summary_metrics" % (sample, t)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+        ]
+    )
+    output.append(
+        [
             "qc/picard_collect_multiple_metrics/%s_%s.%s" % (sample, t, ext)
             for sample in get_samples(samples)
             for t in get_unit_types(units, sample)

@@ -35,6 +35,9 @@ multiqc:
 picard_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 
+picard_collect_gc_bias_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
 picard_collect_multiple_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
   output_ext:
@@ -50,4 +53,7 @@ picard_insert_size:
   container: "docker://hydragenetics/picard:2.25.0"
 
 samtools_stats:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+hotspot_info:
   container: "docker://hydragenetics/common:0.0.1"

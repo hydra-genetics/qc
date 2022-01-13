@@ -53,7 +53,7 @@ picard_insert_size:
   container: "docker://hydragenetics/picard:2.25.0"
 
 samtools_stats:
-  container: "docker://hydragenetics/picard:2.25.0"
+  container: "docker://hydragenetics/common:0.0.1"
 
 hotspot_info:
   container: "docker://hydragenetics/common:0.0.1"

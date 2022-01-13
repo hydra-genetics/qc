@@ -16,6 +16,7 @@ include: "rules/picard_duplication_metrics.smk"
 include: "rules/picard_alignment_summary_metrics.smk"
 include: "rules/picard_hs_metrics.smk"
 include: "rules/picard_insert_size.smk"
+include: "rules/picard_collect_multiple_metrics.smk"
 include: "rules/samtools_stats.smk"
 
 

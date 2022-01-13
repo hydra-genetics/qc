@@ -90,6 +90,14 @@ def compile_output_list(wildcards: snakemake.io.Wildcards):
     )
     output.append(
         [
+            "qc/picard_collect_multiple_metrics/%s_%s.%s" % (sample, t, ext)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+            for ext in config.get("picard_collect_multiple_metrics", []).get("output_ext", [])
+        ]
+    )
+    output.append(
+        [
             "qc/samtools_stats/%s_%s.samtools-stats.txt" % (sample, t)
             for sample in get_samples(samples)
             for t in get_unit_types(units, sample)

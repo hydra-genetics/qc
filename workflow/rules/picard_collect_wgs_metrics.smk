@@ -8,7 +8,7 @@ rule picard_collect_wgs_metrics:
     input:
         bam="alignment/merge_bam/{sample}_{type}.bam",
         ref=config["reference"]["fasta"],
-        interval=config["reference"]["wgs_intervals"],
+        interval=config.get("reference", {}).get("wgs_intervals", ""),
     output:
         metrics=temp("qc/picard_collect_wgs_metrics/{sample}_{type}.txt"),
     params:

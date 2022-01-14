@@ -39,4 +39,4 @@ rule picard_collect_wgs_metrics:
         "O={output.metrics} "
         "R={input.ref} "
         "INTERVALS={input.interval} "
-        "{params.extra}) {log}"
+        "{params.extra}) &> {log}"

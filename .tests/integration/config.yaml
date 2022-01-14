@@ -10,6 +10,7 @@ reference:
   design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
   hotspots: "reference/hotspots_small.csv"
   background: "reference/background_panel_small.tsv"
+  wgs_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
@@ -42,6 +43,9 @@ picard_collect_multiple_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
   output_ext:
     - "gc_bias.pdf"
+
+picard_collect_wgs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
 
 picard_duplication_metrics:
   container: "docker://hydragenetics/picard:2.25.0"

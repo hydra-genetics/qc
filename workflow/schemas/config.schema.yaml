@@ -129,6 +129,37 @@ properties:
         type: string
         description: extra parameters to 'picard_collect_gc_bias_metrics'
 
+  picard_collect_multiple_metrics:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for 'picard_collect_multiple_metrics'
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra parameters to 'picard_collect_multiple_metrics'
+      output_ext:
+        type: array
+        items:
+          type: string
+        description: output file extensions for 'picard_collect_multiple_metrics'
+
+  picard_collect_wgs_metrics:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for 'picard_collect_wgs_metrics'
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra parameters to 'picard_collect_wgs_metrics'
+
   picard_duplication_metrics:
     type: object
     properties:
@@ -164,24 +195,6 @@ properties:
       extra:
         type: string
         description: extra parameters to picard_insert_size
-
-  picard_collect_multiple_metrics:
-    type: object
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated for 'picard_collect_multiple_metrics'
-      container:
-        type: string
-        description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: extra parameters to 'picard_collect_multiple_metrics'
-      output_ext:
-        type: array
-        items:
-          type: string
-        description: output file extensions for 'picard_collect_multiple_metrics'
 
   samtools_stats:
     type: object

@@ -154,24 +154,24 @@ properties:
         type: string
         description: partition to use on the cluster for 'picard_duplication_metrics'
 
-  picard_hs_metrics:
+  picard_collect_hs_metrics:
     type: object
     properties:
       threads:
         type: integer
-        description: number of threads that will be used by 'picard_hs_metrics'
+        description: number of threads that will be used by 'picard_collect_hs_metrics'
       time:
         type: string
-        description: max execution time for 'picard_hs_metrics'
+        description: max execution time for 'picard_collect_hs_metrics'
       mem_mb:
         type: integer
-        description: memory used for 'picard_hs_metrics'
+        description: memory used for 'picard_collect_hs_metrics'
       mem_per_cpu:
         type: integer
-        description: memory used per cpu for 'picard_hs_metrics'
+        description: memory used per cpu for 'picard_collect_hs_metrics'
       partition:
         type: string
-        description: partition to use on the cluster for 'picard_hs_metrics'
+        description: partition to use on the cluster for 'picard_collect_hs_metrics'
 
   picard_insert_size:
     type: object

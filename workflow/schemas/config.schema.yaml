@@ -170,18 +170,18 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
-  picard_hs_metrics:
+  picard_collect_hs_metrics:
     type: object
     properties:
       benchmark_repeats:
         type: integer
-        description: set number of times benchmark should be repeated for picard_hs_metrics
+        description: set number of times benchmark should be repeated for picard_collect_hs_metrics
       container:
         type: string
         description: name or path to docker/singularity container
       extra:
         type: string
-        description: extra parameters to picard_hs_metrics
+        description: extra parameters to picard_collect_hs_metrics
 
   picard_insert_size:
     type: object

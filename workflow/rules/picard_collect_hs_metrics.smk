@@ -22,7 +22,7 @@ rule picard_collect_hs_metrics:
     benchmark:
         repeat(
             "qc/picard_collect_hs_metrics/{sample}_{type}.benchmark.tsv",
-            config.get("picard_collect_hs_metrics", {}).get("benchmark_repeats", 1)
+            config.get("picard_collect_hs_metrics", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("picard_collect_hs_metrics", {}).get("threads", config["default_resources"]["threads"])
     resources:

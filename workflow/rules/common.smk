@@ -76,7 +76,7 @@ def compile_output_list(wildcards: snakemake.io.Wildcards):
     )
     output.append(
         [
-            "qc/picard_hs_metrics/%s_%s.HsMetrics.txt" % (sample, t)
+            "qc/picard_collect_hs_metrics/%s_%s.HsMetrics.txt" % (sample, t)
             for sample in get_samples(samples)
             for t in get_unit_types(units, sample)
         ]

@@ -33,7 +33,7 @@ rule hotspot_info:
         partition=config.get("hotspot_info", {}).get("partition", config["default_resources"]["partition"]),
     benchmark:
         repeat(
-            "prealignment/hotspot_info/{sample}_{type}.fastq.gz.fastp_trimming.benchmark.tsv",
+            "qc/hotspot_info/{sample}_{type}.fastq.gz.fastp_trimming.benchmark.tsv",
             config.get("hotspot_info", {}).get("benchmark_repeats", 1),
         )
     conda:

@@ -36,4 +36,10 @@ rule fastqc:
         "{rule}: qc/{rule}/{wildcards.sample}_{wildcards.type}_{wildcards.read}"
     shell:
         "(touch {output.tmp} && "
-        "fastqc --quiet -t {threads} -d {params.tmp} --outdir {params.outdir} {input}) &> {log}"
+        "fastqc "
+        "--quiet "
+        "-t {threads} "
+        "-d {params.tmp} "
+        "--outdir {params.outdir} "
+        "{input}) "
+        "&> {log}"

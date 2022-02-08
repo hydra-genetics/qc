@@ -97,24 +97,43 @@ properties:
         type: string
         description: partition to use on the cluster for 'multiqc'
 
-  picard_alignment_summary_metrics:
+  picard_collect_alignment_summary_metrics:
     type: object
     properties:
       threads:
         type: integer
-        description: number of threads that will be used by 'picard_alignment_summary_metrics'
+        description: number of threads that will be used by 'picard_collect_alignment_summary_metrics'
       time:
         type: string
-        description: max execution time for 'picard_alignment_summary_metrics'
+        description: max execution time for 'picard_collect_alignment_summary_metrics'
       mem_mb:
         type: integer
-        description: memory used for 'picard_alignment_summary_metrics'
+        description: memory used for 'picard_collect_alignment_summary_metrics'
       mem_per_cpu:
         type: integer
-        description: memory used per cpu for 'picard_alignment_summary_metrics'
+        description: memory used per cpu for 'picard_collect_alignment_summary_metrics'
       partition:
         type: string
-        description: partition to use on the cluster for 'picard_alignment_summary_metrics'
+        description: partition to use on the cluster for 'picard_collect_alignment_summary_metrics'
+
+  picard_collect_duplication_metrics:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'picard_collect_duplication_metrics'
+      time:
+        type: string
+        description: max execution time for 'picard_collect_duplication_metrics'
+      mem_mb:
+        type: integer
+        description: memory used for 'picard_collect_duplication_metrics'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'picard_collect_duplication_metrics'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'picard_collect_duplication_metrics'
 
   picard_collect_gc_bias_metrics:
     type: object
@@ -135,25 +154,6 @@ properties:
         type: string
         description: partition to use on the cluster for 'picard_collect_gc_bias_metrics'
 
-  picard_duplication_metrics:
-    type: object
-    properties:
-      threads:
-        type: integer
-        description: number of threads that will be used by 'picard_duplication_metrics'
-      time:
-        type: string
-        description: max execution time for 'picard_duplication_metrics'
-      mem_mb:
-        type: integer
-        description: memory used for 'picard_duplication_metrics'
-      mem_per_cpu:
-        type: integer
-        description: memory used per cpu for 'picard_duplication_metrics'
-      partition:
-        type: string
-        description: partition to use on the cluster for 'picard_duplication_metrics'
-
   picard_collect_hs_metrics:
     type: object
     properties:
@@ -173,24 +173,24 @@ properties:
         type: string
         description: partition to use on the cluster for 'picard_collect_hs_metrics'
 
-  picard_insert_size:
+  picard_collect_insert_size_metrics:
     type: object
     properties:
       threads:
         type: integer
-        description: number of threads that will be used by 'picard_insert_size'
+        description: number of threads that will be used by 'picard_collect_insert_size_metrics'
       time:
         type: string
-        description: max execution time for 'picard_insert_size'
+        description: max execution time for 'picard_collect_insert_size_metrics'
       mem_mb:
         type: integer
-        description: memory used for 'picard_insert_size'
+        description: memory used for 'picard_collect_insert_size_metrics'
       mem_per_cpu:
         type: integer
-        description: memory used per cpu for 'picard_insert_size'
+        description: memory used per cpu for 'picard_collect_insert_size_metrics'
       partition:
         type: string
-        description: partition to use on the cluster for 'picard_insert_size'
+        description: partition to use on the cluster for 'picard_collect_insert_size_metrics'
 
   picard_collect_gc_bias_metrics:
     type: object

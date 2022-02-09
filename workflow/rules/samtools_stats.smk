@@ -21,8 +21,9 @@ rule samtools_stats:
     log:
         "qc/samtools_stats/{sample}_{type}.samtools-stats.txt.log",
     benchmark:
-        repeat("qc/samtools_stats/{sample}_{type}.samtools-stats.txt.benchmark.tsv", config.get(
-            "samtools_stats", {}).get("benchmark_repeats", 1)
+        repeat(
+            "qc/samtools_stats/{sample}_{type}.samtools-stats.txt.benchmark.tsv",
+            config.get("samtools_stats", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("samtools_stats", {}).get("threads", config["default_resources"]["threads"])
     resources:

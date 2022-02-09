@@ -103,18 +103,28 @@ properties:
     required:
       - qc_files
 
-  picard_alignment_summary_metrics:
+  picard_collect_alignment_summary_metrics:
     type: object
     properties:
       benchmark_repeats:
         type: integer
-        description: set number of times benchmark should be repeated for picard_alignment_summary_metrics
+        description: set number of times benchmark should be repeated for picard_collect_alignment_summary_metrics
       container:
         type: string
         description: name or path to docker/singularity container
       extra:
         type: string
-        description: extra parameters to picard_alignment_summary_metrics
+        description: extra parameters to picard_collect_alignment_summary_metrics
+
+  picard_collect_duplication_metrics:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for picard_collect_duplication_metrics
+      container:
+        type: string
+        description: name or path to docker/singularity container
 
   picard_collect_gc_bias_metrics:
     type: object
@@ -128,6 +138,32 @@ properties:
       extra:
         type: string
         description: extra parameters to 'picard_collect_gc_bias_metrics'
+
+  picard_collect_hs_metrics:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for picard_collect_hs_metrics
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra parameters to picard_collect_hs_metrics
+
+  picard_collect_insert_size_metrics:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for picard_collect_insert_size_metrics
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra parameters to picard_collect_insert_size_metrics
 
   picard_collect_multiple_metrics:
     type: object
@@ -159,42 +195,6 @@ properties:
       extra:
         type: string
         description: extra parameters to 'picard_collect_wgs_metrics'
-
-  picard_duplication_metrics:
-    type: object
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated for picard_duplication_metrics
-      container:
-        type: string
-        description: name or path to docker/singularity container
-
-  picard_collect_hs_metrics:
-    type: object
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated for picard_collect_hs_metrics
-      container:
-        type: string
-        description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: extra parameters to picard_collect_hs_metrics
-
-  picard_insert_size:
-    type: object
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated for picard_insert_size
-      container:
-        type: string
-        description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: extra parameters to picard_insert_size
 
   samtools_stats:
     type: object

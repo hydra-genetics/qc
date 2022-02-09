@@ -53,49 +53,34 @@ wildcard_constraints:
     unit="N|T|R",
 
 
-def compile_output_list(wildcards: snakemake.io.Wildcards):
-    output = [
-        "qc/fastqc/%s_%s_%s_fastqc.html" % (sample, t, read)
-        for read in ["fastq1", "fastq2"]
+def compile_output_list(wildcards):
+    files = {
+        "qc/picard_collect_duplication_metrics": [".duplication_metrics.txt"],
+        "qc/picard_collect_alignment_summary_metrics": [".alignment_summary_metrics.txt"],
+        "qc/picard_collect_hs_metrics": [".HsMetrics.txt"],
+        "qc/picard_collect_insert_size_metrics": [".insert_size_metrics.txt"],
+        "qc/picard_collect_gc_bias_metrics": [".gc_bias.summary_metrics"],
+        "qc/picard_collect_wgs_metrics": [".txt"],
+        "qc/samtools_stats": [".samtools-stats.txt"],
+        "qc/hotspot_info": [".hotspot_info.tsv"],
+        "qc/mosdepth": [".mosdepth.summary.txt"],
+    }
+    output_files = [
+        "%s/%s_%s%s" % (prefix, sample, unit_type, suffix)
+        for prefix in files.keys()
         for sample in get_samples(samples)
-        for t in get_unit_types(units, sample)
+        for unit_type in get_unit_types(units, sample)
+        for suffix in files[prefix]
     ]
-    output.append(
+    output_files.append(
         [
-            "qc/picard_duplication_metrics/%s_%s.duplication_metrics.txt" % (sample, t)
+            "qc/fastqc/%s_%s_%s_fastqc.html" % (sample, t, read)
+            for read in ["fastq1", "fastq2"]
             for sample in get_samples(samples)
             for t in get_unit_types(units, sample)
         ]
     )
-    output.append(
-        [
-            "qc/picard_alignment_summary_metrics/%s_%s.alignment_summary_metrics.txt" % (sample, t)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output.append(
-        [
-            "qc/picard_collect_hs_metrics/%s_%s.HsMetrics.txt" % (sample, t)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output.append(
-        [
-            "qc/picard_insert_size/%s_%s.insert_size_metrics.txt" % (sample, t)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output.append(
-        [
-            "qc/picard_collect_gc_bias_metrics/%s_%s.gc_bias.summary_metrics" % (sample, t)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output.append(
+    output_files.append(
         [
             "qc/picard_collect_multiple_metrics/%s_%s.%s" % (sample, t, ext)
             for sample in get_samples(samples)
@@ -103,33 +88,5 @@ def compile_output_list(wildcards: snakemake.io.Wildcards):
             for ext in config.get("picard_collect_multiple_metrics", []).get("output_ext", [])
         ]
     )
-    output.append(
-        [
-            "qc/picard_collect_wgs_metrics/%s_%s.txt" % (sample, t)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output.append(
-        [
-            "qc/samtools_stats/%s_%s.samtools-stats.txt" % (sample, t)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output.append(
-        [
-            "qc/hotspot_info/%s_%s.hotspot_info.tsv" % (sample, t)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output.append(
-        [
-            "qc/mosdepth/%s_%s.mosdepth.summary.txt" % (sample, t)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output.append("qc/multiqc/MultiQC.html")
-    return output
+    output_files.append("qc/multiqc/MultiQC.html")
+    return output_files

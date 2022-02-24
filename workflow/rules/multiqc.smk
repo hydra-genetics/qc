@@ -13,7 +13,7 @@ rule multiqc:
             file.format(sample=sample, type=u["type"], lane=u["lane"], run=u["run"])
             for file in config["multiqc"]["qc_files"]
             for sample in get_samples(samples)
-            for u in units.loc[(sample,)].dropna()
+            for u in units.loc[(sample,)].dropna().itertuples()
 
         ],
     output:

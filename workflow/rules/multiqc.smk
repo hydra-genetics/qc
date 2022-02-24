@@ -10,10 +10,11 @@ __license__ = "GPL-3"
 rule multiqc:
     input:
         [
-            file.format(sample=sample, type=t)
+            file.format(sample=sample, type=u["type"], lane=u["lane"], run=u["run"])
             for file in config["multiqc"]["qc_files"]
             for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
+            for u in units.loc[(sample,)].dropna()
+
         ],
     output:
         temp("qc/multiqc/MultiQC.html"),

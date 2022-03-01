@@ -64,6 +64,7 @@ def compile_output_list(wildcards):
         "qc/samtools_stats": [".samtools-stats.txt"],
         "qc/hotspot_info": [".hotspot_info.tsv"],
         "qc/mosdepth": [".mosdepth.summary.txt"],
+        "qc/mosdepth_bed": [".per-base.bed.gz"],
     }
     output_files = [
         "%s/%s_%s%s" % (prefix, sample, unit_type, suffix)

@@ -80,6 +80,19 @@ properties:
         type: string
         description: extra flags passed to mosdepth
 
+  mosdepth_bed:
+    type: object
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for fastqc
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: extra flags passed to mosdepth_bed
+
   multiqc:
     type: object
     properties:

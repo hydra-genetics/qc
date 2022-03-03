@@ -23,6 +23,10 @@ mosdepth:
   container: "docker://hydragenetics/mosdepth:0.3.2"
   extra: "--fast-mode --no-per-base"
 
+mosdepth_bed:
+  container: "docker://hydragenetics/mosdepth:0.3.2"
+  extra: ""
+
 multiqc:
   container: "docker://hydragenetics/multiqc:1.11"
   qc_files:

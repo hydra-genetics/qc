@@ -78,6 +78,25 @@ properties:
         type: string
         description: partition to use on the cluster for 'mosdepth'
 
+  mosdepth_bed:
+    type: object
+    properties:
+      threads:
+        type: integer
+        description: number of threads that will be used by 'mosdepth_bed'
+      time:
+        type: string
+        description: max execution time for 'mosdepth_bed'
+      mem_mb:
+        type: integer
+        description: memory used for 'mosdepth_bed'
+      mem_per_cpu:
+        type: integer
+        description: memory used per cpu for 'mosdepth_bed'
+      partition:
+        type: string
+        description: partition to use on the cluster for 'mosdepth_bed'
+
   multiqc:
     type: object
     properties:

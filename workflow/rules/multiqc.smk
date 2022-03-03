@@ -6,6 +6,7 @@ __copyright__ = "Copyright 2021, Patrik Smeds"
 __email__ = "patrik.smeds@scilifelab.uu.se"
 __license__ = "GPL-3"
 
+
 rule multiqc:
     input:
         [
@@ -13,7 +14,6 @@ rule multiqc:
             for file in config["multiqc"]["qc_files"]
             for sample in get_samples(samples)
             for u in units.loc[sample].dropna().itertuples()
-
         ],
     output:
         temp("qc/multiqc/MultiQC.html"),

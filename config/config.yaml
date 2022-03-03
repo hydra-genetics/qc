@@ -11,7 +11,7 @@ mosdepth:
   by: ""
   container: "docker://hydragenetics/mosdepth:0.3.2"
   extra: ""
-  
+
 multiqc:
   container: "docker://hydragenetics/multiqc:1.11"
   qc_files:
@@ -21,3 +21,4 @@ multiqc:
     - "qc/fastqc/{sample}_{type}_fastq2_fastqc.zip"
     - "qc/picard_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
     - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
+    - "prealignment/fastp_pe/{sample}_{run}_{lane}_{type}.json"

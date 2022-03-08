@@ -2,7 +2,7 @@ resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
-default_container: "docker://hydragenetics/common:0.0.1"
+default_container: "docker://hydragenetics/common:0.1.0"
 
 reference:
   fasta: "reference/HES45.fna"
@@ -16,7 +16,7 @@ fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
 hotspot_info:
-  container: "docker://hydragenetics/common:0.0.1"
+  container: "docker://hydragenetics/common:0.1.0"
 
 mosdepth:
   by: "500"
@@ -62,7 +62,7 @@ picard_collect_wgs_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 
 samtools_stats:
-  container: "docker://hydragenetics/common:0.0.1"
+  container: "docker://hydragenetics/common:0.1.0"
 
 hotspot_info:
-  container: "docker://hydragenetics/common:0.0.1"
+  container: "docker://hydragenetics/common:0.1.0"

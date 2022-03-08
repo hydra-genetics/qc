@@ -34,15 +34,15 @@ validate(samples, schema="../schemas/samples.schema.yaml")
 
 ### Read and validate units file
 
-units = pandas.read_table(config["units"], dtype=str).set_index(["sample", "type", "run", "lane"], drop=False).sort_index()
+units = pandas.read_table(config["units"], dtype=str).set_index(["sample", "type", "flowcell", "lane"], drop=False).sort_index()
 validate(units, schema="../schemas/units.schema.yaml")
 
 
-def get_run(units, wildcards):
-    runs = set([u.run for u in get_units(units, wildcards)])
-    if len(runs) > 1:
-        raise ValueError("Sample type combination from different sequence runs")
-    return runs.pop()
+def get_flowcell(units, wildcards):
+    flowcells = set([u.flowcell for u in get_units(units, wildcards)])
+    if len(flowcells) > 1:
+        raise ValueError("Sample type combination from different sequence flowcells")
+    return flowcells.pop()
 
 
 ### Set wildcard constraints

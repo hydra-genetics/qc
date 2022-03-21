@@ -13,7 +13,10 @@ rule fastqc:
     log:
         "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{read}.html.log",
     benchmark:
-        repeat("qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{read}.html.benchmark.tsv", config.get("fastqc", {}).get("benchmark_repeats", 1))
+        repeat(
+            "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{read}.html.benchmark.tsv",
+            config.get("fastqc", {}).get("benchmark_repeats", 1),
+        )
     threads: config.get("fastqc", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("fastqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),

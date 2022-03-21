@@ -54,40 +54,10 @@ wildcard_constraints:
 
 
 def compile_output_list(wildcards):
-    files = {
-        "qc/picard_collect_duplication_metrics": [".duplication_metrics.txt"],
-        "qc/picard_collect_alignment_summary_metrics": [".alignment_summary_metrics.txt"],
-        "qc/picard_collect_hs_metrics": [".HsMetrics.txt"],
-        "qc/picard_collect_insert_size_metrics": [".insert_size_metrics.txt"],
-        "qc/picard_collect_gc_bias_metrics": [".gc_bias.summary_metrics"],
-        "qc/picard_collect_wgs_metrics": [".txt"],
-        "qc/samtools_stats": [".samtools-stats.txt"],
-        "qc/hotspot_info": [".hotspot_info.tsv"],
-        "qc/mosdepth": [".mosdepth.summary.txt"],
-        "qc/mosdepth_bed": [".per-base.bed.gz"],
-    }
     output_files = [
-        "%s/%s_%s%s" % (prefix, sample, unit_type, suffix)
-        for prefix in files.keys()
+        "qc/hotspot_info/%s_%s.hotspot_info.tsv" % (sample, unit_type)
         for sample in get_samples(samples)
         for unit_type in get_unit_types(units, sample)
-        for suffix in files[prefix]
     ]
-    output_files.append(
-        [
-            "qc/fastqc/%s_%s_%s_fastqc.html" % (sample, t, read)
-            for read in ["fastq1", "fastq2"]
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-        ]
-    )
-    output_files.append(
-        [
-            "qc/picard_collect_multiple_metrics/%s_%s.%s" % (sample, t, ext)
-            for sample in get_samples(samples)
-            for t in get_unit_types(units, sample)
-            for ext in config.get("picard_collect_multiple_metrics", []).get("output_ext", [])
-        ]
-    )
-    output_files.append("qc/multiqc/MultiQC.html")
+    output_files.append("qc/multiqc/multiqc.html")
     return output_files

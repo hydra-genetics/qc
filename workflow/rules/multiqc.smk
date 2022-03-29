@@ -10,7 +10,7 @@ __license__ = "GPL-3"
 rule multiqc:
     input:
         files=[
-            file.format(sample=sample, type=u.type, lane=u.lane, flowcell=u.flowcell, read=read, ext=ext)
+            file.format(sample=sample, type=u.type, lane=u.lane, flowcell=u.flowcell, barcode=u.barcode, read=read, ext=ext)
             for file in config["multiqc"]["qc_files"]
             for sample in get_samples(samples)
             for u in units.loc[sample].dropna().itertuples()

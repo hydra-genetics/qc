@@ -15,7 +15,7 @@ rule multiqc:
             for sample in get_samples(samples)
             for u in units.loc[sample].dropna().itertuples()
             for read in ["fastq1", "fastq2"]
-            for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [])
+            for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
         ],
     output:
         html=temp("qc/multiqc/multiqc.html"),

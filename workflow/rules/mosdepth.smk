@@ -6,8 +6,8 @@ __license__ = "GPL-3"
 
 rule mosdepth:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
-        bai="alignment/merge_bam/{sample}_{type}.bam.bai",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
     output:
         bed=temp("qc/mosdepth/{sample}_{type}.regions.bed.gz"),
         csi=temp("qc/mosdepth/{sample}_{type}.regions.bed.gz.csi"),
@@ -43,8 +43,8 @@ rule mosdepth:
 
 rule mosdepth_bed:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
-        bai="alignment/merge_bam/{sample}_{type}.bam.bai",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
         bed=config.get("reference", {}).get("design_bed", ""),
     output:
         bed=temp("qc/mosdepth_bed/{sample}_{type}.regions.bed.gz"),

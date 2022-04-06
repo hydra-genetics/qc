@@ -9,7 +9,7 @@ __license__ = "GPL-3"
 
 rule picard_collect_alignment_summary_metrics:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         ref=config["reference"]["fasta"],
     output:
         metrics=temp("qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"),
@@ -45,7 +45,7 @@ rule picard_collect_alignment_summary_metrics:
 
 rule picard_collect_duplication_metrics:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
     output:
         metrics=temp("qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"),
     log:
@@ -79,7 +79,7 @@ rule picard_collect_duplication_metrics:
 
 rule picard_collect_gc_bias_metrics:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         ref=config["reference"]["fasta"],
     output:
         chart=temp("qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.pdf"),
@@ -115,7 +115,7 @@ rule picard_collect_gc_bias_metrics:
 
 rule picard_collect_hs_metrics:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bait_intervals=config.get("reference", {}).get("design_intervals", ""),
         target_intervals=config.get("reference", {}).get("design_intervals", ""),
         reference=config["reference"]["fasta"],
@@ -149,7 +149,7 @@ rule picard_collect_hs_metrics:
 
 rule picard_collect_insert_size_metrics:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
     output:
         txt=temp("qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"),
         pdf=temp("qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_histogram.pdf"),
@@ -183,7 +183,7 @@ rule picard_collect_insert_size_metrics:
 
 rule picard_collect_multiple_metrics:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         ref=config["reference"]["fasta"],
     output:
         expand(
@@ -220,7 +220,7 @@ rule picard_collect_multiple_metrics:
 
 rule picard_collect_wgs_metrics:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         ref=config["reference"]["fasta"],
         interval=config.get("reference", {}).get("wgs_intervals", ""),
     output:

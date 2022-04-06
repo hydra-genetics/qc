@@ -9,14 +9,7 @@ __license__ = "GPL-3"
 
 rule multiqc:
     input:
-        files=[
-            file.format(sample=sample, type=u.type, lane=u.lane, flowcell=u.flowcell, barcode=u.barcode, read=read, ext=ext)
-            for file in config["multiqc"]["qc_files"]
-            for sample in get_samples(samples)
-            for u in units.loc[sample].dropna().itertuples()
-            for read in ["fastq1", "fastq2"]
-            for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
-        ],
+        files=multiqc_input,
     output:
         html=temp("qc/multiqc/multiqc.html"),
         data=temp(directory("qc/multiqc/multiqc_data")),

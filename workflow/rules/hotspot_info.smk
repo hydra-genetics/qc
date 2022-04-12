@@ -9,8 +9,8 @@ __license__ = "GPL3"
 
 rule hotspot_info:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
-        bai="alignment/merge_bam/{sample}_{type}.bam.bai",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
         vcf="snv_indels/ensemble_vcf/{sample}_{type}.ensembled.vep_annotated.vcf",
         hotspots=config.get("reference", {}).get("hotspots", ""),
         background_panel=config.get("reference", {}).get("background", ""),

@@ -9,7 +9,7 @@ __license__ = "GPL-3"
 
 rule samtools_stats:
     input:
-        bam="alignment/merge_bam/{sample}_{type}.bam",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
     output:
         temp("qc/samtools_stats/{sample}_{type}.samtools-stats.txt"),
     params:

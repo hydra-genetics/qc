@@ -11,12 +11,12 @@ rule hotspot_info:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
-        vcf="snv_indels/ensemble_vcf/{sample}_{type}.ensembled.vep_annotated.vcf",
+        vcf="snv_indels/bcbio_variation_recall_ensemble/{sample}_{type}.ensembled.vep_annotated.vcf",
         hotspots=config.get("reference", {}).get("hotspots", ""),
         background_panel=config.get("reference", {}).get("background", ""),
         background_run=lambda wildcards: "annotation/calculate_seqrun_background/%s_seqrun_background.tsv"
         % get_flowcell(units, wildcards),
-        gvcf="snv_indels/mutect2_gvcf/{sample}_{type}.merged.gvcf.gz",
+        gvcf="snv_indels/mutect2_gvcf/{sample}_{type}.merged.g.vcf.gz",
     output:
         low_coverage=temp("qc/hotspot_info/{sample}_{type}.hotspot_low_coverage.txt"),
         hotspot_info=temp("qc/hotspot_info/{sample}_{type}.hotspot_info.tsv"),

@@ -16,7 +16,7 @@ rule hotspot_info:
         background_panel=config.get("reference", {}).get("background", ""),
         background_run=lambda wildcards: "annotation/calculate_seqrun_background/%s_seqrun_background.tsv"
         % get_flowcell(units, wildcards),
-        gvcf="snv_indels/mutect2_gvcf/{sample}_{type}.merged.gvcf.gz",
+        gvcf="snv_indels/mutect2_gvcf/{sample}_{type}.merged.g.vcf.gz",
     output:
         low_coverage=temp("qc/hotspot_info/{sample}_{type}.hotspot_low_coverage.txt"),
         hotspot_info=temp("qc/hotspot_info/{sample}_{type}.hotspot_info.tsv"),

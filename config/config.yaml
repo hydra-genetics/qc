@@ -4,6 +4,12 @@ units: "units.tsv"
 
 default_container: "docker://hydragenetics/common:0.1.0"
 
+reference:
+  fasta: ""
+  design_intervals: ""
+  design_bed: ""
+  wgs_intervals: ""
+
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
@@ -19,10 +25,38 @@ mosdepth_bed:
 multiqc:
   container: "docker://hydragenetics/multiqc:1.11"
   qc_files:
-    - "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"
+    - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}.zip"
     - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
-    - "qc/fastqc/{sample}_{type}_fastq1_fastqc.zip"
-    - "qc/fastqc/{sample}_{type}_fastq2_fastqc.zip"
     - "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
+    - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics"
+    - "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"
+    - "qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"
+    - "qc/picard_collect_multiple_metrics/{sample}_{type}.{ext}"
+    - "qc/picard_collect_wgs_metrics/{sample}_{type}.txt"
+    - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
+    - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
     - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
-    - "prealignment/fastp_pe/{sample}_{run}_{lane}_{type}.json"
+    - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}.json"
+
+picard_collect_alignment_summary_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_duplication_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_gc_bias_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_hs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_insert_size_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_multiple_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+  output_ext:
+    - "gc_bias.pdf"
+
+picard_collect_wgs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"

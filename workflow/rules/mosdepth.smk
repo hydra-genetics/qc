@@ -26,17 +26,17 @@ rule mosdepth:
         )
     threads: config.get("mosdepth", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        threads=config.get("mosdepth", {}).get("threads", config["default_resources"]["threads"]),
-        time=config.get("mosdepth", {}).get("time", config["default_resources"]["time"]),
         mem_mb=config.get("mosdepth", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
         mem_per_cpu=config.get("mosdepth", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
         partition=config.get("mosdepth", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("mosdepth", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("mosdepth", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("mosdepth", {}).get("container", config["default_container"])
     conda:
         "../envs/mosdepth.yaml"
     message:
-        "{rule}: Calculating coverage for {wildcards.sample}_{wildcards.type}"
+        "{rule}: calculating coverage for {input.bam}"
     wrapper:
         "0.80.2/bio/mosdepth"
 
@@ -65,16 +65,16 @@ rule mosdepth_bed:
         )
     threads: config.get("mosdepth_bed", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        threads=config.get("mosdepth_bed", {}).get("threads", config["default_resources"]["threads"]),
-        time=config.get("mosdepth_bed", {}).get("time", config["default_resources"]["time"]),
         mem_mb=config.get("mosdepth_bed", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
         mem_per_cpu=config.get("mosdepth_bed", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
         partition=config.get("mosdepth_bed", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("mosdepth_bed", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("mosdepth_bed", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("mosdepth_bed", {}).get("container", config["default_container"])
     conda:
         "../envs/mosdepth.yaml"
     message:
-        "{rule}: Calculating coverage for {wildcards.sample}_{wildcards.type}"
+        "{rule}: calculating coverage for {input.bam}"
     wrapper:
         "0.80.2/bio/mosdepth"

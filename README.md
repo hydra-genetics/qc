@@ -2,6 +2,7 @@
 
 #### Snakemake module containing steps for quality control of sequencing data
 
+![Compatibility](https://github.com/hydra-genetics/qc/actions/workflows/compatibility.yaml/badge.svg?branch=develop)
 ![Lint](https://github.com/hydra-genetics/qc/actions/workflows/lint.yaml/badge.svg?branch=develop)
 ![Snakefmt](https://github.com/hydra-genetics/qc/actions/workflows/snakefmt.yaml/badge.svg?branch=develop)
 ![snakemake dry run](https://github.com/hydra-genetics/qc/actions/workflows/snakemake-dry-run.yaml/badge.svg?branch=develop)

@@ -2,12 +2,12 @@ resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
-default_container: "docker://hydragenetics/common:0.1.0"
+default_container: "docker://hydragenetics/common:0.1.2"
 
 reference:
-  fasta: "reference/HES45.fna"
-  design_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
   design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
+  design_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
+  fasta: "reference/HES45.fna"
   wgs_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
 
 fastqc:

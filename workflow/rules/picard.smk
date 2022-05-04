@@ -114,8 +114,8 @@ rule picard_collect_hs_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bait_intervals=config.get("reference", {}).get("design_intervals", ""),
-        target_intervals=config.get("reference", {}).get("design_intervals", ""),
         reference=config["reference"]["fasta"],
+        target_intervals=config.get("reference", {}).get("design_intervals", ""),
     output:
         temp("qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"),
     params:
@@ -148,8 +148,8 @@ rule picard_collect_insert_size_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
     output:
-        txt=temp("qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"),
         pdf=temp("qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_histogram.pdf"),
+        txt=temp("qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"),
     params:
         extra=config.get("picard_collect_insert_size_metrics", {}).get("extra", ""),
     log:
@@ -225,10 +225,10 @@ rule picard_collect_wgs_metrics:
     params:
         extra=config.get("picard_collect_wgs_metrics", {}).get("extra", ""),
     log:
-        "qc/picard_collect_wgs_metrics/{sample}_{type}.log",
+        "qc/picard_collect_wgs_metrics/{sample}_{type}.txt.log",
     benchmark:
         repeat(
-            "qc/picard_collect_wgs_metrics/{sample}_{type}.benchmark.tsv",
+            "qc/picard_collect_wgs_metrics/{sample}_{type}.txt.benchmark.tsv",
             config.get("picard_collect_wgs_metrics", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("picard_collect_wgs_metrics", {}).get("threads", config["default_resources"]["threads"])

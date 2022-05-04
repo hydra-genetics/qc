@@ -18,10 +18,10 @@ rule mosdepth:
         by=config.get("mosdepth", {}).get("by", ""),
         extra=config.get("mosdepth", {}).get("extra", ""),
     log:
-        "qc/mosdepth/{sample}_{type}.log",
+        "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt.log",
     benchmark:
         repeat(
-            "qc/mosdepth/{sample}_{type}.benchmark.tsv",
+            "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt.benchmark.tsv",
             config.get("mosdepth", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("mosdepth", {}).get("threads", config["default_resources"]["threads"])
@@ -49,18 +49,18 @@ rule mosdepth_bed:
     output:
         bed=temp("qc/mosdepth_bed/{sample}_{type}.regions.bed.gz"),
         bed_csi=temp("qc/mosdepth_bed/{sample}_{type}.regions.bed.gz.csi"),
+        coverage=temp("qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"),
+        coverage_csi=temp("qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz.csi"),
         glob=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.global.dist.txt"),
         region=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.region.dist.txt"),
         summary=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.summary.txt"),
-        coverage=temp("qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"),
-        coverage_csi=temp("qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz.csi"),
     params:
         extra=config.get("mosdepth_bed", {}).get("extra", ""),
     log:
-        "qc/mosdepth_bed/{sample}_{type}.log",
+        "qc/mosdepth_bed/{sample}_{type}.mosdepth.summary.txt.log",
     benchmark:
         repeat(
-            "qc/mosdepth_bed/{sample}_{type}.benchmark.tsv",
+            "qc/mosdepth_bed/{sample}_{type}.mosdepth.summary.txt.benchmark.tsv",
             config.get("mosdepth_bed", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("mosdepth_bed", {}).get("threads", config["default_resources"]["threads"])

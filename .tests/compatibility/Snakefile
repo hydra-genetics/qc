@@ -1,0 +1,45 @@
+from hydra_genetics.utils.resources import load_resources
+
+
+rule all:
+    input:
+        "qc/multiqc/multiqc.html",
+
+
+configfile: "config.yaml"
+
+
+config = load_resources(config, config["resources"])
+
+
+def extract_module_version_from_readme(modulename):
+    search_string = modulename + ":(.+)\n$"
+    with open("../../README.md", "r") as reader:
+        for line in reader:
+            result = re.search(search_string, line)
+            if result:
+                return result[1]
+
+
+module alignment:
+    snakefile:
+        github(
+            "hydra-genetics/alignment",
+            path="workflow/Snakefile",
+            tag=extract_module_version_from_readme("alignment"),
+        )
+    config:
+        config
+
+
+use rule * from alignment as alignment_*
+
+
+module qc:
+    snakefile:
+        "../../workflow/Snakefile"
+    config:
+        config
+
+
+use rule * from qc as qc_*

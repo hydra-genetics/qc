@@ -4,7 +4,7 @@ resources: "resources.yaml"
 
 trimmer_software: "fastp_pe"
 
-default_container: "docker://hydragenetics/common:0.1.2"
+default_container: "docker://hydragenetics/common:0.1.3"
 
 reference:
   fasta: "reference/WASH7P.fna"

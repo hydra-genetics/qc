@@ -37,7 +37,7 @@ jobs:
         working-directory: .tests/compatibility
         run: |
           snakemake -n -s Snakefile -c
-      - name: snakemake dry run fastp_pe config
+      - name: snakemake dry run
         working-directory: .tests/compatibility
         run: |
           snakemake -n -s Snakefile

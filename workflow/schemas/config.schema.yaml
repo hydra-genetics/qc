@@ -224,4 +224,3 @@ required:
   - units
   - resources
   - default_container
-  - multiqc

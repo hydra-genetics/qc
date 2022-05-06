@@ -15,8 +15,8 @@ rule multiqc:
             for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
         ],
     output:
-        data=temp(directory("qc/multiqc/multiqc_data")),
-        html=temp("qc/multiqc/multiqc.html"),
+        temp("qc/multiqc/multiqc.html"),
+        temp(directory("qc/multiqc/multiqc_data")),
     params:
         extra="{} {}".format(
             config.get("multiqc", {}).get("extra", ""),

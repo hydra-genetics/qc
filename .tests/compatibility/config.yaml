@@ -1,26 +1,40 @@
-resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
+resources: "resources.yaml"
+
+trimmer_software: "fastp_pe"
 
 default_container: "docker://hydragenetics/common:0.1.3"
 
 reference:
-  fasta: ""
-  design_intervals: ""
-  design_bed: ""
-  wgs_intervals: ""
+  fasta: "reference/WASH7P.fna"
+  dict: "reference/WASH7P.dict"
+  amb: "reference/WASH7P.fna.amb"
+  ann: "reference/WASH7P.fna.ann"
+  bwt: "reference/WASH7P.fna.bwt"
+  fai: "reference/WASH7P.fna.fai"
+  pac: "reference/WASH7P.fna.pac"
+  sa: "reference/WASH7P.fna.sa"
+  design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
+  design_intervals: "reference/WASH7P.interval_list"
+  wgs_intervals: "reference/WASH7P.interval_list"
+
+bwa_mem:
+  container: "docker://hydragenetics/bwa_mem:0.7.17"
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
+fastp_pe:
+  container: "docker://hydragenetics/fastp:0.20.1"
+
 mosdepth:
-  by: ""
+  by: "500"
   container: "docker://hydragenetics/mosdepth:0.3.2"
-  extra: ""
+  extra: "--fast-mode --no-per-base"
 
 mosdepth_bed:
   container: "docker://hydragenetics/mosdepth:0.3.2"
-  extra: ""
 
 multiqc:
   container: "docker://hydragenetics/multiqc:1.11"

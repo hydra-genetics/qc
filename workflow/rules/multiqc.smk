@@ -1,6 +1,3 @@
-# vim: syntax=python tabstop=4 expandtab
-# coding: utf-8
-
 __author__ = "Patrik Smeds"
 __copyright__ = "Copyright 2021, Patrik Smeds"
 __email__ = "patrik.smeds@scilifelab.uu.se"
@@ -18,8 +15,8 @@ rule multiqc:
             for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
         ],
     output:
-        html=temp("qc/multiqc/multiqc.html"),
         data=temp(directory("qc/multiqc/multiqc_data")),
+        html=temp("qc/multiqc/multiqc.html"),
     params:
         extra="{} {}".format(
             config.get("multiqc", {}).get("extra", ""),
@@ -31,11 +28,11 @@ rule multiqc:
         repeat("qc/multiqc/multiqc.html.benchmark.tsv", config.get("multiqc", {}).get("benchmark_repeats", 1))
     threads: config.get("multiqc", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        threads=config.get("multiqc", {}).get("threads", config["default_resources"]["threads"]),
-        time=config.get("multiqc", {}).get("time", config["default_resources"]["time"]),
         mem_mb=config.get("multiqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
         mem_per_cpu=config.get("multiqc", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
         partition=config.get("multiqc", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("multiqc", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("multiqc", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("multiqc", {}).get("container", config["default_container"])
     conda:

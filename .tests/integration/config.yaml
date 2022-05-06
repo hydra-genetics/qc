@@ -2,21 +2,16 @@ resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
-default_container: "docker://hydragenetics/common:0.1.0"
+default_container: "docker://hydragenetics/common:0.1.3"
 
 reference:
-  fasta: "reference/HES45.fna"
-  design_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
   design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
-  hotspots: "reference/hotspots_small.csv"
-  background: "reference/background_panel_small.tsv"
+  design_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
+  fasta: "reference/HES45.fna"
   wgs_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
-
-hotspot_info:
-  container: "docker://hydragenetics/common:0.1.0"
 
 mosdepth:
   by: "500"
@@ -25,7 +20,6 @@ mosdepth:
 
 mosdepth_bed:
   container: "docker://hydragenetics/mosdepth:0.3.2"
-  extra: ""
 
 multiqc:
   container: "docker://hydragenetics/multiqc:1.11"
@@ -65,9 +59,3 @@ picard_collect_multiple_metrics:
 
 picard_collect_wgs_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
-
-samtools_stats:
-  container: "docker://hydragenetics/common:0.1.0"
-
-hotspot_info:
-  container: "docker://hydragenetics/common:0.1.0"

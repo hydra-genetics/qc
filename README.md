@@ -90,6 +90,7 @@ use rule * from qc as qc_*
 
 Latest:
  - alignment:v0.1.0
+ - prealignment:v0.2.0
 
  See [COMPATIBLITY.md](../master/COMPATIBLITY.md) file for a complete list of module compatibility.
 

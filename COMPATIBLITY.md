@@ -1,6 +1,6 @@
 # Compatibility
 ## hydra-genetics/alignment
 
-| alignment version | qc version |
-| --- | --- |
-| v0.1.0 |  |
+| alignment version | prealignment version | qc version |
+| --- | --- | --- |
+| v0.1.0 | v0.2.0 | v0.1.0 |

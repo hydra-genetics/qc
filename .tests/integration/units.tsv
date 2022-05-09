@@ -1,2 +1,2 @@
-sample	type	run	lane	fastq1	fastq2	adapter
-NA12878	N	1	1	input/R1.fq.gz	input/R2.fq.gz	ACGT
+sample	platform	barcode	type	flowcell	lane	fastq1	fastq2	adapter
+HD832.HES45	Illumina	AAAA+CCCC	T	1	1	fastq/HD827sonic_testing1_R1.fastq.gz	fastq/HD827sonic_testing1_R2.fastq.gz	ACGT

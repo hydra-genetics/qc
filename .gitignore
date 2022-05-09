@@ -1,6 +1,6 @@
+.cache
 .eggs
-__pycache__
+.java
 .snakemake
-describe_workflow.rst
-describe_jupyter_notebook.txt
+__pycache__
 qc

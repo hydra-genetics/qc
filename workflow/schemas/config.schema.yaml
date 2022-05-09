@@ -2,18 +2,225 @@ $schema: "http://json-schema.org/draft-04/schema#"
 description: snakemake configuration file
 type: object
 properties:
-  samples:
-    type: string
-  units:
-    type: string
   resources:
     type: string
-    description: Path to resources.yaml file
+    description: path to resources.yaml file
+  samples:
+    type: string
+    description: path to samples.tsv file
+  units:
+    type: string
+    description: path to units.tsv file
   default_container:
     type: string
     description: name or path to a default docker/singularity container
-  required:
-    - samples
-    - units
-    - resources
-    - default_container
+  reference:
+    type: object
+    description: paths to reference files
+    properties:
+      design_bed:
+        type: string
+        description: path to bed file for design regions
+      design_intervals:
+        type: string
+        description: path to picard-style bed file for design regions
+      fasta:
+        type: string
+        description: path to reference fasta file
+      wgs_intervals:
+        type: string
+        description: path to picard-style interval file for wgs regions
+    required:
+      - fasta
+
+  fastqc:
+    type: object
+    description: parameters for fastqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      outdir:
+        type: string
+        description: path to output directory
+      tmp:
+        type: string
+        description: path to temporary directory
+
+  mosdepth:
+    type: object
+    description: parameters for mosdepth
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      by:
+        type: string
+        description: by flag
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  mosdepth_bed:
+    type: object
+    description: parameters for mosdepth_bed
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  multiqc:
+    type: object
+    description: parameters for multiqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      config:
+        type: string
+        description: path to config file
+      extra:
+        type: string
+        description: parameters that should be forwarded
+      qc_files:
+        type: array
+        description: list with path to qc-files that will be used to generate a MultiQC report
+        items:
+            type: string
+    required:
+      - qc_files
+
+  picard_collect_alignment_summary_metrics:
+    type: object
+    description: parameters for picard_collect_alignment_summary_metrics
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  picard_collect_duplication_metrics:
+    type: object
+    description: parameters for picard_collect_duplication_metrics
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated for picard_collect_alignment_summary_metrics
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  picard_collect_gc_bias_metrics:
+    type: object
+    description: parameters for picard_collect_gc_bias_metrics
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  picard_collect_hs_metrics:
+    type: object
+    description: parameters for picard_collect_hs_metrics
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  picard_collect_insert_size_metrics:
+    type: object
+    description: parameters for picard_collect_insert_size_metrics
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  picard_collect_multiple_metrics:
+    type: object
+    description: parameters for picard_collect_multiple_metrics
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+      output_ext:
+        type: array
+        description: list of output file extensions
+        items:
+          type: string
+
+  picard_collect_wgs_metrics:
+    type: object
+    description: parameters for picard_collect_wgs_metrics
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  samtools_stats:
+    type: object
+    description: parameters for samtools_stats
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+required:
+  - samples
+  - units
+  - resources
+  - default_container

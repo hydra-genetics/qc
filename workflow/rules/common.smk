@@ -1,20 +1,17 @@
-# vim: syntax=python tabstop=4 expandtab
-# coding: utf-8
-
 __author__ = "Jonas A"
 __copyright__ = "Copyright 2021, Jonas A"
 __email__ = "jonas.almlof@igp.uu.se"
 __license__ = "GPL-3"
 
 import pandas as pd
-from snakemake.utils import validate
-from snakemake.utils import min_version
 
 from hydra_genetics.utils.resources import load_resources
 from hydra_genetics.utils.samples import *
 from hydra_genetics.utils.units import *
+from snakemake.utils import validate
+from snakemake.utils import min_version
 
-min_version("6.8.0")
+min_version("6.10.0")
 
 ### Set and validate config file
 
@@ -34,8 +31,13 @@ validate(samples, schema="../schemas/samples.schema.yaml")
 
 ### Read and validate units file
 
-units = pandas.read_table(config["units"], dtype=str).set_index(["sample", "type", "run", "lane"], drop=False)
+units = (
+    pandas.read_table(config["units"], dtype=str)
+    .set_index(["sample", "type", "flowcell", "lane", "barcode"], drop=False)
+    .sort_index()
+)
 validate(units, schema="../schemas/units.schema.yaml")
+
 
 ### Set wildcard constraints
 
@@ -45,9 +47,13 @@ wildcard_constraints:
     unit="N|T|R",
 
 
+def get_flowcell(units, wildcards):
+    flowcells = set([u.flowcell for u in get_units(units, wildcards)])
+    if len(flowcells) > 1:
+        raise ValueError("Sample type combination from different sequence flowcells")
+    return flowcells.pop()
+
+
 def compile_output_list(wildcards):
-    return [
-        "qc/dummy/%s_%s.dummy.txt" % (sample, t)
-        for sample in get_samples(samples)
-        for t in get_unit_types(units, sample)
-    ]
+    output_files = ["qc/multiqc/multiqc.html"]
+    return output_files

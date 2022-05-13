@@ -58,7 +58,6 @@ def compile_output_list(wildcards):
     types = set([u.type for u in units.itertuples()])
     output_files = []
     for qc_type, value in config.get("multiqc", {}).get("reports", {}).items():
-        print(qc_type)
         if not set(value.get("included_unit_types", [])).isdisjoint(types):
             output_files.append("qc/multiqc/multiqc_{}.html".format(qc_type))
 

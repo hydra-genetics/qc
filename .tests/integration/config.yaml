@@ -42,7 +42,10 @@ multiqc:
     RNA:
       included_unit_types: ['R']
       qc_files:
+        - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}.zip"
         - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+        - "qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.txt"
+        - "qc/rseqc_inner_distance/{sample}_{type}.inner_distance.txt"
 
 picard_collect_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
@@ -66,3 +69,11 @@ picard_collect_multiple_metrics:
 
 picard_collect_wgs_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
+
+rseqc_gene_body_coverage:
+  bed: "reference/gene_model.bed"
+  container: "docker://hydragenetics/rseqc:4.0.0"
+
+rseqc_inner_distance:
+  bed: "reference/gene_model.bed"
+  container: "docker://hydragenetics/rseqc:4.0.0"

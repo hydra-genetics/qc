@@ -10,10 +10,12 @@ rule rseqc_gene_body_coverage:
         bai="alignment/star/{sample}_{type}.bam.bai",
         bed=config.get("rseqc_gene_body_coverage", {}).get("bed", ""),
     output:
-        pdf=temp("qc/rseqc_gene_body_coverage/{sample}_{type}.pdf"),
+        pdf=temp("qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.curves.pdf"),
+        rscrpt=temp("qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.r"),
+        txt=temp("qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.txt"),
     params:
         extra=config.get("rseqc_gene_body_coverage", {}).get("extra", ""),
-        prefix="{sample}_{type}",
+        prefix="qc/rseqc_gene_body_coverage/{sample}_{type}",
     log:
         "qc/rseqc_gene_body_coverage/{sample}_{type}.pdf.log",
     benchmark:
@@ -47,10 +49,13 @@ rule rseqc_inner_distance:
         bai="alignment/star/{sample}_{type}.bam.bai",
         bed=config.get("rseqc_inner_distance", {}).get("bed", ""),
     output:
-        pdf=temp("qc/rseqc_inner_distance/{sample}_{type}.txt"),
+        freq=temp("qc/rseqc_inner_distance/{sample}_{type}.inner_distance_freq.txt"),
+        plot=temp("qc/rseqc_inner_distance/{sample}_{type}.inner_distance_plot.pdf"),
+        rscrpt=temp("qc/rseqc_inner_distance/{sample}_{type}.inner_distance_plot.r"),
+        txt=temp("qc/rseqc_inner_distance/{sample}_{type}.inner_distance.txt"),
     params:
         extra=config.get("rseqc_inner_distance", {}).get("extra", ""),
-        prefix="{sample}_{type}",
+        prefix="qc/rseqc_inner_distance/{sample}_{type}",
     log:
         "qc/rseqc_inner_distance/{sample}_{type}.txt.log",
     benchmark:

@@ -91,19 +91,33 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      config:
-        type: string
-        description: path to config file
       extra:
         type: string
         description: parameters that should be forwarded
-      qc_files:
-        type: array
-        description: list with path to qc-files that will be used to generate a MultiQC report
-        items:
-            type: string
-    required:
-      - qc_files
+      reports:
+        type: object
+        description: list of multiqc reports that will be generated
+        additionalProperties:
+          type: object
+          properties:
+            config:
+              type: string
+              description: path to config file
+            included_unit_types:
+              type: array
+              description: unit types that will be included
+              items:
+                type: string
+                pattern: "^(N|T|R)$"
+            qc_files:
+              type: array
+              description: list with path to qc-files that will be used to generate a MultiQC report
+              items:
+                type: string
+            required:
+              - qc_files
+      required:
+        - reports
 
   picard_collect_alignment_summary_metrics:
     type: object

@@ -8,13 +8,13 @@ rule fastqc:
     input:
         fastq=lambda wildcards: get_fastq_file(units, wildcards, wildcards.read),
     output:
-        html=temp("qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}.html"),
-        zip=temp("qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}.zip"),
+        html=temp("qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.html"),
+        zip=temp("qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"),
     log:
-        "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}.html.log",
+        "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.html.log",
     benchmark:
         repeat(
-            "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}.html.benchmark.tsv",
+            "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.html.benchmark.tsv",
             config.get("fastqc", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("fastqc", {}).get("threads", config["default_resources"]["threads"])

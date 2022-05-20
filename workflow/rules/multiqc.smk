@@ -21,8 +21,8 @@ rule multiqc:
     params:
         extra=lambda wildcards: "{} {}".format(
             config.get("multiqc", {}).get("extra", ""),
-            " -c {}".format(config["multiqc"][wildcards.report]["config"])
-            if "config" in config.get("multiqc", {}).get(wildcards.report, {})
+            " -c {}".format(config["multiqc"]["reports"][wildcards.report]["config"])
+            if "config" in config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {})
             else "",
         ),
     log:

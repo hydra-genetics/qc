@@ -64,7 +64,7 @@ rule samtools_idxstats:
     container:
         config.get("samtools_idxstats", {}).get("container", config["default_container"])
     conda:
-        "../envs/samtools_idxstats.yaml"
+        "../envs/samtools.yaml"
     message:
         "{rule}: Calculate index qc using samtools: qc/{rule}/{wildcards.sample}_{wildcards.type}"
     wrapper:

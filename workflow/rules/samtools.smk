@@ -44,9 +44,9 @@ rule samtools_idxstats:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
     output:
-        temp("qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.txt"),
+        stats=temp("qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.txt"),
     params:
-        extra="%s" % config.get("samtools_stats", {}).get("extra", ""),
+        extra=config.get("samtools_stats", {}).get("extra", ""),
     log:
         "qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.txt.log",
     benchmark:
@@ -56,16 +56,16 @@ rule samtools_idxstats:
         )
     threads: config.get("samtools_idxstats", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        threads=config.get("samtools_idxstats", {}).get("threads", config["default_resources"]["threads"]),
-        time=config.get("samtools_idxstats", {}).get("time", config["default_resources"]["time"]),
         mem_mb=config.get("samtools_idxstats", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
         mem_per_cpu=config.get("samtools_idxstats", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
         partition=config.get("samtools_idxstats", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("samtools_idxstats", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("samtools_idxstats", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("samtools_idxstats", {}).get("container", config["default_container"])
     conda:
         "../envs/samtools.yaml"
     message:
-        "{rule}: Calculate index qc using samtools: qc/{rule}/{wildcards.sample}_{wildcards.type}"
+        "{rule}: calculate index qc using samtools for {input.bai}"
     wrapper:
         "v1.5.0/bio/samtools/idxstats"

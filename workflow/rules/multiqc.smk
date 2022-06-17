@@ -22,7 +22,7 @@ rule multiqc:
         data=temp(directory("qc/multiqc/multiqc_{report}_data")),
     params:
         extra=lambda wildcards: "{} {}".format(
-            config.get("multiqc", {}).get("extra", ""),
+            config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {}).get("extra", ""),
             " -c {}".format(config["multiqc"]["reports"][wildcards.report]["config"])
             if "config" in config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {})
             else "",

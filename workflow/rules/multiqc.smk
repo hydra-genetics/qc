@@ -44,13 +44,5 @@ rule multiqc:
         "../envs/multiqc.yaml"
     message:
         "{rule}: generate combined qc report at {output.html}"
-    shell:
-        "FILENAME=`basename {output.html}` && "
-        "DIRECTORY=`dirname {output.html}` && "
-        "(multiqc "
-        "{params.extra} "
-        "--force "
-        "-o $DIRECTORY "
-        "-n $FILENAME "
-        "{input}) "
-        "&> {log}"
+    wrapper:
+        "v1.7.0/bio/multiqc"

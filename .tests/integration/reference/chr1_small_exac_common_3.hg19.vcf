@@ -28,31 +28,7 @@
 ##LoF_flags=Possible warning flags for LoF
 ##LoF_info=Info used for LoF annotation
 ##VEP=v77 cache=/humgen/atgu1/fs03/konradk/vep/tin//homo_sapiens/77_GRCh37 db=.
-##contig=<ID=chr1,length=249250621,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr2,length=243199373,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr3,length=198022430,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr4,length=191154276,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr5,length=180915260,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr6,length=171115067,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr7,length=159138663,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr8,length=146364022,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr9,length=141213431,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr10,length=135534747,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr11,length=135006516,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr12,length=133851895,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr13,length=115169878,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr14,length=107349540,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr15,length=102531392,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr16,length=90354753,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr17,length=81195210,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr18,length=78077248,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr19,length=59128983,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr20,length=63025520,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr21,length=48129895,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chr22,length=51304566,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chrX,length=155270560,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chrY,length=59373566,assembly=Homo_sapiens_assembly19.fasta>
-##contig=<ID=chrMT,length=16569,assembly=Homo_sapiens_assembly19.fasta>
+##contig=<ID=chr1,length=2461623,assembly=Homo_sapiens_assembly19.fasta>
 ##source=SelectVariants
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
 chr1	17365	.	C	G	826621.11	InbreedingCoeff_Filter	AF=0.136

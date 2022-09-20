@@ -43,7 +43,7 @@ rule gatk_get_pileup_summaries:
 
 rule gatk_calculate_contamination:
     input:
-        pileups_table=temp("qc/gatk_get_pileup_summaries/{sample}_{type}.pileups.table"),
+        pileups_table="qc/gatk_get_pileup_summaries/{sample}_{type}.pileups.table",
     output:
         contamination_table=temp("qc/gatk_calculate_contamination/{sample}_{type}.contamination.table"),
     params:
@@ -67,7 +67,7 @@ rule gatk_calculate_contamination:
     conda:
         "../envs/gatk.yaml"
     message:
-        "{rule}: generate contamination table {ouput.contamination_table}"
+        "{rule}: generate contamination table {output.contamination_table}"
     shell:
         "gatk CalculateContamination "
         "-I {input.pileups_table} "

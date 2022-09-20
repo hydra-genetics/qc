@@ -60,4 +60,10 @@ def compile_output_list(wildcards):
     for qc_type, value in config.get("multiqc", {}).get("reports", {}).items():
         if not set(value.get("included_unit_types", [])).isdisjoint(types):
             output_files.append("qc/multiqc/multiqc_{}.html".format(qc_type))
+    output_files += [
+        "qc/gatk_calculate_contamination/%s_%s.contamination.table" % (sample, unit_type)
+        for sample in get_samples(samples)
+        for unit_type in get_unit_types(units, sample)
+        if unit_type != "R"
+    ]
     return output_files

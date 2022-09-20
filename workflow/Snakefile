@@ -6,6 +6,7 @@ __license__ = "GPL-3"
 
 include: "rules/common.smk"
 include: "rules/fastqc.smk"
+include: "rules/gatk.smk"
 include: "rules/mosdepth.smk"
 include: "rules/multiqc.smk"
 include: "rules/picard.smk"

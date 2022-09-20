@@ -60,4 +60,9 @@ def compile_output_list(wildcards):
     for qc_type, value in config.get("multiqc", {}).get("reports", {}).items():
         if not set(value.get("included_unit_types", [])).isdisjoint(types):
             output_files.append("qc/multiqc/multiqc_{}.html".format(qc_type))
+    output_files += [
+        "qc/gatk_get_pileup_summaries/%s_%s.pileups.table" % (sample, unit_type)
+        for sample in get_samples(samples)
+        for unit_type in get_unit_types(units, sample)
+    ]
     return output_files

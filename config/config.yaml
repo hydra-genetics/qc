@@ -13,6 +13,9 @@ reference:
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
+gatk_get_pileup_summaries:
+  container: "docker://hydragenetics/gatk4:4.1.9.0"
+
 mosdepth:
   by: ""
   container: "docker://hydragenetics/mosdepth:0.3.2"

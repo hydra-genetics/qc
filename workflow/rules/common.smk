@@ -64,5 +64,6 @@ def compile_output_list(wildcards):
         "qc/gatk_get_pileup_summaries/%s_%s.pileups.table" % (sample, unit_type)
         for sample in get_samples(samples)
         for unit_type in get_unit_types(units, sample)
+        if unit_type != "R"
     ]
     return output_files

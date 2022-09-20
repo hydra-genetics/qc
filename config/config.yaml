@@ -15,6 +15,8 @@ fastqc:
 
 gatk_get_pileup_summaries:
   container: "docker://hydragenetics/gatk4:4.1.9.0"
+  sites: "reference/chr1_small_exac_common_3.hg19.vcf"
+  variants: "reference/chr1_small_exac_common_3.hg19.vcf"
 
 mosdepth:
   by: ""

@@ -45,7 +45,7 @@ rule gatk_calculate_contamination:
     input:
         pileups_table="qc/gatk_get_pileup_summaries/{sample}_{type}.pileups.table",
     output:
-        contamination_table=temp("qc/gatk_calculate_contamination/{sample}_{type}.contamination.table_mqc.tsv"),
+        contamination_table=temp("qc/gatk_calculate_contamination/{sample}_{type}.contamination.table.tsv"),
     params:
         extra=config.get("gatk_calculate_contamination", {}).get("extra", ""),
     log:

@@ -45,14 +45,14 @@ rule gatk_calculate_contamination:
     input:
         pileups_table="qc/gatk_get_pileup_summaries/{sample}_{type}.pileups.table",
     output:
-        contamination_table=temp("qc/gatk_calculate_contamination/{sample}_{type}.contamination.table"),
+        contamination_table=temp("qc/gatk_calculate_contamination/{sample}_{type}.contamination.table.tsv"),
     params:
         extra=config.get("gatk_calculate_contamination", {}).get("extra", ""),
     log:
-        "qc/gatk_calculate_contamination/{sample}_{type}.contamination.table.log",
+        "qc/gatk_calculate_contamination/{sample}_{type}.contamination.table.tsv.log",
     benchmark:
         repeat(
-            "qc/gatk_calculate_contamination/{sample}_{type}.contamination.table.benchmark.tsv",
+            "qc/gatk_calculate_contamination/{sample}_{type}.contamination.table.tsv.benchmark.tsv",
             config.get("gatk_calculate_contamination", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("gatk_calculate_contamination", {}).get("threads", config["default_resources"]["threads"])

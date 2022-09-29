@@ -40,7 +40,7 @@ rule peddy:
         {input.ped} and using the genotypes in {input.vcf}"
     shell:
         "python -m peddy "
-        "--procs {resources.threads} "
+        "--procs {threads} "
         "{params.extra} "
         "--prefix {params.pre} "
         "{input.vcf} {input.ped} &> {log}"

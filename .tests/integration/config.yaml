@@ -55,6 +55,10 @@ multiqc:
         - "qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.txt"
         - "qc/rseqc_inner_distance/{sample}_{type}.inner_distance.txt"
 
+peddy:
+  container: "docker://hydragenetics/peddy:0.4.8"
+  extra: ""
+  
 picard_collect_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 

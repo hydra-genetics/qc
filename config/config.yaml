@@ -49,6 +49,10 @@ multiqc:
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
         - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}.json"
 
+peddy:
+  container: "docker://hydragenetics/peddy:0.4.8"
+  extra: ""
+
 picard_collect_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 

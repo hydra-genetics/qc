@@ -153,6 +153,20 @@ properties:
       required:
         - reports
 
+  peddy:
+    type: object
+    description: parameters for peddy
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
   picard_collect_alignment_summary_metrics:
     type: object
     description: parameters for picard_collect_alignment_summary_metrics

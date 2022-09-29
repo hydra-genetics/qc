@@ -23,11 +23,16 @@ rule peddy:
         "qc/peddy/peddy.output.log",
     benchmark:
         repeat(
+<<<<<<< HEAD
             "qc/peddy/all.peddy.benchmark.tsv",
             config.get("peddy", {}).get("benchmark_repeats", 1),
         )
     threads:
         config.get("peddy", {}).get("threads", config["default_resources"]["threads"])
+=======
+            "qc/peddy/peddy.output.benchmark.tsv",
+            config.get("peddy", {}).get("benchmark_repeats", 1),)
+>>>>>>> acaff1aa82ee3a7858061624e791d63bc2ea5775
     resources:
         mem_mb=config.get("peddy", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
         mem_per_cpu=config.get("peddy", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
@@ -44,6 +49,11 @@ rule peddy:
     shell:
         "python -m peddy "
         "--procs {threads} "
+<<<<<<< HEAD
         "{params.extra}"
         "--prefix {params.prefix}/peddy "
+=======
+        "{params.extra} "
+        "--prefix {params.pre} "
+>>>>>>> acaff1aa82ee3a7858061624e791d63bc2ea5775
         "{input.vcf} {input.ped} &> {log}"

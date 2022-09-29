@@ -15,16 +15,19 @@ rule peddy:
         het_check=temp("qc/peddy/peddy.het_check.csv"),
         ped_html=temp("qc/peddy/peddy.html"),
         ped_vs_html=temp("qc/peddy/peddy.vs.html"),
-        pca=temp("qc/peddy/peddy.background_pca.json")
+        pca=temp("qc/peddy/peddy.background_pca.json"),
     params:
-        pre="qc/peddy/peddy",
-        extra=config.get("peddy", {}).get("extra", "")
+        prefix=lambda wildcards, input: os.path.split(input.ped)[0],
+        extra=config.get("peddy", {}).get("extra", ""),
     log:
         "qc/peddy/peddy.output.log",
     benchmark:
         repeat(
             "qc/peddy/all.peddy.benchmark.tsv",
-            config.get("peddy", {}).get("benchmark_repeats", 1),)
+            config.get("peddy", {}).get("benchmark_repeats", 1),
+        )
+    threads:
+        config.get("peddy", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("peddy", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
         mem_per_cpu=config.get("peddy", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
@@ -40,7 +43,7 @@ rule peddy:
         {input.ped} and using the genotypes in {input.vcf}"
     shell:
         "python -m peddy "
-        "--procs {resources.threads} "
+        "--procs {threads} "
         "{params.extra}"
-        "--prefix {params.pre} "
+        "--prefix {params.prefix}/peddy "
         "{input.vcf} {input.ped} &> {log}"

@@ -67,12 +67,12 @@ def compile_output_list(wildcards):
         if unit_type != "R"
     ]
     output_files += [
-    "qc/peddy/peddy.peddy.ped",
-    "qc/peddy/peddy.ped_check.csv",
-    "qc/peddy/peddy.sex_check.csv",
-    "qc/peddy/peddy.het_check.csv",
-    "qc/peddy/peddy.html",
-    "qc/peddy/peddy.vs.html",
-    "qc/peddy/peddy.background_pca.json"
+        "qc/peddy/peddy.peddy.ped",
+        "qc/peddy/peddy.ped_check.csv",
+        "qc/peddy/peddy.sex_check.csv",
+        "qc/peddy/peddy.het_check.csv",
+        "qc/peddy/peddy.html",
+        "qc/peddy/peddy.vs.html",
+        "qc/peddy/peddy.background_pca.json",
     ]
     return output_files

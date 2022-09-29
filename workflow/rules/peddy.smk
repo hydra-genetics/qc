@@ -43,6 +43,6 @@ rule peddy:
     shell:
         "python -m peddy "
         "--procs {threads} "
-        "{params.extra}"
+        "{params.extra} "
         "--prefix {params.prefix}/peddy "
         "{input.vcf} {input.ped} &> {log}"

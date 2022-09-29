@@ -23,7 +23,7 @@ rule peddy:
         "qc/peddy/peddy.output.log",
     benchmark:
         repeat(
-            "qc/peddy/all.peddy.benchmark.tsv",
+            "qc/peddy/peddy.output.benchmark.tsv",
             config.get("peddy", {}).get("benchmark_repeats", 1),)
     resources:
         mem_mb=config.get("peddy", {}).get("mem_mb", config["default_resources"]["mem_mb"]),

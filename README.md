@@ -1,4 +1,4 @@
-# :snake: hydra-genetics/qc
+# <img src="images/hydragenetics.png" width=40 /> hydra-genetics/qc
 
 #### Snakemake module containing steps for quality control of sequencing data
 

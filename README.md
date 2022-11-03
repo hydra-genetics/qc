@@ -7,24 +7,32 @@
 ![lint](https://github.com/hydra-genetics/qc/actions/workflows/lint.yaml/badge.svg?branch=develop)
 ![snakefmt](https://github.com/hydra-genetics/qc/actions/workflows/snakefmt.yaml/badge.svg?branch=develop)
 ![snakemake dry run](https://github.com/hydra-genetics/qc/actions/workflows/snakemake-dry-run.yaml/badge.svg?branch=develop)
+![pycodestyle](https://github.com/hydra-genetics/qc/actions/workflows/pycodestyl.yaml/badge.svg?branch=develop)
+![pytest](https://github.com/hydra-genetics/qc/actions/workflows/pytest.yaml/badge.svg?branch=develop)
 
 [![License: GPL-3](https://img.shields.io/badge/License-GPL3-yellow.svg)](https://opensource.org/licenses/gpl-3.0.html)
 
 ## :speech_balloon: Introduction
 
-The module contains rules to run different quality control tools. Fastqc is checking the raw `.fastq` files while
-mosdepth, samtools stats and picard's collect metrics generates reports on the resulting `.bam` files. Most
-output can be compiled to one `.html` report using multiqc.
+The module contains rules to run different quality control tools. Most output can be compiled to one `.html` report using multiqc.
+ - Fastqc is checking the raw `.fastq` files.
+ - Mosdepth, samtools stats and picard's collect metrics generates reports on the resulting `.bam` files.
+ - Peddy generates sex checks
+ - Rseqc reports on different RNA-specific QC measures
 
 ## :heavy_exclamation_mark: Dependencies
 
 In order to use this module, the following dependencies are required:
 
-[![hydra-genetics](https://img.shields.io/badge/hydragenetics-v0.10.0-blue)](https://github.com/hydra-genetics/)
+[![hydra-genetics](https://img.shields.io/badge/hydragenetics-0.15.0-blue)](https://github.com/hydra-genetics/)
 [![pandas](https://img.shields.io/badge/pandas-1.3.1-blue)](https://pandas.pydata.org/)
 [![python](https://img.shields.io/badge/python-3.8-blue)](https://www.python.org/)
-[![snakemake](https://img.shields.io/badge/snakemake-6.10.0-blue)](https://snakemake.readthedocs.io/en/stable/)
+[![snakemake](https://img.shields.io/badge/snakemake-7.13.0-blue)](https://snakemake.readthedocs.io/en/stable/)
 [![singularity](https://img.shields.io/badge/singularity-3.0.0-blue)](https://sylabs.io/docs/)
+[![drmaa](https://img.shields.io/badge/drmaa-0.7.9-blue)](https://pypi.org/project/drmaa/)
+[![tabulate](https://img.shields.io/badge/tabulate-0.8.10-blue)](https://pypi.org/project/tabulate/)
+
+**Note! Releases of prealignment <= v0.4.0 needs tabulate<0.9.0 added in requirements.txt**
 
 ## :school_satchel: Preparations
 
@@ -53,16 +61,20 @@ The following information need to be added to these files:
 ### Reference data
 
 A reference `.fasta`-file should be specified in `config.yaml` in the section `reference` and `fasta`. Picard
-requires also interval files for WGS, `wgs_intervals`, and for HS metrics, `design_intervals`. Mosdepth and
-samtools require a `.bed` file with specified regions to be analysed.
+requires also interval files for WGS, `wgs_intervals`, and for HS metrics, `design_intervals`. Mosdepth,
+samtools, and Rseqc require a `.bed` file with specified regions to be analysed.
+
+### MultiQC
+
+Files to be included in the MultiQC report is specified in the config file, see example [config](https://github.com/hydra-genetics/qc/blob/develop/.tests/integration/config.yaml). The report can be split into several reports based on for example sample type or rna/dna. A report configuration file for each MultiQC report can also be specified by the `config` tag in the config file which is forwarded to MultiQC.
 
 ## :white_check_mark: Testing
 
 The workflow repository contains a small test dataset `.tests/integration` which can be run like so:
 
 ```bash
-cd .tests/integration
-snakemake -s ../../Snakefile -j1 --use-singularity
+$ cd .tests/integration
+$ snakemake -s ../../Snakefile -j1 --configfile config.yaml --use-singularity
 ```
 
 ## :rocket: Usage
@@ -89,8 +101,8 @@ use rule * from qc as qc_*
 ### Compatibility
 
 Latest:
- - alignment:v0.1.0
- - prealignment:v0.2.0
+ - alignment:v0.3.0
+ - prealignment:v0.5.0
 
  See [COMPATIBLITY.md](../master/COMPATIBLITY.md) file for a complete list of module compatibility.
 
@@ -105,4 +117,4 @@ The following output files should be targeted via another rule:
 
 ## :judge: Rule Graph
 
-![rule_graph](images/rulegraph.svg)
+![rule_graph](images/qc.svg)

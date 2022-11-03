@@ -2,7 +2,7 @@ resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
-default_container: "docker://hydragenetics/common:0.1.8"
+default_container: "docker://hydragenetics/common:0.1.9"
 
 reference:
   design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
@@ -58,7 +58,7 @@ multiqc:
 peddy:
   container: "docker://hydragenetics/peddy:0.4.8"
   extra: ""
-  
+
 picard_collect_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 

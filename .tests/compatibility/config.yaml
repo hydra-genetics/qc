@@ -53,7 +53,14 @@ multiqc:
         - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
         - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
-        - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}.json"
+        - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}_fastp.json"
+    RNA:
+      included_unit_types: ['R']
+      qc_files:
+        - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
+        - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+        - "qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.txt"
+        - "qc/rseqc_inner_distance/{sample}_{type}.inner_distance.txt"
 
 picard_collect_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"

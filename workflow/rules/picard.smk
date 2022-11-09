@@ -7,7 +7,7 @@ __license__ = "GPL-3"
 rule picard_collect_alignment_summary_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
-        ref=config["reference"]["fasta"],
+        ref=config.get("reference", {}).get("fasta", ""),
     output:
         metrics=temp("qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"),
     params:
@@ -77,7 +77,7 @@ rule picard_collect_duplication_metrics:
 rule picard_collect_gc_bias_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
-        ref=config["reference"]["fasta"],
+        ref=config.get("reference", {}).get("fasta", ""),
     output:
         chart=temp("qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.pdf"),
         metrics=temp("qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.detail_metrics"),
@@ -114,7 +114,7 @@ rule picard_collect_hs_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bait_intervals=config.get("reference", {}).get("design_intervals", ""),
-        reference=config["reference"]["fasta"],
+        reference=config.get("reference", {}).get("fasta", ""),
         target_intervals=config.get("reference", {}).get("design_intervals", ""),
     output:
         temp("qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"),
@@ -181,7 +181,7 @@ rule picard_collect_insert_size_metrics:
 rule picard_collect_multiple_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
-        ref=config["reference"]["fasta"],
+        ref=config.get("reference", {}).get("fasta", ""),
     output:
         expand(
             "qc/picard_collect_multiple_metrics/{{sample}}_{{type}}.{ext}",
@@ -218,7 +218,7 @@ rule picard_collect_multiple_metrics:
 rule picard_collect_wgs_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
-        ref=config["reference"]["fasta"],
+        ref=config.get("reference", {}).get("fasta", ""),
         interval=config.get("reference", {}).get("wgs_intervals", ""),
     output:
         metrics=temp("qc/picard_collect_wgs_metrics/{sample}_{type}.txt"),

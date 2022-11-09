@@ -50,6 +50,40 @@ properties:
         type: string
         description: path to temporary directory
 
+  gatk_calculate_contamination:
+    type: object
+    description: parameters for gatk_calculate_contamination
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  gatk_get_pileup_summaries:
+    type: object
+    description: parameters for gatk_get_pileup_summaries
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      sites:
+        type: string
+        description: sites to pileup (eg small_exac_common.vcf from GnomAD)
+      variants:
+        type: string
+        description: varaints to pileup (eg small_exac_common.vcf from GnomAD, usually same as sites)
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
   mosdepth:
     type: object
     description: parameters for mosdepth
@@ -91,19 +125,47 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      config:
-        type: string
-        description: path to config file
       extra:
         type: string
         description: parameters that should be forwarded
-      qc_files:
-        type: array
-        description: list with path to qc-files that will be used to generate a MultiQC report
-        items:
-            type: string
-    required:
-      - qc_files
+      reports:
+        type: object
+        description: list of multiqc reports that will be generated
+        additionalProperties:
+          type: object
+          properties:
+            config:
+              type: string
+              description: path to config file
+            included_unit_types:
+              type: array
+              description: unit types that will be included
+              items:
+                type: string
+                pattern: "^(N|T|R)$"
+            qc_files:
+              type: array
+              description: list with path to qc-files that will be used to generate a MultiQC report
+              items:
+                type: string
+            required:
+              - qc_files
+      required:
+        - reports
+
+  peddy:
+    type: object
+    description: parameters for peddy
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
 
   picard_collect_alignment_summary_metrics:
     type: object

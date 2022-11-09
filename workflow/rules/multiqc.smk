@@ -6,26 +6,31 @@ __license__ = "GPL-3"
 
 rule multiqc:
     input:
-        files=[
-            file.format(sample=sample, type=u.type, lane=u.lane, flowcell=u.flowcell, barcode=u.barcode, read=read, ext=ext)
-            for file in config["multiqc"]["qc_files"]
-            for sample in get_samples(samples)
-            for u in units.loc[sample].dropna().itertuples()
-            for read in ["fastq1", "fastq2"]
-            for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
-        ],
+        files=lambda wildcards: set(
+            [
+                file.format(sample=sample, type=u.type, lane=u.lane, flowcell=u.flowcell, barcode=u.barcode, read=read, ext=ext)
+                for file in config["multiqc"]["reports"][wildcards.report]["qc_files"]
+                for sample in get_samples(samples)
+                for u in units.loc[sample].dropna().itertuples()
+                if u.type in config["multiqc"]["reports"][wildcards.report]["included_unit_types"]
+                for read in ["fastq1", "fastq2"]
+                for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
+            ]
+        ),
     output:
-        html=temp("qc/multiqc/multiqc.html"),
-        data=temp(directory("qc/multiqc/multiqc_data")),
+        html=temp("qc/multiqc/multiqc_{report}.html"),
+        data=temp(directory("qc/multiqc/multiqc_{report}_data")),
     params:
-        extra="{} {}".format(
-            config.get("multiqc", {}).get("extra", ""),
-            " -c {}".format(config["multiqc"]["config"]) if "config" in config.get("multiqc", {}) else "",
+        extra=lambda wildcards: "{} {}".format(
+            config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {}).get("extra", ""),
+            " -c {}".format(config["multiqc"]["reports"][wildcards.report]["config"])
+            if "config" in config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {})
+            else "",
         ),
     log:
-        "qc/multiqc/multiqc.html.log",
+        "qc/multiqc/multiqc_{report}.html.log",
     benchmark:
-        repeat("qc/multiqc/multiqc.html.benchmark.tsv", config.get("multiqc", {}).get("benchmark_repeats", 1))
+        repeat("qc/multiqc/multiqc_{report}.html.benchmark.tsv", config.get("multiqc", {}).get("benchmark_repeats", 1))
     threads: config.get("multiqc", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("multiqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -40,4 +45,4 @@ rule multiqc:
     message:
         "{rule}: generate combined qc report at {output.html}"
     wrapper:
-        "0.72.0/bio/multiqc"
+        "v1.7.0/bio/multiqc"

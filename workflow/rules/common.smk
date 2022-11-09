@@ -11,12 +11,12 @@ from hydra_genetics.utils.units import *
 from snakemake.utils import validate
 from snakemake.utils import min_version
 
-min_version("6.10.0")
+min_version("7.8.0")
 
 ### Set and validate config file
 
-
-configfile: "config.yaml"
+if not workflow.overwrite_configfiles:
+    sys.exit("At least one config file must be passed using --configfile/--configfiles, by command line or a profile!")
 
 
 validate(config, schema="../schemas/config.schema.yaml")
@@ -55,5 +55,24 @@ def get_flowcell(units, wildcards):
 
 
 def compile_output_list(wildcards):
-    output_files = ["qc/multiqc/multiqc.html"]
+    types = set([u.type for u in units.itertuples()])
+    output_files = []
+    for qc_type, value in config.get("multiqc", {}).get("reports", {}).items():
+        if not set(value.get("included_unit_types", [])).isdisjoint(types):
+            output_files.append("qc/multiqc/multiqc_{}.html".format(qc_type))
+    output_files += [
+        "qc/gatk_calculate_contamination/%s_%s.contamination.table" % (sample, unit_type)
+        for sample in get_samples(samples)
+        for unit_type in get_unit_types(units, sample)
+        if unit_type != "R"
+    ]
+    output_files += [
+        "qc/peddy/peddy.peddy.ped",
+        "qc/peddy/peddy.ped_check.csv",
+        "qc/peddy/peddy.sex_check.csv",
+        "qc/peddy/peddy.het_check.csv",
+        "qc/peddy/peddy.html",
+        "qc/peddy/peddy.vs.html",
+        "qc/peddy/peddy.background_pca.json",
+    ]
     return output_files

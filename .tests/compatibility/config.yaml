@@ -9,18 +9,18 @@ default_container: "docker://hydragenetics/common:0.1.3"
 reference:
   fasta: "reference/WASH7P.fna"
   dict: "reference/WASH7P.dict"
-  amb: "reference/WASH7P.fna.amb"
-  ann: "reference/WASH7P.fna.ann"
-  bwt: "reference/WASH7P.fna.bwt"
-  fai: "reference/WASH7P.fna.fai"
-  pac: "reference/WASH7P.fna.pac"
-  sa: "reference/WASH7P.fna.sa"
   design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
   design_intervals: "reference/WASH7P.interval_list"
   wgs_intervals: "reference/WASH7P.interval_list"
 
 bwa_mem:
+  amb: "reference/WASH7P.fna.amb"
+  ann: "reference/WASH7P.fna.ann"
+  bwt: "reference/WASH7P.fna.bwt"
   container: "docker://hydragenetics/bwa_mem:0.7.17"
+  fai: "reference/WASH7P.fna.fai"
+  pac: "reference/WASH7P.fna.pac"
+  sa: "reference/WASH7P.fna.sa"
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
@@ -38,19 +38,29 @@ mosdepth_bed:
 
 multiqc:
   container: "docker://hydragenetics/multiqc:1.11"
-  qc_files:
-    - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}.zip"
-    - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
-    - "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
-    - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics"
-    - "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"
-    - "qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"
-    - "qc/picard_collect_multiple_metrics/{sample}_{type}.{ext}"
-    - "qc/picard_collect_wgs_metrics/{sample}_{type}.txt"
-    - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
-    - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
-    - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
-    - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}.json"
+  reports:
+    DNA:
+      included_unit_types: ['N', 'T']
+      qc_files:
+        - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
+        - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+        - "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
+        - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics"
+        - "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"
+        - "qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"
+        - "qc/picard_collect_multiple_metrics/{sample}_{type}.{ext}"
+        - "qc/picard_collect_wgs_metrics/{sample}_{type}.txt"
+        - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
+        - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
+        - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
+        - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}_fastp.json"
+    RNA:
+      included_unit_types: ['R']
+      qc_files:
+        - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
+        - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+        - "qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.txt"
+        - "qc/rseqc_inner_distance/{sample}_{type}.inner_distance.txt"
 
 picard_collect_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"

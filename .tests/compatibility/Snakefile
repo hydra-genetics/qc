@@ -3,7 +3,7 @@ from hydra_genetics.utils.resources import load_resources
 
 rule all:
     input:
-        "qc/multiqc/multiqc.html",
+        "qc/multiqc/multiqc_DNA.html",
 
 
 configfile: "config.yaml"

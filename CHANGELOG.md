@@ -1,5 +1,59 @@
 # Changelog
 
+## [0.2.0](https://www.github.com/hydra-genetics/qc/compare/v0.1.0...v0.2.0) (2022-11-09)
+
+
+### Features
+
+* Add peddy rule ([#79](https://www.github.com/hydra-genetics/qc/issues/79)) ([cf4843a](https://www.github.com/hydra-genetics/qc/commit/cf4843a21b2e5fb9bc36718891c325ee2336323d))
+* Add rseqc and make multiqc take specific type ([9f9db81](https://www.github.com/hydra-genetics/qc/commit/9f9db815b9d43da15dc8089f36f6cb2ccc8b582a))
+* **ci:** pull-request template ([9cabf8d](https://www.github.com/hydra-genetics/qc/commit/9cabf8d22f243b010caaa2ad71e6996a7fa3c0a8))
+* **common:** added gatk_get_pileup_summaries output file ([c14ae28](https://www.github.com/hydra-genetics/qc/commit/c14ae28e9277610be28cc2353f2f736a76942a85))
+* **common:** added output file for gatk_calculate_contamination ([ddff81c](https://www.github.com/hydra-genetics/qc/commit/ddff81c4c52d512cf3f396f6b0a1e91d6844ec8a))
+* **config:** added configs for gatk_calculate_contamination ([3a77442](https://www.github.com/hydra-genetics/qc/commit/3a774424fcc69d9402d5c5890d119ddf2f7cc284))
+* **config:** added gatk_get_pileup_summaries to configs ([68f9fe9](https://www.github.com/hydra-genetics/qc/commit/68f9fe9924f8a1f0be85534cfc2880eddbb97766))
+* **config:** added input file to config ([5923ff9](https://www.github.com/hydra-genetics/qc/commit/5923ff9c9c2fc7cf6d3f961f2d34279665fd9190))
+* convert list to set ([69e5fed](https://www.github.com/hydra-genetics/qc/commit/69e5fedc67d1aa551e868c5b0a6379e36d482306))
+* **env:** added gatk_get_pileup_summaries env ([f08ab11](https://www.github.com/hydra-genetics/qc/commit/f08ab11e1b57ddc3423a5fe35436fccb0e491de7))
+* extra parameter depending on report type ([a41b1b6](https://www.github.com/hydra-genetics/qc/commit/a41b1b6dc57fb9d2b72eaff312b8fe49c8fbbd6b))
+* make config.yaml location more flexible ([36e1969](https://www.github.com/hydra-genetics/qc/commit/36e196903e7b33941ad1f2c0e554ddb507cc775f))
+* make configfile/confgilefiles argument mandatory ([f26c509](https://www.github.com/hydra-genetics/qc/commit/f26c509b8d22788b611282eab367fab94e05fcda))
+* make it possible to generate multiple multiqc reports using the same rule. ([cbd63ec](https://www.github.com/hydra-genetics/qc/commit/cbd63ec1128f0962afc431b8074ede3b63b2a304))
+* **rule:** adapted contamination output file to multiQC format ([d264e00](https://www.github.com/hydra-genetics/qc/commit/d264e005c563f32699b4a0e02fc65068c7eaadbc))
+* **rule:** added gatk_get_pileup_summaries rule ([d484e71](https://www.github.com/hydra-genetics/qc/commit/d484e71aaa18a1a1c3577e592dc20bbfce38a44a))
+* **rule:** added rule and updated test set ([1756fa5](https://www.github.com/hydra-genetics/qc/commit/1756fa50c0bffb4f28ba9d601088876370606250))
+* **schema:** added gatk_get_pileup_summaries schemas ([e1c44af](https://www.github.com/hydra-genetics/qc/commit/e1c44afeb65701249e92a7bb3cd19a07d6776412))
+* **schema:** added schemas for gatk_calculate_contamination ([9e80863](https://www.github.com/hydra-genetics/qc/commit/9e8086303f5d8749a60fe6fc1a54a87c9a357985))
+* **Snakefile:** added gatk to Snakefile ([f30e6c6](https://www.github.com/hydra-genetics/qc/commit/f30e6c68775090e6a7f758c3249d0f63ffb9e7ad))
+* start using multiqc-wrapper ([aa027ea](https://www.github.com/hydra-genetics/qc/commit/aa027eac8a5bdb1b0de741d9d6757f2628625352))
+* Update samtools.smk ([265deab](https://www.github.com/hydra-genetics/qc/commit/265deab15b8aad1684f15fe610cbb0359ea82588))
+* update snakemake-version ([03a7171](https://www.github.com/hydra-genetics/qc/commit/03a7171dae7297044973423cd84ae090a551c80e))
+
+
+### Bug Fixes
+
+* access config with get and set defaults ([8e0d327](https://www.github.com/hydra-genetics/qc/commit/8e0d32709acdd83c075c6cac621e59b9f9d1e35b))
+* added bai as input as it is required ([c8b13a1](https://www.github.com/hydra-genetics/qc/commit/c8b13a1ed0e7e1d920d0a24f84d3fa1325f8dc61))
+* added tabulate<0.9.0 requirement ([ffc0d6a](https://www.github.com/hydra-genetics/qc/commit/ffc0d6a7c38a3996cc5de8dc02ad57828c26586d))
+* change multiqc to use shell until modification to the wrapper have been approved ([3ab568e](https://www.github.com/hydra-genetics/qc/commit/3ab568e6c3d8be48f8a94abebe8055addb4fe8c9))
+* fastqc input name to multiqc ([bbc8eda](https://www.github.com/hydra-genetics/qc/commit/bbc8eda18d7820fd8037b349a98beca5c90a187b))
+* handle config file for multiqc correctly ([1d12776](https://www.github.com/hydra-genetics/qc/commit/1d12776088207f9b8f34ee6998c3538119f5c186))
+* **multiqc:** log files and benchmarks renamed so that are not picked up by multiqc ([eb9f33b](https://www.github.com/hydra-genetics/qc/commit/eb9f33b9b3b3f7f0367d05ae1dfb1cbc1cb23d30))
+* outputfiles without tsv ending ([e356c9f](https://www.github.com/hydra-genetics/qc/commit/e356c9f19cc5f3178c838cbe81d13be1453f0c05))
+* rm mgc tag on files ([67c97a4](https://www.github.com/hydra-genetics/qc/commit/67c97a42c10bbaffda56c579eb6a09ac4f08c867))
+* rm mgc tag on files ([b767fdf](https://www.github.com/hydra-genetics/qc/commit/b767fdf2a8567b6bee32e6cfc930cf7ea9bcfc17))
+* spelling error ([eb6460a](https://www.github.com/hydra-genetics/qc/commit/eb6460a72da23b88be0dda119809bbeee9f84eaf))
+* **test:** update with bam file that will be able to run rseqc ([d449d7b](https://www.github.com/hydra-genetics/qc/commit/d449d7b605254039e7967717ce3ef3dcdbb11237))
+* updated compatibilty config ([cd2e5df](https://www.github.com/hydra-genetics/qc/commit/cd2e5df9ffe74234aa2473c4905c24ca2b79f710))
+
+
+### Documentation
+
+* **redme:** update logo ([82c7911](https://www.github.com/hydra-genetics/qc/commit/82c79118fcf1bdfe1bf0df5f9955d09c50353586))
+* remove pytest and pycodestyle badges ([ff85877](https://www.github.com/hydra-genetics/qc/commit/ff85877c5f3b1046ea662307681eb324257bd7e7))
+* update readme ([d735726](https://www.github.com/hydra-genetics/qc/commit/d7357267720c035ccfab353fa87d77a97c2f4e03))
+* updated documentation ([b11e279](https://www.github.com/hydra-genetics/qc/commit/b11e2799ae4c27a235b4fe30712982d033969174))
+
 ## 0.1.0 (2022-05-09)
 
 

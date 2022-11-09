@@ -2,7 +2,7 @@ resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
-default_container: "docker://hydragenetics/common:0.1.8"
+default_container: "docker://hydragenetics/common:0.1.9"
 
 reference:
   design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
@@ -46,7 +46,7 @@ multiqc:
         - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
         - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
-        - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}.json"
+        - "prealignment/fastp_pe/{sample}_{flowcell}_{lane}_{barcode}_{type}_fastp.json"
     RNA:
       included_unit_types: ['R']
       qc_files:
@@ -58,7 +58,7 @@ multiqc:
 peddy:
   container: "docker://hydragenetics/peddy:0.4.8"
   extra: ""
-  
+
 picard_collect_alignment_summary_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 

@@ -32,7 +32,7 @@ In order to use this module, the following dependencies are required:
 [![drmaa](https://img.shields.io/badge/drmaa-0.7.9-blue)](https://pypi.org/project/drmaa/)
 [![tabulate](https://img.shields.io/badge/tabulate-0.8.10-blue)](https://pypi.org/project/tabulate/)
 
-**Note! Releases of prealignment <= v0.4.0 needs tabulate<0.9.0 added in requirements.txt**
+**Note! Releases of qc <= v0.1.0 needs tabulate<0.9.0 added in requirements.txt**
 
 ## :school_satchel: Preparations
 

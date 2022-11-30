@@ -8,6 +8,7 @@ rule peddy:
     input:
         vcf="qc/peddy/all.vcf.gz",
         ped="qc/peddy/all.ped",
+        tbi="qc/peddy/all.vcf.gz.tbi",
     output:
         ped=temp("qc/peddy/peddy.peddy.ped"),
         ped_check=temp("qc/peddy/peddy.ped_check.csv"),

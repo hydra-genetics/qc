@@ -27,6 +27,7 @@ rule multiqc:
             if "config" in config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {})
             else "",
         ),
+        use_input_files_only=config.get("multiqc", {}).get("use_input_files_only", True))
     log:
         "qc/multiqc/multiqc_{report}.html.log",
     benchmark:

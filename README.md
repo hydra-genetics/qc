@@ -100,7 +100,7 @@ use rule * from qc as qc_*
 
 Latest:
  - alignment:v0.3.0
- - prealignment:v0.5.0
+ - prealignment:v1.0.0
 
  See [COMPATIBLITY.md](../master/COMPATIBLITY.md) file for a complete list of module compatibility.
 

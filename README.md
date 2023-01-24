@@ -99,8 +99,8 @@ use rule * from qc as qc_*
 ### Compatibility
 
 Latest:
- - alignment:v0.3.0
- - prealignment:v0.5.0
+ - alignment:v0.3.1
+ - prealignment:v1.0.0
 
  See [COMPATIBLITY.md](../master/COMPATIBLITY.md) file for a complete list of module compatibility.
 

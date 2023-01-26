@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/hydra-genetics/qc/compare/v0.2.0...v0.3.0) (2023-01-26)
+
+
+### Features
+
+* **peddy:** add vcf tbi to inputs ([#87](https://www.github.com/hydra-genetics/qc/issues/87)) ([68b30bf](https://www.github.com/hydra-genetics/qc/commit/68b30bf99b740b822f8d052492b2c1f3e6807c4b))
+
+
+### Bug Fixes
+
+* compatibility fix for fastp in prealignment v1.0.0 ([e4e0b1a](https://www.github.com/hydra-genetics/qc/commit/e4e0b1a5b1f704d4b8b18a9073399ef1876ab14e))
+* multiqc should take input files as default ([e51457d](https://www.github.com/hydra-genetics/qc/commit/e51457de534efdf778ca17b9d73826eef538c2f8))
+
+
+### Documentation
+
+* update version list in compatibility file ([544ef48](https://www.github.com/hydra-genetics/qc/commit/544ef48898d6ffb4f686b5d6785f7f029ef9f5d8))
+
 ## [0.2.0](https://www.github.com/hydra-genetics/qc/compare/v0.1.0...v0.2.0) (2022-11-09)
 
 

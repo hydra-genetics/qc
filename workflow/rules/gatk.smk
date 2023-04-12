@@ -30,8 +30,6 @@ rule gatk_get_pileup_summaries:
         time=config.get("gatk_get_pileup_summaries", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("gatk_get_pileup_summaries", {}).get("container", config["default_container"])
-    conda:
-        "../envs/gatk.yaml"
     message:
         "{rule}: generate pileup table fo contamination estimation using {input.bam}"
     shell:
@@ -65,8 +63,6 @@ rule gatk_calculate_contamination:
         time=config.get("gatk_calculate_contamination", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("gatk_calculate_contamination", {}).get("container", config["default_container"])
-    conda:
-        "../envs/gatk.yaml"
     message:
         "{rule}: generate contamination table {output.contamination_table}"
     shell:

@@ -26,8 +26,6 @@ rule fastqc:
         time=config.get("fastqc", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("fastqc", {}).get("container", config["default_container"])
-    conda:
-        "../envs/fastqc.yaml"
     message:
         "{rule}: sequencing run stats for {input.fastq}"
     wrapper:

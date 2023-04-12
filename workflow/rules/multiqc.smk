@@ -41,8 +41,6 @@ rule multiqc:
         time=config.get("multiqc", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("multiqc", {}).get("container", config["default_container"])
-    conda:
-        "../envs/multiqc.yaml"
     message:
         "{rule}: generate combined qc report at {output.html}"
     wrapper:

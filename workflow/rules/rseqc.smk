@@ -32,8 +32,6 @@ rule rseqc_gene_body_coverage:
         time=config.get("rseqc_gene_body_coverage", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("rseqc_gene_body_coverage", {}).get("container", config["default_container"])
-    conda:
-        "../envs/rseqc.yaml"
     message:
         "{rule}: calculating gene body coverage for {input.bam}"
     shell:
@@ -72,8 +70,6 @@ rule rseqc_inner_distance:
         time=config.get("rseqc_inner_distance", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("rseqc_inner_distance", {}).get("container", config["default_container"])
-    conda:
-        "../envs/rseqc.yaml"
     message:
         "{rule}: calculating gene body coverage for {input.bam}"
     shell:

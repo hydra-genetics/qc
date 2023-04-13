@@ -36,8 +36,6 @@ rule peddy:
         time=config.get("peddy", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("peddy", {}).get("container", config["default_container"])
-    conda:
-        "../envs/peddy.yaml"
     message:
         "{rule}: Run peddy analysis to check relatedeness and sex of samples in \
         {input.ped} and using the genotypes in {input.vcf}"

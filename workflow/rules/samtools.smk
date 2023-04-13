@@ -31,8 +31,6 @@ rule samtools_stats:
         time=config.get("samtools_stats", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("samtools_stats", {}).get("container", config["default_container"])
-    conda:
-        "../envs/samtools.yaml"
     message:
         "{rule}: calculate qc using samtools for {input.bam}"
     wrapper:
@@ -63,8 +61,6 @@ rule samtools_idxstats:
         time=config.get("samtools_idxstats", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("samtools_idxstats", {}).get("container", config["default_container"])
-    conda:
-        "../envs/samtools.yaml"
     message:
         "{rule}: calculate index qc using samtools for {input.bai}"
     wrapper:

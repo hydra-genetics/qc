@@ -32,8 +32,6 @@ rule picard_collect_alignment_summary_metrics:
         time=config.get("picard_collect_alignment_summary_metrics", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("picard_collect_alignment_summary_metrics", {}).get("container", config["default_container"])
-    conda:
-        "../envs/picard.yaml"
     message:
         "{rule}: calculate alignment statistics using picard for {input.bam}"
     wrapper:
@@ -63,8 +61,6 @@ rule picard_collect_duplication_metrics:
         time=config.get("picard_collect_duplication_metrics", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("picard_collect_duplication_metrics", {}).get("container", config["default_container"])
-    conda:
-        "../envs/picard.yaml"
     message:
         "{rule}: calculate duplication metrics using picard for {input.bam}"
     shell:

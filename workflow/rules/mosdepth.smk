@@ -33,8 +33,6 @@ rule mosdepth:
         time=config.get("mosdepth", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("mosdepth", {}).get("container", config["default_container"])
-    conda:
-        "../envs/mosdepth.yaml"
     message:
         "{rule}: calculating coverage for {input.bam}"
     wrapper:
@@ -72,8 +70,6 @@ rule mosdepth_bed:
         time=config.get("mosdepth_bed", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("mosdepth_bed", {}).get("container", config["default_container"])
-    conda:
-        "../envs/mosdepth.yaml"
     message:
         "{rule}: calculating coverage for {input.bam}"
     wrapper:

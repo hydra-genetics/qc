@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.0](https://www.github.com/hydra-genetics/qc/compare/v0.3.0...v0.4.0) (2023-04-14)
+
+
+### Features
+
+* drop conda support and testing ([2e962a3](https://www.github.com/hydra-genetics/qc/commit/2e962a3873a3cfeb2dc63ea69bb4f5907ecd9aa6))
+
+
+### Documentation
+
+* update compatibility ([4dad537](https://www.github.com/hydra-genetics/qc/commit/4dad537e9e2669d46746ebfebf1febb9a13faf39))
+* update compatibility ([501a5a8](https://www.github.com/hydra-genetics/qc/commit/501a5a8f8fc83a0d07ab7007e21dd458dacadbab))
+
 ## [0.3.0](https://www.github.com/hydra-genetics/qc/compare/v0.2.0...v0.3.0) (2023-01-26)
 
 

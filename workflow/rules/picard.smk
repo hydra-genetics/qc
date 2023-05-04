@@ -98,8 +98,6 @@ rule picard_collect_gc_bias_metrics:
         time=config.get("picard_collect_gc_bias_metrics", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("picard_collect_gc_bias_metrics", {}).get("container", config["default_container"])
-    conda:
-        "../envs/picard.yaml"
     message:
         "{rule}: calculate gc bias using picard for {input.bam}"
     wrapper:
@@ -132,8 +130,6 @@ rule picard_collect_hs_metrics:
         time=config.get("picard_collect_hs_metrics", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("picard_collect_hs_metrics", {}).get("container", config["default_container"])
-    conda:
-        "../envs/picard.yaml"
     message:
         "{rule}: calculate hs metrics using picard for {input.bam}"
     wrapper:
@@ -166,8 +162,6 @@ rule picard_collect_insert_size_metrics:
         time=config.get("picard_collect_insert_size_metrics", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("picard_collect_insert_size_metrics", {}).get("container", config["default_container"])
-    conda:
-        "../envs/picard.yaml"
     message:
         "{rule}: calculate insert size using picard for {input.bam}"
     wrapper:
@@ -203,8 +197,6 @@ rule picard_collect_multiple_metrics:
         time=config.get("picard_collect_multiple_metrics", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("picard_collect_multiple_metrics", {}).get("container", config["default_container"])
-    conda:
-        "../envs/picard.yaml"
     message:
         "{rule}: calculate multiple metrics using picard for {input.bam}"
     wrapper:
@@ -236,8 +228,6 @@ rule picard_collect_wgs_metrics:
         time=config.get("picard_collect_wgs_metrics", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("picard_collect_wgs_metrics", {}).get("container", config["default_container"])
-    conda:
-        "../envs/picard.yaml"
     message:
         "{rule}: collect wgs metrics using picard for {input.bam}"
     shell:

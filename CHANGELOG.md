@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.4.1](https://www.github.com/hydra-genetics/qc/compare/v0.4.0...v0.4.1) (2023-05-05)
+
+
+### Bug Fixes
+
+* remove conda from picard.smk ([#102](https://www.github.com/hydra-genetics/qc/issues/102)) ([31eb95f](https://www.github.com/hydra-genetics/qc/commit/31eb95f8210341c7239ebffab7492c4fdc464673))
+
 ## [0.4.0](https://www.github.com/hydra-genetics/qc/compare/v0.3.0...v0.4.0) (2023-04-14)
 
 

@@ -69,16 +69,16 @@ rule samtools_idxstats:
 
 rule samtools_idxstats_sex:
     input:
-        txt=expand("qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.tsv", sample=get(samples), type=get(types)),
+        txt="qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.tsv",
     output:
-        stats=temp("qc/samtools_idxstats/samtools-idxstats-sex.txt"),
+        stats="qc/samtools_idxstats/{sample}_{type}.samtools-idxstats-sex.txt",
     params:
         extra=config.get("samtools_stats", {}).get("extra", ""),
     log:
-        "qc/samtools_idxstats/samtools-idxstats-sex.txt.log",
+        "qc/samtools_idxstats/{sample}_{type}.samtools-idxstats-sex.txt.log",
     benchmark:
         repeat(
-            "qc/samtools_idxstats/samtools-idxstats-sex.txt.benchmark.tsv",
+            "qc/samtools_idxstats/{sample}_{type}.samtools-idxstats-sex.txt.benchmark.tsv",
             config.get("samtools_idxstats", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("samtools_idxstats", {}).get("threads", config["default_resources"]["threads"])
@@ -91,6 +91,6 @@ rule samtools_idxstats_sex:
     container:
         config.get("samtools_idxstats", {}).get("container", config["default_container"])
     message:
-        "{rule}: calculate index qc using samtools for {input.bai}"
+        "{rule}: calculate sex based on number of reads for chrX and chrY {input.bai}"
     script:
         "../scripts/samtools-idxstats-sex.py"

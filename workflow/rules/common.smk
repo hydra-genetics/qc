@@ -74,5 +74,6 @@ def compile_output_list(wildcards):
         "qc/peddy/peddy.html",
         "qc/peddy/peddy.vs.html",
         "qc/peddy/peddy.background_pca.json",
+        "qc/samtools_idxstats/%s_%s.samtools-idxstats-sex.tsv"
     ]
     return output_files

@@ -69,16 +69,16 @@ rule samtools_idxstats:
 
 rule samtools_idxstats_sex:
     input:
-        txt="qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.tsv",
+        txt="qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.txt",
     output:
-        stats="qc/samtools_idxstats/{sample}_{type}.samtools-idxstats-sex.txt",
+        stats="qc/samtools_idxstats/samtools-idxstats-sex.tsv",
     params:
         extra=config.get("samtools_stats", {}).get("extra", ""),
     log:
-        "qc/samtools_idxstats/{sample}_{type}.samtools-idxstats-sex.txt.log",
+        "qc/samtools_idxstats/samtools-idxstats-sex.txt.log",
     benchmark:
         repeat(
-            "qc/samtools_idxstats/{sample}_{type}.samtools-idxstats-sex.txt.benchmark.tsv",
+            "qc/samtools_idxstats/samtools-idxstats-sex.txt.benchmark.tsv",
             config.get("samtools_idxstats", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("samtools_idxstats", {}).get("threads", config["default_resources"]["threads"])

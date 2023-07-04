@@ -69,7 +69,7 @@ rule samtools_idxstats:
 
 rule samtools_idxstats_sex:
     input:
-        txt=expand("qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.tsv"),
+        txt=expand("qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.tsv", sample=SAMPLES, type=TYPES),
     output:
         stats=temp("qc/samtools_idxstats/samtools-idxstats-sex.txt"),
     params:

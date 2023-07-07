@@ -115,7 +115,7 @@ rule picard_collect_hs_metrics:
         reference=config.get("reference", {}).get("fasta", ""),
         target_intervals=config.get("reference", {}).get("design_intervals", ""),
     output:
-        temp("qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"),
+        metrics=temp("qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"),
     params:
         extra=config.get("picard_collect_hs_metrics", {}).get("extra", "COVERAGE_CAP=5000"),
     log:
@@ -178,7 +178,7 @@ rule picard_collect_multiple_metrics:
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
         ref=config.get("reference", {}).get("fasta", ""),
     output:
-        expand(
+        metrices=expand(
             "qc/picard_collect_multiple_metrics/{{sample}}_{{type}}.{ext}",
             ext=config.get("picard_collect_multiple_metrics", {}).get("output_ext", ""),
         ),

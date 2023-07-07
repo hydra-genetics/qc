@@ -43,12 +43,6 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      outdir:
-        type: string
-        description: path to output directory
-      tmp:
-        type: string
-        description: path to temporary directory
 
   gatk_calculate_contamination:
     type: object
@@ -218,7 +212,9 @@ properties:
         description: name or path to docker/singularity container
       extra:
         type: string
-        description: parameters that should be forwarded
+        description: |
+          parameters that should be forwarded
+          NOTE: Increase COVERAGE_CAP=5000 if you have high coverage data or RNA data
 
   picard_collect_insert_size_metrics:
     type: object

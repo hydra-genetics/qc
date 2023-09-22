@@ -11,6 +11,7 @@ rule multiqc:
                 file.format(sample=sample, type=u.type, lane=u.lane, flowcell=u.flowcell, barcode=u.barcode, read=read, ext=ext)
                 for file in config["multiqc"]["reports"][wildcards.report]["qc_files"]
                 for sample in get_samples(samples)
+                if sample.get("deduplication", "mark_duplicates") in config["multiqc"]["reports"][wildcards.report].get("deduplication", "")
                 for u in units.loc[sample].dropna().itertuples()
                 if u.type in config["multiqc"]["reports"][wildcards.report]["included_unit_types"]
                 for read in ["fastq1", "fastq2"]

@@ -13,7 +13,7 @@ include: "rules/peddy.smk"
 include: "rules/picard.smk"
 include: "rules/rseqc.smk"
 include: "rules/samtools.smk"
-
+include: "rules/verifybamid2.smk"
 
 rule all:
     input:

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Softwares used in the biomarker module
 
 ## [fastqc](https://github.com/s-andrews/FastQC)
@@ -297,4 +298,29 @@ Collects multiple statistics st once that can be used by MultiQC.
 
 #RESOURCESSCHEMA__picard_collect_multiple_metrics#
 
----
+
+
+## [verifybamid2](https://github.com/Griffan/VerifyBamID)
+Introduction to verifybamid2
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__verifybamid2__verifybamid2#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__verifybamid2__verifybamid2#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__verifybamid2#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__verifybamid2#
+
+
+
+-

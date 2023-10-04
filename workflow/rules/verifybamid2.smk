@@ -10,8 +10,8 @@ rule verifybamid2:
         ref=config.get("reference", {}).get("fasta", ""),
         svd_mu=config.get("verifybamid2", {}).get("svd_mu", ""),
     output:
-        selfsm="qc/verifybamid2/{sample}_{type}.selfSM",
-        ancestry="qc/verifybamid2/{sample}_{type}.ancestry",
+        selfsm=temp("qc/verifybamid2/{sample}_{type}.selfSM"),
+        ancestry=temp("qc/verifybamid2/{sample}_{type}.ancestry"),
     params:
         extra=config.get("verifybamid2", {}).get("extra", ""),
     log:

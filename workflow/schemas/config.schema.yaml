@@ -144,8 +144,8 @@ properties:
                 type: string
             required:
               - qc_files
-      required:
-        - reports
+    required:
+      - reports
 
   peddy:
     type: object

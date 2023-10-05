@@ -124,13 +124,13 @@ Collects QC data from external sources and compiles a comprehensive html QC-repo
 
 #### :left_right_arrow: input / output files
 
-SNAKEMAKE_RULE_TABLE__multiqc__multiqc#
+#SNAKEMAKE_RULE_TABLE__multiqc__multiqc#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-CONFIGSCHEMA__multiqc#
+#CONFIGSCHEMA__multiqc#
 
 #### Resources settings (`resources.yaml`)
 

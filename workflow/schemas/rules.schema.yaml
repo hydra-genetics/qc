@@ -162,6 +162,7 @@ properties:
           files:
             type: string
             description: List of files based on `config.yaml`
+            value: list of qc files that will be parsed by multiqc
       output:
         type: object
         description: list of outputs

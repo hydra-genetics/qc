@@ -62,7 +62,7 @@ def compile_output_list(wildcards):
             output_files.append("qc/multiqc/multiqc_{}.html".format(qc_type))
     files = {
         "qc/gatk_calculate_contamination": ["contamination.table"],
-        #"qc/verifybamid2": ["selfSM", "ancestry"],
+        # "qc/verifybamid2": ["selfSM", "ancestry"],
     }
     # Since it is not possible to create integration test without a large dataset verifybamid2  will not be subjected to integration
     # testing and we can not guarantee that it will work

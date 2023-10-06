@@ -413,19 +413,24 @@ properties:
         type: object
         description: list of inputs
         properties:
-          input1:
+          bam:
             type: string
-            description: description input1
-            #value: set to override value in table, else remove
-
+            description: Alignment bam file
+          ref:
+            type: string
+            description: Fasta reference file
+          svd_mu:
+            type: string
+            description: Resource file for verifybamid2 
       output:
         type: object
         description: list of outputs
         properties:
-          output1:
+          metrics:
             type: string
-            description: description output1
-            #value: set to override value in table, else remove
+            description: Contamination statistics used by MultiQC
+
+
 
 
 

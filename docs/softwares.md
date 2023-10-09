@@ -298,3 +298,29 @@ Collects multiple statistics st once that can be used by MultiQC.
 #RESOURCESSCHEMA__picard_collect_multiple_metrics#
 
 ---
+ 
+## [verifybamid2](https://github.com/Griffan/VerifyBamID)
+verifybamid2 estimates contamination in samples by simultaneously estimating genetic background and contamination using population allele frequencies. The output is parsed and displayed by the MultiQC rapport.
+
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__verifybamid2__verifybamid2#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__verifybamid2__verifybamid2#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__verifybamid2#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__verifybamid2#
+
+
+
+---

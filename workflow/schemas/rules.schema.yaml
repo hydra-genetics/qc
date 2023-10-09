@@ -22,8 +22,9 @@ properties:
             description: Html report containing sequencing qc
           zip:
             type: string
-            description: Zipped qc data that can be used as input to MultiQC
-  
+            description: Zipped qc data that can be used as input to MultiQC 
+
+
   gatk_calculate_contamination:
     type: object
     description: input and output parameters for gatk_calculate_contamination
@@ -51,7 +52,7 @@ properties:
     properties:
       input:
         type: object
-        description: list of inputs
+        description: list of inputsw
         properties:
           bam:
             type: string
@@ -73,7 +74,8 @@ properties:
             type: string
             description: Pileup file with allele information for selected sites
 
-  mosdepth:
+
+   mosdepth:
     type: object
     description: input and output parameters for mosdepth
     properties:
@@ -402,3 +404,33 @@ properties:
           metrics:
             type: string
             description: WGS statistics used by MultiQC
+
+  verifybamid2:
+    type: object
+    description: input and output parameters for verifybamid2
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: Alignment bam file
+          ref:
+            type: string
+            description: Fasta reference file
+          svd_mu:
+            type: string
+            description: Resource file for verifybamid2 
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          metrics:
+            type: string
+            description: Contamination statistics used by MultiQC
+
+
+
+
+

@@ -297,7 +297,7 @@ Collects multiple statistics st once that can be used by MultiQC.
 
 #RESOURCESSCHEMA__picard_collect_multiple_metrics#
 
-
+---
  
 ## [verifybamid2](https://github.com/Griffan/VerifyBamID)
 verifybamid2 estimates contamination in samples by simultaneously estimating genetic background and contamination using population allele frequencies. The output is parsed and displayed by the MultiQC rapport.
@@ -323,4 +323,4 @@ verifybamid2 estimates contamination in samples by simultaneously estimating gen
 
 
 
--
+---

@@ -52,7 +52,7 @@ properties:
     properties:
       input:
         type: object
-        description: list of inputs
+        description: list of inputsw
         properties:
           bam:
             type: string
@@ -75,7 +75,7 @@ properties:
             description: Pileup file with allele information for selected sites
 
 
- mosdepth:
+   mosdepth:
     type: object
     description: input and output parameters for mosdepth
     properties:

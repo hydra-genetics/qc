@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Softwares used in the biomarker module
 
 ## [fastqc](https://github.com/s-andrews/FastQC)

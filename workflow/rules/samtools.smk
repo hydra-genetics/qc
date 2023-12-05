@@ -8,7 +8,7 @@ rule samtools_stats:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
     output:
-        temp("qc/samtools_stats/{sample}_{type}.samtools-stats.txt"),
+        stats=temp("qc/samtools_stats/{sample}_{type}.samtools-stats.txt"),
     params:
         extra=config.get("samtools_stats", {}).get("extra", ""),
     log:

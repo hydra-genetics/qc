@@ -407,7 +407,7 @@ properties:
 
   samtools_idxstats:
     type: object
-    description: input and output parameters for samtools_stats
+    description: input and output parameters for samtools_idxstats
     properties:
       input:
         type: object

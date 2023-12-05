@@ -405,6 +405,47 @@ properties:
             type: string
             description: WGS statistics used by MultiQC
 
+  samtools_idxstats:
+    type: object
+    description: input and output parameters for samtools_idxstats
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: Aligned bam file
+          bai:
+            type: string
+            description: Bam index file
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          stats:
+            type: string
+            description: Alignment summary statistics from samtools idxstats
+            
+  samtools_stats:
+    type: object
+    description: input and output parameters for samtools_stats
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: Aligned bam file
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          stats:
+            type: string
+            description: Alignment summary statistics from samtools stats
+
   verifybamid2:
     type: object
     description: input and output parameters for verifybamid2

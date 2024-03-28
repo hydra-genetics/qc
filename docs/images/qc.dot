@@ -1,0 +1,36 @@
+digraph snakemake_dag {
+	rankdir="LR"
+    graph[bgcolor=white, margin=0];
+    node[shape=box, style=rounded, fontname=sans,                 fontsize=10, penwidth=2];
+    edge[penwidth=2, color=grey];
+	0[label = "html report", color = "0.0 0.0 0.0", style="dotted"];
+	1[label = "multiqc", color = "0.35 0.6 0.85", style="rounded"];
+	2[label = "peddy", color = "0.04 0.6 0.85", style="rounded"];
+	4[label = "fastqc", color = "0.63 0.6 0.85", style="rounded"];
+	5[label = "picard:\nalignment_summary_metrics\nduplication_metrics\ngc_bias_metrics\nhs_metrics\ninsert_size_metric1s\nmultiple_metrics\nwgs_metrics", color = "0.42 0.6 0.85", style="rounded"];
+	9[label = "samtools:\nstats\nidxstats", color = "0.11 0.6 0.85", style="rounded"];
+	10[label = "mosdepth", color = "0.21 0.6 0.85", style="rounded"];
+	14[label = "rseqc:\ngene_body_coverage\ninner_distance", color = "0.00 0.6 0.85", style="rounded"];
+	16[label = "gatk_calculate_contamination", color = "0.60 0.6 0.85", style="rounded"];
+	17[label = "gatk_get_pileup_summaries", color = "0.49 0.6 0.85", style="rounded"];
+	18[label = "bam", color = "0.0 0.0 0.0", style="dotted"];
+	19[label = "fastq", color = "0.0 0.0 0.0", style="dotted"];
+	20[label = "vcf", color = "0.0 0.0 0.0", style="dotted"];
+	20 -> 2
+	19 -> 4
+	18 -> 5
+	18 -> 9
+	18 -> 10
+	18 -> 14
+	18 -> 17
+	1 -> 0
+	16 -> 1
+	5 -> 1
+	14 -> 1
+	2 -> 1
+	10 -> 1
+	9 -> 1
+	4 -> 1
+	17 -> 16
+}            
+1

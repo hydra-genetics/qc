@@ -43,12 +43,6 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      outdir:
-        type: string
-        description: path to output directory
-      tmp:
-        type: string
-        description: path to temporary directory
 
   gatk_calculate_contamination:
     type: object
@@ -150,8 +144,8 @@ properties:
                 type: string
             required:
               - qc_files
-      required:
-        - reports
+    required:
+      - reports
 
   peddy:
     type: object
@@ -218,7 +212,9 @@ properties:
         description: name or path to docker/singularity container
       extra:
         type: string
-        description: parameters that should be forwarded
+        description: |
+          parameters that should be forwarded
+          NOTE: Increase COVERAGE_CAP=5000 if you have high coverage data or RNA data
 
   picard_collect_insert_size_metrics:
     type: object
@@ -270,6 +266,22 @@ properties:
   samtools_stats:
     type: object
     description: parameters for samtools_stats
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+
+
+  verifybamid2:
+    type: object
+    description: parameters for verifybamid2
     properties:
       benchmark_repeats:
         type: integer

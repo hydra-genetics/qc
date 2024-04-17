@@ -12,6 +12,7 @@ The qc module is a collection of qc programs that performs analysis on the align
 | [rseqc](https://rseqc.sourceforge.net/) | | RNA gene coverage and inner distance |
 | [samtools](http://www.htslib.org/doc/samtools-stats.html) | _ _ | Alignment statistics |
 | [peddy](http://www.htslib.org/doc/samtools-stats.html) | vcf | Sex and relatedness checks |
+| [verifybamid2](https://github.com/Griffan/VerifyBamID) | bam | Sample contamination estimate |
 | [multiQC](https://github.com/ewels/MultiQC) | QC-files | Summary html-report |
 
 

@@ -74,8 +74,7 @@ properties:
             type: string
             description: Pileup file with allele information for selected sites
 
-
-   mosdepth:
+  mosdepth:
     type: object
     description: input and output parameters for mosdepth
     properties:
@@ -467,9 +466,12 @@ properties:
         type: object
         description: list of outputs
         properties:
-          metrics:
+          selfsm:
             type: string
-            description: Contamination statistics used by MultiQC
+            description: Text file with the estimated contamination level
+          ancestry:
+            type: string
+            description: Text file containing the PC coordinates for both intended sample and contaminating sample
 
 
 

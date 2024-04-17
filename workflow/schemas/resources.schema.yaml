@@ -328,8 +328,6 @@ properties:
         type: string
         description: max execution time
 
-
-
   verifybamid2:
     type: object
     description: resource definitions for verifybamid2

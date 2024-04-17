@@ -8,9 +8,9 @@ The qc module is a collection of qc programs that performs analysis on the align
 | [fastqQC](https://github.com/s-andrews/FastQC) | fastq | Sequencing report |
 | [GATK](https://gatk.broadinstitute.org/hc/en-us) | pileup | Sample contamination |
 | [mosdepth](https://github.com/brentp/mosdepth) | bam | Coverage |
-| [picard](https://broadinstitute.github.io/picard/) | | Alignment statistics, gc bias, panel statistics, insert size |
-| [rseqc](https://rseqc.sourceforge.net/) | | RNA gene coverage and inner distance |
-| [samtools](http://www.htslib.org/doc/samtools-stats.html) | _ _ | Alignment statistics |
+| [picard](https://broadinstitute.github.io/picard/) | bam | Alignment statistics, gc bias, panel statistics, insert size |
+| [rseqc](https://rseqc.sourceforge.net/) | bam | RNA gene coverage and inner distance |
+| [samtools](http://www.htslib.org/doc/samtools-stats.html) | bam | Alignment statistics |
 | [peddy](http://www.htslib.org/doc/samtools-stats.html) | vcf | Sex and relatedness checks |
 | [verifybamid2](https://github.com/Griffan/VerifyBamID) | bam | Sample contamination estimate |
 | [multiQC](https://github.com/ewels/MultiQC) | QC-files | Summary html-report |
@@ -25,6 +25,7 @@ The qc module is a collection of qc programs that performs analysis on the align
 The QC programs operate mostly on bam files but also fastq and vcf files.
 
 * `alignment/samtools_merge_bam/{sample}_{type}.bam`
+* `alignment/star/{sample}_R.bam`
 * `prealignment/merged/{sample}_{type}_fastq1.fastq.gz`
 * `prealignment/merged/{sample}_{type}_fastq2.fastq.gz`
 * `qc/peddy/all.vcf.gz`

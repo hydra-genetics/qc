@@ -36,8 +36,6 @@ multiqc:
       included_unit_types: ['N', 'T']
       qc_files:
         - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
-        - "qc/peddy/peddy.sex_check.csv"
-        - "qc/peddy/peddy.ped_check.csv"
         - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
         - "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
         - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics"
@@ -91,9 +89,3 @@ rseqc_gene_body_coverage:
 rseqc_inner_distance:
   bed: "reference/gene_model.bed"
   container: "docker://hydragenetics/rseqc:4.0.0"
-
-verifybamid2:
-  container: "docker://hydragenetics/verifybamid2:2.0.1"
-  svd_mu: "verifybamid2/1000g.phase3.10k.b38.exome.vcf.gz.dat.mu"
-
-

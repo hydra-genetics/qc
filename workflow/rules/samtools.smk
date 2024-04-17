@@ -8,9 +8,13 @@ rule samtools_stats:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
     output:
-        stats=temp("qc/samtools_stats/{sample}_{type}.samtools-stats.txt"),
+        temp("qc/samtools_stats/{sample}_{type}.samtools-stats.txt"),
     params:
-        extra=config.get("samtools_stats", {}).get("extra", ""),
+        extra="%s -t %s"
+        % (
+            config.get("samtools_stats", {}).get("extra", ""),
+            config.get("reference", {}).get("design_bed", ""),
+        ),
     log:
         "qc/samtools_stats/{sample}_{type}.samtools-stats.txt.log",
     benchmark:
@@ -30,7 +34,7 @@ rule samtools_stats:
     message:
         "{rule}: calculate qc using samtools for {input.bam}"
     wrapper:
-        "v3.0.0/bio/samtools/stats"
+        "0.79.0/bio/samtools/stats"
 
 
 rule samtools_idxstats:

@@ -48,7 +48,27 @@ properties:
         type: string
         description: max execution time
 
-  gatk_calculate_contamination:
+  fastqc:
+    type: object
+    description: resource definitions for fastqc
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+
+  gatk_get_pileup_summaries:
     type: object
     description: resource definitions for gatk_calculate_contamination
     properties:
@@ -311,26 +331,6 @@ properties:
   samtools_stats:
     type: object
     description: resource definitions for samtools_stats
-    properties:
-      mem_mb:
-        type: integer
-        description: max memory in MB to be available
-      mem_per_cpu:
-        type: integer
-        description: memory in MB used per cpu
-      partition:
-        type: string
-        description: partition to use on cluster
-      threads:
-        type: integer
-        description: number of threads to be available
-      time:
-        type: string
-        description: max execution time
-
-  verifybamid2:
-    type: object
-    description: resource definitions for verifybamid2
     properties:
       mem_mb:
         type: integer

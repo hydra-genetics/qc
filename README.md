@@ -1,7 +1,3 @@
-<p align="center">
-<a href="https://hydra-genetics-qc.readthedocs.io">https://hydra-genetics-qc.readthedocs.io</a>
-</p>
-
 # <img src="images/hydragenetics.png" width=40 /> hydra-genetics/qc
 
 #### Snakemake module containing steps for quality control of sequencing data

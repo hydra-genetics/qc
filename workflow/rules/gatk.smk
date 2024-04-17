@@ -6,8 +6,8 @@ __license__ = "GPL-3"
 
 rule gatk_get_pileup_summaries:
     input:
-        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
+        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         sites=config.get("gatk_get_pileup_summaries", {}).get("sites", ""),
         variants=config.get("gatk_get_pileup_summaries", {}).get("variants", ""),
     output:

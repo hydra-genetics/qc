@@ -1,0 +1,5 @@
+# Generate a dag graph and place it here
+cd .tests/integration
+snakemake --rulegraph -s ../../workflow/Snakefile --configfile config.yaml > qc.dot
+# move and modify dot-file manually and then
+dot -Tpng qc.dot > qc.png

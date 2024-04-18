@@ -7,6 +7,7 @@ __license__ = "GPL-3"
 rule picard_collect_alignment_summary_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
         ref=config.get("reference", {}).get("fasta", ""),
     output:
         metrics=temp("qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"),
@@ -41,6 +42,7 @@ rule picard_collect_alignment_summary_metrics:
 rule picard_collect_duplication_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
     output:
         metrics=temp("qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"),
     log:
@@ -73,6 +75,7 @@ rule picard_collect_duplication_metrics:
 rule picard_collect_gc_bias_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
         ref=config.get("reference", {}).get("fasta", ""),
     output:
         chart=temp("qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.pdf"),
@@ -107,11 +110,12 @@ rule picard_collect_gc_bias_metrics:
 rule picard_collect_hs_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
         bait_intervals=config.get("reference", {}).get("design_intervals", ""),
         reference=config.get("reference", {}).get("fasta", ""),
         target_intervals=config.get("reference", {}).get("design_intervals", ""),
     output:
-        temp("qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"),
+        metrics=temp("qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"),
     params:
         extra=config.get("picard_collect_hs_metrics", {}).get("extra", "COVERAGE_CAP=5000"),
     log:
@@ -171,9 +175,10 @@ rule picard_collect_insert_size_metrics:
 rule picard_collect_multiple_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
         ref=config.get("reference", {}).get("fasta", ""),
     output:
-        expand(
+        metrices=expand(
             "qc/picard_collect_multiple_metrics/{{sample}}_{{type}}.{ext}",
             ext=config.get("picard_collect_multiple_metrics", {}).get("output_ext", ""),
         ),
@@ -206,6 +211,7 @@ rule picard_collect_multiple_metrics:
 rule picard_collect_wgs_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
+        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
         ref=config.get("reference", {}).get("fasta", ""),
         interval=config.get("reference", {}).get("wgs_intervals", ""),
     output:

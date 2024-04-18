@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.5.0](https://www.github.com/hydra-genetics/qc/compare/v0.4.1...v0.5.0) (2024-04-18)
+
+
+### Features
+
+* add vertifybamid2 ([c604d05](https://www.github.com/hydra-genetics/qc/commit/c604d05a50f35d286440ed192970ebc90f31fba6))
+* update samtools.smk and remove design_bed as a default extra ([#112](https://www.github.com/hydra-genetics/qc/issues/112)) ([da66130](https://www.github.com/hydra-genetics/qc/commit/da661302b6297fa36962e4b2b5a7874da4773fe0))
+* update snakemake version, allow range up to version 8 ([8a18038](https://www.github.com/hydra-genetics/qc/commit/8a1803860b99d4aa446cd126b326877bb3e6a12b))
+
+
+### Bug Fixes
+
+* add bai file to picard rules that needs it ([dbc71e7](https://www.github.com/hydra-genetics/qc/commit/dbc71e7e258aacaa39902a603c7ae9bbdac6c19c))
+* excluded verifybamid from integration testing ([03ab7f7](https://www.github.com/hydra-genetics/qc/commit/03ab7f72060cf596cc683058c2478cfd340ee622))
+* Update requirements.txt ([#114](https://www.github.com/hydra-genetics/qc/issues/114)) ([c882232](https://www.github.com/hydra-genetics/qc/commit/c8822321c8c695284d7f421c4824c40d72aca34a))
+* Update to make outputs temporary ([5045af4](https://www.github.com/hydra-genetics/qc/commit/5045af47f2ec9fee2dd7adff26ccc9d0104b6c5f))
+
+
+### Documentation
+
+* add files to build rtd and test the build ([#117](https://www.github.com/hydra-genetics/qc/issues/117)) ([47ebeac](https://www.github.com/hydra-genetics/qc/commit/47ebeac49ec08efc2816c0c525a4ef136973cee4))
+* added rtd for all rules up to picard ([f4bc663](https://www.github.com/hydra-genetics/qc/commit/f4bc6636d99df461a2c4ea791840365e990a8a69))
+* update plugin version and added override value for multiqc input ([d6a06c6](https://www.github.com/hydra-genetics/qc/commit/d6a06c685b04a72d2d7c0a375fd6d795832b3549))
+* update rule graph ([#116](https://www.github.com/hydra-genetics/qc/issues/116)) ([3470422](https://www.github.com/hydra-genetics/qc/commit/34704224af1efe4e936dea73362cf28b9bf00644))
+* Update softwares.md ([75ad68f](https://www.github.com/hydra-genetics/qc/commit/75ad68fe90dd310fac66d028cc25ea6bbb7a35f3))
+* Updated rules.schema.yaml with additional details on inputs and outputs ([d3780c4](https://www.github.com/hydra-genetics/qc/commit/d3780c4b898c45c06bbb7b2c6a678db2ffb26535))
+
 ### [0.4.1](https://www.github.com/hydra-genetics/qc/compare/v0.4.0...v0.4.1) (2023-05-05)
 
 

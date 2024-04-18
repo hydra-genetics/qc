@@ -7,19 +7,19 @@ __license__ = "GPL-3"
 rule peddy:
     input:
         vcf="qc/peddy/all.vcf.gz",
-        tbi="qc/peddy/all.vcf.gz.tbi",
         ped="qc/peddy/all.ped",
+        tbi="qc/peddy/all.vcf.gz.tbi",
     output:
-        het_check=temp("qc/peddy/peddy.het_check.csv"),
-        pca=temp("qc/peddy/peddy.background_pca.json"),
         ped=temp("qc/peddy/peddy.peddy.ped"),
         ped_check=temp("qc/peddy/peddy.ped_check.csv"),
+        sex_check=temp("qc/peddy/peddy.sex_check.csv"),
+        het_check=temp("qc/peddy/peddy.het_check.csv"),
         ped_html=temp("qc/peddy/peddy.html"),
         ped_vs_html=temp("qc/peddy/peddy.vs.html"),
-        sex_check=temp("qc/peddy/peddy.sex_check.csv"),
+        pca=temp("qc/peddy/peddy.background_pca.json"),
     params:
-        extra=config.get("peddy", {}).get("extra", ""),
         prefix=lambda wildcards, input: os.path.split(input.ped)[0],
+        extra=config.get("peddy", {}).get("extra", ""),
     log:
         "qc/peddy/peddy.output.log",
     benchmark:

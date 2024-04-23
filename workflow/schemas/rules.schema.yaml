@@ -74,6 +74,25 @@ properties:
             type: string
             description: Pileup file with allele information for selected sites
 
+  longqc_sampleqc:
+    type: object
+    description: input and output parameters for longqc_sampleqc
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          input1:
+            type: string
+            description: Fastq filer med longread sekvenser
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          output1:
+            type: string
+            description: A folder with a collection of output files
+
   mosdepth:
     type: object
     description: input and output parameters for mosdepth
@@ -472,7 +491,6 @@ properties:
           ancestry:
             type: string
             description: Text file containing the PC coordinates for both intended sample and contaminating sample
-
 
 
 

@@ -69,7 +69,7 @@ Calculate coverage in specified regions that is used by gatk_calculate_contamina
 
 ---
 
-## [longqc_sampleqc](url_to_tool)
+## [longqc_sampleqc](https://github.com/yfukasawa/LongQC)
 Introduction to longqc_sampleqc
 
 ### :snake: Rule

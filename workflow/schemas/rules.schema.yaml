@@ -82,14 +82,14 @@ properties:
         type: object
         description: list of inputs
         properties:
-          input1:
+          fastq:
             type: string
-            description: Fastq filer med longread sekvenser
+            description: Fastq fil eller filer med longread sekvenser
       output:
         type: object
         description: list of outputs
         properties:
-          output1:
+          dir:
             type: string
             description: A folder with a collection of output files
 

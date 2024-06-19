@@ -12,7 +12,7 @@ rule longqc_sampleqc:
     params:
         extra="--min_length 1000 --max_length 15000"  # example of additional parameters
     log:
-        "logs/longqc/sample_qc.log"
+        "qc/longqc_sampleqc/{sample}_{type}.sample_qc.log"
     benchmark:
         repeat(
             "qc/longqc_sampleqc/{sample}_{type}.output.benchmark.tsv",

@@ -6,17 +6,17 @@ __license__ = "GPL-3"
 
 rule longqc_sampleqc:
     input:
-        fastq="data/sample.fastq"
+        fastq="data/sample.fastq",
     output:
-        dir=directory("qc/sample_qc/")
+        dir=directory("qc/sample_qc/"),
     params:
-        extra="--min_length 1000 --max_length 15000"  # example of additional parameters
+        extra="--min_length 1000 --max_length 15000",  # example of additional parameters
     log:
-        "qc/longqc_sampleqc/{sample}_{type}.sample_qc.log"
+        "qc/longqc_sampleqc/{sample}_{type}.sample_qc.log",
     benchmark:
         repeat(
             "qc/longqc_sampleqc/{sample}_{type}.output.benchmark.tsv",
-            config.get("longqc_sampleqc", {}).get("benchmark_repeats", 1)
+            config.get("longqc_sampleqc", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("longqc_sampleqc", {}).get("threads", config["default_resources"]["threads"])
     resources:
@@ -31,5 +31,3 @@ rule longqc_sampleqc:
         "longqc_sampleqc: run longqc QC statistics and generate plots from  {input.fastq}"
     wrapper:
         "file://path/to/your/wrappers/longqc/wrapper.py"
-
-

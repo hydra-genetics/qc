@@ -108,9 +108,8 @@ properties:
         type: object
         description: list of outputs
         properties:
-          outputlist:
-            type: string
-            description: list of a range of outputfiles produced
+          type: string
+          description: list of a range of outputfiles produced
 
   longqc_sampleqc:
     type: object

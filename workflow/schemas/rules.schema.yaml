@@ -74,6 +74,44 @@ properties:
             type: string
             description: Pileup file with allele information for selected sites
 
+  # Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
+  happy:
+    type: object
+    description: input and output parameters for happy
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          genome:
+            type: string
+            description: Genome fasta file
+          genome_index:
+            type: string
+            description: Genome fasta index file
+          truth:
+            type: string
+            description: VCF reference file
+          query:
+            type: string
+            description: VCF test file
+          truth_regions:
+            type: string
+            description: BED reference file for which regions should be evaluated
+          strats:
+            type: string
+            description: stratifications.tsv reference file
+           strats:
+            type: string
+            description: directory    
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          outputlist:
+            type: string
+            description: list of a range of outputfiles produced
+
   longqc_sampleqc:
     type: object
     description: input and output parameters for longqc_sampleqc
@@ -491,7 +529,5 @@ properties:
           ancestry:
             type: string
             description: Text file containing the PC coordinates for both intended sample and contaminating sample
-
-
 
 

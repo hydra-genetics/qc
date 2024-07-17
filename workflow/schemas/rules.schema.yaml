@@ -101,9 +101,9 @@ properties:
           strats:
             type: string
             description: stratifications.tsv reference file
-           strats:
+           strat_dir:
             type: string
-            description: directory    
+            description: directory for stratifications   
       output:
         type: object
         description: list of outputs

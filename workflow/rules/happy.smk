@@ -14,21 +14,31 @@ rule happy:
         genome=config.get("reference", {}).get("fasta", ""),
         genome_index=config.get("reference", {}).get("fai", ""),
     output:
-        multiext("qc/happy/{sample}_{type}.","results",".runinfo.json",".vcf.gz",".summary.csv",
-                ".extended.csv",".metrics.json.gz",".roc.all.csv.gz",
-                ".roc.Locations.INDEL.csv.gz",".roc.Locations.INDEL.PASS.csv.gz",
-                ".roc.Locations.SNP.csv.gz",".roc.tsv")
+        multiext(
+            "qc/happy/{sample}_{type}.",
+            "results",
+            ".runinfo.json",
+            ".vcf.gz",
+            ".summary.csv",
+            ".extended.csv",
+            ".metrics.json.gz",
+            ".roc.all.csv.gz",
+            ".roc.Locations.INDEL.csv.gz",
+            ".roc.Locations.INDEL.PASS.csv.gz",
+            ".roc.Locations.SNP.csv.gz",
+            ".roc.tsv",
+        ),
     params:
         engine="vcfeval",
-        prefix=lambda wc, input, output: output[0].split('.')[0],
+        prefix=lambda wc, input, output: output[0].split(".")[0],
         ## parameters such as -L to left-align variants
-        extra="--verbose"
-    log: "qc/happy/{sample}_{type}.happy.log"
-        container:
+        extra="--verbose",
+    log:
+        "qc/happy/{sample}_{type}.happy.log",
+    container:
         config.get("happy", {}).get("container", config["default_container"])
     message:
         "{rule}: Happy is for benchmarking variant accuracy of {input.query} compared to {input.truth}"
     threads: config.get("happy", {}).get("threads", config["default_resources"]["threads"])
-    wrapper: "v3.13.7/bio/hap.py/hap.py"
-
-
+    wrapper:
+        "v3.13.7/bio/hap.py/hap.py"

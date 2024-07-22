@@ -78,6 +78,10 @@ To compare a VCF against a gold standard dataset.
 
 #### :left_right_arrow: input / output files
 
+print(f"rule_schema: {rule_schema}")
+print(f"section_key: {section_key}")
+print(f"variable_key: {variable_key}")
+
 #SNAKEMAKE_RULE_TABLE__happy__happy#
 
 ### :wrench: Configuration

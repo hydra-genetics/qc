@@ -74,7 +74,6 @@ properties:
             type: string
             description: Pileup file with allele information for selected sites
 
-  # Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
   happy:
     type: object
     description: input and output parameters for happy
@@ -106,10 +105,11 @@ properties:
             description: directory for stratifications   
       output:
         type: object
-        description: list of outputs
+        description: list of inputs
         properties:
-          type: string
-          description: list of a range of outputfiles produced
+          dummy:
+            type: string
+            description: VCF file
 
   longqc_sampleqc:
     type: object

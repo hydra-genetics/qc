@@ -27,7 +27,8 @@ rule happy:
             ".roc.Locations.INDEL.PASS.csv.gz",
             ".roc.Locations.SNP.csv.gz",
             ".roc.tsv",
-        ),
+        ),        
+        dummy="qc/happy/{sample}_{type}.vcf.gz",
     params:
         engine="vcfeval",
         prefix=lambda wc, input, output: output[0].split(".")[0],

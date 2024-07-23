@@ -84,4 +84,7 @@ def compile_output_list(wildcards):
         "qc/peddy/peddy.vs.html",
         "qc/peddy/peddy.background_pca.json",
     ]
+    output_files += [
+        "qc/happy/results",
+    ]
     return output_files

@@ -63,6 +63,7 @@ def compile_output_list(wildcards):
     files = {
         "qc/gatk_calculate_contamination": ["contamination.table"],
         "qc/mosdepth": ["regions.bed.gz"],
+        "qc/happy": ["results"],
         # "qc/verifybamid2": ["selfSM", "ancestry"],
     }
     # Since it is not possible to create integration test without a large dataset verifybamid2  will not be subjected to integration
@@ -83,8 +84,5 @@ def compile_output_list(wildcards):
         "qc/peddy/peddy.html",
         "qc/peddy/peddy.vs.html",
         "qc/peddy/peddy.background_pca.json",
-    ]
-    output_files += [
-        "qc/happy/results",
     ]
     return output_files

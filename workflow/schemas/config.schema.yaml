@@ -88,6 +88,12 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
+      fasta:
+        type: string
+        description: path to reference fasta file
+      fai:
+        type: string
+        description: path to reference fasta file index
       extra:
         type: string
         description: parameters that should be forwarded

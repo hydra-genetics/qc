@@ -23,6 +23,8 @@ gatk_get_pileup_summaries:
 
 happy:
   container: "docker://hydragenetics/hap.py:0.3.15"
+  fasta: "reference/HES45.fas"
+  fai: "reference/HES45.fas.fai"
   extra: ""
 
 mosdepth:

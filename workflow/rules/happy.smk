@@ -9,7 +9,7 @@ rule happy:
         truth="reference/happy.truth.vcf",
         query="reference/happy.test.vcf",
         truth_regions="reference/happy.bed",
-        strats="stratifications.tsv", # optional, from https://github.com/genome-in-a-bottle/genome-stratifications
+        strats="stratifications.tsv",  # optional, from https://github.com/genome-in-a-bottle/genome-stratifications
         genome=config.get("reference", {}).get("fasta", ""),
         genome_index=config.get("reference", {}).get("fai", ""),
     output:

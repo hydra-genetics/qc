@@ -99,10 +99,7 @@ properties:
             description: BED reference file for which regions should be evaluated
           strats:
             type: string
-            description: stratifications.tsv reference file
-          strat_dir:
-            type: string
-            description: directory for stratifications   
+            description: stratifications.tsv reference file, optional from https://github.com/genome-in-a-bottle/genome-stratifications
       output:
         type: object
         description: list of inputs

@@ -1,3 +1,3 @@
 sample	platform	barcode	type	flowcell	lane	fastq1	fastq2	adapter
-HD832.HES45	Illumina	AAAA+CCCC	T	1	1	fastq/HD827sonic_testing1_R1.fastq.gz	fastq/HD827sonic_testing1_R2.fastq.gz	ACGT
-HD832.HES45	Illumina	AAAA+TTTT	R	1	1	fastq/HD827sonic_testing2_R1.fastq.gz	fastq/HD827sonic_testing2_R2.fastq.gz	ACGT
+HD832.HES45	Illumina	AAAA+CCCC	T	1	L001	fastq/HD827sonic_testing1_R1.fastq.gz	fastq/HD827sonic_testing1_R2.fastq.gz	ACGT
+HD832.HES45	Illumina	AAAA+TTTT	R	1	L001	fastq/HD827sonic_testing2_R1.fastq.gz	fastq/HD827sonic_testing2_R2.fastq.gz	ACGT

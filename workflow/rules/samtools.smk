@@ -40,7 +40,7 @@ rule samtools_idxstats:
     output:
         stats=temp("qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.txt"),
     params:
-        extra=config.get("samtools_stats", {}).get("extra", ""),
+        extra=config.get("samtools_idxstats", {}).get("extra", ""),
     log:
         "qc/samtools_idxstats/{sample}_{type}.samtools-idxstats.txt.log",
     benchmark:

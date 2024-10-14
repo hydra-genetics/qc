@@ -44,4 +44,4 @@ rule multiqc:
     message:
         "{rule}: generate combined qc report at {output.html}"
     wrapper:
-        "v1.7.0/bio/multiqc"
+        "v4.7.1/bio/multiqc"

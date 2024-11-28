@@ -78,6 +78,40 @@ properties:
         type: string
         description: parameters that should be forwarded
 
+  happy:
+    type: object
+    description: parameters for hap.py
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      fasta:
+        type: string
+        description: path to reference fasta file
+      fai:
+        type: string
+        description: path to reference fasta file index
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  longqc_sampleqc:
+    type: object
+    description: parameters for longqc_sampleqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
   mosdepth:
     type: object
     description: parameters for mosdepth
@@ -276,8 +310,6 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
-
-
 
   verifybamid2:
     type: object

@@ -40,4 +40,4 @@ jobs:
         working-directory: .tests/integration
         run: |
           mamba install -c conda-forge -c bioconda singularity=3.8.6
-          snakemake -s ../../workflow/Snakefile -j 1 --show-failed-logs --configfile config.yaml --use-singularity --singularity-args  " --cleanenv --bind /home/runner "
+          snakemake -s ../../workflow/Snakefile -j 1 --show-failed-logs --configfile config/config.yaml --use-singularity --singularity-args  " --cleanenv --bind /home/runner "

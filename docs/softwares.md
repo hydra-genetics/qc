@@ -69,6 +69,52 @@ Calculate coverage in specified regions that is used by gatk_calculate_contamina
 
 ---
 
+## [happy](https://github.com/Illumina/hap.py)
+To compare a VCF against a gold standard dataset. 
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__happy__happy#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__happy__happy#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__happy#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__happy#
+
+---
+
+## [longqc_sampleqc](https://github.com/yfukasawa/LongQC)
+Introduction to longqc_sampleqc
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__longqc__longqc_sampleqc#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__longqc__longqc_sampleqc#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__longqc_sampleqc#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__longqc_sampleqc#
+
+---
+
 ## [mosdepth](https://github.com/brentp/mosdepth)
 Fast calculations of coverage.
 
@@ -321,5 +367,3 @@ verifybamid2 estimates contamination in samples by simultaneously estimating gen
 #RESOURCESSCHEMA__verifybamid2#
 
 
-
----

@@ -5,8 +5,10 @@ __license__ = "GPL-3"
 
 
 include: "rules/common.smk"
+# include: "rules/longqc.smk" not finished rule
 include: "rules/fastqc.smk"
 include: "rules/gatk.smk"
+include: "rules/happy.smk"
 include: "rules/mosdepth.smk"
 include: "rules/multiqc.smk"
 include: "rules/peddy.smk"

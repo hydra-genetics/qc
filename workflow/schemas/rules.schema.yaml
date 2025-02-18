@@ -444,6 +444,30 @@ properties:
           stats:
             type: string
             description: Alignment summary statistics from samtools stats
+  
+  sequali:
+    type: object
+    description: input and output parameters for sequali
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          infile:
+            type: string
+            description: bam file or fastq file of reads
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          json:
+            type: string
+            description: sequali html report 
+          html:
+            type: string
+            description: sequali read statistics in json format
+
 
   verifybamid2:
     type: object
@@ -472,8 +496,4 @@ properties:
           ancestry:
             type: string
             description: Text file containing the PC coordinates for both intended sample and contaminating sample
-
-
-
-
 

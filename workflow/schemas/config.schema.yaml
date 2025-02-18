@@ -278,6 +278,19 @@ properties:
         description: parameters that should be forwarded
 
 
+  sequali:
+    type: object
+    description: parameters for sequali
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
 
   verifybamid2:
     type: object

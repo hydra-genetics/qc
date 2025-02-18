@@ -298,6 +298,30 @@ Collects multiple statistics st once that can be used by MultiQC.
 #RESOURCESSCHEMA__picard_collect_multiple_metrics#
 
 ---
+
+## [sequali](url_to_tool)
+Sequali calculates and visulises quality metrics for FASTQ and uBAM files. Similar to fastqc but with addional plots for ONT when uBAM input used.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__sequali__sequali#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__sequali__sequali#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__sequali#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__sequali#
+
+
+---
  
 ## [verifybamid2](https://github.com/Griffan/VerifyBamID)
 verifybamid2 estimates contamination in samples by simultaneously estimating genetic background and contamination using population allele frequencies. The output is parsed and displayed by the MultiQC rapport.

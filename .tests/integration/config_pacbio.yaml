@@ -1,0 +1,12 @@
+resources: "resources.yaml"
+samples: "samples_pacbio.tsv"
+units: "units_pacbio.tsv"
+
+default_container: "docker://hydragenetics/common:0.1.9"
+
+sequali:
+  container: "docker://hydragenetics/sequali:0.12.0"
+
+
+
+

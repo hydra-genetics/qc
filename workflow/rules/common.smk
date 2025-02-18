@@ -42,9 +42,10 @@ validate(units, schema="../schemas/units.schema.yaml")
 
 
 wildcard_constraints:
+    barcode="[A-Z+]+",
     sample="|".join(samples.index),
-    unit="N|T|R",
-
+    type="N|T|R",
+    
 
 def get_flowcell(units, wildcards):
     flowcells = set([u.flowcell for u in get_units(units, wildcards)])
@@ -53,7 +54,15 @@ def get_flowcell(units, wildcards):
     return flowcells.pop()
 
 
+def get_bam_input(wildcards):
+    unit = units.loc[(wildcards.sample, wildcards.type, wildcards.processing_unit, wildcards.barcode)]
+    bam_file = unit["bam"]
+
+    return bam_file
+
+
 def compile_output_list(wildcards):
+    platform = units.platform.iloc[0]
     types = set([u.type for u in units.itertuples()])
     output_files = []
     for qc_type, value in config.get("multiqc", {}).get("reports", {}).items():
@@ -70,17 +79,36 @@ def compile_output_list(wildcards):
         "%s/%s_%s.%s" % (prefix, sample, unit_type, suffix)
         for prefix in files.keys()
         for sample in get_samples(samples)
+        for platform in units.loc[(sample,)].platform
+        if platform not in ["ONT", "PACBIO"]
         for unit_type in get_unit_types(units, sample)
         for suffix in files[prefix]
         if unit_type != "R"
     ]
+
+    if platform not in ["ONT", "PACBIO"]:
+        output_files += [
+            "qc/peddy/peddy.peddy.ped",
+            "qc/peddy/peddy.ped_check.csv",
+            "qc/peddy/peddy.sex_check.csv",
+            "qc/peddy/peddy.het_check.csv",
+            "qc/peddy/peddy.html",
+            "qc/peddy/peddy.vs.html",
+            "qc/peddy/peddy.background_pca.json",
+        ]
+
+    files = {
+        "qc/sequali": ["html"],
+    }
+
     output_files += [
-        "qc/peddy/peddy.peddy.ped",
-        "qc/peddy/peddy.ped_check.csv",
-        "qc/peddy/peddy.sex_check.csv",
-        "qc/peddy/peddy.het_check.csv",
-        "qc/peddy/peddy.html",
-        "qc/peddy/peddy.vs.html",
-        "qc/peddy/peddy.background_pca.json",
+        f"{prefix}/{sample}_{u.type}_{u.processing_unit}_{u.barcode}.{suffix}"
+        for prefix in files.keys()
+        for sample in get_samples(samples)
+        for platform in units.loc[(sample,)].platform
+        if platform in ["ONT", "PACBIO"]
+        for u in units.loc[sample].dropna().itertuples()
+        for suffix in files[prefix]
     ]
+
     return output_files

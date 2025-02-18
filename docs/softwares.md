@@ -299,7 +299,7 @@ Collects multiple statistics st once that can be used by MultiQC.
 
 ---
 
-## [sequali](url_to_tool)
+## [sequali](https://sequali.readthedocs.io/en/latest/)
 Sequali calculates and visulises quality metrics for FASTQ and uBAM files. Similar to fastqc but with addional plots for ONT when uBAM input used.
 
 ### :snake: Rule

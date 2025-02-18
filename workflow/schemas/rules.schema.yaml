@@ -445,7 +445,7 @@ properties:
             type: string
             description: Alignment summary statistics from samtools stats
   
-    sequali:
+  sequali:
     type: object
     description: input and output parameters for sequali
     properties:

@@ -17,7 +17,7 @@ rule sequali:
     benchmark:
         repeat(
             "qc/sequali/{sample}_{type}_{processing_unit}_{barcode}.html.benchmark.tsv",
-            config.get("sequali", {}).get("benchmark_repeats", 1)
+            config.get("sequali", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("sequali", {}).get("threads", config["default_resources"]["threads"])
     resources:

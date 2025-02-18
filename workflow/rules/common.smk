@@ -45,7 +45,7 @@ wildcard_constraints:
     barcode="[A-Z+]+",
     sample="|".join(samples.index),
     type="N|T|R",
-    
+
 
 def get_flowcell(units, wildcards):
     flowcells = set([u.flowcell for u in get_units(units, wildcards)])

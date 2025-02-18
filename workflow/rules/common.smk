@@ -63,7 +63,6 @@ def get_bam_input(wildcards):
 
 def compile_output_list(wildcards):
     platform = units.platform.iloc[0]
-    print(platform)
     types = set([u.type for u in units.itertuples()])
     output_files = []
     if platform not in ["ONT", "PACBIO"]:

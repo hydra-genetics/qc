@@ -4,6 +4,14 @@ units: "units_pacbio.tsv"
 
 default_container: "docker://hydragenetics/common:0.1.9"
 
+multiqc:
+  container: "docker://hydragenetics/multiqc:1.25"
+  reports:
+    DNA:
+      included_unit_types: ['N', 'T']
+      qc_files:
+        - "qc/sequali/{sample}_{type}_{processing_unit}_{barcode}.json"
+
 sequali:
   container: "docker://hydragenetics/sequali:0.12.0"
 

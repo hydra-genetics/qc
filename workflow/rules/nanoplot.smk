@@ -8,7 +8,7 @@ rule nanoplot:
     input:
         arrow="qc/cramino/{sample}_{type}.arrow",
     output:
-        repprt="qc/nanoplot/{sample}_{type}/NanoPlot-report.html",
+        report="qc/nanoplot/{sample}_{type}/NanoPlot-report.html",
         stats="qc/nanoplot/{sample}_{type}/NanoStats.txt",
     params:
         extra=config.get("nanoplot", {}).get("extra", ""),

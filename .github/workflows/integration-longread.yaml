@@ -44,11 +44,7 @@ jobs:
       - name: Install requirements.test.txt
         run: |
           pip install -r requirements.test.txt
-      - name: Integration test - small dataset
-        working-directory: .tests/integration
-        run: |
-          snakemake -s ../../workflow/Snakefile -j 1 --show-failed-logs  --configfile config.yaml --use-singularity --singularity-args  " --cleanenv --bind /home/runner "
-      - name: Integration test - small dataset PACBIO
+      - name: Integration test - small dataset long-read
         working-directory: .tests/integration
         run: |
           snakemake -s ../../workflow/Snakefile -j 1 --show-failed-logs  --configfile config_pacbio.yaml --use-singularity --singularity-args  " --cleanenv --bind /home/runner "

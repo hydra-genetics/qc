@@ -1,4 +1,4 @@
-name: small integration test
+name: small integration test for long-read
 
 # Controls when the action will run.
 on:

@@ -32,4 +32,5 @@ rule nanoplot:
         "Nanoplot --arrow {input.arrow} "
         "-o {params.outdir} "
         "--threads {threads} "
+        "{params.extra} "
         "--only-report &> {log}"

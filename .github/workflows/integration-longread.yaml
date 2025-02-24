@@ -21,10 +21,6 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
-      - name: Build
-        run: |
-          echo "Free space:"
-          df -h
       - name: Remove stuff
         run: |
           sudo rm -rf /usr/share/dotnet

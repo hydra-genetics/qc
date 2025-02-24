@@ -31,4 +31,5 @@ rule cramino:
         "cramino "
         "--arrow {output.arrow} "
         "--threads {threads} "
-        "{input.bam} > {output.txt} 2> {log}"
+        "{params.extra} "
+        "{input.bam}  > {output.txt} 2> {log}"

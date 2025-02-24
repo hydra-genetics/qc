@@ -112,4 +112,19 @@ def compile_output_list(wildcards):
         for suffix in files[prefix]
     ]
 
+    files = {
+        "qc/cramino": [".txt", ".arrow"],
+        "qc/nanoplot": ["/NanoPlot-report.html", "/NanoStats.txt"],
+    }
+
+    output_files += [
+        f"{prefix}/{sample}_{unit_type}{suffix}"
+        for prefix in files.keys()
+        for sample in get_samples(samples)
+        for platform in units.loc[(sample,)].platform
+        if platform in ["ONT", "PACBIO"]
+        for unit_type in get_unit_types(units, sample)
+        for suffix in files[prefix]
+    ]
+
     return output_files

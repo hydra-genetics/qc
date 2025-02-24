@@ -1,0 +1,35 @@
+__author__ = "Padraic Corcoran"
+__copyright__ = "Copyright 2025, Padraic Corcoran"
+__email__ = "padraic.corcoran@scilifelab.uu.se"
+__license__ = "GPL-3"
+
+
+rule nanoplot:
+    input:
+        arrow="qc/cramino/{sample}_{type}.arrow",
+    output:
+        repprt="qc/nanoplot/{sample}_{type}/NanoPlot-report.html",
+        stats="qc/nanoplot/{sample}_{type}/NanoStats.txt",
+    params:
+        extra=config.get("nanoplot", {}).get("extra", ""),
+        outdir=lambda wildcards: f"{wildcards.sample}_{wildcards.type}",
+    log:
+        "qc/nanoplot/{sample}_{type}/Nanoplot.log",
+    benchmark:
+        repeat("qc/nanoplot/{sample}_{type}/Nanplot.benchmark.tsv", config.get("nanoplot", {}).get("benchmark_repeats", 1))
+    threads: config.get("nanoplot", {}).get("threads", config["default_resources"]["threads"])
+    resources:
+        mem_mb=config.get("nanoplot", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("nanoplot", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("nanoplot", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("nanoplot", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("nanoplot", {}).get("time", config["default_resources"]["time"]),
+    container:
+        config.get("nanoplot", {}).get("container", config["default_container"])
+    message:
+        "{rule}: visualise and summarise reads in {input.arrow}"
+    shell:
+        "Nanoplot --arrow {input.arrow} "
+        "-o {params.outdir} "
+        "--threads {threads} "
+        "--only-report &> {log}"

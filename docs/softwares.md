@@ -1,5 +1,26 @@
 # Softwares used in the biomarker module
 
+## [cramino](https://github.com/wdecoster/cramino)
+A tool for quick quality assessment of cram and bam files, intended for long read sequencing.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__cramino__cramino#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__cramino__cramino#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__cramino#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__cramino#
+
 ## [fastqc](https://github.com/s-andrews/FastQC)
 Generate QC data from short read fastq files. Can be used to located problems with sequencing runs.
 
@@ -135,6 +156,30 @@ Collects QC data from external sources and compiles a comprehensive html QC-repo
 #### Resources settings (`resources.yaml`)
 
 #RESOURCESSCHEMA__multiqc#
+
+---
+
+
+## [nanoplot](https://github.com/wdecoster/NanoPlot)
+Plotting tool for long read sequencing data and alignments.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__nanoplot__nanoplot#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__nanoplot__nanoplot#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__nanoplot#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__nanoplot#
 
 ---
 

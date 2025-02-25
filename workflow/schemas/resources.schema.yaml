@@ -28,6 +28,26 @@ properties:
       - threads
       - time
 
+  cramino:
+    type: object
+    description: resource definitions for cramino
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+
   fastqc:
     type: object
     description: resource definitions for fastqc
@@ -131,6 +151,26 @@ properties:
   multiqc:
     type: object
     description: resource definitions for multiqc
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+  
+  nanoplot:
+    type: object
+    description: resource definitions for nanoplot
     properties:
       mem_mb:
         type: integer

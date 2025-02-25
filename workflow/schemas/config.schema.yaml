@@ -33,6 +33,20 @@ properties:
     required:
       - fasta
 
+  cramino:
+    type: object
+    description: parameters for cramino
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
   fastqc:
     type: object
     description: parameters for fastqc
@@ -146,6 +160,20 @@ properties:
               - qc_files
     required:
       - reports
+  
+  nanoplot:
+    type: object
+    description: parameters for nanoplot
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
 
   peddy:
     type: object

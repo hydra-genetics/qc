@@ -1,4 +1,4 @@
-name: small integration test
+name: small integration test for short-read
 
 # Controls when the action will run.
 on:
@@ -21,10 +21,6 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
-      - name: Build
-        run: |
-          echo "Free space:"
-          df -h
       - name: Remove stuff
         run: |
           sudo rm -rf /usr/share/dotnet
@@ -44,13 +40,9 @@ jobs:
       - name: Install requirements.test.txt
         run: |
           pip install -r requirements.test.txt
-      - name: Integration test - small dataset
+      - name: Integration test - small dataset short-read
         working-directory: .tests/integration
         run: |
           snakemake -s ../../workflow/Snakefile -j 1 --show-failed-logs  --configfile config.yaml --use-singularity --singularity-args  " --cleanenv --bind /home/runner "
-      - name: Integration test - small dataset PACBIO
-        working-directory: .tests/integration
-        run: |
-          snakemake -s ../../workflow/Snakefile -j 1 --show-failed-logs  --configfile config_pacbio.yaml --use-singularity --singularity-args  " --cleanenv --bind /home/runner "
-
+ 
     

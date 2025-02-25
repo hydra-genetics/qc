@@ -2,6 +2,29 @@ $schema: "http://json-schema.org/draft-04/schema#"
 description: snakemake rule input and output files description file
 type: object
 properties:
+  cramino:
+    type: object
+    description: input and output parameters for cramino
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: BAM file with aligned or unaligned reads
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          txt:
+            type: string
+            description: crammino summary statistics text file
+          arrow:
+            type: string
+            description: arrow file that can be used with Nanoplot
+
   fastqc:
     type: object
     description: input and output parameters for fastqc
@@ -174,6 +197,29 @@ properties:
           data:
             type: string
             description: Data directory with the underlying data found in the html report
+
+  nanoplot:
+    type: object
+    description: input and output parameters for nanoplot
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          arrow:
+            type: string
+            description: arrow file produced by cramino
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          report:
+            type: string
+            description: Nanoplot html report
+          stats:
+            type: string
+            description: Nanoplot summary statistics in text format
 
   peddy:
     type: object

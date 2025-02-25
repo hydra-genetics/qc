@@ -4,6 +4,9 @@ units: "units_pacbio.tsv"
 
 default_container: "docker://hydragenetics/common:0.1.9"
 
+cramino:
+  container: "docker://hydragenetics/cramino:0.14.5"
+
 multiqc:
   container: "docker://hydragenetics/multiqc:1.25"
   reports:
@@ -11,6 +14,9 @@ multiqc:
       included_unit_types: ['N', 'T']
       qc_files:
         - "qc/sequali/{sample}_{type}_{processing_unit}_{barcode}.json"
+
+nanoplot:
+  container: "docker://hydragenetics/cramino:1.44.1"
 
 sequali:
   container: "docker://hydragenetics/sequali:0.12.0"

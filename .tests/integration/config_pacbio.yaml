@@ -16,7 +16,7 @@ multiqc:
         - "qc/sequali/{sample}_{type}_{processing_unit}_{barcode}.json"
 
 nanoplot:
-  container: "docker://hydragenetics/cramino:1.44.1"
+  container: "docker://hydragenetics/nanoplot:1.44.1"
 
 sequali:
   container: "docker://hydragenetics/sequali:0.12.0"

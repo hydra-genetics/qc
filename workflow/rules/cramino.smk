@@ -8,8 +8,8 @@ rule cramino:
     input:
         bam="alignment/minimap2_align/{sample}_{type}.bam",
     output:
-        txt="qc/cramino/{sample}_{type}.txt",
-        arrow="qc/cramino/{sample}_{type}.arrow",
+        txt=temp("qc/cramino/{sample}_{type}.txt"),
+        arrow=temp("qc/cramino/{sample}_{type}.arrow"),
     params:
         extra=config.get("cramino", {}).get("extra", ""),
     log:

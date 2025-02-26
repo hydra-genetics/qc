@@ -8,11 +8,11 @@ rule nanoplot:
     input:
         arrow="qc/cramino/{sample}_{type}.arrow",
     output:
-        report="qc/nanoplot/{sample}_{type}/NanoPlot-report.html",
-        stats="qc/nanoplot/{sample}_{type}/NanoStats.txt",
+        report=temp("qc/nanoplot/{sample}_{type}/NanoPlot-report.html"),
+        stats=temp("qc/nanoplot/{sample}_{type}/NanoStats.txt"),
     params:
         extra=config.get("nanoplot", {}).get("extra", ""),
-        outdir=lambda wildcards: f"{wildcards.sample}_{wildcards.type}",
+        outdir=lambda wildcards: f"qc/nanoplot/{wildcards.sample}_{wildcards.type}",
     log:
         "qc/nanoplot/{sample}_{type}/Nanoplot.log",
     benchmark:

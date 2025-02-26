@@ -8,15 +8,15 @@ rule nanoplot:
     input:
         arrow="qc/cramino/{sample}_{type}.arrow",
     output:
-        report=temp("qc/nanoplot/{sample}_{type}/NanoPlot-report.html"),
-        stats=temp("qc/nanoplot/{sample}_{type}/NanoStats.txt"),
+        report=temp("qc/nanoplot/{sample}_{type}_NanoPlot-report.html"),
+        stats=temp("qc/nanoplot/{sample}_{type}_NanoStats.txt"),
     params:
         extra=config.get("nanoplot", {}).get("extra", ""),
         outdir=lambda wildcards: f"qc/nanoplot/{wildcards.sample}_{wildcards.type}",
     log:
-        "qc/nanoplot/{sample}_{type}/Nanoplot.log",
+        "qc/nanoplot/{sample}_{type}_Nanoplot.log",
     benchmark:
-        repeat("qc/nanoplot/{sample}_{type}/Nanplot.benchmark.tsv", config.get("nanoplot", {}).get("benchmark_repeats", 1))
+        repeat("qc/nanoplot/{sample}_{type}_Nanoplot.benchmark.tsv", config.get("nanoplot", {}).get("benchmark_repeats", 1))
     threads: config.get("nanoplot", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("nanoplot", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -34,3 +34,5 @@ rule nanoplot:
         "--threads {threads} "
         "{params.extra} "
         "--only-report &> {log}"
+        "cp {params.outdir}/NanoStats.txt {output.stats}"
+        "cp {params.outdir}/NanoPlot-report.html {output.report}"

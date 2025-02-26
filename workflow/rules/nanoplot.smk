@@ -29,7 +29,7 @@ rule nanoplot:
     message:
         "{rule}: visualise and summarise reads in {input.arrow}"
     shell:
-        "Nanoplot --arrow {input.arrow} "
+        "NanoPlot --arrow {input.arrow} "
         "-o {params.outdir} "
         "--threads {threads} "
         "{params.extra} "

@@ -28,7 +28,7 @@ rule nanoplot:
     container:
         config.get("nanoplot", {}).get("container", config["default_container"])
     message:
-        "{rule}: visualise and summarise reads in {input.arrow}"
+        "{rule}: visualise and summarise reads in {input.bam}"
     shell:
         "NanoPlot --bam {input.bam} "
         "-o {params.outdir} "

@@ -6,7 +6,8 @@ __license__ = "GPL-3"
 
 rule nanoplot:
     input:
-        arrow="qc/cramino/{sample}_{type}.arrow",
+        bam="alignment/minimap2_align/{sample}_{type}.bam",
+        bai="alignment/minimap2_align/{sample}_{type}.bam.bai",
     output:
         report=temp("qc/nanoplot/{sample}_{type}/NanoPlot-report.html"),
         stats=temp("qc/nanoplot/{sample}_{type}/NanoStats.txt"),
@@ -29,7 +30,7 @@ rule nanoplot:
     message:
         "{rule}: visualise and summarise reads in {input.arrow}"
     shell:
-        "NanoPlot --arrow {input.arrow} "
+        "NanoPlot --bam {input.bam} "
         "-o {params.outdir} "
         "--threads {threads} "
         "{params.extra} "

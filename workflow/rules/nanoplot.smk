@@ -35,5 +35,5 @@ rule nanoplot:
         "--threads {threads} "
         "{params.extra} "
         "--only-report && "
-        "cp {params.outdir}/NanoStats.txt {ouput.stats} && "
-        "cp {params.outdir}/NanoPlot-report.html {ouput.report} &> {log}"
+        "cp {params.outdir}/NanoStats.txt {output.stats} && "
+        "cp {params.outdir}/NanoPlot-report.html {output.report} &> {log}"

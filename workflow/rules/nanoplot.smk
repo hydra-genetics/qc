@@ -9,8 +9,8 @@ rule nanoplot:
         bam="alignment/minimap2_align/{sample}_{type}.bam",
         bai="alignment/minimap2_align/{sample}_{type}.bam.bai",
     output:
-        report=temp("qc/nanoplot/{sample}_{type}/NanoPlot-report.html"),
-        stats=temp("qc/nanoplot/{sample}_{type}/NanoStats.txt"),
+        report=temp("qc/nanoplot/{sample}_{type}_NanoPlot-report.html"),
+        stats=temp("qc/nanoplot/{sample}_{type}.txt"),
     params:
         extra=config.get("nanoplot", {}).get("extra", ""),
         outdir=lambda wildcards: f"qc/nanoplot/{wildcards.sample}_{wildcards.type}",
@@ -34,4 +34,6 @@ rule nanoplot:
         "-o {params.outdir} "
         "--threads {threads} "
         "{params.extra} "
-        "--only-report &> {log}"
+        "--only-report && "
+        "cp {params.outdir}/NanoStats.txt {ouput.stats} && "
+        "cp {params.outdir}/NanoPlot-report.html {ouput.report} &> {log}"

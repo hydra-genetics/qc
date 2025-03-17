@@ -42,7 +42,7 @@ validate(units, schema="../schemas/units.schema.yaml")
 
 
 wildcard_constraints:
-    barcode="[A-Z+]+",
+    barcode="[A-Z+-]+",
     sample="|".join(samples.index),
     type="N|T|R",
 

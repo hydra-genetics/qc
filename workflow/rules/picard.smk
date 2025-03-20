@@ -70,8 +70,8 @@ rule picard_collect_duplication_metrics:
     shell:
         "(picard CollectDuplicateMetrics "
         "INPUT={input.bam} "
-        "M={output.metrics}) "
-        "{params.extra} "
+        "M={output.metrics} "
+        "{params.extra} )"
         "&> {log}"
 
 

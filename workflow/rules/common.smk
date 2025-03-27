@@ -131,7 +131,7 @@ def compile_output_list(wildcards):
     }
 
     output_files += [
-        f"{prefix}/{sample}_{unit_type}/{suffix}"
+        f"{prefix}/{sample}_{unit_type}_{suffix}"
         for prefix in files.keys()
         for sample in get_samples(samples)
         for platform in units.loc[(sample,)].platform

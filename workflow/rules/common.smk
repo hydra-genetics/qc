@@ -127,11 +127,11 @@ def compile_output_list(wildcards):
     ]
 
     files = {
-        "qc/nanoplot": ["NanoPlot-report.html", "NanoStats.txt"],
+        "qc/nanoplot": [".html", ".txt"],
     }
 
     output_files += [
-        f"{prefix}/{sample}_{unit_type}_{suffix}"
+        f"{prefix}/{sample}_{unit_type}{suffix}"
         for prefix in files.keys()
         for sample in get_samples(samples)
         for platform in units.loc[(sample,)].platform

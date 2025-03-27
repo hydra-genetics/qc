@@ -9,7 +9,7 @@ rule nanoplot:
         bam="alignment/minimap2_align/{sample}_{type}.bam",
         bai="alignment/minimap2_align/{sample}_{type}.bam.bai",
     output:
-        report=temp("qc/nanoplot/{sample}_{type}_NanoPlot-report.html"),
+        report=temp("qc/nanoplot/{sample}_{type}.html"),
         stats=temp("qc/nanoplot/{sample}_{type}.txt"),
     params:
         extra=config.get("nanoplot", {}).get("extra", ""),

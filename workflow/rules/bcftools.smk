@@ -28,6 +28,6 @@ rule bcftools_stats:
     container:
         config.get("bcftools_stats", {}).get("container", config["default_container"])
     message:
-        "{rule}: Calculate variant statistcs from {input.input1} using bcftools stats"
+        "{rule}: Calculate variant statistcs from {input.vcf} using bcftools stats"
     wrapper:
         "v6.0.0/bio/bcftools/stats"

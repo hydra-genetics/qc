@@ -16,7 +16,7 @@ rule bcftools_stats:
     benchmark:
         repeat(
             "qc/bcftools_stats/{sample}_{type}.stats.txt.benchmark.tsv",
-            config.get("bcftools_stats", {}).get("benchmark_repeats", 1)
+            config.get("bcftools_stats", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("bcftools_stats", {}).get("threads", config["default_resources"]["threads"])
     resources:

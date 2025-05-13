@@ -114,6 +114,7 @@ def compile_output_list(wildcards):
 
     files = {
         "qc/cramino": [".txt", ".arrow"],
+        "qc/bcftools_stats": [".stats.txt"],
     }
 
     output_files += [

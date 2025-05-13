@@ -1,5 +1,29 @@
 # Softwares used in the biomarker module
 
+---
+
+## [bcftools_stats](https://samtools.github.io/bcftools/bcftools.html#stats)
+Bcftools stats parses VCF or BCF and produces text with summary statistics on the
+variants. 
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__bcftools__bcftools_stats#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__bcftools__bcftools_stats#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__bcftools_stats#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__bcftools_stats#
+
 ## [cramino](https://github.com/wdecoster/cramino)
 A tool for quick quality assessment of cram and bam files, intended for long read sequencing.
 
@@ -391,4 +415,4 @@ verifybamid2 estimates contamination in samples by simultaneously estimating gen
 
 
 
----
+

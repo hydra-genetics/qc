@@ -32,6 +32,20 @@ properties:
         description: path to picard-style interval file for wgs regions
     required:
       - fasta
+  
+  bcftools_stats:
+    type: object
+    description: parameters for bcftools_stats
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
 
   cramino:
     type: object

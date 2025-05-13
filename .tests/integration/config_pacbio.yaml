@@ -14,7 +14,8 @@ multiqc:
       included_unit_types: ['N', 'T']
       qc_files:
         - "qc/sequali/{sample}_{type}_{processing_unit}_{barcode}.json"
-
+        - "qc/bcftools_stats/{sample}_{type}.stats.txt"
+  
 nanoplot:
   container: "docker://hydragenetics/nanoplot:1.44.1"
 

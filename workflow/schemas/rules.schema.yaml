@@ -13,7 +13,6 @@ properties:
           vcf:
             type: string
             description: VCF file
-
       output:
         type: object
         description: list of outputs

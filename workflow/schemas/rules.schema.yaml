@@ -19,7 +19,7 @@ properties:
         description: list of outputs
         properties:
           stats:
-            type: strng
+            type: string
             description: bcftools stats output file
 
   cramino:

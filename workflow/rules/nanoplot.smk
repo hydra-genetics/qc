@@ -6,10 +6,11 @@ __license__ = "GPL-3"
 
 rule nanoplot:
     input:
-        arrow="qc/cramino/{sample}_{type}.arrow",
+        bam="alignment/minimap2_align/{sample}_{type}.bam",
+        bai="alignment/minimap2_align/{sample}_{type}.bam.bai",
     output:
-        report=temp("qc/nanoplot/{sample}_{type}/NanoPlot-report.html"),
-        stats=temp("qc/nanoplot/{sample}_{type}/NanoStats.txt"),
+        report=temp("qc/nanoplot/{sample}_{type}.html"),
+        stats=temp("qc/nanoplot/{sample}_{type}.txt"),
     params:
         extra=config.get("nanoplot", {}).get("extra", ""),
         outdir=lambda wildcards: f"qc/nanoplot/{wildcards.sample}_{wildcards.type}",
@@ -27,10 +28,12 @@ rule nanoplot:
     container:
         config.get("nanoplot", {}).get("container", config["default_container"])
     message:
-        "{rule}: visualise and summarise reads in {input.arrow}"
+        "{rule}: visualise and summarise reads in {input.bam}"
     shell:
-        "NanoPlot --arrow {input.arrow} "
+        "NanoPlot --bam {input.bam} "
         "-o {params.outdir} "
         "--threads {threads} "
         "{params.extra} "
-        "--only-report &> {log}"
+        "--only-report && "
+        "cp {params.outdir}/NanoStats.txt {output.stats} && "
+        "cp {params.outdir}/NanoPlot-report.html {output.report} &> {log}"

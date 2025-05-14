@@ -225,9 +225,12 @@ properties:
         type: object
         description: list of inputs
         properties:
-          arrow:
+          bam:
             type: string
-            description: arrow file produced by cramino
+            description: Aligned bam file
+          bai:
+            type: string
+            description: Bam index file
 
       output:
         type: object

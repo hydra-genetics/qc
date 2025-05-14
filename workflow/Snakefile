@@ -5,6 +5,7 @@ __license__ = "GPL-3"
 
 
 include: "rules/common.smk"
+include: "rules/bcftools.smk"
 include: "rules/cramino.smk"
 include: "rules/sequali.smk"
 include: "rules/fastqc.smk"

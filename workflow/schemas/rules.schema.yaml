@@ -2,6 +2,25 @@ $schema: "http://json-schema.org/draft-04/schema#"
 description: snakemake rule input and output files description file
 type: object
 properties:
+  bcftools_stats:
+    type: object
+    description: input and output parameters for bcftools_stats
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          vcf:
+            type: string
+            description: VCF file
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          stats:
+            type: string
+            description: bcftools stats output file
+
   cramino:
     type: object
     description: input and output parameters for cramino

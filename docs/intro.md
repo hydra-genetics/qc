@@ -18,11 +18,11 @@ The qc module is a collection of qc programs that performs analysis on the align
 
 ## CNV_SV short read steps
 
-![CNV_SV steps](images/qc.png)
+![steps](images/qc.png)
 
 ## DNA Pacbio steps
 
-![CNV_SV steps](images/qc_longread.png )
+![steps](images/qc_longread.png )
 
 ## Module input files
 The QC programs operate mostly on mapped and unmapped bam files but also fastq and vcf files.

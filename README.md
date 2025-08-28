@@ -26,7 +26,7 @@ The module contains rules to run different quality control tools. Most output ca
 
 In order to use this module, the following dependencies are required:
 
-[![hydra-genetics](https://img.shields.io/badge/hydragenetics-0.15.0-blue)](https://github.com/hydra-genetics/)
+[![hydra-genetics](https://img.shields.io/badge/hydragenetics-3.1.1-blue)](https://github.com/hydra-genetics/)
 [![pandas](https://img.shields.io/badge/pandas-1.3.1-blue)](https://pandas.pydata.org/)
 [![python](https://img.shields.io/badge/python-3.8-blue)](https://www.python.org/)
 [![snakemake](https://img.shields.io/badge/snakemake-7.13.0-blue)](https://snakemake.readthedocs.io/en/stable/)
@@ -38,10 +38,10 @@ In order to use this module, the following dependencies are required:
 
 ## :school_satchel: Preparations
 
-### Sample and unit data
+### Sample and unit data short read
 
-Input data should be added to [`samples.tsv`](https://github.com/hydra-genetics/qc/blob/develop/config/samples.tsv)
-and [`units.tsv`](https://github.com/hydra-genetics/qc/blob/develop/config/units.tsv).
+Input data should be added to [`samples.tsv`](https://github.com/hydra-genetics/prealignment/blob/develop/config/samples.tsv)
+and [`units.tsv`](https://github.com/hydra-genetics/prealignment/blob/develop/config/units.tsv).
 The following information need to be added to these files:
 
 | Column Id | Description |
@@ -59,6 +59,29 @@ The following information need to be added to these files:
 | barcode | sequence library barcode/index, connect forward and reverse indices by `+`, e.g. `ATGC+ATGC` |
 | fastq1/2 | absolute path to forward and reverse reads |
 | adapter | adapter sequences to be trimmed, separated by comma |
+
+
+### Sample and unit data long read
+
+Input data should be added to [`samples.tsv`](https://github.com/hydra-genetics/cnv_sv/blob/develop/.tests/integration/samples_pacbio.tsv)
+and [`units.tsv`](https://github.com/hydra-genetics/cnv_sv/blob/develop/.tests/integration/units_pacbio.tsv).
+The following information need to be added to these files:
+
+| Column Id | Description |
+| --- | --- |
+| **`samples.tsv`** |
+| sample | unique sample/patient id, one per row |
+| tumor_content | ratio of tumor cells to total cells |
+| **`units.tsv`** |
+| sample | same sample/patient id as in `samples.tsv` |
+| type | data type identifier (one letter), can be one of **T**umor, **N**ormal, **R**NA |
+| platform | type of sequencing platform, e.g. `Pacbio` |
+| machine | specific machine id, e.g. Pacbio instrument e.g. `REVIO` |
+| processing_unit | contains the PacBio movie name or flowcell id for ONT |
+| barcode | sequence library barcode/index, connect forward and reverse indices by `-`, e.g. `ATGC-ATGC` |
+| methylation | Methylation read tags are found in the bam file (Yes or No) |
+| bam | absolute path to the unmapped BAM file |
+
 
 ### Reference data
 
@@ -117,6 +140,4 @@ The following output files should be targeted via another rule:
 | `qc/multiqc/multiqc.html` | `.html` report from multiqc |
 | `qc/multiqc/multiqc_data` | directory holding multiqc data |
 
-## :judge: Rule Graph
 
-![rule_graph](images/qc.svg)

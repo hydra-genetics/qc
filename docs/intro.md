@@ -16,13 +16,16 @@ The qc module is a collection of qc programs that performs analysis on the align
 | [multiQC](https://github.com/ewels/MultiQC) | QC-files | Summary html-report |
 
 
-## Dag graph
+## CNV_SV short read steps
 
-![Steps](images/qc.png)
+![CNV_SV steps](images/qc.png)
 
+## DNA Pacbio steps
+
+![CNV_SV steps](images/qc_longread.png )
 
 ## Module input files
-The QC programs operate mostly on bam files but also fastq and vcf files.
+The QC programs operate mostly on mapped and unmapped bam files but also fastq and vcf files.
 
 * `alignment/samtools_merge_bam/{sample}_{type}.bam`
 * `alignment/star/{sample}_R.bam`

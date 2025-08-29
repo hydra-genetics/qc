@@ -234,10 +234,13 @@ properties:
         type: object
         description: list of outputs
         properties:
-          output1:
+          html:
             type: string
-            description: description output1
-
+            description: MultiQC html report
+          data:
+            type: string
+            description: Data 
+          
   nanoplot:
     type: object
     description: input and output parameters for nanoplot

@@ -175,6 +175,45 @@ properties:
     required:
       - reports
   
+  # Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
+  multiqc_longread:
+    type: object
+    description: parameters for multiqc_longread
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+      reports:
+        type: object
+        description: list of multiqc reports that will be generated
+        additionalProperties:
+          type: object
+          properties:
+            config:
+              type: string
+              description: path to config file
+            included_unit_types:
+              type: array
+              description: unit types that will be included
+              items:
+                type: string
+                pattern: "^(N|T|R)$"
+            qc_files:
+              type: array
+              description: list with path to qc-files that will be used to generate a MultiQC report
+              items:
+                type: string
+            required:
+              - qc_files
+    required:
+      - reports
+  
   nanoplot:
     type: object
     description: parameters for nanoplot
@@ -347,6 +386,7 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
+
 
 required:
   - samples

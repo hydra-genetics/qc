@@ -2,19 +2,21 @@ resources: "resources.yaml"
 samples: "samples_pacbio.tsv"
 units: "units_pacbio.tsv"
 
-default_container: "docker://hydragenetics/common:0.1.9"
+default_container: "docker://hydragenetics/common:3.1.1"
+
 
 cramino:
   container: "docker://hydragenetics/cramino:0.14.5"
 
 multiqc:
-  container: "docker://hydragenetics/multiqc:1.25"
+  container: "docker://hydragenetics/multiqc:1.25.1"
   reports:
     DNA:
       included_unit_types: ['N', 'T']
       qc_files:
         - "qc/sequali/{sample}_{type}_{processing_unit}_{barcode}.json"
         - "qc/bcftools_stats/{sample}_{type}.stats.txt"
+        - "qc/nanoplot/{sample}_{type}.txt"
   
 nanoplot:
   container: "docker://hydragenetics/nanoplot:1.44.1"

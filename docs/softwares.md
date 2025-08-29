@@ -183,6 +183,28 @@ Collects QC data from external sources and compiles a comprehensive html QC-repo
 
 ---
 
+## [multiqc_longread](url_to_tool)
+Collects QC data from external sources and compiles a comprehensive html QC-report.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__multiqc__multiqc_longread#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__multiqc__multiqc_longread#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__multiqc_longread#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__multiqc_longread#
+
+---
 
 ## [nanoplot](https://github.com/wdecoster/NanoPlot)
 Plotting tool for long read sequencing data and alignments.
@@ -412,7 +434,4 @@ verifybamid2 estimates contamination in samples by simultaneously estimating gen
 #### Resources settings (`resources.yaml`)
 
 #RESOURCESSCHEMA__verifybamid2#
-
-
-
 

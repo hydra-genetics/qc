@@ -216,7 +216,31 @@ properties:
           data:
             type: string
             description: Data directory with the underlying data found in the html report
+  
+  multiqc_longread:
+    type: object
+    description: input and output parameters for multiqc_longread
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          files:
+            type: string
+            description: List of files based on `config.yaml`
+            value: list of qc files that will be parsed by multiqc
 
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          html:
+            type: string
+            description: MultiQC html report
+          data:
+            type: string
+            description: Data 
+          
   nanoplot:
     type: object
     description: input and output parameters for nanoplot

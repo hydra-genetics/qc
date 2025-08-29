@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.6.0](https://www.github.com/hydra-genetics/qc/compare/v0.5.0...v0.6.0) (2025-08-29)
+
+
+### Features
+
+* add '-' to barcode wildcard constraint ([f6fb93e](https://www.github.com/hydra-genetics/qc/commit/f6fb93e0a49e02aa310b5fc54d68df743eed8dce))
+* add bcftools stats ([8020bae](https://www.github.com/hydra-genetics/qc/commit/8020bae8c10edb6680e2813d7ad16e6d144ca337))
+* add cramino and nanoplot ([5a30c6a](https://www.github.com/hydra-genetics/qc/commit/5a30c6aaef73f4c5f0e140b250931030f617125e))
+* add multiqc rule for long-read input ([9833a37](https://www.github.com/hydra-genetics/qc/commit/9833a376710858ee09a2388df28c673a641f8ab8))
+* add sequali ([babe3ba](https://www.github.com/hydra-genetics/qc/commit/babe3ba93a4b4f93021e7c9db6620bf57bfb6e45))
+
+
+### Bug Fixes
+
+* change to correct container path for nanoplot ([ce47aa8](https://www.github.com/hydra-genetics/qc/commit/ce47aa83f703a63feca353c89a069a9f2a4e7894))
+* **nanoplot:** fix output directory and temp outputs ([ee34e36](https://www.github.com/hydra-genetics/qc/commit/ee34e368a42bf3a9d2214ed16f28e1134d5808f3))
+* **nanoplot:** fix typo in command name ([14e3da4](https://www.github.com/hydra-genetics/qc/commit/14e3da497e1ddb4eb34b11c9721ee3694baa2a0f))
+* **nanoplot:** switch to bam input for multiqc compatability ([230941f](https://www.github.com/hydra-genetics/qc/commit/230941fc598f494c5360e3f5490431475d85780a))
+* **picard:** add missing extra to collect duplicate metrics rule ([0e3bff4](https://www.github.com/hydra-genetics/qc/commit/0e3bff48c39edb44803855a7e69d5a2b3fe255b3))
+* **samtools_idxstats:** point to correct config ([0737673](https://www.github.com/hydra-genetics/qc/commit/0737673647f20a36c1c96a2968700fcdc45ea9ff))
+
 ## [0.5.0](https://www.github.com/hydra-genetics/qc/compare/v0.4.1...v0.5.0) (2024-04-18)
 
 

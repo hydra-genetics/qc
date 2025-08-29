@@ -1,5 +1,50 @@
 # Softwares used in the biomarker module
 
+---
+
+## [bcftools_stats](https://samtools.github.io/bcftools/bcftools.html#stats)
+Bcftools stats parses VCF or BCF and produces text with summary statistics on the
+variants. 
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__bcftools__bcftools_stats#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__bcftools__bcftools_stats#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__bcftools_stats#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__bcftools_stats#
+
+## [cramino](https://github.com/wdecoster/cramino)
+A tool for quick quality assessment of cram and bam files, intended for long read sequencing.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__cramino__cramino#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__cramino__cramino#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__cramino#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__cramino#
+
 ## [fastqc](https://github.com/s-andrews/FastQC)
 Generate QC data from short read fastq files. Can be used to located problems with sequencing runs.
 
@@ -135,6 +180,52 @@ Collects QC data from external sources and compiles a comprehensive html QC-repo
 #### Resources settings (`resources.yaml`)
 
 #RESOURCESSCHEMA__multiqc#
+
+---
+
+## [multiqc_longread](url_to_tool)
+Collects QC data from external sources and compiles a comprehensive html QC-report.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__multiqc__multiqc_longread#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__multiqc__multiqc_longread#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__multiqc_longread#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__multiqc_longread#
+
+---
+
+## [nanoplot](https://github.com/wdecoster/NanoPlot)
+Plotting tool for long read sequencing data and alignments.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__nanoplot__nanoplot#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__nanoplot__nanoplot#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__nanoplot#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__nanoplot#
 
 ---
 
@@ -298,6 +389,30 @@ Collects multiple statistics st once that can be used by MultiQC.
 #RESOURCESSCHEMA__picard_collect_multiple_metrics#
 
 ---
+
+## [sequali](https://sequali.readthedocs.io/en/latest/)
+Sequali calculates and visulises quality metrics for FASTQ and uBAM files. Similar to fastqc but with addional plots for ONT when uBAM input used.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__sequali__sequali#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__sequali__sequali#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__sequali#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__sequali#
+
+
+---
  
 ## [verifybamid2](https://github.com/Griffan/VerifyBamID)
 verifybamid2 estimates contamination in samples by simultaneously estimating genetic background and contamination using population allele frequencies. The output is parsed and displayed by the MultiQC rapport.
@@ -320,6 +435,3 @@ verifybamid2 estimates contamination in samples by simultaneously estimating gen
 
 #RESOURCESSCHEMA__verifybamid2#
 
-
-
----

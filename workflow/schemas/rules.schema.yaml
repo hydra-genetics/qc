@@ -2,6 +2,48 @@ $schema: "http://json-schema.org/draft-04/schema#"
 description: snakemake rule input and output files description file
 type: object
 properties:
+  bcftools_stats:
+    type: object
+    description: input and output parameters for bcftools_stats
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          vcf:
+            type: string
+            description: VCF file
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          stats:
+            type: string
+            description: bcftools stats output file
+
+  cramino:
+    type: object
+    description: input and output parameters for cramino
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: BAM file with aligned or unaligned reads
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          txt:
+            type: string
+            description: crammino summary statistics text file
+          arrow:
+            type: string
+            description: arrow file that can be used with Nanoplot
+
   fastqc:
     type: object
     description: input and output parameters for fastqc
@@ -174,6 +216,56 @@ properties:
           data:
             type: string
             description: Data directory with the underlying data found in the html report
+  
+  multiqc_longread:
+    type: object
+    description: input and output parameters for multiqc_longread
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          files:
+            type: string
+            description: List of files based on `config.yaml`
+            value: list of qc files that will be parsed by multiqc
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          html:
+            type: string
+            description: MultiQC html report
+          data:
+            type: string
+            description: Data 
+          
+  nanoplot:
+    type: object
+    description: input and output parameters for nanoplot
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: Aligned bam file
+          bai:
+            type: string
+            description: Bam index file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          report:
+            type: string
+            description: Nanoplot html report
+          stats:
+            type: string
+            description: Nanoplot summary statistics in text format
 
   peddy:
     type: object
@@ -444,6 +536,30 @@ properties:
           stats:
             type: string
             description: Alignment summary statistics from samtools stats
+  
+  sequali:
+    type: object
+    description: input and output parameters for sequali
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          infile:
+            type: string
+            description: bam file or fastq file of reads
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          json:
+            type: string
+            description: sequali html report 
+          html:
+            type: string
+            description: sequali read statistics in json format
+
 
   verifybamid2:
     type: object
@@ -472,8 +588,4 @@ properties:
           ancestry:
             type: string
             description: Text file containing the PC coordinates for both intended sample and contaminating sample
-
-
-
-
 

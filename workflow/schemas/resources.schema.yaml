@@ -28,6 +28,46 @@ properties:
       - threads
       - time
 
+  bcftools_stats:
+    type: object
+    description: resource definitions for bcftools_stats
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+
+  cramino:
+    type: object
+    description: resource definitions for cramino
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+
   fastqc:
     type: object
     description: resource definitions for fastqc
@@ -131,6 +171,47 @@ properties:
   multiqc:
     type: object
     description: resource definitions for multiqc
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+
+  multiqc_longread:
+    type: object
+    description: resource definitions for multiqc_longread
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+
+  
+  nanoplot:
+    type: object
+    description: resource definitions for nanoplot
     properties:
       mem_mb:
         type: integer
@@ -311,6 +392,26 @@ properties:
   samtools_stats:
     type: object
     description: resource definitions for samtools_stats
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+  
+  sequali:
+    type: object
+    description: resource definitions for sequali
     properties:
       mem_mb:
         type: integer

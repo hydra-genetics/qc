@@ -435,3 +435,188 @@ verifybamid2 estimates contamination in samples by simultaneously estimating gen
 
 #RESOURCESSCHEMA__verifybamid2#
 
+--
+
+## somalier
+
+## [somalier_combine_fam](https://github.com/brentp/somalier)
+Combines individual tumor and normal pedigree files into a single master .fam file for batch analysis.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_combine_fam#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_combine_fam#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_combine_fam#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_combine_fam#
+
+--
+
+## [somalier_create_groupfile](https://github.com/brentp/somalier)
+Creates group file mapping samples to their types (tumor/normal) for somalier's ancestry and QC analysis.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_groupfile#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_groupfile#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_create_groupfile#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_create_groupfile#
+
+--
+
+## [somalier_create_ped_n](https://github.com/brentp/somalier)
+Creates pedigree (.fam) files from sample sheet for normal samples. Converts sex information (M→1, K→2, other→0) for somalier compatibility. Handling normal (N) samples.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_ped_n#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped_n#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_create_ped_n#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_create_ped_n#
+
+--
+
+## [somalier_create_ped_t](https://github.com/brentp/somalier)
+Creates pedigree (.fam) files from sample sheet for tumor samples. Converts sex information (M→1, K→2, other→0) for somalier compatibility. Handling tumor (T) samples. 
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_ped_t#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped_t#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_create_ped_t#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_create_ped_t#
+
+--
+
+## [somalier_custom_multiqc](https://github.com/brentp/somalier)
+Formats somalier output files for MultiQC integration, adding custom configuration to display sample relatedness and QC metrics.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_custom_multiqc#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_custom_multiqc#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_custom_multiqc#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_custom_multiqc#
+
+--
+
+## [somalier_extract](https://github.com/brentp/somalier)
+Extracts genotype information from BAM/CRAM files at informative sites for fast sample QC, relatedness checks, and sex inference.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_extract#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_extract#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_extract#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_extract#
+
+--
+
+## [somalier_relate](https://github.com/brentp/somalier)
+Performs relatedness and ancestry inference across all samples, generating pairwise statistics and interactive HTML reports.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_relate#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_relate#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_relate#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_relate#
+
+--
+
+## [somalier_tn_test](https://github.com/brentp/somalier)
+Triggers somalier analysis only when both tumor and normal samples exist, ensuring proper tumor-normal matching validation.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_tn_test#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_tn_test#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_tn_test#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_tn_test#

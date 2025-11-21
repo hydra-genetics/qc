@@ -98,6 +98,20 @@ def compile_output_list(wildcards):
             "qc/peddy/peddy.background_pca.json",
         ]
 
+        samples_with_tn = [
+            sample
+            for sample in get_samples(samples)
+            if set(get_unit_types(units, sample)) & {"N", "T"}
+        ]
+        if samples_with_tn:
+            output_files += [
+                "qc/somalier_relate/somalier_relate.pairs.tsv",
+                "qc/somalier_relate/somalier_relate.samples.tsv",
+                "qc/somalier_relate/somalier_relate.html",
+                "qc/somalier_custom_multiqc/somalier_samples_mqc.tsv",
+                "qc/somalier_tn_test/TNmismatch.txt",
+            ]
+
     files = {
         "qc/sequali": ["html"],
     }

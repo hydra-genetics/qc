@@ -560,6 +560,192 @@ properties:
             type: string
             description: sequali read statistics in json format
 
+  somalier_combine_fam:
+    type: object
+    description: input and output parameters for somalier_combine_fam
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          fam:
+            type: array
+            description: all pedigree files in fam format from N and T samples
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          ped:
+            type: string
+            description: combined pedigree file in PED format
+
+  somalier_create_groupfile:
+    type: object
+    description: input and output parameters for somalier_create_groupfile
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: sample sheet TSV file
+          units:
+            type: string
+            description: units TSV file with sample types
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          groups:
+            type: string
+            description: somalier groups file pairing N and T samples
+
+  somalier_create_ped_n:
+    type: object
+    description: input and output parameters for somalier_create_ped_n
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: sample sheet tsv file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          fam:
+            type: string
+            description: pedigree file in fam format
+
+  somalier_create_ped_t:
+    type: object
+    description: input and output parameters for somalier_create_ped_t
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: sample sheet tsv file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          fam:
+            type: string
+            description: pedigree file in fam format
+
+  somalier_custom_multiqc:
+    type: object
+    description: input and output parameters for somalier_custom_multiqc
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          conf:
+            type: string
+            description: MultiQC config YAML file for somalier section
+          samples:
+            type: string
+            description: somalier relate samples TSV file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          mqc:
+            type: string
+            description: formatted TSV file for MultiQC custom content
+
+  somalier_extract:
+    type: object
+    description: input and output parameters for somalier_extract
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          sites:
+            type: string
+            description: VCF file with SNP sites for somalier extraction
+          fasta:
+            type: string
+            description: reference genome FASTA file
+          bam:
+            type: string
+            description: aligned BAM file
+          bai:
+            type: string
+            description: BAM index file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          somalier:
+            type: string
+            description: somalier binary file with extracted genotype information
+
+  somalier_relate:
+    type: object
+    description: input and output parameters for somalier_relate
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: array
+            description: list of somalier binary files from all samples
+          ped:
+            type: string
+            description: combined pedigree file in PED format
+          group:
+            type: string
+            description: somalier groups file for sample pairing
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          pairs:
+            type: string
+            description: TSV file with pairwise sample relationships
+          samples:
+            type: string
+            description: TSV file with per-sample statistics and sex inference
+          html:
+            type: string
+            description: somalier HTML report with relatedness plots
+
+  somalier_tn_test:
+    type: object
+    description: input and output parameters for somalier_tn_test
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: somalier relate samples TSV file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          tncheck:
+            type: string
+            description: text file listing samples with mismatched tumor/normal pairs
 
   verifybamid2:
     type: object
@@ -588,4 +774,3 @@ properties:
           ancestry:
             type: string
             description: Text file containing the PC coordinates for both intended sample and contaminating sample
-

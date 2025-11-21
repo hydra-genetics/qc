@@ -92,6 +92,10 @@ rseqc_inner_distance:
   bed: "reference/gene_model.bed"
   container: "docker://hydragenetics/rseqc:4.0.0"
 
+somalier_extract:
+  sites: "reference/sites.vcf.gz"
+  extract_folder: "qc/somalier/cohort/"
+
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"
   svd_mu: "verifybamid2/1000g.phase3.10k.b38.exome.vcf.gz.dat.mu"

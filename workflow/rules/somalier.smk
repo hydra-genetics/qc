@@ -154,7 +154,7 @@ rule somalier_relate:
         html=temp("qc/somalier/somalier_relate.html"),
     params:
         extra=config.get("somalier_relate", {}).get("extra", ""),
-        outname="qc/somalier/somalier_relate",
+        outname=lambda wildcards, output: output.pairs.replace(".pairs.tsv", ""),
     log:
         "qc/somalier_relate/somalier_relate.log",
     benchmark:
@@ -216,7 +216,7 @@ rule somalier_extract:
     output:
         somalier=temp("qc/somalier_extract/{sample}_{type}.somalier"),
     params:
-        extract_folder="qc/somalier_extract",
+        extract_folder=lambda wildcards, output: os.path.dirname(output.somalier),
         extra=config.get("somalier_extract", {}).get("extra", ""),
     log:
         "qc/somalier_extract/{sample}_{type}.somalier.log",
@@ -269,4 +269,3 @@ rule somalier_tn_test:
         """
         awk -F"[\t_]" '$1==$3 && $5<=0.2 {{print $1}}' {input.samples} > {output.tncheck} 2> {log}
         """
-

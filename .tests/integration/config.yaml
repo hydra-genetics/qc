@@ -95,6 +95,7 @@ rseqc_inner_distance:
 somalier_extract:
   sites: "reference/sites.vcf.gz"
   container: "docker://brentp/somalier:v0.2.16"
+  extra: "--unknown-side-step"
 
 somalier_relate:
   container: "docker://brentp/somalier:v0.2.16"

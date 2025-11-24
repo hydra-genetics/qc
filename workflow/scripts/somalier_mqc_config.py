@@ -6,6 +6,12 @@ import traceback
 import yaml
 import pandas as pd
 
+# test handling outside of snakemake
+try:
+    snakemake
+except NameError:
+    snakemake = None
+
 
 def comment_the_config_keys(config_dict):
     """

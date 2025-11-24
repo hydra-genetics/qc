@@ -1,0 +1,23 @@
+id: somalier_sex_check
+section_name: "Somalier Sex Check"
+description: "Sex inference and sample relatedness from somalier"
+plot_type: "table"
+pconfig:
+  id: "somalier_sex_table"
+  title: "Somalier Sex Check"
+  save_file: true
+  scale: false
+headers:
+  Sample:
+    title: "Sample"
+    description: "Sample ID"
+  inferred_sex:
+    title: "Inferred Sex"
+    description: "Sex inferred by somalier"
+  reported_sex:
+    title: "Reported Sex"
+    description: "Sex from sample sheet"
+  sex_check:
+    title: "Check"
+    description: "Pass if inferred matches reported"
+    scale: "RdYlGn"

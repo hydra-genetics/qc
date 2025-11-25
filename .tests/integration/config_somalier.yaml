@@ -1,0 +1,17 @@
+# requires system-specific reference paths
+# Override reference to use standard hg19 (required for somalier)
+reference:
+  fasta: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta"
+
+samples: "samples_somalier.tsv"
+units: "units_somalier.tsv"
+
+somalier_extract:
+  sites: "reference/sites.vcf.gz"
+  container: "docker://brentp/somalier:v0.2.16"
+
+somalier_relate:
+  container: "docker://brentp/somalier:v0.2.16"
+
+somalier_mqc:
+  config: "reference/somalier_mqc_config.yaml"

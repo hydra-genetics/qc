@@ -10,11 +10,6 @@ reference:
   fasta: "reference/HES45.fna"
   wgs_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
 
-# Somalier is DISABLED in default integration tests due to reference incompatibility
-# The test BAMs were aligned to standard hg19, but HES45.fna is modified
-# To test somalier, use a system-specific config with proper hg19 path
-# See reference/README.md for details
-
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
@@ -97,15 +92,9 @@ rseqc_inner_distance:
   bed: "reference/gene_model.bed"
   container: "docker://hydragenetics/rseqc:4.0.0"
 
-somalier_extract:
-  sites: "reference/sites.vcf.gz"
-  container: "docker://brentp/somalier:v0.2.16"
-
-somalier_relate:
-  container: "docker://brentp/somalier:v0.2.16"
-
-somalier_mqc:
-  config: "reference/somalier_mqc_config.yaml"
+# Somalier relate and extract disabled in default integration tests due to reference incompatibility
+somalier_custom_multiqc:
+  config: "${QC_HOME}/config/somalier_mqc.yaml"
 
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"

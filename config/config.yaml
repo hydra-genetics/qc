@@ -48,6 +48,7 @@ multiqc:
         - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
         - "prealignment/fastp_pe/{sample}_{type}_{flowcell}_{lane}_{barcode}_fastp.json"
+        - "qc/somalier/somalier_samples_mqc.tsv"
 
 peddy:
   container: "docker://hydragenetics/peddy:0.4.8"
@@ -76,18 +77,17 @@ picard_collect_multiple_metrics:
 picard_collect_wgs_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 
+somalier_custom_multiqc:
+  config: "${QC_HOME}/config/somalier_mqc.yaml"
+
 somalier_extract:
   container: "docker://brentp/somalier:v0.2.18"
   sites: ""
   extra: ""
-  
-somalier_mqc:
-  config: "{{FLUFFY_HOME}}/config/somalier_mqc.yaml"   
 
 somalier_relate: 
   container: "docker://brentp/somalier:v0.2.18"
   extra: "--infer"
-
 
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"

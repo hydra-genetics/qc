@@ -35,7 +35,7 @@ rule rseqc_gene_body_coverage:
     message:
         "{rule}: calculating gene body coverage for {input.bam}"
     shell:
-        "geneBody_coverage.py "
+        "(geneBody_coverage.py "
         "-r {input.bed} "
         "-i {input.bam} "
         "-o {params.prefix}"
@@ -73,7 +73,7 @@ rule rseqc_inner_distance:
     message:
         "{rule}: calculating gene body coverage for {input.bam}"
     shell:
-        "inner_distance.py "
+        "(inner_distance.py "
         "-r {input.bed} "
         "-i {input.bam} "
         "-o {params.prefix}"

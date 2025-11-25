@@ -13,8 +13,8 @@ somalier_extract:
 somalier_relate:
   container: "docker://brentp/somalier:v0.2.16"
 
-somalier_mqc:
-  config: "reference/somalier_mqc_config.yaml"
+somalier_custom_multiqc:
+  config: "${QC_HOME}/config/somalier_mqc_config.yaml"
 
 multiqc:
   reports:
@@ -22,7 +22,7 @@ multiqc:
       qc_files:
         - "qc/somalier/somalier_samples_mqc.tsv"
       included_unit_types: ["N", "T"]
-      config: "reference/somalier_mqc_config.yaml"
+      config: "${QC_HOME}/config/somalier_mqc_config.yaml"
   use_input_files_only: true
   threads: 1
   container: "docker://ewels/multiqc:v1.13"

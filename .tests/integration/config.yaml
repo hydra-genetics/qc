@@ -94,7 +94,7 @@ rseqc_inner_distance:
 
 # Somalier relate and extract disabled in default integration tests due to reference incompatibility
 somalier_custom_multiqc:
-  config: "${QC_HOME}/config/somalier_mqc_config.yaml"
+  config: "{{QC_HOME}}/config/somalier_mqc_config.yaml"
 
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"

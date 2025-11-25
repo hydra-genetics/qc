@@ -179,10 +179,10 @@ rule somalier_relate:
 
 rule somalier_custom_multiqc:
     input:
-        conf=config.get("somalier_mqc", {}).get("config", ""),
+        conf=config.get("somalier_custom_multiqc", {}).get("config", ""),
         samples="qc/somalier/somalier_relate.samples.tsv",
     output:
-        mqc=temp("qc/somalier/somalier_samples_mqc.tsv"),
+        mqc="qc/somalier/somalier_samples_mqc.tsv",
     params:
         extra=config.get("somalier_custom_multiqc", {}).get("extra", ""),
     log:

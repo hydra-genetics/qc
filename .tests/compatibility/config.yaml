@@ -86,4 +86,4 @@ picard_collect_wgs_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 
 somalier_custom_multiqc:
-  config: "${QC_HOME}/config/somalier_mqc.yaml"
+  config: "${QC_HOME}/config/somalier_mqc_config.yaml"

@@ -38,7 +38,7 @@ rule rseqc_gene_body_coverage:
         "(geneBody_coverage.py "
         "-r {input.bed} "
         "-i {input.bam} "
-        "-o {params.prefix}"
+        "-o {params.prefix}) &> {log}"
 
 
 rule rseqc_inner_distance:
@@ -76,4 +76,4 @@ rule rseqc_inner_distance:
         "(inner_distance.py "
         "-r {input.bed} "
         "-i {input.bam} "
-        "-o {params.prefix}"
+        "-o {params.prefix}) &> {log}"

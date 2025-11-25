@@ -35,11 +35,10 @@ rule rseqc_gene_body_coverage:
     message:
         "{rule}: calculating gene body coverage for {input.bam}"
     shell:
-        "mkdir -p $(dirname {log}) && "
-        "(geneBody_coverage.py "
+        "geneBody_coverage.py "
         "-r {input.bed} "
         "-i {input.bam} "
-        "-o {params.prefix}) &> {log}"
+        "-o {params.prefix}"
 
 
 rule rseqc_inner_distance:
@@ -74,8 +73,7 @@ rule rseqc_inner_distance:
     message:
         "{rule}: calculating gene body coverage for {input.bam}"
     shell:
-        "mkdir -p $(dirname {log}) && "
-        "(inner_distance.py "
+        "inner_distance.py "
         "-r {input.bed} "
         "-i {input.bam} "
-        "-o {params.prefix}) &> {log}"
+        "-o {params.prefix}"

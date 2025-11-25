@@ -1,7 +1,7 @@
 # requires system-specific reference paths
 # Override reference to use standard hg19 (required for somalier)
 reference:
-  fasta: "/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta"
+  fasta: "/beegfs-storage/data/ref_genomes/hg19/bwa/BWA_0.7.10_refseq/hg19.with.mt.fasta"
 
 samples: "samples_somalier.tsv"
 units: "units_somalier.tsv"
@@ -15,3 +15,14 @@ somalier_relate:
 
 somalier_mqc:
   config: "reference/somalier_mqc_config.yaml"
+
+multiqc:
+  reports:
+    multiqc:
+      qc_files:
+        - "qc/somalier/somalier_samples_mqc.tsv"
+      included_unit_types: ["N", "T"]
+      config: "reference/somalier_mqc_config.yaml"
+  use_input_files_only: true
+  threads: 1
+  container: "docker://ewels/multiqc:v1.13"

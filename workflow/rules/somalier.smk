@@ -237,7 +237,25 @@ rule somalier_extract:
     message:
         "{rule}: extract sites for somalier in sample {wildcards.sample}_{wildcards.type}.bam"
     shell:
-        "somalier extract {params.extra} -s {input.sites} -f {input.fasta} -d {params.extract_folder} {input.bam}"
+        """
+        mkdir -p {params.extract_folder}
+        somalier extract {params.extra} -s {input.sites} -f {input.fasta} -d {params.extract_folder} {input.bam}
+        # Extract sample name from BAM filename to rename somalier output
+        bam_base=$(basename {input.bam})
+        sample_name="${bam_base%%.*}"
+        extracted_file="{params.extract_folder}/$sample_name.somalier"
+        if [ -f "$extracted_file" ]; then
+            mv "$extracted_file" {output.somalier}
+        else
+            som_count=$(ls {params.extract_folder}/*.somalier 2>/dev/null | wc -l)
+            if [ "$som_count" -eq 1 ]; then
+                mv {params.extract_folder}/*.somalier {output.somalier}
+            else
+                echo "Could not determine which .somalier file to move!" >&2
+                exit 1
+            fi
+        fi
+        """
 
 
 rule somalier_tn_test:

@@ -531,26 +531,26 @@ Creates pedigree (.fam) files from sample sheet for tumor samples. Converts sex 
 
 --
 
-## [somalier_custom_multiqc](https://github.com/brentp/somalier)
+## [somalier_mqc](https://github.com/brentp/somalier)
 Formats somalier output files for MultiQC integration, adding custom configuration to display sample relatedness and QC metrics.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_custom_multiqc#
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_mqc#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_custom_multiqc#
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_mqc#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_custom_multiqc#
+#CONFIGSCHEMA__somalier_mqc#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_custom_multiqc#
+#RESOURCESSCHEMA__somalier_mqc#
 
 --
 

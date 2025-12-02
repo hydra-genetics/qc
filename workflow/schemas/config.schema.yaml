@@ -433,13 +433,16 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-  somalier_custom_multiqc:
+  somalier_mqc:
     type: object
-    description: parameters for somalier_custom_multiqc
+    description: parameters for somalier_mqc
     properties:
       benchmark_repeats:
         type: integer
         description: set number of times benchmark should be repeated
+      mqc_config:
+        type: string
+        description: path to somalier MultiQC config file
       container:
         type: string
         description: name or path to docker/singularity container
@@ -460,6 +463,9 @@ properties:
       extract_folder:
         type: string
         description: path to somalier extract folder
+      sites:
+        type: string
+        description: path to sites VCF file for somalier extraction
       extra:
         type: string
         description: parameters that should be forwarded

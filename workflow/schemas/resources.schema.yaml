@@ -509,9 +509,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_custom_multiqc:
+  somalier_mqc:
     type: object
-    description: resource definitions for somalier_custom_multiqc
+    description: resource definitions for somalier_mqc
     properties:
       mem_mb:
         type: integer

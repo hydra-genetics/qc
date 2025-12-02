@@ -149,9 +149,9 @@ rule somalier_relate:
         ped="qc/somalier/somalier_all.ped",
         group="qc/somalier/somalier.groups",
     output:
-        pairs=temp("qc/somalier/somalier_relate.pairs.tsv"),
-        samples=temp("qc/somalier/somalier_relate.samples.tsv"),
-        html=temp("qc/somalier/somalier_relate.html"),
+        pairs="qc/somalier/somalier_relate.pairs.tsv",
+        samples="qc/somalier/somalier_relate.samples.tsv",
+        html="qc/somalier/somalier_relate.html",
     params:
         extra=config.get("somalier_relate", {}).get("extra", ""),
         outname=lambda wildcards, output: output.pairs.replace(".pairs.tsv", ""),
@@ -177,30 +177,30 @@ rule somalier_relate:
         "somalier relate {params.extra} --ped {input.ped} -g {input.group} -o {params.outname} {input.samples}"
 
 
-rule somalier_custom_multiqc:
+rule somalier_mqc:
     input:
-        conf=config.get("somalier_custom_multiqc", {}).get("config", ""),
         samples="qc/somalier/somalier_relate.samples.tsv",
     output:
         mqc="qc/somalier/somalier_samples_mqc.tsv",
     params:
-        extra=config.get("somalier_custom_multiqc", {}).get("extra", ""),
+        mqc_config=config.get("somalier_mqc", {}).get("mqc_config", ""),
+        extra=config.get("somalier_mqc", {}).get("extra", ""),
     log:
-        "qc/somalier_custom_multiqc/somalier_samples_mqc.log",
+        "qc/somalier_mqc/somalier_samples_mqc.log",
     benchmark:
         repeat(
-            "qc/somalier_custom_multiqc/somalier_samples_mqc.benchmark.tsv",
-            config.get("somalier_custom_multiqc", {}).get("benchmark_repeats", 1),
+            "qc/somalier_mqc/somalier_samples_mqc.benchmark.tsv",
+            config.get("somalier_mqc", {}).get("benchmark_repeats", 1),
         )
-    threads: config.get("somalier_custom_multiqc", {}).get("threads", config["default_resources"]["threads"])
+    threads: config.get("somalier_mqc", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        mem_mb=config.get("somalier_custom_multiqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("somalier_custom_multiqc", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
-        partition=config.get("somalier_custom_multiqc", {}).get("partition", config["default_resources"]["partition"]),
-        threads=config.get("somalier_custom_multiqc", {}).get("threads", config["default_resources"]["threads"]),
-        time=config.get("somalier_custom_multiqc", {}).get("time", config["default_resources"]["time"]),
+        mem_mb=config.get("somalier_mqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("somalier_mqc", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("somalier_mqc", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("somalier_mqc", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("somalier_mqc", {}).get("time", config["default_resources"]["time"]),
     container:
-        config.get("somalier_custom_multiqc", {}).get("container", config["default_container"])
+        config.get("somalier_mqc", {}).get("container", config["default_container"])
     message:
         "{rule}: creating custom input for somalier to MultiQC general stats"
     script:
@@ -216,8 +216,9 @@ rule somalier_extract:
     output:
         somalier=temp("qc/somalier_extract/{sample}_{type}.somalier"),
     params:
-        extract_folder=lambda wildcards, output: os.path.dirname(output.somalier),
         extra=config.get("somalier_extract", {}).get("extra", ""),
+        fasta_abs=lambda wildcards, input: os.path.abspath(input.fasta),
+        sites_abs=lambda wildcards, input: os.path.abspath(input.sites),
     log:
         "qc/somalier_extract/{sample}_{type}.somalier.log",
     benchmark:
@@ -238,23 +239,14 @@ rule somalier_extract:
         "{rule}: extract sites for somalier in sample {wildcards.sample}_{wildcards.type}.bam"
     shell:
         """
-        mkdir -p {params.extract_folder}
-        somalier extract {params.extra} -s {input.sites} -f {input.fasta} -d {params.extract_folder} {input.bam}
-        # Extract sample name from BAM filename to rename somalier output
-        bam_base=$(basename {input.bam})
-        sample_name="${bam_base%%.*}"
-        extracted_file="{params.extract_folder}/$sample_name.somalier"
-        if [ -f "$extracted_file" ]; then
-            mv "$extracted_file" {output.somalier}
-        else
-            som_count=$(ls {params.extract_folder}/*.somalier 2>/dev/null | wc -l)
-            if [ "$som_count" -eq 1 ]; then
-                mv {params.extract_folder}/*.somalier {output.somalier}
-            else
-                echo "Could not determine which .somalier file to move!" >&2
-                exit 1
-            fi
-        fi
+        bash workflow/scripts/somalier_extract_wrapper.sh \
+            "{params.extra}" \
+            "{params.sites_abs}" \
+            "{params.fasta_abs}" \
+            "$(dirname {output.somalier})" \
+            "{input.bam}" \
+            "{output.somalier}" \
+            2>&1 | tee {log}
         """
 
 
@@ -262,7 +254,7 @@ rule somalier_tn_test:
     input:
         samples="qc/somalier/somalier_relate.samples.tsv",
     output:
-        tncheck=temp("qc/somalier/TNmismatch.txt"),
+        tncheck="qc/somalier/TNmismatch.txt",
     params:
         extra=config.get("somalier_tn_test", {}).get("extra", ""),
     log:

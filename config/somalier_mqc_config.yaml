@@ -1,23 +1,21 @@
-id: somalier_sex_check
-section_name: "Somalier Sex Check"
-description: "Sex inference and sample relatedness from somalier"
-plot_type: "table"
-pconfig:
-  id: "somalier_sex_table"
-  title: "Somalier Sex Check"
-  save_file: true
-  scale: false
-headers:
-  Sample:
-    title: "Sample"
-    description: "Sample ID"
-  inferred_sex:
-    title: "Inferred Sex"
-    description: "Sex inferred by somalier"
-  reported_sex:
-    title: "Reported Sex"
-    description: "Sex from sample sheet"
-  sex_check:
-    title: "Check"
-    description: "Pass if inferred matches reported"
-    scale: "RdYlGn"
+somalier_sex_check:
+  parent_id: somalier_section
+  parent_name: "Somalier"
+  parent_description: "This parent section contains somalier results"
+  id: 'somalier_sex_check_table'
+  format: tsv
+  plot_type: 'table'
+  section_name: 'Sex check'
+  description: 'Check on the sex of a sample with Somalier'
+  pconfig:
+    namespace: 'Cust Data'
+  headers:
+    inferred_sex:
+      title: inferred sex
+      description: inferred sex from .bam file
+    reported_sex:
+      title: reported sex
+      description: sex from pedigree file
+    sex_check:
+      title: sex check
+      description: Pass when inferred sex and reported sex agree

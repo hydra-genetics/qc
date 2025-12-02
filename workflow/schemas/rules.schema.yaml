@@ -643,9 +643,9 @@ properties:
             type: string
             description: pedigree file in fam format
 
-  somalier_custom_multiqc:
+  somalier_mqc:
     type: object
-    description: input and output parameters for somalier_custom_multiqc
+    description: input and output parameters for somalier_mqc
     properties:
       input:
         type: object

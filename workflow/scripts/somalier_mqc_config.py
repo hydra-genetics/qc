@@ -50,8 +50,8 @@ def process_sample_file(input_file):
 
 def main():
     try:
-        # Get the config path from Snakemake
-        config_path = snakemake.config.get("somalier_mqc", {}).get("config", "")
+        # Get the config path from Snakemake params (passed from rule)
+        config_path = snakemake.params.mqc_config
         if not config_path:
             raise FileNotFoundError("Path to Somalier MultiQC config file not found/specified in Snakemake config.")
 

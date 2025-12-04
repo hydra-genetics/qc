@@ -1,14 +1,11 @@
 # requires somalier specific reference paths
-# Override reference to use standard hg19 subsample (required for somalier)
-
-reference:
-  fasta: "reference/HES45_somalier.fasta"
+# Uses filtered hg19 sites that match HES45.fna chromosome lengths
 
 samples: "samples_somalier.tsv"
 units: "units_somalier.tsv"
 
 somalier_extract:
-  sites: "reference/sites.vcf.gz"
+  sites: "reference/sites.hg19.HES45.vcf.gz"
   container: "docker://brentp/somalier:v0.2.16"
 
 somalier_relate:

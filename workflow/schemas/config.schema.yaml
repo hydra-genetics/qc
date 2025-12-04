@@ -409,9 +409,6 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      sample: 
-        type: string
-        description: sample type (T or N)
       extra:
         type: string
         description: parameters that should be forwarded
@@ -426,9 +423,6 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      sample: 
-        type: string
-        description: sample type (T or N)
       extra:
         type: string
         description: parameters that should be forwarded
@@ -460,9 +454,6 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      extract_folder:
-        type: string
-        description: path to somalier extract folder
       sites:
         type: string
         description: path to sites VCF file for somalier extraction
@@ -480,9 +471,6 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      outname: 
-        type: string
-        description: output name prefix
       extra:
         type: string
         description: parameters that should be forwarded

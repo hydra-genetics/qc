@@ -651,9 +651,6 @@ properties:
         type: object
         description: list of inputs
         properties:
-          conf:
-            type: string
-            description: MultiQC config YAML file for somalier section
           samples:
             type: string
             description: somalier relate samples TSV file
@@ -680,6 +677,9 @@ properties:
           fasta:
             type: string
             description: reference genome FASTA file
+          fai:
+            type: string
+            description: FASTA index file (.fai)
           bam:
             type: string
             description: aligned BAM file

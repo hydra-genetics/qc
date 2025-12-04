@@ -92,7 +92,13 @@ rseqc_inner_distance:
   bed: "reference/gene_model.bed"
   container: "docker://hydragenetics/rseqc:4.0.0"
 
-# Somalier relate and extract disabled in default integration tests due to reference incompatibility
+somalier_extract:
+  sites: "reference/sites.hg19.HES45.vcf.gz"
+  container: "docker://brentp/somalier:v0.2.16"
+
+somalier_relate:
+  container: "docker://brentp/somalier:v0.2.16"
+
 somalier_mqc:
   mqc_config: "config/somalier_mqc_config.yaml"
 

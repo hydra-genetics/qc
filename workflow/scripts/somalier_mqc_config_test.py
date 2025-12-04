@@ -104,11 +104,8 @@ class TestSomalierMqcConfigMain(unittest.TestCase):
         output_file = os.path.join(self.test_dir, "somalier_mqc_config.pass.actual.tsv")
 
         mock_snakemake = Mock()
-        mock_snakemake.config = {
-            "somalier_mqc": {
-                "config": config_file
-            }
-        }
+        mock_snakemake.params = Mock()
+        mock_snakemake.params.mqc_config = config_file
         mock_snakemake.input = Mock()
         mock_snakemake.input.samples = sample_file
         mock_snakemake.output = [output_file]

@@ -3,6 +3,8 @@ __copyright__ = "Copyright 2021, Nina Hollfelder, Julia Höglund"
 __email__ = "nina.hollfelder@scilifelab.uu.se, julia.hoglund@scilifelab.uu.se"
 __license__ = "GPL-3"
 
+import os
+
 
 rule somalier_create_ped_t:
     input:
@@ -211,6 +213,7 @@ rule somalier_extract:
     input:
         sites=config.get("somalier_extract", {}).get("sites", ""),
         fasta=config.get("reference", {}).get("fasta", ""),
+        fai=config.get("reference", {}).get("fasta", "") + ".fai",
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
     output:
@@ -239,14 +242,11 @@ rule somalier_extract:
         "{rule}: extract sites for somalier in sample {wildcards.sample}_{wildcards.type}.bam"
     shell:
         """
-        bash workflow/scripts/somalier_extract_wrapper.sh \
-            "{params.extra}" \
-            "{params.sites_abs}" \
-            "{params.fasta_abs}" \
-            "$(dirname {output.somalier})" \
-            "{input.bam}" \
-            "{output.somalier}" \
-            2>&1 | tee {log}
+        TEMP_DIR=$(mktemp -d "$(dirname {output.somalier})/somalier_tmp.XXXXXX")
+        trap "rm -rf $TEMP_DIR" EXIT
+        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $TEMP_DIR {input.bam} 2>&1 | tee {log}
+        generated_file=$(ls $TEMP_DIR/*.somalier 2>/dev/null | head -n1)
+        mv "$generated_file" {output.somalier}
         """
 
 

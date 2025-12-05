@@ -185,7 +185,7 @@ rule somalier_mqc:
     output:
         mqc="qc/somalier/somalier_samples_mqc.tsv",
     params:
-        mqc_config=config.get("somalier_mqc", {}).get("mqc_config", ""),
+        mqc_config=lambda wildcards: os.path.abspath(config.get("somalier_mqc", {}).get("mqc_config", "")),
         extra=config.get("somalier_mqc", {}).get("extra", ""),
     log:
         "qc/somalier_mqc/somalier_samples_mqc.log",
@@ -222,6 +222,7 @@ rule somalier_extract:
         extra=config.get("somalier_extract", {}).get("extra", ""),
         fasta_abs=lambda wildcards, input: os.path.abspath(input.fasta),
         sites_abs=lambda wildcards, input: os.path.abspath(input.sites),
+        sample_name=lambda wildcards: f"{wildcards.sample}_{wildcards.type}",
     log:
         "qc/somalier_extract/{sample}_{type}.somalier.log",
     benchmark:
@@ -246,7 +247,8 @@ rule somalier_extract:
         trap "rm -rf $TEMP_DIR" EXIT
         somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $TEMP_DIR {input.bam} 2>&1 | tee {log}
         generated_file=$(ls $TEMP_DIR/*.somalier 2>/dev/null | head -n1)
-        mv "$generated_file" {output.somalier}
+        mv "$generated_file" "$TEMP_DIR/{params.sample_name}.somalier"
+        mv "$TEMP_DIR/{params.sample_name}.somalier" {output.somalier}
         """
 
 

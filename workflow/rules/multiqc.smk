@@ -16,7 +16,8 @@ rule multiqc:
                 for read in ["fastq1", "fastq2"]
                 for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
                 if "{sample}" in file or "{type}" in file
-            ] + [
+            ]
+            + [
                 file
                 for file in config["multiqc"]["reports"][wildcards.report]["qc_files"]
                 if "{sample}" not in file and "{type}" not in file

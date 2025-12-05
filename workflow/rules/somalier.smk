@@ -214,8 +214,8 @@ rule somalier_extract:
         sites=config.get("somalier_extract", {}).get("sites", ""),
         fasta=config.get("reference", {}).get("fasta", ""),
         fai=config.get("reference", {}).get("fasta", "") + ".fai",
-        bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
-        bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
+        bam=lambda wildcards: get_input_aligned_bam(wildcards, config)[0],
+        bai=lambda wildcards: get_input_aligned_bam(wildcards, config)[1],
     output:
         somalier=temp("qc/somalier_extract/{sample}_{type}.somalier"),
     params:

@@ -39,8 +39,8 @@ rule multiqc:
             config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {}).get("extra", ""),
             (
                 " -c {}".format(config["multiqc"]["reports"][wildcards.report]["config"])
-        if "config" in config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {})
-        else ""
+                if "config" in config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {})
+                else ""
             ),
         ),
         use_input_files_only=config.get("multiqc", {}).get("use_input_files_only", True),
@@ -90,8 +90,8 @@ rule multiqc_longread:
             config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {}).get("extra", ""),
             (
                 " -c {}".format(config["multiqc"]["reports"][wildcards.report]["config"])
-        if "config" in config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {})
-        else ""
+                if "config" in config.get("multiqc", {}).get("reports", {}).get(wildcards.report, {})
+                else ""
             ),
         ),
         use_input_files_only=config.get("multiqc", {}).get("use_input_files_only", True),

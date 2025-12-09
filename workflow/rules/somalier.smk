@@ -243,12 +243,11 @@ rule somalier_extract:
         "{rule}: extract sites for somalier in sample {wildcards.sample}_{wildcards.type}.bam"
     shell:
         """
-        TEMP_DIR=$(mktemp -d "$(dirname {output.somalier})/somalier_tmp.XXXXXX")
-        trap "rm -rf $TEMP_DIR" EXIT
-        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $TEMP_DIR {input.bam} 2>&1 | tee {log}
-        generated_file=$(ls $TEMP_DIR/*.somalier 2>/dev/null | head -n1)
-        mv "$generated_file" "$TEMP_DIR/{params.sample_name}.somalier"
-        mv "$TEMP_DIR/{params.sample_name}.somalier" {output.somalier}
+        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $(dirname {output.somalier}) {input.bam} 2>&1 | tee {log}
+        generated_file=$(ls $(dirname {output.somalier})/*.somalier | grep -v "/{params.sample_name}.somalier" | head -n1)
+        if [ -f "$generated_file" ] && [ "$generated_file" != "{output.somalier}" ]; then
+            mv "$generated_file" {output.somalier}
+        fi
         """
 
 

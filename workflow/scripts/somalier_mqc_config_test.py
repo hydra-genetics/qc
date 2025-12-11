@@ -59,6 +59,22 @@ class TestProcessSampleFile(unittest.TestCase):
         self.assertEqual(df.iloc[0]['reported_sex'], 'male')
         self.assertEqual(df.iloc[0]['sex_check'], 'Pass')
 
+    def test_process_sample_file_numeric_reported(self):
+        """Test processing sample file with numeric reported sex (Pass)"""
+        # Create a temp file with numeric reported sex
+        with tempfile.NamedTemporaryFile(mode='w+', delete=False) as tmp:
+            tmp.write("sample_id\tsex\toriginal_pedigree_sex\n")
+            tmp.write("SAMPLE_NUM\t1\t1\n")
+            tmp_path = tmp.name
+
+        try:
+            df = process_sample_file(tmp_path)
+            self.assertEqual(df.iloc[0]['sex_check'], 'Pass')
+            self.assertEqual(df.iloc[0]['reported_sex'], 'male')
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
     def test_process_sample_file_fail(self):
         """Test processing sample file with mismatched sex (Fail)"""
         input_file = os.path.join(self.test_dir, "somalier_mqc_config.fail.input.tsv")

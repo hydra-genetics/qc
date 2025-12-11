@@ -24,23 +24,19 @@ def comment_the_config_keys(config_dict):
 
 
 def process_sample_file(input_file):
-    """
-    Extracts columns 2, 5, and 7; renames header; transforms data as specified.
-    """
-    # Read the input file
+
     df = pd.read_csv(input_file, sep="\t")
 
-    # Extract the required columns
     df = df[['sample_id', 'sex', 'original_pedigree_sex']]
 
-    # Rename 'sample_id' to 'Sample'
     df.rename(columns={'sample_id': 'Sample'}, inplace=True)
     df.rename(columns={'sex': 'inferred_sex'}, inplace=True)
     df.rename(columns={'original_pedigree_sex': 'reported_sex'}, inplace=True)
-    # Map `sex` column values to 'female' and 'male'
-    df['inferred_sex'] = df['inferred_sex'].map({2: 'female', 1: 'male'})
+    # Use map and fillna to handle both numerc (1/2) and string inputs
+    sex_map = {2: 'female', 1: 'male', '2': 'female', '1': 'male'}
+    df['inferred_sex'] = df['inferred_sex'].map(sex_map).fillna(df['inferred_sex'])
+    df['reported_sex'] = df['reported_sex'].map(sex_map).fillna(df['reported_sex'])
 
-    # Add 'sex_check' column to check if 'sex' matches 'original_pedigree_sex'
     df['sex_check'] = df.apply(
         lambda row: 'Pass' if row['inferred_sex'] == row['reported_sex'] else 'Fail',
         axis=1
@@ -50,27 +46,21 @@ def process_sample_file(input_file):
 
 def main():
     try:
-        # Get the config path from Snakemake params (passed from rule)
         config_path = snakemake.params.mqc_config
         if not config_path:
             raise FileNotFoundError("Path to Somalier MultiQC config file not found/specified in Snakemake config.")
 
-        # Load the configuration
         with open(config_path, 'r') as config_file:
             config_dict = yaml.load(config_file, Loader=yaml.FullLoader)
 
-        # Comment the config keys
         commented_config = comment_the_config_keys(config_dict)
 
-        # Process the sample file
         sample_file = snakemake.input.samples
         sample_df = process_sample_file(sample_file)
 
-        # Combine the commented config and processed sample file
         sample_data_str = sample_df.to_csv(sep="\t", index=False)
         combined_output = f"{commented_config}\n{sample_data_str}"
 
-        # Write the combined output directly to the final file
         with open(snakemake.output[0], 'w') as output_file:
             output_file.write(combined_output)
 

@@ -18,142 +18,68 @@ sys.path.insert(0, SCRIPT_DIR)
 
 class TestSomalierCreatePed(unittest.TestCase):
     def setUp(self):
-        """Set up test fixtures"""
-        self.test_dir = os.path.join(SCRIPT_DIR, ".tests")
-        os.makedirs(self.test_dir, exist_ok=True)
+        """Set up - read the script content"""
+        self.script_path = os.path.join(SCRIPT_DIR, "somalier_create_ped.py")
+        with open(self.script_path, "r") as f:
+            self.script_content = f.read()
 
-    def tearDown(self):
-        """Clean up test files"""
-        # Clean up actual output files
-        for f in os.listdir(self.test_dir):
-            if f.endswith(".actual.fam"):
-                os.remove(os.path.join(self.test_dir, f))
+    def run_script(self, input_content, wildcards_sample, sample_type="T"):
+        """Helper to run the script with mocked environment"""
+        mock_snakemake = Mock()
+        mock_snakemake.params = {"sample_type": sample_type}
+        mock_snakemake.input = ["samples.tsv"]
+        mock_snakemake.wildcards.sample = wildcards_sample
+        mock_snakemake.output = {"fam": "output.fam"}
 
-    def test_create_ped_male_tumor(self):
-        """Test creating .fam file for male tumor sample"""
-        input_file = os.path.join(self.test_dir, "somalier_create_ped.male.input.tsv")
-        expected_file = os.path.join(self.test_dir, "somalier_create_ped.male_T.expected.fam")
-        output_file = os.path.join(self.test_dir, "somalier_create_ped.male_T.actual.fam")
+        with unittest.mock.patch("builtins.open", unittest.mock.mock_open(read_data=input_content)) as m_open:
+            global snakemake
+            snakemake = mock_snakemake
 
-        # Mock snakemake object
-        global snakemake
-        snakemake = Mock()
-        snakemake.params = {"sample_type": "T"}
-        snakemake.input = [input_file]
-        snakemake.output = {"fam": output_file}
+            # Execute the script
+            exec(self.script_content, globals())
 
-        # Import and run the script logic
-        with open(input_file, "r") as samplesheet:
-            header_line = samplesheet.readline().strip().split("\t")
-            for lline in samplesheet:
-                line = lline.strip().split("\t")
-                if line[header_line.index("sex")] == "M":
-                    sex = "1"
-                elif line[header_line.index("sex")] == "K":
-                    sex = "2"
-                else:
-                    sex = "0"
-                sample_id = line[header_line.index("sample")]
-                output_path = snakemake.output["fam"]
-                with open(output_path, "w+") as pedfile:
-                    pedfile.write(
-                        "\t".join([sample_id, f"{sample_id}_{snakemake.params['sample_type']}", "0", "0", sex, "-9"]) + "\n"
-                    )
+            # Capture what was written
+            handle = m_open()
+            return handle.write.call_args_list
 
-        # Compare with expected output
-        with open(expected_file, "r") as expected:
-            with open(output_file, "r") as actual:
-                expected_content = expected.read()
-                actual_content = actual.read()
-                self.assertEqual(
-                    expected_content,
-                    actual_content,
-                    f"Output differs from expected.\nExpected:\n{expected_content}\nActual:\n{actual_content}"
-                )
+    def test_sex_mapping_flexible(self):
+        """Test flexible sex mapping (M/F/K/O/etc)"""
+        cases = [
+            ("M", "1"), ("Male", "1"), ("Man", "1"), ("1", "1"),
+            ("F", "2"), ("Female", "2"), ("K", "2"), ("Kvinna", "2"), ("2", "2"),
+            ("O", "0"), ("Okänd", "0"), ("U", "0"), ("Unknown", "0"), ("0", "0")
+        ]
 
-    def test_create_ped_female_normal(self):
-        """Test creating .fam file for female normal sample"""
-        input_file = os.path.join(self.test_dir, "somalier_create_ped.female.input.tsv")
-        expected_file = os.path.join(self.test_dir, "somalier_create_ped.female_N.expected.fam")
-        output_file = os.path.join(self.test_dir, "somalier_create_ped.female_N.actual.fam")
+        for input_sex, expected_ped_sex in cases:
+            with self.subTest(sex=input_sex):
+                content = f"sample\tsex\nsample1\t{input_sex}\n"
+                calls = self.run_script(content, "sample1")
 
-        # Mock snakemake object
-        global snakemake
-        snakemake = Mock()
-        snakemake.params = {"sample_type": "N"}
-        snakemake.input = [input_file]
-        snakemake.output = {"fam": output_file}
+                # Check match
+                self.assertTrue(calls, "No write calls found")
+                args = calls[0][0][0]
+                # First call, args tuple, first arg
+                expected = f"sample1\tsample1_T\t0\t0\t{expected_ped_sex}\t-9\n"
+                self.assertEqual(args, expected)
 
-        # Import and run the script logic
-        with open(input_file, "r") as samplesheet:
-            header_line = samplesheet.readline().strip().split("\t")
-            for lline in samplesheet:
-                line = lline.strip().split("\t")
-                if line[header_line.index("sex")] == "M":
-                    sex = "1"
-                elif line[header_line.index("sex")] == "K":
-                    sex = "2"
-                else:
-                    sex = "0"
-                sample_id = line[header_line.index("sample")]
-                output_path = snakemake.output["fam"]
-                with open(output_path, "w+") as pedfile:
-                    pedfile.write(
-                        "\t".join([sample_id, f"{sample_id}_{snakemake.params['sample_type']}", "0", "0", sex, "-9"]) + "\n"
-                    )
+    def test_sample_selection(self):
+        """Test that script picks the correct sample from a multi-line samplesheet"""
+        content = "sample\tsex\nsample1\tM\nsample2\tF\nsample3\tO\n"
 
-        # Compare with expected output
-        with open(expected_file, "r") as expected:
-            with open(output_file, "r") as actual:
-                expected_content = expected.read()
-                actual_content = actual.read()
-                self.assertEqual(
-                    expected_content,
-                    actual_content,
-                    f"Output differs from expected.\nExpected:\n{expected_content}\nActual:\n{actual_content}"
-                )
+        calls = self.run_script(content, "sample2")
 
-    def test_create_ped_unknown_sex(self):
-        """Test creating .fam file for sample with unknown sex"""
-        input_file = os.path.join(self.test_dir, "somalier_create_ped.unknown.input.tsv")
-        expected_file = os.path.join(self.test_dir, "somalier_create_ped.unknown_T.expected.fam")
-        output_file = os.path.join(self.test_dir, "somalier_create_ped.unknown_T.actual.fam")
+        self.assertTrue(calls, "No write calls found")
+        args = calls[0][0][0]
+        expected = "sample2\tsample2_T\t0\t0\t2\t-9\n"
+        self.assertEqual(args, expected)
 
-        # Mock snakemake object
-        global snakemake
-        snakemake = Mock()
-        snakemake.params = {"sample_type": "T"}
-        snakemake.input = [input_file]
-        snakemake.output = {"fam": output_file}
+    def test_missing_column(self):
+        """Test error handling for missing columns"""
+        content = "sample\tother\nsample1\tM\n"
+        with self.assertRaises(SystemExit) as cm:
+            self.run_script(content, "sample1")
 
-        # Import and run the script logic
-        with open(input_file, "r") as samplesheet:
-            header_line = samplesheet.readline().strip().split("\t")
-            for lline in samplesheet:
-                line = lline.strip().split("\t")
-                if line[header_line.index("sex")] == "M":
-                    sex = "1"
-                elif line[header_line.index("sex")] == "K":
-                    sex = "2"
-                else:
-                    sex = "0"
-                sample_id = line[header_line.index("sample")]
-                output_path = snakemake.output["fam"]
-                with open(output_path, "w+") as pedfile:
-                    pedfile.write(
-                        "\t".join([sample_id, f"{sample_id}_{snakemake.params['sample_type']}", "0", "0", sex, "-9"]) + "\n"
-                    )
-
-        # Compare with expected output
-        with open(expected_file, "r") as expected:
-            with open(output_file, "r") as actual:
-                expected_content = expected.read()
-                actual_content = actual.read()
-                self.assertEqual(
-                    expected_content,
-                    actual_content,
-                    f"Output differs from expected.\nExpected:\n{expected_content}\nActual:\n{actual_content}"
-                )
+        self.assertIn("Missing required column", str(cm.exception))
 
 
 if __name__ == "__main__":

@@ -136,7 +136,7 @@ rule somalier_create_groupfile:
         if [ $var == "N,T" ] || [ $var == "T,N" ]
         then echo ${{i}}_N,${{i}}_T
         fi
-        done > {output}
+        done > {output.groups}
         """
 
 
@@ -244,7 +244,7 @@ rule somalier_extract:
     shell:
         """
         somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $(dirname {output.somalier}) {input.bam} 2>&1 | tee {log}
-        generated_file=$(ls $(dirname {output.somalier})/*.somalier | grep -v "/{params.sample_name}.somalier" | head -n1)
+        generated_file=$(ls $(dirname {output.somalier})/*.somalier | grep -v "{output.somalier}" | head -n1)
         if [ -f "$generated_file" ] && [ "$generated_file" != "{output.somalier}" ]; then
             mv "$generated_file" {output.somalier}
         fi

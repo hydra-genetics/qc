@@ -13,7 +13,6 @@ rule somalier_create_ped_t:
         fam=temp("qc/somalier_create_ped_t/{sample}_T.fam"),
     params:
         sample_type="T",
-        extra=config.get("somalier_create_ped_t", {}).get("extra", ""),
     log:
         "qc/somalier_create_ped_t/{sample}_T.fam.log",
     benchmark:
@@ -43,7 +42,6 @@ rule somalier_create_ped_n:
         fam=temp("qc/somalier_create_ped_n/{sample}_N.fam"),
     params:
         sample_type="N",
-        extra=config.get("somalier_create_ped_n", {}).get("extra", ""),
     log:
         "qc/somalier_create_ped_n/{sample}_N.fam.log",
     benchmark:
@@ -76,8 +74,6 @@ rule somalier_combine_fam:
         ],
     output:
         ped=temp("qc/somalier/somalier_all.ped"),
-    params:
-        extra=config.get("somalier_combine_fam", {}).get("extra", ""),
     log:
         "qc/somalier_combine_fam/somalier_all.ped.log",
     benchmark:
@@ -108,8 +104,6 @@ rule somalier_create_groupfile:
         units=config["units"],
     output:
         groups=temp("qc/somalier/somalier.groups"),
-    params:
-        extra=config.get("somalier_create_groupfile", {}).get("extra", ""),
     log:
         "qc/somalier_create_groupfile/somalier.groups.log",
     benchmark:
@@ -176,7 +170,7 @@ rule somalier_relate:
     message:
         "{rule}: Running somalier relate for inferring sex and checking T/N"
     shell:
-        "somalier relate {params.extra} --ped {input.ped} -g {input.group} -o {params.outname} {input.samples}"
+        "somalier relate {params.extra} --ped {input.ped} -g {input.group} -o {params.outname} {input.samples} 2> {log}"
 
 
 rule somalier_mqc:
@@ -186,7 +180,6 @@ rule somalier_mqc:
         mqc="qc/somalier/somalier_samples_mqc.tsv",
     params:
         mqc_config=lambda wildcards: os.path.abspath(config.get("somalier_mqc", {}).get("mqc_config", "")),
-        extra=config.get("somalier_mqc", {}).get("extra", ""),
     log:
         "qc/somalier_mqc/somalier_samples_mqc.log",
     benchmark:
@@ -243,11 +236,21 @@ rule somalier_extract:
         "{rule}: extract sites for somalier in sample {wildcards.sample}_{wildcards.type}.bam"
     shell:
         """
-        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $(dirname {output.somalier}) {input.bam} 2>&1 | tee {log}
-        generated_file=$(ls $(dirname {output.somalier})/*.somalier | grep -v "{output.somalier}" | head -n1)
-        if [ -f "$generated_file" ] && [ "$generated_file" != "{output.somalier}" ]; then
+        # handle renaming
+        tmpdir=$(mktemp -d -p $(dirname {output.somalier}))
+        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
+        generated_file=$(ls $tmpdir/*.somalier | head -n1)
+
+        if [ -f "$generated_file" ]; then
             mv "$generated_file" {output.somalier}
+        else
+            echo "Error: No somalier output file found in temp directory $tmpdir" >&2
+            rm -rf $tmpdir
+            exit 1
         fi
+        
+        # Clean up
+        rm -rf $tmpdir
         """
 
 

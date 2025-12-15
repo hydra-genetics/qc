@@ -381,9 +381,7 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: parameters that should be forwarded
+
 
   somalier_create_groupfile:
     type: object
@@ -395,9 +393,7 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: parameters that should be forwarded
+
 
   somalier_create_ped_n:
     type: object
@@ -409,9 +405,7 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: parameters that should be forwarded
+
 
   somalier_create_ped_t:
     type: object
@@ -423,9 +417,7 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: parameters that should be forwarded
+
 
   somalier_mqc:
     type: object
@@ -440,9 +432,7 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: parameters that should be forwarded
+
 
   somalier_extract:
     type: object
@@ -485,9 +475,7 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
-      extra:
-        type: string
-        description: parameters that should be forwarded
+
 
   verifybamid2:
     type: object

@@ -235,23 +235,7 @@ rule somalier_extract:
     message:
         "{rule}: extract sites for somalier in sample {wildcards.sample}_{wildcards.type}.bam"
     shell:
-        """
-        # handle renaming
-        tmpdir=$(mktemp -d -p $(dirname {output.somalier}))
-        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
-        generated_file=$(ls $tmpdir/*.somalier | head -n1)
-
-        if [ -f "$generated_file" ]; then
-            mv "$generated_file" {output.somalier}
-        else
-            echo "Error: No somalier output file found in temp directory $tmpdir" >&2
-            rm -rf $tmpdir
-            exit 1
-        fi
-        
-        # Clean up
-        rm -rf $tmpdir
-        """
+        "somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $(dirname {output.somalier}) {input.bam} 2> {log}"
 
 
 rule somalier_tn_test:

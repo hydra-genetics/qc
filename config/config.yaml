@@ -82,7 +82,7 @@ somalier_mqc:
 
 somalier_extract:
   container: "docker://brentp/somalier:v0.2.18"
-  sites: ""
+  sites: "reference/sites.hg19.vcf.gz"
   extra: ""
 
 somalier_relate: 

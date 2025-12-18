@@ -485,49 +485,26 @@ Creates group file mapping samples to their types (tumor/normal) for somalier's 
 
 --
 
-## [somalier_create_ped_n](https://github.com/brentp/somalier)
-Creates pedigree (.fam) files from sample sheet for normal samples. Converts sex information (M→1, K→2, other→0) for somalier compatibility. Handling normal (N) samples.
+## [somalier_create_ped](https://github.com/brentp/somalier)
+Creates pedigree (.fam) files from sample sheet for all samples. Converts sex information (M→1, F/K→2, other→0) for somalier compatibility.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_ped_n#
+#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_ped#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped_n#
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_create_ped_n#
+#CONFIGSCHEMA__somalier_create_ped#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_create_ped_n#
-
---
-
-## [somalier_create_ped_t](https://github.com/brentp/somalier)
-Creates pedigree (.fam) files from sample sheet for tumor samples. Converts sex information (M→1, K→2, other→0) for somalier compatibility. Handling tumor (T) samples. 
-
-### :snake: Rule
-
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_ped_t#
-
-#### :left_right_arrow: input / output files
-
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped_t#
-
-### :wrench: Configuration
-
-#### Software settings (`config.yaml`)
-
-#CONFIGSCHEMA__somalier_create_ped_t#
-
-#### Resources settings (`resources.yaml`)
-
-#RESOURCESSCHEMA__somalier_create_ped_t#
+#RESOURCESSCHEMA__somalier_create_ped#
 
 --
 
@@ -601,7 +578,7 @@ Performs relatedness and ancestry inference across all samples, generating pairw
 --
 
 ## [somalier_tn_test](https://github.com/brentp/somalier)
-Triggers somalier analysis only when both tumor and normal samples exist, ensuring proper tumor-normal matching validation.
+Validates that T/N pairs have high relatedness scores. Checks expected pairs from group file and reports mismatch diagnostics.
 
 ### :snake: Rule
 

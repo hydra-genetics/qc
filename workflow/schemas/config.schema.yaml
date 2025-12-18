@@ -394,22 +394,9 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
-
-  somalier_create_ped_n:
+  somalier_create_ped:
     type: object
-    description: parameters for somalier_create_ped_n
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated
-      container:
-        type: string
-        description: name or path to docker/singularity container
-
-
-  somalier_create_ped_t:
-    type: object
-    description: parameters for somalier_create_ped_t
+    description: parameters for somalier_create_ped
     properties:
       benchmark_repeats:
         type: integer
@@ -472,6 +459,12 @@ properties:
       benchmark_repeats:
         type: integer
         description: set number of times benchmark should be repeated
+      threshold:
+        type: number
+        description: minimum relatedness score for valid T/N pairs (default 0.8)
+      fail_on_mismatch:
+        type: boolean
+        description: if true, fail pipeline when T/N pairs have low relatedness; if false, continue with warning (default false)
       container:
         type: string
         description: name or path to docker/singularity container

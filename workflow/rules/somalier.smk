@@ -254,7 +254,6 @@ rule somalier_tn_test:
         tncheck="qc/somalier/TNmismatch.txt",
     params:
         threshold=config.get("somalier_tn_test", {}).get("threshold", 0.8),
-        fail_on_mismatch=config.get("somalier_tn_test", {}).get("fail_on_mismatch", False),
     log:
         "qc/somalier_tn_test/TNmismatch.txt.log",
     benchmark:

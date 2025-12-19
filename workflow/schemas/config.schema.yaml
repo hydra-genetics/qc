@@ -462,9 +462,6 @@ properties:
       threshold:
         type: number
         description: minimum relatedness score for valid T/N pairs (default 0.8)
-      fail_on_mismatch:
-        type: boolean
-        description: if true, fail pipeline when T/N pairs have low relatedness; if false, continue with warning (default false)
       container:
         type: string
         description: name or path to docker/singularity container

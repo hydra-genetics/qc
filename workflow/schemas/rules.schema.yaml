@@ -715,9 +715,12 @@ properties:
         type: object
         description: list of inputs
         properties:
-          samples:
+          pairs:
             type: string
-            description: somalier relate samples TSV file
+            description: somalier relate pairs TSV file
+          group:
+            type: string
+            description: somalier groups file for sample pairing (optional)
 
       output:
         type: object

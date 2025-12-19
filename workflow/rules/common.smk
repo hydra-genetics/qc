@@ -62,11 +62,6 @@ def get_bam_input(wildcards):
     return bam_file
 
 
-def get_samples_file(wildcards):
-    """Return path to samples config file."""
-    return config["samples"]
-
-
 def get_fam_inputs(wildcards):
     """Gather all .fam files for all sample types."""
     return [

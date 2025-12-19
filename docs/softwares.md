@@ -485,6 +485,7 @@ Creates group file mapping samples to their types (tumor/normal) for somalier's 
 
 --
 
+<!-- Temporarily disabled due to mkdocs plugin parsing issue
 ## [somalier_create_ped](https://github.com/brentp/somalier)
 Creates pedigree (.fam) files from sample sheet for all samples. Converts sex information (M→1, F/K→2, other→0) for somalier compatibility.
 
@@ -494,7 +495,7 @@ Creates pedigree (.fam) files from sample sheet for all samples. Converts sex in
 
 #### :left_right_arrow: input / output files
 
-<!-- #SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped# -->
+#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped#
 
 ### :wrench: Configuration
 
@@ -505,6 +506,8 @@ Creates pedigree (.fam) files from sample sheet for all samples. Converts sex in
 #### Resources settings (`resources.yaml`)
 
 #RESOURCESSCHEMA__somalier_create_ped#
+
+-->
 
 --
 

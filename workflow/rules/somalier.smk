@@ -38,7 +38,7 @@ rule somalier_combine_fam:
 
 rule somalier_create_groupfile:
     input:
-        samples=config["samples"],
+        samples=get_samples_file,
         units=config["units"],
     output:
         groups=temp("qc/somalier/somalier.groups"),
@@ -74,7 +74,7 @@ rule somalier_create_groupfile:
 
 rule somalier_create_ped:
     input:
-        samples=config["samples"],
+        samples=get_samples_file,
     output:
         fam=temp("qc/somalier_create_ped/{sample}_{type}.fam"),
     params:

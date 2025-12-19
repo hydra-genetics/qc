@@ -65,9 +65,7 @@ def get_bam_input(wildcards):
 def get_fam_inputs(wildcards):
     """Gather all .fam files for all sample types."""
     return [
-        "qc/somalier_create_ped/%s_%s.fam" % (sample, t)
-        for sample in get_samples(samples)
-        for t in get_unit_types(units, sample)
+        "qc/somalier_create_ped/%s_%s.fam" % (sample, t) for sample in get_samples(samples) for t in get_unit_types(units, sample)
     ]
 
 
@@ -183,4 +181,3 @@ def compile_output_list(wildcards):
     ]
 
     return output_files
-

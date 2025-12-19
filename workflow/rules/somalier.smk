@@ -4,7 +4,6 @@ __email__ = "nina.hollfelder@scilifelab.uu.se, julia.hoglund@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 
-
 import os
 
 

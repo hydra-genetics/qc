@@ -494,7 +494,7 @@ Creates pedigree (.fam) files from sample sheet for all samples. Converts sex in
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped#
+<!-- #SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped# -->
 
 ### :wrench: Configuration
 

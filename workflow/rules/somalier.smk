@@ -10,7 +10,7 @@ import os
 
 rule somalier_combine_fam:
     input:
-        fam=get_fam_inputs
+        fam=get_fam_inputs,
     output:
         ped=temp("qc/somalier/somalier_all.ped"),
     log:
@@ -77,11 +77,11 @@ rule somalier_create_ped:
     input:
         samples=config["samples"],
     output:
-        fam=temp("qc/somalier_create_ped/{sample}_{type}.fam")
+        fam=temp("qc/somalier_create_ped/{sample}_{type}.fam"),
     params:
-        sample_type=lambda w: w.type
+        sample_type=lambda w: w.type,
     log:
-        "qc/somalier_create_ped/{sample}_{type}.fam.log"
+        "qc/somalier_create_ped/{sample}_{type}.fam.log",
     benchmark:
         repeat(
             "qc/somalier_create_ped/{sample}_{type}.fam.benchmark.tsv",
@@ -140,7 +140,7 @@ rule somalier_extract:
         tmpdir=$(mktemp -d -p $(dirname {output.somalier}))
         somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
         generated_file=$(ls $tmpdir/*.somalier | head -n1)
-        
+
         if [ -f "$generated_file" ]; then
             mv "$generated_file" {output.somalier}
         else
@@ -148,7 +148,7 @@ rule somalier_extract:
             rm -rf $tmpdir
             exit 1
         fi
-        
+
         # Clean up
         rm -rf $tmpdir
         """
@@ -187,7 +187,7 @@ rule somalier_relate:
     input:
         samples=get_somalier_relate_samples,
         ped="qc/somalier/somalier_all.ped",
-        group="qc/somalier/somalier.groups" if has_tn_pairs(config["samples"], config["units"]) else [],
+        group="qc/somalier/somalier.groups" if has_tn_pairs(samples, units) else [],
     output:
         pairs="qc/somalier/somalier_relate.pairs.tsv",
         samples="qc/somalier/somalier_relate.samples.tsv",
@@ -195,7 +195,7 @@ rule somalier_relate:
     params:
         extra=config.get("somalier_relate", {}).get("extra", ""),
         outname=lambda wildcards, output: output.pairs.replace(".pairs.tsv", ""),
-        group_flag=lambda wildcards, input: f"-g {input.group}" if input.group else ""
+        group_flag=lambda wildcards, input: f"-g {input.group}" if input.group else "",
     log:
         "qc/somalier_relate/somalier_relate.log",
     benchmark:
@@ -221,7 +221,7 @@ rule somalier_relate:
 rule somalier_tn_test:
     input:
         pairs="qc/somalier/somalier_relate.pairs.tsv",
-        group="qc/somalier/somalier.groups" if has_tn_pairs(config["samples"], config["units"]) else [],
+        group="qc/somalier/somalier.groups" if has_tn_pairs(samples, units) else [],
     output:
         tncheck="qc/somalier/TNmismatch.txt",
     params:

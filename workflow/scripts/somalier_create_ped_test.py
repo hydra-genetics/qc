@@ -104,47 +104,46 @@ class TestSomalierCreatePed(unittest.TestCase):
 
         # Test Case 1: Type T -> Expect S1_T (will be grouped with N if exists)
         output_fam_t = os.path.join(self.temp_dir, "output_T.fam")
-        
+
         mock_snakemake_t = MockSnakemake(
             params={"sample_type": "T"},
             input_files=[samples_file],
             output_files={"fam": output_fam_t},
             wildcards=type("Wildcards", (object,), {"sample": "S1"})()
         )
-        
+
         global snakemake
         snakemake = mock_snakemake_t
         exec(self.script_content, globals())
-             
+
         # Verify Output
         with open(output_fam_t, "r") as f:
             content = f.read().strip()
             fields = content.split("\t")
             self.assertEqual(fields[0], "S1")
-            self.assertEqual(fields[1], "S1_T") 
-            self.assertEqual(fields[4], "1") 
+            self.assertEqual(fields[1], "S1_T")
+            self.assertEqual(fields[4], "1")
 
         # Test Case 2: Type R -> Expect S2_R (won't be grouped, treated independently)
         output_fam_r = os.path.join(self.temp_dir, "output_R.fam")
-        
+
         mock_snakemake_r = MockSnakemake(
-            params={"sample_type": "R"}, 
+            params={"sample_type": "R"},
             input_files=[samples_file],
             output_files={"fam": output_fam_r},
             wildcards=type("Wildcards", (object,), {"sample": "S2"})()
         )
-        
+
         snakemake = mock_snakemake_r
         exec(self.script_content, globals())
-             
+
         # Verify Output
         with open(output_fam_r, "r") as f:
             content = f.read().strip()
             fields = content.split("\t")
             self.assertEqual(fields[0], "S2")
-            self.assertEqual(fields[1], "S2_R") # Still uses type suffix
+            self.assertEqual(fields[1], "S2_R")
             self.assertEqual(fields[4], "2")
- 
 
 
 if __name__ == "__main__":

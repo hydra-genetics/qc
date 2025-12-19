@@ -3,37 +3,9 @@ __copyright__ = "Copyright 2021, Nina Hollfelder, Julia Höglund"
 __email__ = "nina.hollfelder@scilifelab.uu.se, julia.hoglund@scilifelab.uu.se"
 __license__ = "GPL-3"
 
+
+
 import os
-
-def get_fam_inputs(wildcards):
-    """Gather all .fam files for all sample types."""
-    return [
-        "qc/somalier_create_ped/%s_%s.fam" % (sample, t)
-        for sample in get_samples(config["samples"])
-        for t in get_unit_types(config["units"], sample)
-    ]
-
-
-def get_somalier_relate_samples(wildcards):
-    """Gather all .somalier files for all sample types."""
-    return [
-        "qc/somalier_extract/%s_%s.somalier" % (sample, t)
-        for sample in get_samples(config["samples"])
-        for t in get_unit_types(config["units"], sample)
-    ]
-
-
-def has_tn_pairs(samples_dict, units_dict):
-    """Check if any sample has both T and N types.
-    
-    Used to conditionally include the group file in somalier_relate.
-    Only T/N pairs need grouping; other types (R, D, etc.) are independent.
-    """
-    for sample in get_samples(samples_dict):
-        types = set(get_unit_types(units_dict, sample))
-        if "T" in types and "N" in types:
-            return True
-    return False
 
 
 rule somalier_combine_fam:

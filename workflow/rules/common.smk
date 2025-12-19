@@ -8,6 +8,7 @@ import pandas as pd
 from hydra_genetics.utils.resources import load_resources
 from hydra_genetics.utils.samples import *
 from hydra_genetics.utils.units import *
+from hydra_genetics.utils.misc import get_input_aligned_bam
 from snakemake.utils import validate
 from snakemake.utils import min_version
 
@@ -97,6 +98,16 @@ def compile_output_list(wildcards):
             "qc/peddy/peddy.vs.html",
             "qc/peddy/peddy.background_pca.json",
         ]
+
+        samples_with_tn = [sample for sample in get_samples(samples) if set(get_unit_types(units, sample)) & {"N", "T"}]
+        if samples_with_tn:
+            output_files += [
+                "qc/somalier/somalier_relate.pairs.tsv",
+                "qc/somalier/somalier_relate.samples.tsv",
+                "qc/somalier/somalier_relate.html",
+                "qc/somalier/somalier_samples_mqc.tsv",
+                "qc/somalier/TNmismatch.txt",
+            ]
 
     files = {
         "qc/sequali": ["html"],

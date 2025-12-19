@@ -175,7 +175,6 @@ properties:
     required:
       - reports
   
-  # Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
   multiqc_longread:
     type: object
     description: parameters for multiqc_longread
@@ -358,7 +357,6 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-
   sequali:
     type: object
     description: parameters for sequali
@@ -373,6 +371,112 @@ properties:
         type: string
         description: parameters that should be forwarded
 
+  somalier_combine_fam:
+    type: object
+    description: parameters for somalier_combine_fam
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+
+  somalier_create_groupfile:
+    type: object
+    description: parameters for somalier_create_groupfile
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+
+  somalier_create_ped_n:
+    type: object
+    description: parameters for somalier_create_ped_n
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+
+  somalier_create_ped_t:
+    type: object
+    description: parameters for somalier_create_ped_t
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+
+  somalier_mqc:
+    type: object
+    description: parameters for somalier_mqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      mqc_config:
+        type: string
+        description: path to somalier MultiQC config file
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+
+  somalier_extract:
+    type: object
+    description: parameters for somalier_extract
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      sites:
+        type: string
+        description: path to sites VCF file for somalier extraction
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  somalier_relate:
+    type: object
+    description: parameters for somalier_relate
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  somalier_tn_test:
+    type: object
+    description: parameters for somalier_tn_test
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+
   verifybamid2:
     type: object
     description: parameters for verifybamid2
@@ -386,7 +490,6 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
-
 
 required:
   - samples

@@ -1,0 +1,4 @@
+sample_id	paternal_id	maternal_id	family_id	sex	phenotype	original_pedigree_sex	ancestry-prediction
+SAMPLE001_N	0	0	0	1	-9	male	EUR
+SAMPLE002_T	0	0	0	2	-9	male	EUR
+SAMPLE003_N	0	0	0	2	-9	female	AFR

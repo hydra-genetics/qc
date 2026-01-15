@@ -72,6 +72,13 @@ def compile_output_list(wildcards):
 
     files = {
         "qc/gatk_calculate_contamination": ["contamination.table"],
+        "alignment/fgbio_collect_duplex_seq_metrics": [
+            "family_sizes.txt",
+            "duplex_family_sizes.txt",
+            "duplex_yield_metrics.txt",
+            "umi_counts.txt",
+            "duplex_qc.pdf",
+        ],
         # "qc/verifybamid2": ["selfSM", "ancestry"],
     }
     # Since it is not possible to create integration test without a large dataset verifybamid2  will not be subjected to integration

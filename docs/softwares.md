@@ -68,6 +68,29 @@ Generate QC data from short read fastq files. Can be used to located problems wi
 
 ---
 
+## [fgbio_collect_duplex_seq_metrics](https://fulcrumgenomics.github.io/fgbio/tools/latest/CollectDuplexSeqMetrics.html)
+Collects a suite of metrics to QC duplex sequencing data.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__fgbio__fgbio_collect_duplex_seq_metrics#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__fgbio__fgbio_collect_duplex_seq_metrics#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__fgbio_collect_duplex_seq_metrics#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__fgbio_collect_duplex_seq_metrics#
+
+---
+
 ## [gatk_calculate_contamination](https://gatk.broadinstitute.org/hc/en-us/articles/360036888972-CalculateContamination)
 Based on pileups from gatk_get_pileup_summaries calculates sample contamination.
 

@@ -93,10 +93,6 @@ properties:
           umi_counts:
             type: string
             description: umi counts statistics
-          duplex_qc:
-            type: string
-            description: duplex qc plots
-
 
   gatk_calculate_contamination:
     type: object

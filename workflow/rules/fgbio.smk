@@ -7,7 +7,6 @@ rule fgbio_collect_duplex_seq_metrics:
         duplex_family_sizes=temp("alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_family_sizes.txt"),
         duplex_yield_metrics=temp("alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_metrics.txt"),
         umi_counts=temp("alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.umi_counts.txt"),
-        duplex_qc=temp("alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_qc.pdf"),
     params:
         intervals=lambda wildcards: (
             "--intervals %s" % config["reference"]["design_intervals"]

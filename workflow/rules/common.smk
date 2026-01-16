@@ -77,7 +77,6 @@ def compile_output_list(wildcards):
             "duplex_family_sizes.txt",
             "duplex_yield_metrics.txt",
             "umi_counts.txt",
-            "duplex_qc.pdf",
         ],
         # "qc/verifybamid2": ["selfSM", "ancestry"],
     }

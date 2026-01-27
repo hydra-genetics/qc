@@ -64,7 +64,7 @@ def get_bam_input(wildcards):
 
 def get_fam_inputs(wildcards):
     """Gather all .fam files for all sample types (only if PED is needed)."""
-    if not needs_ped_file(samples, units, config):
+    if not needs_ped_file(wildcards):
         return []
     return [
         "qc/somalier_create_ped/%s_%s.fam" % (sample, t) 
@@ -82,8 +82,22 @@ def get_somalier_relate_samples(wildcards):
     ]
 
 
-def has_tn_pairs(samples_dict, units_dict):
-    """Check if any sample has both T and N types.
+def is_somalier_mode(mode_name):
+    """Check if the configured somalier mode matches the given mode name."""
+    return config.get("somalier", {}).get("mode", "tn_pairs") == mode_name
+
+
+def needs_ped_file(wildcards):
+    """Determine if PED file creation is needed based on mode.
+    
+    create:
+    - tn_pairs, trio, ungrouped
+    not create:
+    - rna
+    """
+    mode = config.get("somalier", {}).get("mode", "tn_pairs")
+    return mode in ["tn_pairs", "trio", "ungrouped"]
+
 
     Used to conditionally include the group file in somalier_relate for matched samples.
     """

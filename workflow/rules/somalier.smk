@@ -11,7 +11,7 @@ rule somalier_combine_fam:
     input:
         fam=get_fam_inputs,
     output:
-        ped=temp("qc/somalier/somalier_all.ped"),
+        ped=temp("qc/somalier/somalier_all.ped") if needs_ped_file(samples, units, config) else temp(touch("qc/somalier/somalier_all.ped.skip")),
     log:
         "qc/somalier_combine_fam/somalier_all.ped.log",
     benchmark:

@@ -63,9 +63,13 @@ def get_bam_input(wildcards):
 
 
 def get_fam_inputs(wildcards):
-    """Gather all .fam files for all sample types."""
+    """Gather all .fam files for all sample types (only if PED is needed)."""
+    if not needs_ped_file(samples, units, config):
+        return []
     return [
-        "qc/somalier_create_ped/%s_%s.fam" % (sample, t) for sample in get_samples(samples) for t in get_unit_types(units, sample)
+        "qc/somalier_create_ped/%s_%s.fam" % (sample, t) 
+        for sample in get_samples(samples) 
+        for t in get_unit_types(units, sample)
     ]
 
 

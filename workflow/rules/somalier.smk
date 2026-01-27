@@ -11,7 +11,7 @@ rule somalier_combine_fam:
     input:
         fam=get_fam_inputs,
     output:
-        ped=temp("qc/somalier/somalier_all.ped") if needs_ped_file(samples, units, config) else temp(touch("qc/somalier/somalier_all.ped.skip")),
+        ped=temp("qc/somalier/somalier_all.ped") if needs_ped_file(None) else temp(touch("qc/somalier/somalier_all.ped.skip")),
     log:
         "qc/somalier_combine_fam/somalier_all.ped.log",
     benchmark:
@@ -132,7 +132,7 @@ rule somalier_extract:
     container:
         config.get("somalier_extract", {}).get("container", config["default_container"])
     message:
-        "{rule}: extract sites for somalier in sample {wildcards.sample}_{wildcards.type}.bam"
+        "{rule}: extract sites for somalier in sample {input.bam}"
     shell:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming

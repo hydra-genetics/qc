@@ -371,6 +371,17 @@ properties:
         type: string
         description: parameters that should be forwarded
 
+  somalier:
+    type: object
+    description: parameters for somalier
+    properties:
+      mode:
+        type: string
+        enum: ["tn_pairs", "trio", "rna", "ungrouped"]
+        default: "tn_pairs"
+        description: "Analysis mode: 'tn_pairs' for matched T/N, 'trio' for family analysis, 'rna' for RNA relatedness, 'ungrouped' for general QC."
+
+
   somalier_combine_fam:
     type: object
     description: parameters for somalier_combine_fam
@@ -406,6 +417,7 @@ properties:
         description: name or path to docker/singularity container
 
 
+
   somalier_mqc:
     type: object
     description: parameters for somalier_mqc
@@ -419,6 +431,20 @@ properties:
       container:
         type: string
         description: name or path to docker/singularity container
+
+  somalier_create_ped:
+    type: object
+    description: parameters for creating pedigree files from sample sheet
+    properties:
+      enabled:
+        type: boolean
+        description: Enable PED file creation (required for sex check and trio analysis). Set to false for RNA-only workflows.
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      benchmark_repeats:
+        type: integer
+        description: number of times benchmark should be repeated
 
 
   somalier_extract:

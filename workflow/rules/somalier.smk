@@ -41,7 +41,7 @@ rule somalier_create_groupfile:
         samples=config["samples"],
         units=config["units"],
     output:
-        groups=temp("qc/somalier/somalier.groups"),
+        groups=temp("qc/somalier/somalier.groups") if needs_group_file(None) else temp(touch("qc/somalier/somalier.groups.skip")),
     log:
         "qc/somalier_create_groupfile/somalier.groups.log",
     benchmark:
@@ -62,10 +62,11 @@ rule somalier_create_groupfile:
         "{rule}: Create group file for somalier input"
     shell:
         """
+        # T/N pairs
         for i in $( cut -f1 {input.samples} | tail -n+2 )
         do
-        var=$(grep $i {input.units} | cut -f2 | uniq | tr "\\n" "," | sed "s/,$/\\n/")
-        if [ $var == "N,T" ] || [ $var == "T,N" ]
+        var=$(grep $i {input.units} | cut -f2 | uniq | tr "\\n" "," | sed "s/,$//")
+        if [ "$var" == "N,T" ] || [ "$var" == "T,N" ]
         then echo ${{i}}_N,${{i}}_T
         fi
         done > {output.groups}
@@ -194,7 +195,8 @@ rule somalier_relate:
     params:
         extra=config.get("somalier_relate", {}).get("extra", ""),
         outname=lambda wildcards, output: output.pairs.replace(".pairs.tsv", ""),
-        group_flag=lambda wildcards, input: f"-g {input.group}" if input.group else "",
+        group_flag=lambda wildcards, input: f"-g {input.group}" if is_somalier_mode("tn_pairs") else "",
+        infer_flag="--infer" if is_somalier_mode("trio") else "",
     log:
         "qc/somalier_relate/somalier_relate.log",
     benchmark:
@@ -214,13 +216,13 @@ rule somalier_relate:
     message:
         "{rule}: Running somalier relate"
     shell:
-        "somalier relate {params.extra} --ped {input.ped} {params.group_flag} -o {params.outname} {input.samples} 2> {log}"
+        "somalier relate {params.extra} {params.infer_flag} --ped {input.ped} {params.group_flag} -o {params.outname} {input.samples} 2> {log}"
 
 
 rule somalier_tn_test:
     input:
         pairs="qc/somalier/somalier_relate.pairs.tsv",
-        group="qc/somalier/somalier.groups" if has_tn_pairs(samples, units) else [],
+        group="qc/somalier/somalier.groups" if is_somalier_mode("tn_pairs") else [],
     output:
         tncheck="qc/somalier/TNmismatch.txt",
     params:

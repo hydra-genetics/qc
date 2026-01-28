@@ -99,13 +99,13 @@ def needs_ped_file(wildcards):
     return mode in ["tn_pairs", "trio", "ungrouped"]
 
 
-    Used to conditionally include the group file in somalier_relate for matched samples.
+def needs_group_file(wildcards):
+    """Determine if group file creation is needed.
+    
+    Only used for T/N pairs mode.
     """
-    for sample in get_samples(samples_dict):
-        types = set(get_unit_types(units_dict, sample))
-        if "T" in types and "N" in types:
-            return True
-    return False
+    return is_somalier_mode("tn_pairs")
+
 
 
 def compile_output_list(wildcards):
@@ -145,15 +145,15 @@ def compile_output_list(wildcards):
             "qc/peddy/peddy.background_pca.json",
         ]
 
-        samples_with_tn = [sample for sample in get_samples(samples) if set(get_unit_types(units, sample)) & {"N", "T"}]
-        if samples_with_tn:
+        if is_somalier_mode("tn_pairs") or is_somalier_mode("trio") or is_somalier_mode("ungrouped") or is_somalier_mode("rna"):
             output_files += [
                 "qc/somalier/somalier_relate.pairs.tsv",
                 "qc/somalier/somalier_relate.samples.tsv",
                 "qc/somalier/somalier_relate.html",
                 "qc/somalier/somalier_samples_mqc.tsv",
-                "qc/somalier/TNmismatch.txt",
             ]
+            if is_somalier_mode("tn_pairs"):
+                output_files += ["qc/somalier/TNmismatch.txt"]
 
     files = {
         "qc/sequali": ["html"],

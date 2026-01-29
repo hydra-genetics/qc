@@ -560,9 +560,9 @@ properties:
             type: string
             description: sequali read statistics in json format
 
-  somalier_combine_fam:
+  somalier_matched_combine_fam:
     type: object
-    description: input and output parameters for somalier_combine_fam
+    description: input and output parameters for somalier_matched_combine_fam
     properties:
       input:
         type: object
@@ -580,9 +580,9 @@ properties:
             type: string
             description: combined pedigree file in PED format
 
-  somalier_create_groupfile:
+  somalier_matched_create_groupfile:
     type: object
-    description: input and output parameters for somalier_create_groupfile
+    description: input and output parameters for somalier_matched_create_groupfile
     properties:
       input:
         type: object
@@ -601,11 +601,11 @@ properties:
         properties:
           groups:
             type: string
-            description: somalier groups file pairing N and T samples
+            description: somalier_matched groups file pairing N and T samples
 
-  somalier_create_ped:
+  somalier_matched_create_ped:
     type: object
-    description: input and output parameters for somalier_create_ped
+    description: input and output parameters for somalier_matched_create_ped
     properties:
       input:
         type: object
@@ -623,9 +623,9 @@ properties:
             type: string
             description: pedigree file in fam format
 
-  somalier_mqc:
+  somalier_matched_mqc:
     type: object
-    description: input and output parameters for somalier_mqc
+    description: input and output parameters for somalier_matched_mqc
     properties:
       input:
         type: object
@@ -633,7 +633,7 @@ properties:
         properties:
           samples:
             type: string
-            description: somalier relate samples TSV file
+            description: somalier_matched relate samples TSV file
 
       output:
         type: object
@@ -643,9 +643,9 @@ properties:
             type: string
             description: formatted TSV file for MultiQC custom content
 
-  somalier_extract:
+  somalier_matched_extract:
     type: object
-    description: input and output parameters for somalier_extract
+    description: input and output parameters for somalier_matched_extract
     properties:
       input:
         type: object
@@ -653,7 +653,7 @@ properties:
         properties:
           sites:
             type: string
-            description: VCF file with SNP sites for somalier extraction
+            description: VCF file with SNP sites for somalier_matched extraction
           fasta:
             type: string
             description: reference genome FASTA file
@@ -673,11 +673,11 @@ properties:
         properties:
           somalier:
             type: string
-            description: somalier binary file with extracted genotype information
+            description: somalier_matched binary file with extracted genotype information
 
-  somalier_relate:
+  somalier_matched_relate:
     type: object
-    description: input and output parameters for somalier_relate
+    description: input and output parameters for somalier_matched_relate
     properties:
       input:
         type: object
@@ -685,13 +685,13 @@ properties:
         properties:
           samples:
             type: array
-            description: list of somalier binary files from all samples
+            description: list of somalier_matched binary files from all samples
           ped:
             type: string
             description: combined pedigree file in PED format
           group:
             type: string
-            description: somalier groups file for sample pairing
+            description: somalier_matched groups file for sample pairing
 
       output:
         type: object
@@ -705,11 +705,11 @@ properties:
             description: TSV file with per-sample statistics and sex inference
           html:
             type: string
-            description: somalier HTML report with relatedness plots
+            description: somalier_matched HTML report with relatedness plots
 
-  somalier_tn_test:
+  somalier_matched_tn_test:
     type: object
-    description: input and output parameters for somalier_tn_test
+    description: input and output parameters for somalier_matched_tn_test
     properties:
       input:
         type: object
@@ -717,10 +717,10 @@ properties:
         properties:
           pairs:
             type: string
-            description: somalier relate pairs TSV file
+            description: somalier_matched relate pairs TSV file
           group:
             type: string
-            description: somalier groups file for sample pairing (optional)
+            description: somalier_matched groups file for sample pairing (optional)
 
       output:
         type: object

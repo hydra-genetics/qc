@@ -67,7 +67,7 @@ def get_fam_inputs(wildcards):
     if not needs_ped_file(wildcards):
         return []
     return [
-        "qc/somalier_create_ped/%s_%s.fam" % (sample, t) 
+        "qc/somalier_matched_create_ped/%s_%s.fam" % (sample, t) 
         for sample in get_samples(samples) 
         for t in get_unit_types(units, sample)
     ]
@@ -76,7 +76,7 @@ def get_fam_inputs(wildcards):
 def get_somalier_relate_samples(wildcards):
     """Gather all .somalier files for all sample types."""
     return [
-        "qc/somalier_extract/%s_%s.somalier" % (sample, t)
+        "qc/somalier_matched_extract/%s_%s.somalier" % (sample, t)
         for sample in get_samples(samples)
         for t in get_unit_types(units, sample)
     ]
@@ -147,13 +147,13 @@ def compile_output_list(wildcards):
 
         if is_somalier_mode("tn_pairs") or is_somalier_mode("trio") or is_somalier_mode("ungrouped") or is_somalier_mode("rna"):
             output_files += [
-                "qc/somalier/somalier_relate.pairs.tsv",
-                "qc/somalier/somalier_relate.samples.tsv",
-                "qc/somalier/somalier_relate.html",
-                "qc/somalier/somalier_samples_mqc.tsv",
+                "qc/somalier_matched/somalier_relate.pairs.tsv",
+                "qc/somalier_matched/somalier_relate.samples.tsv",
+                "qc/somalier_matched/somalier_relate.html",
+                "qc/somalier_matched/somalier_samples_mqc.tsv",
             ]
             if is_somalier_mode("tn_pairs"):
-                output_files += ["qc/somalier/TNmismatch.txt"]
+                output_files += ["qc/somalier_matched/TNmismatch.txt"]
 
     files = {
         "qc/sequali": ["html"],

@@ -11,9 +11,11 @@ rule somalier_matched_combine_fam:
     input:
         fam=get_fam_inputs,
     output:
-        ped=temp("qc/somalier_matched/somalier_all.ped")
-        if needs_ped_file(None)
-        else temp(touch("qc/somalier_matched/somalier_all.ped.skip")),
+        ped=(
+            temp("qc/somalier_matched/somalier_all.ped")
+            if needs_ped_file(None)
+            else temp(touch("qc/somalier_matched/somalier_all.ped.skip"))
+        ),
     log:
         "qc/somalier_matched_combine_fam/somalier_all.ped.log",
     benchmark:

@@ -11,7 +11,9 @@ rule somalier_matched_combine_fam:
     input:
         fam=get_fam_inputs,
     output:
-        ped=temp("qc/somalier_matched/somalier_all.ped") if needs_ped_file(None) else temp(touch("qc/somalier_matched/somalier_all.ped.skip")),
+        ped=temp("qc/somalier_matched/somalier_all.ped")
+        if needs_ped_file(None)
+        else temp(touch("qc/somalier_matched/somalier_all.ped.skip")),
     log:
         "qc/somalier_matched_combine_fam/somalier_all.ped.log",
     benchmark:
@@ -52,7 +54,9 @@ rule somalier_matched_create_groupfile:
     threads: config.get("somalier_matched_create_groupfile", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("somalier_matched_create_groupfile", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("somalier_matched_create_groupfile", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        mem_per_cpu=config.get("somalier_matched_create_groupfile", {}).get(
+            "mem_per_cpu", config["default_resources"]["mem_per_cpu"]
+        ),
         partition=config.get("somalier_matched_create_groupfile", {}).get("partition", config["default_resources"]["partition"]),
         threads=config.get("somalier_matched_create_groupfile", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("somalier_matched_create_groupfile", {}).get("time", config["default_resources"]["time"]),

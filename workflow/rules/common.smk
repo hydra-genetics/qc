@@ -67,8 +67,8 @@ def get_fam_inputs(wildcards):
     if not needs_ped_file(wildcards):
         return []
     return [
-        "qc/somalier_matched_create_ped/%s_%s.fam" % (sample, t) 
-        for sample in get_samples(samples) 
+        "qc/somalier_matched_create_ped/%s_%s.fam" % (sample, t)
+        for sample in get_samples(samples)
         for t in get_unit_types(units, sample)
     ]
 
@@ -82,6 +82,18 @@ def get_somalier_relate_samples(wildcards):
     ]
 
 
+def has_tn_pairs(samples_dict, units_dict):
+    """Check if any sample has both T and N types.
+
+    Used to conditionally include the group file in somalier_relate for matched samples.
+    """
+    for sample in get_samples(samples_dict):
+        types = set(get_unit_types(units_dict, sample))
+        if "T" in types and "N" in types:
+            return True
+    return False
+
+
 def is_somalier_mode(mode_name):
     """Check if the configured somalier mode matches the given mode name."""
     return config.get("somalier", {}).get("mode", "tn_pairs") == mode_name
@@ -89,7 +101,7 @@ def is_somalier_mode(mode_name):
 
 def needs_ped_file(wildcards):
     """Determine if PED file creation is needed based on mode.
-    
+
     create:
     - tn_pairs, trio, ungrouped
     not create:
@@ -101,11 +113,10 @@ def needs_ped_file(wildcards):
 
 def needs_group_file(wildcards):
     """Determine if group file creation is needed.
-    
+
     Only used for T/N pairs mode.
     """
     return is_somalier_mode("tn_pairs")
-
 
 
 def compile_output_list(wildcards):

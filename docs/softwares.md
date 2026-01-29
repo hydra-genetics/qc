@@ -486,7 +486,7 @@ Creates group file mapping samples to their types (tumor/normal) for somalier's 
 --
 
 ## [somalier_create_ped](https://github.com/brentp/somalier)
-Creates pedigree (.fam) files from sample sheet for all samples. Converts sex information (M→1, F/K→2, other→0) for somalier compatibility.
+Creates pedigree (.fam) files from sample sheet for all samples. Converts sex information (M→1, F/K→2, other→0) for somalier compatibility. Can handle trio relationships if `trio`, `father`, and `mother` columns are present in `samples.tsv`.
 
 ### :snake: Rule
 

@@ -11,11 +11,7 @@ rule somalier_matched_combine_fam:
     input:
         fam=get_fam_inputs,
     output:
-        ped=(
-            temp("qc/somalier_matched/somalier_all.ped")
-            if needs_ped_file(None)
-            else temp(touch("qc/somalier_matched/somalier_all.ped.skip"))
-        ),
+        ped=temp("qc/somalier_matched/somalier_all.ped"),
     log:
         "qc/somalier_matched_combine_fam/somalier_all.ped.log",
     benchmark:
@@ -165,7 +161,11 @@ rule somalier_matched_mqc:
     output:
         mqc="qc/somalier_matched/somalier_samples_mqc.tsv",
     params:
-        mqc_config=lambda wildcards: os.path.abspath(config.get("somalier_matched_mqc", {}).get("mqc_config", "")),
+        mqc_config=lambda wildcards: (
+            os.path.abspath(config["somalier_matched_mqc"]["mqc_config"])
+            if config.get("somalier_matched_mqc", {}).get("mqc_config")
+            else ""
+        ),
     log:
         "qc/somalier_matched_mqc/somalier_samples_mqc.log",
     benchmark:

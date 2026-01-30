@@ -63,9 +63,7 @@ def get_bam_input(wildcards):
 
 
 def get_fam_inputs(wildcards):
-    """Gather all .fam files for all sample types (only if PED is needed)."""
-    if not needs_ped_file(wildcards):
-        return []
+    """Gather all .fam files for all sample types."""
     return [
         "qc/somalier_matched_create_ped/%s_%s.fam" % (sample, t)
         for sample in get_samples(samples)
@@ -92,31 +90,6 @@ def has_tn_pairs(samples_dict, units_dict):
         if "T" in types and "N" in types:
             return True
     return False
-
-
-def is_somalier_mode(mode_name):
-    """Check if the configured somalier mode matches the given mode name."""
-    return config.get("somalier", {}).get("mode", "tn_pairs") == mode_name
-
-
-def needs_ped_file(wildcards):
-    """Determine if PED file creation is needed based on mode.
-
-    create:
-    - tn_pairs, trio, ungrouped
-    not create:
-    - rna
-    """
-    mode = config.get("somalier", {}).get("mode", "tn_pairs")
-    return mode in ["tn_pairs", "trio", "ungrouped"]
-
-
-def needs_group_file(wildcards):
-    """Determine if group file creation is needed.
-
-    Only used for T/N pairs mode.
-    """
-    return is_somalier_mode("tn_pairs")
 
 
 def compile_output_list(wildcards):
@@ -156,14 +129,16 @@ def compile_output_list(wildcards):
             "qc/peddy/peddy.background_pca.json",
         ]
 
-        if is_somalier_mode("tn_pairs") or is_somalier_mode("trio") or is_somalier_mode("ungrouped") or is_somalier_mode("rna"):
+        # Add somalier_matched outputs if module is configured
+        if config.get("somalier_matched_extract"):
             output_files += [
                 "qc/somalier_matched/somalier_relate.pairs.tsv",
                 "qc/somalier_matched/somalier_relate.samples.tsv",
                 "qc/somalier_matched/somalier_relate.html",
                 "qc/somalier_matched/somalier_samples_mqc.tsv",
             ]
-            if is_somalier_mode("tn_pairs"):
+            # Add T/N validation output if has_tn_pairs
+            if has_tn_pairs(samples, units):
                 output_files += ["qc/somalier_matched/TNmismatch.txt"]
 
     files = {

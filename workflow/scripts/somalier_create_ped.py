@@ -35,8 +35,11 @@ with open(input_file, "r") as samplesheet:
             sex = SEX_MAPPING.get(raw_sex, SEX_MAPPING.get(raw_sex.capitalize(), "0"))
 
             output_path = snakemake.output["fam"]
+
+            individual_id = f"{target_sample}_{sample_type}"
+
             with open(output_path, "w+") as pedfile:
                 pedfile.write(
-                    "\t".join([target_sample, f"{target_sample}_{sample_type}", "0", "0", sex, "-9"]) + "\n"
+                    "\t".join([target_sample, individual_id, "0", "0", sex, "-9"]) + "\n"
                 )
             break

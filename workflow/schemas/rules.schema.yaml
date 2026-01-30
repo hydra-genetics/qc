@@ -603,29 +603,9 @@ properties:
             type: string
             description: somalier groups file pairing N and T samples
 
-  somalier_create_ped_n:
+  somalier_create_ped:
     type: object
-    description: input and output parameters for somalier_create_ped_n
-    properties:
-      input:
-        type: object
-        description: list of inputs
-        properties:
-          samples:
-            type: string
-            description: sample sheet tsv file
-
-      output:
-        type: object
-        description: list of outputs
-        properties:
-          fam:
-            type: string
-            description: pedigree file in fam format
-
-  somalier_create_ped_t:
-    type: object
-    description: input and output parameters for somalier_create_ped_t
+    description: input and output parameters for somalier_create_ped
     properties:
       input:
         type: object
@@ -735,9 +715,12 @@ properties:
         type: object
         description: list of inputs
         properties:
-          samples:
+          pairs:
             type: string
-            description: somalier relate samples TSV file
+            description: somalier relate pairs TSV file
+          group:
+            type: string
+            description: somalier groups file for sample pairing (optional)
 
       output:
         type: object

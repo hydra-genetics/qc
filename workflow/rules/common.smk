@@ -65,14 +65,16 @@ def get_bam_input(wildcards):
 def get_fam_inputs(wildcards):
     """Gather all .fam files for all sample types."""
     return [
-        "qc/somalier_create_ped/%s_%s.fam" % (sample, t) for sample in get_samples(samples) for t in get_unit_types(units, sample)
+        "qc/somalier_matched_create_ped/%s_%s.fam" % (sample, t)
+        for sample in get_samples(samples)
+        for t in get_unit_types(units, sample)
     ]
 
 
 def get_somalier_relate_samples(wildcards):
     """Gather all .somalier files for all sample types."""
     return [
-        "qc/somalier_extract/%s_%s.somalier" % (sample, t)
+        "qc/somalier_matched_extract/%s_%s.somalier" % (sample, t)
         for sample in get_samples(samples)
         for t in get_unit_types(units, sample)
     ]
@@ -127,15 +129,17 @@ def compile_output_list(wildcards):
             "qc/peddy/peddy.background_pca.json",
         ]
 
-        samples_with_tn = [sample for sample in get_samples(samples) if set(get_unit_types(units, sample)) & {"N", "T"}]
-        if samples_with_tn:
+        # Add somalier_matched outputs if module is configured
+        if config.get("somalier_matched_extract"):
             output_files += [
-                "qc/somalier/somalier_relate.pairs.tsv",
-                "qc/somalier/somalier_relate.samples.tsv",
-                "qc/somalier/somalier_relate.html",
-                "qc/somalier/somalier_samples_mqc.tsv",
-                "qc/somalier/TNmismatch.txt",
+                "qc/somalier_matched/somalier_relate.pairs.tsv",
+                "qc/somalier_matched/somalier_relate.samples.tsv",
+                "qc/somalier_matched/somalier_relate.html",
+                "qc/somalier_matched/somalier_samples_mqc.tsv",
             ]
+            # Add T/N validation output if has_tn_pairs
+            if has_tn_pairs(samples, units):
+                output_files += ["qc/somalier_matched/TNmismatch.txt"]
 
     files = {
         "qc/sequali": ["html"],

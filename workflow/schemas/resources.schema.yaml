@@ -429,9 +429,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_combine_fam:
+  somalier_trio_combine_fam:
     type: object
-    description: resource definitions for somalier_combine_fam
+    description: resource definitions for somalier_trio_combine_fam
     properties:
       mem_mb:
         type: integer
@@ -449,9 +449,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_create_groupfile:
+  somalier_trio_create_groupfile:
     type: object
-    description: resource definitions for somalier_create_groupfile
+    description: resource definitions for somalier_trio_create_groupfile
     properties:
       mem_mb:
         type: integer
@@ -469,9 +469,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_create_ped:
+  somalier_trio_create_ped:
     type: object
-    description: resource definitions for somalier_create_ped
+    description: resource definitions for somalier_trio_create_ped
     properties:
       mem_mb:
         type: integer
@@ -489,9 +489,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_mqc:
+  somalier_trio_mqc:
     type: object
-    description: resource definitions for somalier_mqc
+    description: resource definitions for somalier_trio_mqc
     properties:
       mem_mb:
         type: integer
@@ -509,9 +509,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_extract:
+  somalier_trio_extract:
     type: object
-    description: resource definitions for somalier_extract
+    description: resource definitions for somalier_trio_extract
     properties:
       mem_mb:
         type: integer
@@ -529,9 +529,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_relate:
+  somalier_trio_relate:
     type: object
-    description: resource definitions for somalier_relate
+    description: resource definitions for somalier_trio_relate
     properties:
       mem_mb:
         type: integer
@@ -549,9 +549,9 @@ properties:
         type: string
         description: max execution time
         
-  somalier_tn_test:
+  somalier_trio_validate:
     type: object
-    description: resource definitions for somalier_tn_test
+    description: resource definitions for somalier_trio_validate
     properties:
       mem_mb:
         type: integer

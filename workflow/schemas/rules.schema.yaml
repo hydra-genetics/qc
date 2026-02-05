@@ -560,9 +560,9 @@ properties:
             type: string
             description: sequali read statistics in json format
 
-  somalier_combine_fam:
+  somalier_trio_combine_fam:
     type: object
-    description: input and output parameters for somalier_combine_fam
+    description: input and output parameters for somalier_trio_combine_fam
     properties:
       input:
         type: object
@@ -580,9 +580,9 @@ properties:
             type: string
             description: combined pedigree file in PED format
 
-  somalier_create_groupfile:
+  somalier_trio_create_groupfile:
     type: object
-    description: input and output parameters for somalier_create_groupfile
+    description: input and output parameters for somalier_trio_create_groupfile
     properties:
       input:
         type: object
@@ -603,9 +603,9 @@ properties:
             type: string
             description: somalier groups file pairing N and T samples
 
-  somalier_create_ped:
+  somalier_trio_create_ped:
     type: object
-    description: input and output parameters for somalier_create_ped
+    description: input and output parameters for somalier_trio_create_ped
     properties:
       input:
         type: object
@@ -623,9 +623,9 @@ properties:
             type: string
             description: pedigree file in fam format
 
-  somalier_mqc:
+  somalier_trio_mqc:
     type: object
-    description: input and output parameters for somalier_mqc
+    description: input and output parameters for somalier_trio_mqc
     properties:
       input:
         type: object
@@ -643,9 +643,9 @@ properties:
             type: string
             description: formatted TSV file for MultiQC custom content
 
-  somalier_extract:
+  somalier_trio_extract:
     type: object
-    description: input and output parameters for somalier_extract
+    description: input and output parameters for somalier_trio_extract
     properties:
       input:
         type: object
@@ -675,9 +675,9 @@ properties:
             type: string
             description: somalier binary file with extracted genotype information
 
-  somalier_relate:
+  somalier_trio_relate:
     type: object
-    description: input and output parameters for somalier_relate
+    description: input and output parameters for somalier_trio_relate
     properties:
       input:
         type: object
@@ -707,9 +707,9 @@ properties:
             type: string
             description: somalier HTML report with relatedness plots
 
-  somalier_tn_test:
+  somalier_trio_validate:
     type: object
-    description: input and output parameters for somalier_tn_test
+    description: input and output parameters for somalier_trio_validate
     properties:
       input:
         type: object

@@ -17,7 +17,7 @@ include: "rules/picard.smk"
 include: "rules/rseqc.smk"
 include: "rules/samtools.smk"
 include: "rules/sequali.smk"
-include: "rules/somalier.smk"
+include: "rules/somalier_trio.smk"
 include: "rules/verifybamid2.smk"
 
 

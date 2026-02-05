@@ -382,9 +382,9 @@ properties:
         description: "Analysis mode: 'tn_pairs' for matched T/N, 'trio' for family analysis, 'rna' for RNA relatedness, 'ungrouped' for general QC."
 
 
-  somalier_combine_fam:
+  somalier_trio_combine_fam:
     type: object
-    description: parameters for somalier_combine_fam
+    description: parameters for somalier_trio_combine_fam
     properties:
       benchmark_repeats:
         type: integer
@@ -394,9 +394,9 @@ properties:
         description: name or path to docker/singularity container
 
 
-  somalier_create_groupfile:
+  somalier_trio_create_groupfile:
     type: object
-    description: parameters for somalier_create_groupfile
+    description: parameters for somalier_trio_create_groupfile
     properties:
       benchmark_repeats:
         type: integer
@@ -405,9 +405,9 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
-  somalier_create_ped:
+  somalier_trio_create_ped:
     type: object
-    description: parameters for somalier_create_ped
+    description: parameters for somalier_trio_create_ped
     properties:
       benchmark_repeats:
         type: integer
@@ -418,9 +418,9 @@ properties:
 
 
 
-  somalier_mqc:
+  somalier_trio_mqc:
     type: object
-    description: parameters for somalier_mqc
+    description: parameters for somalier_trio_mqc
     properties:
       benchmark_repeats:
         type: integer
@@ -432,7 +432,7 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
-  somalier_create_ped:
+  somalier_trio_create_ped:
     type: object
     description: parameters for creating pedigree files from sample sheet
     properties:
@@ -447,9 +447,9 @@ properties:
         description: number of times benchmark should be repeated
 
 
-  somalier_extract:
+  somalier_trio_extract:
     type: object
-    description: parameters for somalier_extract
+    description: parameters for somalier_trio_extract
     properties:
       benchmark_repeats:
         type: integer
@@ -464,9 +464,9 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-  somalier_relate:
+  somalier_trio_relate:
     type: object
-    description: parameters for somalier_relate
+    description: parameters for somalier_trio_relate
     properties:
       benchmark_repeats:
         type: integer
@@ -478,9 +478,9 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-  somalier_tn_test:
+  somalier_trio_validate:
     type: object
-    description: parameters for somalier_tn_test
+    description: parameters for somalier_trio_validate
     properties:
       benchmark_repeats:
         type: integer

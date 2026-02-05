@@ -63,48 +63,74 @@ def get_bam_input(wildcards):
 
 
 def get_fam_inputs(wildcards):
-    """Gather all .fam files for all sample types (only if PED is needed)."""
-    if not needs_ped_file(wildcards):
-        return []
-    return [
-        "qc/somalier_create_ped/%s_%s.fam" % (sample, t) 
-        for sample in get_samples(samples) 
-        for t in get_unit_types(units, sample)
-    ]
+    """Gather all .fam files for all sample types."""
+    # For trio analysis
+    if config.get("somalier_trio_extract"):
+        return [
+            "qc/somalier_trio_create_ped/%s_%s.fam" % (sample, t)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+        ]
+    # For matched analysis
+    elif config.get("somalier_matched_extract"):
+        return [
+            "qc/somalier_matched_create_ped/%s_%s.fam" % (sample, t)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+        ]
+    return []
 
 
 def get_somalier_relate_samples(wildcards):
     """Gather all .somalier files for all sample types."""
-    return [
-        "qc/somalier_extract/%s_%s.somalier" % (sample, t)
-        for sample in get_samples(samples)
-        for t in get_unit_types(units, sample)
-    ]
+    # For trio analysis
+    if config.get("somalier_trio_extract"):
+        return [
+            "qc/somalier_trio_extract/%s_%s.somalier" % (sample, t)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+        ]
+    # For matched analysis
+    elif config.get("somalier_matched_extract"):
+        return [
+            "qc/somalier_matched_extract/%s_%s.somalier" % (sample, t)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+        ]
+    return []
 
 
-def is_somalier_mode(mode_name):
-    """Check if the configured somalier mode matches the given mode name."""
-    return config.get("somalier", {}).get("mode", "tn_pairs") == mode_name
-
-
-def needs_ped_file(wildcards):
-    """Determine if PED file creation is needed based on mode.
+def has_tn_pairs(samples_dict, units_dict):
+    """Check if any samples have both T (tumor) and N (normal) types.
     
-    create:
-    - tn_pairs, trio, ungrouped
-    not create:
-    - rna
-    """
-    mode = config.get("somalier", {}).get("mode", "tn_pairs")
-    return mode in ["tn_pairs", "trio", "ungrouped"]
-
-
     Used to conditionally include the group file in somalier_relate for matched samples.
     """
     for sample in get_samples(samples_dict):
         types = set(get_unit_types(units_dict, sample))
         if "T" in types and "N" in types:
             return True
+    return False
+
+
+def has_trio_samples(samples_dict):
+    """Check if samples file has trio information.
+    
+    Used to conditionally include the group file in somalier_trio_relate.
+    Checks for presence of trio, father, and mother columns in samples.
+    """
+    import pandas as pd
+    try:
+        df = pd.read_csv(config["samples"], sep="\t")
+        required_cols = ["trio", "father", "mother"]
+        if all(col in df.columns for col in required_cols):
+            # Check if any sample has non-empty trio information
+            return any(
+                (df["trio"].notna()) & 
+                (df["trio"] != ".") & 
+                (df["trio"] != "0")
+            )
+    except Exception:
+        pass
     return False
 
 
@@ -145,14 +171,24 @@ def compile_output_list(wildcards):
             "qc/peddy/peddy.background_pca.json",
         ]
 
-        samples_with_tn = [sample for sample in get_samples(samples) if set(get_unit_types(units, sample)) & {"N", "T"}]
-        if samples_with_tn:
+        # Somalier matched samples (T/N pairs)
+        if config.get("somalier_matched_extract") and has_tn_pairs(samples, units):
             output_files += [
-                "qc/somalier/somalier_relate.pairs.tsv",
-                "qc/somalier/somalier_relate.samples.tsv",
-                "qc/somalier/somalier_relate.html",
-                "qc/somalier/somalier_samples_mqc.tsv",
-                "qc/somalier/TNmismatch.txt",
+                "qc/somalier_matched/somalier_relate.pairs.tsv",
+                "qc/somalier_matched/somalier_relate.samples.tsv",
+                "qc/somalier_matched/somalier_relate.html",
+                "qc/somalier_matched/somalier_samples_mqc.tsv",
+                "qc/somalier_matched/TNmismatch.txt",
+            ]
+
+        # Somalier trio analysis
+        if config.get("somalier_trio_extract") and has_trio_samples(samples):
+            output_files += [
+                "qc/somalier_trio/somalier_relate.pairs.tsv",
+                "qc/somalier_trio/somalier_relate.samples.tsv",
+                "qc/somalier_trio/somalier_relate.html",
+                "qc/somalier_trio/somalier_samples_mqc.tsv",
+                "qc/somalier_trio/trio_validation.txt",
             ]
 
     files = {

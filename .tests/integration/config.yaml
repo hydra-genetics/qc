@@ -48,7 +48,7 @@ multiqc:
         - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
         - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
-        - "qc/somalier/somalier_samples_mqc.tsv"
+        - "qc/somalier_trio/somalier_samples_mqc.tsv"
         - "prealignment/fastp_pe/{sample}_{type}_{flowcell}_{lane}_{barcode}_fastp.json"
     RNA:
       included_unit_types: ['R']
@@ -93,15 +93,15 @@ rseqc_inner_distance:
   bed: "reference/gene_model.bed"
   container: "docker://hydragenetics/rseqc:4.0.0"
 
-somalier_extract:
+somalier_trio_extract:
   sites: "reference/sites.hg19.HES45.vcf.gz"
   container: "docker://brentp/somalier:v0.2.16"
 
-somalier_relate:
+somalier_trio_relate:
   container: "docker://brentp/somalier:v0.2.16"
 
-somalier_mqc:
-  mqc_config: "config/somalier_mqc_config.yaml"
+somalier_trio_mqc:
+  mqc_config: "config/somalier_trio_mqc_config.yaml"
 
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"

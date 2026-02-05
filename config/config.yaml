@@ -85,7 +85,7 @@ somalier_matched_extract:
   sites: "reference/sites.hg19.vcf.gz"
   extra: ""
 
-somalier_matched_relate: 
+somalier_matched_relate:
   container: "docker://brentp/somalier:v0.2.18"
   extra: "--infer"
 

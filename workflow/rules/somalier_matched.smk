@@ -66,9 +66,9 @@ rule somalier_matched_create_groupfile:
         """
         for i in $( cut -f1 {input.samples} | tail -n+2 )
         do
-        var=$(grep $i {input.units} | cut -f2 | uniq | tr "\\n" "," | sed "s/,$/\\n/")
-        if [ $var == "N,T" ] || [ $var == "T,N" ]
-        then echo ${{i}}_N,${{i}}_T
+        var=$(awk -v sample="$i" '$1 == sample {{print $2}}' {input.units} | uniq | tr "\n" "," | sed "s/,$//")
+        if [ -n "$var" ] && {{ [ "$var" = "N,T" ] || [ "$var" = "T,N" ]; }}
+        then echo "${{i}}_N,${{i}}_T"
         fi
         done > {output.groups}
         """
@@ -115,7 +115,16 @@ rule somalier_matched_extract:
     params:
         extra=config.get("somalier_matched_extract", {}).get("extra", ""),
         fasta_abs=lambda wildcards, input: os.path.abspath(input.fasta),
-        sites_abs=lambda wildcards, input: os.path.abspath(input.sites),
+        sites_abs=lambda wildcards, input: (
+            os.path.abspath(input.sites)
+            if input.sites
+            else (_ for _ in ()).throw(
+                ValueError(
+                    f"somalier_matched_extract: 'sites' parameter is required but empty. "
+                    f"Please configure 'somalier_matched_extract.sites' in config.yaml"
+                )
+            )
+        ),
         sample_name=lambda wildcards: f"{wildcards.sample}_{wildcards.type}",
     log:
         "qc/somalier_matched_extract/{sample}_{type}.somalier.log",

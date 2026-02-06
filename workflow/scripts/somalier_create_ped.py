@@ -44,18 +44,17 @@ with open(input_file, "r") as samplesheet:
                 trio_idx = header_line.index("trio")
                 father_idx = header_line.index("father")
                 mother_idx = header_line.index("mother")
-                
+
                 # If trio info exists for this sample
                 if len(line) > max(trio_idx, father_idx, mother_idx):
                     trio_val = line[trio_idx]
                     if trio_val and trio_val != "." and trio_val != "0":
                         fam_id = trio_val
 
-                        
                         father_val = line[father_idx]
                         if father_val and father_val != "." and father_val != "0":
                             father_id = f"{father_val}_{sample_type}"
-                            
+
                         mother_val = line[mother_idx]
                         if mother_val and mother_val != "." and mother_val != "0":
                             mother_id = f"{mother_val}_{sample_type}"

@@ -102,7 +102,7 @@ def get_somalier_relate_samples(wildcards):
 
 def has_tn_pairs(samples_dict, units_dict):
     """Check if any samples have both T (tumor) and N (normal) types.
-    
+
     Used to conditionally include the group file in somalier_relate for matched samples.
     """
     for sample in get_samples(samples_dict):
@@ -114,21 +114,18 @@ def has_tn_pairs(samples_dict, units_dict):
 
 def has_trio_samples(samples_dict):
     """Check if samples file has trio information.
-    
+
     Used to conditionally include the group file in somalier_trio_relate.
     Checks for presence of trio, father, and mother columns in samples.
     """
     import pandas as pd
+
     try:
         df = pd.read_csv(config["samples"], sep="\t")
         required_cols = ["trio", "father", "mother"]
         if all(col in df.columns for col in required_cols):
             # Check if any sample has non-empty trio information
-            return any(
-                (df["trio"].notna()) & 
-                (df["trio"] != ".") & 
-                (df["trio"] != "0")
-            )
+            return any((df["trio"].notna()) & (df["trio"] != ".") & (df["trio"] != "0"))
     except Exception:
         pass
     return False

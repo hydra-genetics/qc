@@ -67,11 +67,13 @@ class TestSomalierTrioValidate(unittest.TestCase):
 
     def test_valid_trio(self):
         """Test trio with all relationships above threshold"""
-        pairs_data = """#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness
-father1_N\tproband1_N\t0.45\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5
-mother1_N\tproband1_N\t0.48\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5
-father1_N\tmother1_N\t0.05\t0.9\t0.1\t10\t5\t3\t1000\t0\t0\t0
-"""
+        pairs_data = (
+            "#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count"
+            "\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness\n"
+            "father1_N\tproband1_N\t0.45\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+            "mother1_N\tproband1_N\t0.48\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+            "father1_N\tmother1_N\t0.05\t0.9\t0.1\t10\t5\t3\t1000\t0\t0\t0\n"
+        )
         ped_data = """trio1\tproband1_N\tfather1_N\tmother1_N\t1\t-9
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
@@ -87,10 +89,12 @@ mother1_N\tfemale\tEUR
 
     def test_low_father_relatedness(self):
         """Test detection of low father-child relatedness"""
-        pairs_data = """#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness
-father1_N\tproband1_N\t0.25\t0.5\t0.3\t100\t20\t15\t1000\t0\t0\t0.5
-mother1_N\tproband1_N\t0.48\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5
-"""
+        pairs_data = (
+            "#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count"
+            "\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness\n"
+            "father1_N\tproband1_N\t0.25\t0.5\t0.3\t100\t20\t15\t1000\t0\t0\t0.5\n"
+            "mother1_N\tproband1_N\t0.48\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+        )
         ped_data = """trio1\tproband1_N\tfather1_N\tmother1_N\t1\t-9
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
@@ -108,10 +112,12 @@ mother1_N\tfemale\tEUR
 
     def test_low_mother_relatedness(self):
         """Test detection of low mother-child relatedness"""
-        pairs_data = """#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness
-father1_N\tproband1_N\t0.45\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5
-mother1_N\tproband1_N\t0.30\t0.4\t0.5\t100\t30\t20\t1000\t0\t0\t0.5
-"""
+        pairs_data = (
+            "#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count"
+            "\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness\n"
+            "father1_N\tproband1_N\t0.45\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+            "mother1_N\tproband1_N\t0.30\t0.4\t0.5\t100\t30\t20\t1000\t0\t0\t0.5\n"
+        )
         ped_data = """trio1\tproband1_N\tfather1_N\tmother1_N\t1\t-9
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
@@ -129,12 +135,14 @@ mother1_N\tfemale\tEUR
 
     def test_multiple_trios(self):
         """Test validation of multiple trios"""
-        pairs_data = """#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness
-father1_N\tproband1_N\t0.45\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5
-mother1_N\tproband1_N\t0.48\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5
-father2_N\tproband2_N\t0.47\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5
-mother2_N\tproband2_N\t0.46\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5
-"""
+        pairs_data = (
+            "#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count"
+            "\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness\n"
+            "father1_N\tproband1_N\t0.45\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+            "mother1_N\tproband1_N\t0.48\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+            "father2_N\tproband2_N\t0.47\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+            "mother2_N\tproband2_N\t0.46\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+        )
         ped_data = """trio1\tproband1_N\tfather1_N\tmother1_N\t1\t-9
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
@@ -155,10 +163,12 @@ mother2_N\tfemale\tEUR
 
     def test_threshold_sensitivity(self):
         """Test that threshold parameter works correctly"""
-        pairs_data = """#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness
-father1_N\tproband1_N\t0.35\t0.2\t0.7\t100\t40\t25\t1000\t0\t0\t0.5
-mother1_N\tproband1_N\t0.35\t0.2\t0.7\t100\t40\t25\t1000\t0\t0\t0.5
-"""
+        pairs_data = (
+            "#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count"
+            "\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness\n"
+            "father1_N\tproband1_N\t0.35\t0.2\t0.7\t100\t40\t25\t1000\t0\t0\t0.5\n"
+            "mother1_N\tproband1_N\t0.35\t0.2\t0.7\t100\t40\t25\t1000\t0\t0\t0.5\n"
+        )
         ped_data = """trio1\tproband1_N\tfather1_N\tmother1_N\t1\t-9
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
@@ -178,9 +188,11 @@ mother1_N\tfemale\tEUR
 
     def test_no_parents_defined(self):
         """Test samples without parents are skipped"""
-        pairs_data = """#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness
-sample1_N\tsample2_N\t0.05\t0.9\t0.1\t10\t5\t3\t1000\t0\t0\t0
-"""
+        pairs_data = (
+            "#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count"
+            "\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness\n"
+            "sample1_N\tsample2_N\t0.05\t0.9\t0.1\t10\t5\t3\t1000\t0\t0\t0\n"
+        )
         ped_data = """fam1\tsample1_N\t0\t0\t1\t-9
 fam2\tsample2_N\t0\t0\t2\t-9
 """

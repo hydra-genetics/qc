@@ -31,7 +31,7 @@ with open(input_file, "r") as samplesheet:
 
     # Track samples by their trio ID to build complete trios
     trio_dict = {}
-    
+
     for line in samplesheet:
         fields = line.strip().split("\t")
         if len(fields) <= max(sample_idx, trio_idx, father_idx, mother_idx):

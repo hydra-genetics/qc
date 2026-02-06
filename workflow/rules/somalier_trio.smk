@@ -243,7 +243,7 @@ rule somalier_trio_validate:
     resources:
         mem_mb=config.get("somalier_trio_validate", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
         mem_per_cpu=config.get("somalier_trio_validate", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
-        partition=config.get("somalier_trio_validate", {}).get("partition", config["default_resources")["partition"]),
+        partition=config.get("somalier_trio_validate", {}).get("partition", config["default_resources"]["partition"]),
         threads=config.get("somalier_trio_validate", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("somalier_trio_validate", {}).get("time", config["default_resources"]["time"]),
     container:

@@ -29,17 +29,17 @@ for idx, row in ped.iterrows():
     individual = row["ind"]
     father = row["father"]
     mother = row["mother"]
-    
+
     # Skip if no parents defined
     if father == "0" or mother == "0":
         continue
-    
+
     # Check father-child relationship
     father_child = pairs[
         ((pairs["#sample_a"] == father) & (pairs["sample_b"] == individual)) |
         ((pairs["#sample_a"] == individual) & (pairs["sample_b"] == father))
     ]
-    
+
     if not father_child.empty:
         relatedness = father_child["relatedness"].values[0]
         if relatedness < threshold:
@@ -47,13 +47,13 @@ for idx, row in ped.iterrows():
                 f"Low father-child relatedness: {father} - {individual} "
                 f"(relatedness={relatedness:.4f}, threshold={threshold})"
             )
-    
+
     # Check mother-child relationship
     mother_child = pairs[
         ((pairs["#sample_a"] == mother) & (pairs["sample_b"] == individual)) |
         ((pairs["#sample_a"] == individual) & (pairs["sample_b"] == mother))
     ]
-    
+
     if not mother_child.empty:
         relatedness = mother_child["relatedness"].values[0]
         if relatedness < threshold:

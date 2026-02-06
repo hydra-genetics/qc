@@ -489,9 +489,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_trio_mqc:
+  somalier_trio_extract:
     type: object
-    description: resource definitions for somalier_trio_mqc
+    description: resource definitions for somalier_trio_extract
     properties:
       mem_mb:
         type: integer
@@ -509,9 +509,9 @@ properties:
         type: string
         description: max execution time
 
-  somalier_trio_extract:
+  somalier_trio_mqc:
     type: object
-    description: resource definitions for somalier_trio_extract
+    description: resource definitions for somalier_trio_mqc
     properties:
       mem_mb:
         type: integer

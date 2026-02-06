@@ -508,29 +508,6 @@ Creates pedigree (.fam) files from sample sheet for all samples. Converts sex in
 
 --
 
-## [somalier_trio_mqc](https://github.com/brentp/somalier)
-Formats somalier output files for MultiQC integration, adding custom configuration to display sample relatedness and QC metrics.
-
-### :snake: Rule
-
-#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_mqc#
-
-#### :left_right_arrow: input / output files
-
-#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_mqc#
-
-### :wrench: Configuration
-
-#### Software settings (`config.yaml`)
-
-#CONFIGSCHEMA__somalier_trio_mqc#
-
-#### Resources settings (`resources.yaml`)
-
-#RESOURCESSCHEMA__somalier_trio_mqc#
-
---
-
 ## [somalier_trio_extract](https://github.com/brentp/somalier)
 Extracts genotype information from BAM/CRAM files at informative sites for fast sample QC, relatedness checks, and sex inference.
 
@@ -551,6 +528,29 @@ Extracts genotype information from BAM/CRAM files at informative sites for fast 
 #### Resources settings (`resources.yaml`)
 
 #RESOURCESSCHEMA__somalier_trio_extract#
+
+--
+
+## [somalier_trio_mqc](https://github.com/brentp/somalier)
+Formats somalier output files for MultiQC integration, adding custom configuration to display sample relatedness and QC metrics.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_mqc#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_mqc#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_mqc#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_mqc#
 
 --
 

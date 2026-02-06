@@ -623,26 +623,6 @@ properties:
             type: string
             description: pedigree file in fam format
 
-  somalier_trio_mqc:
-    type: object
-    description: input and output parameters for somalier_trio_mqc
-    properties:
-      input:
-        type: object
-        description: list of inputs
-        properties:
-          samples:
-            type: string
-            description: somalier relate samples TSV file
-
-      output:
-        type: object
-        description: list of outputs
-        properties:
-          mqc:
-            type: string
-            description: formatted TSV file for MultiQC custom content
-
   somalier_trio_extract:
     type: object
     description: input and output parameters for somalier_trio_extract
@@ -674,6 +654,26 @@ properties:
           somalier:
             type: string
             description: somalier binary file with extracted genotype information
+
+  somalier_trio_mqc:
+    type: object
+    description: input and output parameters for somalier_trio_mqc
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: somalier relate samples TSV file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          mqc:
+            type: string
+            description: formatted TSV file for MultiQC custom content
 
   somalier_trio_relate:
     type: object

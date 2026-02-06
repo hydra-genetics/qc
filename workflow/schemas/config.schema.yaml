@@ -417,36 +417,6 @@ properties:
         description: name or path to docker/singularity container
 
 
-
-  somalier_trio_mqc:
-    type: object
-    description: parameters for somalier_trio_mqc
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated
-      mqc_config:
-        type: string
-        description: path to somalier MultiQC config file
-      container:
-        type: string
-        description: name or path to docker/singularity container
-
-  somalier_trio_create_ped:
-    type: object
-    description: parameters for creating pedigree files from sample sheet
-    properties:
-      enabled:
-        type: boolean
-        description: Enable PED file creation (required for sex check and trio analysis). Set to false for RNA-only workflows.
-      container:
-        type: string
-        description: name or path to docker/singularity container
-      benchmark_repeats:
-        type: integer
-        description: number of times benchmark should be repeated
-
-
   somalier_trio_extract:
     type: object
     description: parameters for somalier_trio_extract
@@ -463,6 +433,20 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
+
+  somalier_trio_mqc:
+    type: object
+    description: parameters for somalier_trio_mqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      mqc_config:
+        type: string
+        description: path to somalier MultiQC config file
+      container:
+        type: string
+        description: name or path to docker/singularity container
 
   somalier_trio_relate:
     type: object

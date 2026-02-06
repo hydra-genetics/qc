@@ -1,0 +1,67 @@
+samples: ".tests/integration/samples_trio.tsv"
+units: ".tests/integration/units_trio.tsv"
+output: "qc"
+
+default_container: "docker://hydragenetics/common:0.1.9"
+
+reference:
+  fasta: "reference/genome.fasta"
+
+multiqc:
+  reports:
+    DNA:
+      included_unit_types: ['N', 'T']
+      qc_files:
+        - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
+        - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
+        - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+        - "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
+        - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics.txt"
+        - "qc/picard_collect_hs_metrics/{sample}_{type}.txt"
+        - "qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"
+        - "qc/picard_collect_multiple_metrics/{sample}_{type}.{ext}"
+        - "qc/picard_collect_wgs_metrics/{sample}_{type}.txt"
+        - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
+        - "qc/somalier_trio/somalier_samples_mqc.tsv"
+        - "prealignment/fastp_pe/{sample}_{type}_{flowcell}_{lane}_{barcode}_fastp.json"
+
+peddy:
+  container: "docker://hydragenetics/peddy:0.4.8"
+  extra: ""
+
+picard_collect_alignment_summary_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_duplication_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_gc_bias_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_hs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_insert_size_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_multiple_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+  output_ext:
+    - "gc_bias.pdf"
+
+picard_collect_wgs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+somalier_trio_extract:
+  sites: "reference/sites.hg19.HES45.vcf.gz"
+  container: "docker://brentp/somalier:v0.2.16"
+
+somalier_trio_mqc:
+  mqc_config: "config/somalier_trio_mqc_config.yaml"
+
+somalier_trio_relate:
+  container: "docker://brentp/somalier:v0.2.16"
+
+verifybamid2:
+  container: "docker://hydragenetics/verifybamid2:2.0.1"
+  svd_mu: "verifybamid2/1000g.phase3.10k.b38.exome.vcf.gz.dat.mu"

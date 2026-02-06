@@ -590,10 +590,7 @@ properties:
         properties:
           samples:
             type: string
-            description: sample sheet TSV file
-          units:
-            type: string
-            description: units TSV file with sample types
+            description: sample sheet TSV file with trio/father/mother columns
 
       output:
         type: object
@@ -718,17 +715,20 @@ properties:
           pairs:
             type: string
             description: somalier relate pairs TSV file
-          group:
+          samples:
             type: string
-            description: somalier groups file for sample pairing (optional)
+            description: somalier relate samples TSV file
+          ped:
+            type: string
+            description: combined pedigree file in PED format
 
       output:
         type: object
         description: list of outputs
         properties:
-          tncheck:
+          validation:
             type: string
-            description: text file listing samples with mismatched tumor/normal pairs
+            description: text file with trio validation results
 
   verifybamid2:
     type: object

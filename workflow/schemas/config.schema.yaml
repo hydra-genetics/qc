@@ -371,20 +371,9 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-  somalier:
+  somalier_matched_combine_fam:
     type: object
-    description: parameters for somalier
-    properties:
-      mode:
-        type: string
-        enum: ["tn_pairs", "trio", "rna", "ungrouped"]
-        default: "tn_pairs"
-        description: "Analysis mode: 'tn_pairs' for matched T/N, 'trio' for family analysis, 'rna' for RNA relatedness, 'ungrouped' for general QC."
-
-
-  somalier_trio_combine_fam:
-    type: object
-    description: parameters for somalier_trio_combine_fam
+    description: parameters for somalier_matched_combine_fam
     properties:
       benchmark_repeats:
         type: integer
@@ -394,9 +383,9 @@ properties:
         description: name or path to docker/singularity container
 
 
-  somalier_trio_create_groupfile:
+  somalier_matched_create_groupfile:
     type: object
-    description: parameters for somalier_trio_create_groupfile
+    description: parameters for somalier_matched_create_groupfile
     properties:
       benchmark_repeats:
         type: integer
@@ -405,9 +394,9 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
-  somalier_trio_create_ped:
+  somalier_matched_create_ped:
     type: object
-    description: parameters for somalier_trio_create_ped
+    description: parameters for somalier_matched_create_ped
     properties:
       benchmark_repeats:
         type: integer
@@ -417,9 +406,24 @@ properties:
         description: name or path to docker/singularity container
 
 
-  somalier_trio_extract:
+  somalier_matched_mqc:
     type: object
-    description: parameters for somalier_trio_extract
+    description: parameters for somalier_matched_mqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      mqc_config:
+        type: string
+        description: path to somalier_matched MultiQC config file
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+
+  somalier_matched_extract:
+    type: object
+    description: parameters for somalier_matched_extract
     properties:
       benchmark_repeats:
         type: integer
@@ -429,28 +433,14 @@ properties:
         description: name or path to docker/singularity container
       sites:
         type: string
-        description: path to sites VCF file for somalier extraction
+        description: path to sites VCF file for somalier_matched extraction
       extra:
         type: string
         description: parameters that should be forwarded
 
-  somalier_trio_mqc:
+  somalier_matched_relate:
     type: object
-    description: parameters for somalier_trio_mqc
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated
-      mqc_config:
-        type: string
-        description: path to somalier MultiQC config file
-      container:
-        type: string
-        description: name or path to docker/singularity container
-
-  somalier_trio_relate:
-    type: object
-    description: parameters for somalier_trio_relate
+    description: parameters for somalier_matched_relate
     properties:
       benchmark_repeats:
         type: integer
@@ -462,9 +452,9 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-  somalier_trio_validate:
+  somalier_matched_tn_test:
     type: object
-    description: parameters for somalier_trio_validate
+    description: parameters for somalier_matched_tn_test
     properties:
       benchmark_repeats:
         type: integer

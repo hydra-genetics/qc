@@ -560,9 +560,9 @@ properties:
             type: string
             description: sequali read statistics in json format
 
-  somalier_trio_combine_fam:
+  somalier_matched_combine_fam:
     type: object
-    description: input and output parameters for somalier_trio_combine_fam
+    description: input and output parameters for somalier_matched_combine_fam
     properties:
       input:
         type: object
@@ -580,9 +580,9 @@ properties:
             type: string
             description: combined pedigree file in PED format
 
-  somalier_trio_create_groupfile:
+  somalier_matched_create_groupfile:
     type: object
-    description: input and output parameters for somalier_trio_create_groupfile
+    description: input and output parameters for somalier_matched_create_groupfile
     properties:
       input:
         type: object
@@ -590,7 +590,10 @@ properties:
         properties:
           samples:
             type: string
-            description: sample sheet TSV file with trio/father/mother columns
+            description: sample sheet TSV file
+          units:
+            type: string
+            description: units TSV file with sample types
 
       output:
         type: object
@@ -598,11 +601,11 @@ properties:
         properties:
           groups:
             type: string
-            description: somalier groups file pairing N and T samples
+            description: somalier_matched groups file pairing N and T samples
 
-  somalier_trio_create_ped:
+  somalier_matched_create_ped:
     type: object
-    description: input and output parameters for somalier_trio_create_ped
+    description: input and output parameters for somalier_matched_create_ped
     properties:
       input:
         type: object
@@ -620,9 +623,29 @@ properties:
             type: string
             description: pedigree file in fam format
 
-  somalier_trio_extract:
+  somalier_matched_mqc:
     type: object
-    description: input and output parameters for somalier_trio_extract
+    description: input and output parameters for somalier_matched_mqc
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: somalier_matched relate samples TSV file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          mqc:
+            type: string
+            description: formatted TSV file for MultiQC custom content
+
+  somalier_matched_extract:
+    type: object
+    description: input and output parameters for somalier_matched_extract
     properties:
       input:
         type: object
@@ -630,7 +653,7 @@ properties:
         properties:
           sites:
             type: string
-            description: VCF file with SNP sites for somalier extraction
+            description: VCF file with SNP sites for somalier_matched extraction
           fasta:
             type: string
             description: reference genome FASTA file
@@ -650,31 +673,11 @@ properties:
         properties:
           somalier:
             type: string
-            description: somalier binary file with extracted genotype information
+            description: somalier_matched binary file with extracted genotype information
 
-  somalier_trio_mqc:
+  somalier_matched_relate:
     type: object
-    description: input and output parameters for somalier_trio_mqc
-    properties:
-      input:
-        type: object
-        description: list of inputs
-        properties:
-          samples:
-            type: string
-            description: somalier relate samples TSV file
-
-      output:
-        type: object
-        description: list of outputs
-        properties:
-          mqc:
-            type: string
-            description: formatted TSV file for MultiQC custom content
-
-  somalier_trio_relate:
-    type: object
-    description: input and output parameters for somalier_trio_relate
+    description: input and output parameters for somalier_matched_relate
     properties:
       input:
         type: object
@@ -682,13 +685,13 @@ properties:
         properties:
           samples:
             type: array
-            description: list of somalier binary files from all samples
+            description: list of somalier_matched binary files from all samples
           ped:
             type: string
             description: combined pedigree file in PED format
           group:
             type: string
-            description: somalier groups file for sample pairing
+            description: somalier_matched groups file for sample pairing
 
       output:
         type: object
@@ -702,11 +705,11 @@ properties:
             description: TSV file with per-sample statistics and sex inference
           html:
             type: string
-            description: somalier HTML report with relatedness plots
+            description: somalier_matched HTML report with relatedness plots
 
-  somalier_trio_validate:
+  somalier_matched_tn_test:
     type: object
-    description: input and output parameters for somalier_trio_validate
+    description: input and output parameters for somalier_matched_tn_test
     properties:
       input:
         type: object
@@ -714,21 +717,18 @@ properties:
         properties:
           pairs:
             type: string
-            description: somalier relate pairs TSV file
-          samples:
+            description: somalier_matched relate pairs TSV file
+          group:
             type: string
-            description: somalier relate samples TSV file
-          ped:
-            type: string
-            description: combined pedigree file in PED format
+            description: somalier_matched groups file for sample pairing (optional)
 
       output:
         type: object
         description: list of outputs
         properties:
-          validation:
+          tncheck:
             type: string
-            description: text file with trio validation results
+            description: text file listing samples with mismatched tumor/normal pairs
 
   verifybamid2:
     type: object

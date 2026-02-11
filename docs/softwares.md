@@ -597,3 +597,167 @@ Validates that T/N pairs have high relatedness scores. Checks expected pairs fro
 #### Resources settings (`resources.yaml`)
 
 #RESOURCESSCHEMA__somalier_matched_tn_test#
+
+--
+
+## somalier_trio
+
+## [somalier_trio_combine_fam](https://github.com/brentp/somalier)
+Combines individual family pedigree files into a single master .fam file for trio batch analysis.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_combine_fam#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_combine_fam#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_combine_fam#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_combine_fam#
+
+--
+
+## [somalier_trio_create_groupfile](https://github.com/brentp/somalier)
+Creates trio group file mapping sample IDs to their family groups (father,mother,proband format) for somalier's relationship inference.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_create_groupfile#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_create_groupfile#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_create_groupfile#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_create_groupfile#
+
+--
+
+## [somalier_trio_create_ped](https://github.com/brentp/somalier)
+Creates pedigree (.fam) files from sample sheet for all samples. Converts sex information (M→1, F/K→2, other→0) for somalier compatibility.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_create_ped#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_create_ped#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_create_ped#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_create_ped#
+
+--
+
+## [somalier_trio_mqc](https://github.com/brentp/somalier)
+Formats somalier trio output files for MultiQC integration, adding custom configuration to display family relatedness and QC metrics.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_mqc#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_mqc#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_mqc#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_mqc#
+
+--
+
+## [somalier_trio_extract](https://github.com/brentp/somalier)
+Extracts genotype information from BAM/CRAM files at informative sites for fast family QC, parent-child relatedness checks, and sex inference.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_extract#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_extract#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_extract#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_extract#
+
+--
+
+## [somalier_trio_relate](https://github.com/brentp/somalier)
+Performs parent-child relatedness inference across all trio samples using --infer flag, generating pairwise statistics and interactive HTML reports.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_relate#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_relate#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_relate#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_relate#
+
+--
+
+## [somalier_trio_validate](https://github.com/brentp/somalier)
+Validates parent-child relationships in trios by checking relatedness scores against threshold (default 0.4). Reports trios with missing or low father-child or mother-child relationships.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_validate#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_validate#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_validate#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_validate#
+

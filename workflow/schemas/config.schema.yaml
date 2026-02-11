@@ -466,6 +466,97 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
+  somalier_trio_combine_fam:
+    type: object
+    description: parameters for somalier_trio_combine_fam
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_trio_create_groupfile:
+    type: object
+    description: parameters for somalier_trio_create_groupfile
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_trio_create_ped:
+    type: object
+    description: parameters for somalier_trio_create_ped
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_trio_extract:
+    type: object
+    description: parameters for somalier_trio_extract
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      sites:
+        type: string
+        description: path to sites VCF file for somalier extract
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  somalier_trio_mqc:
+    type: object
+    description: parameters for somalier_trio_mqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      mqc_config:
+        type: string
+        description: path to somalier_trio MultiQC config file
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_trio_relate:
+    type: object
+    description: parameters for somalier_trio_relate
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  somalier_trio_validate:
+    type: object
+    description: parameters for somalier_trio_validate
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      threshold:
+        type: number
+        description: minimum relatedness score for valid parent-child relationships (default 0.4)
+      container:
+        type: string
+        description: name or path to docker/singularity container
 
   verifybamid2:
     type: object

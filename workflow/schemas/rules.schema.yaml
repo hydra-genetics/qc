@@ -807,7 +807,7 @@ properties:
           sites:
             type: string
             description: sites VCF file for somalier extract
-          ref:
+          fasta:
             type: string
             description: reference genome FASTA file
           fai:

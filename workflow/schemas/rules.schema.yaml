@@ -741,9 +741,6 @@ properties:
           fam:
             type: array
             description: list of individual FAM files
-          samples:
-            type: string
-            description: sample sheet TSV file with trio/father/mother columns
 
       output:
         type: object

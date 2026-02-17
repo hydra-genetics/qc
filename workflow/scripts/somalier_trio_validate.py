@@ -38,7 +38,6 @@ for _, row in ped.iterrows():
         continue
 
     # Check father-child relationship (only if father is defined)
-    if has_father: (only if father is defined)
     if has_father:
         father_child = pairs[
             ((pairs["#sample_a"] == father) & (pairs["sample_b"] == individual)) |
@@ -59,7 +58,6 @@ for _, row in ped.iterrows():
             )
 
     # Check mother-child relationship (only if mother is defined)
-    if has_mother: (only if mother is defined)
     if has_mother:
         mother_child = pairs[
             ((pairs["#sample_a"] == mother) & (pairs["sample_b"] == individual)) |

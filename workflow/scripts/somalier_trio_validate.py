@@ -10,7 +10,6 @@ import pandas as pd
 import sys
 
 pairs_file = snakemake.input["pairs"]
-samples_file = snakemake.input["samples"]
 ped_file = snakemake.input["ped"]
 output_file = snakemake.output["validation"]
 threshold = snakemake.params["threshold"]
@@ -18,20 +17,20 @@ threshold = snakemake.params["threshold"]
 # Read the pairs file (relatedness scores)
 pairs = pd.read_csv(pairs_file, sep="\t")
 
-# Read the PED file to get trio relationships
-ped = pd.read_csv(ped_file, sep="\t", header=None, names=["fam", "ind", "father", "mother", "sex", "pheno"])
+# Read the PED file to get trio relationships (keep as strings for consistent comparison)
+ped = pd.read_csv(ped_file, sep="\t", header=None, names=["fam", "ind", "father", "mother", "sex", "pheno"], dtype=str)
 
 # Track validation issues
 issues = []
 
 # For each individual with parents defined
-for idx, row in ped.iterrows():
+for _, row in ped.iterrows():
     individual = row["ind"]
     father = row["father"]
     mother = row["mother"]
 
-    # Skip if no parents defined
-    if father == "0" or mother == "0":
+    # Skip if no parents defined (0, "0", or empty)
+    if father in ["0", ".", ""] or mother in ["0", ".", ""]:
         continue
 
     # Check father-child relationship
@@ -47,6 +46,11 @@ for idx, row in ped.iterrows():
                 f"Low father-child relatedness: {father} - {individual} "
                 f"(relatedness={relatedness:.4f}, threshold={threshold})"
             )
+    else:
+        issues.append(
+            f"Missing father-child pair: {father} - {individual} "
+            f"(pair not found in relatedness results)"
+        )
 
     # Check mother-child relationship
     mother_child = pairs[
@@ -61,6 +65,11 @@ for idx, row in ped.iterrows():
                 f"Low mother-child relatedness: {mother} - {individual} "
                 f"(relatedness={relatedness:.4f}, threshold={threshold})"
             )
+    else:
+        issues.append(
+            f"Missing mother-child pair: {mother} - {individual} "
+            f"(pair not found in relatedness results)"
+        )
 
 # Write results
 with open(output_file, "w") as outfile:

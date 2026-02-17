@@ -42,11 +42,9 @@ class TestSomalierTrioCreateGroupfile(unittest.TestCase):
         mock_snakemake.input = {"samples": input_file}
         mock_snakemake.output = {"groups": output_file}
 
-        global snakemake
-        snakemake = mock_snakemake
-
-        # Execute the script
-        exec(self.script_content, globals())
+        # Execute the script with isolated context
+        context = {"snakemake": mock_snakemake, "__name__": "__main__"}
+        exec(self.script_content, context)
 
         # Read output
         if os.path.exists(output_file):
@@ -99,14 +97,22 @@ mother2\ttrio2\t.\t.\tF
 sample1\tM
 sample2\tF
 """
+        output_file = os.path.join(self.temp_dir, "groups.txt")
+
         # When columns are missing, script exits with code 0 after creating empty file
         # This is expected behavior - not an error
         try:
             result = self.run_script(input_content)
-            self.assertEqual(result, "")
+            self.assertTrue(os.path.exists(output_file), "Output file should be created")
+            self.assertEqual(result, "", "Output file should be empty")
         except SystemExit as e:
             # Script exits successfully with empty file - this is correct
             self.assertEqual(e.code, 0, "Should exit successfully when columns missing")
+            self.assertTrue(os.path.exists(output_file), "Output file should be created even when script exits")
+            # Verify file is empty
+            with open(output_file, "r") as f:
+                content = f.read()
+            self.assertEqual(content, "", "Output file should be empty")
 
     def test_samples_without_trio_info(self):
         """Test samples without trio information are skipped"""

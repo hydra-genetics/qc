@@ -885,9 +885,6 @@ properties:
           pairs:
             type: string
             description: somalier relate pairs TSV file
-          samples:
-            type: string
-            description: somalier relate samples TSV file
           ped:
             type: string
             description: combined pedigree file in PED format

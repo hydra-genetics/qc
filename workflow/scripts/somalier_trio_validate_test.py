@@ -31,11 +31,10 @@ class TestSomalierTrioValidate(unittest.TestCase):
         """Clean up temp dir"""
         shutil.rmtree(self.temp_dir)
 
-    def run_script(self, pairs_data, ped_data, samples_data, threshold=0.4):
+    def run_script(self, pairs_data, ped_data, threshold=0.4):
         """Helper to run the script with mocked environment"""
         pairs_file = os.path.join(self.temp_dir, "pairs.tsv")
         ped_file = os.path.join(self.temp_dir, "ped.tsv")
-        samples_file = os.path.join(self.temp_dir, "samples.tsv")
         output_file = os.path.join(self.temp_dir, "validation.txt")
 
         # Write input files
@@ -43,23 +42,18 @@ class TestSomalierTrioValidate(unittest.TestCase):
             f.write(pairs_data)
         with open(ped_file, "w") as f:
             f.write(ped_data)
-        with open(samples_file, "w") as f:
-            f.write(samples_data)
 
         mock_snakemake = Mock()
         mock_snakemake.input = {
             "pairs": pairs_file,
             "ped": ped_file,
-            "samples": samples_file,
         }
         mock_snakemake.output = {"validation": output_file}
         mock_snakemake.params = {"threshold": threshold}
 
-        global snakemake
-        snakemake = mock_snakemake
-
-        # Execute the script
-        exec(self.script_content, globals())
+        # Execute the script with isolated context
+        context = {"snakemake": mock_snakemake, "__name__": "__main__"}
+        exec(self.script_content, context)
 
         # Read output
         with open(output_file, "r") as f:
@@ -78,12 +72,7 @@ class TestSomalierTrioValidate(unittest.TestCase):
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
 """
-        samples_data = """sample_id\tsex\tancestry
-proband1_N\tmale\tEUR
-father1_N\tmale\tEUR
-mother1_N\tfemale\tEUR
-"""
-        result = self.run_script(pairs_data, ped_data, samples_data, threshold=0.4)
+        result = self.run_script(pairs_data, ped_data, threshold=0.4)
         self.assertIn("validated successfully", result)
         self.assertNotIn("ISSUES", result)
 
@@ -99,12 +88,7 @@ mother1_N\tfemale\tEUR
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
 """
-        samples_data = """sample_id\tsex\tancestry
-proband1_N\tmale\tEUR
-father1_N\tmale\tEUR
-mother1_N\tfemale\tEUR
-"""
-        result = self.run_script(pairs_data, ped_data, samples_data, threshold=0.4)
+        result = self.run_script(pairs_data, ped_data, threshold=0.4)
         self.assertIn("ISSUES", result)
         self.assertIn("Low father-child relatedness", result)
         self.assertIn("father1_N", result)
@@ -122,12 +106,7 @@ mother1_N\tfemale\tEUR
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
 """
-        samples_data = """sample_id\tsex\tancestry
-proband1_N\tmale\tEUR
-father1_N\tmale\tEUR
-mother1_N\tfemale\tEUR
-"""
-        result = self.run_script(pairs_data, ped_data, samples_data, threshold=0.4)
+        result = self.run_script(pairs_data, ped_data, threshold=0.4)
         self.assertIn("ISSUES", result)
         self.assertIn("Low mother-child relatedness", result)
         self.assertIn("mother1_N", result)
@@ -150,15 +129,7 @@ trio2\tproband2_N\tfather2_N\tmother2_N\t2\t-9
 trio2\tfather2_N\t0\t0\t1\t-9
 trio2\tmother2_N\t0\t0\t2\t-9
 """
-        samples_data = """sample_id\tsex\tancestry
-proband1_N\tmale\tEUR
-father1_N\tmale\tEUR
-mother1_N\tfemale\tEUR
-proband2_N\tfemale\tEUR
-father2_N\tmale\tEUR
-mother2_N\tfemale\tEUR
-"""
-        result = self.run_script(pairs_data, ped_data, samples_data, threshold=0.4)
+        result = self.run_script(pairs_data, ped_data, threshold=0.4)
         self.assertIn("validated successfully", result)
 
     def test_threshold_sensitivity(self):
@@ -173,17 +144,12 @@ mother2_N\tfemale\tEUR
 trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
 """
-        samples_data = """sample_id\tsex\tancestry
-proband1_N\tmale\tEUR
-father1_N\tmale\tEUR
-mother1_N\tfemale\tEUR
-"""
         # Should pass with threshold=0.3
-        result = self.run_script(pairs_data, ped_data, samples_data, threshold=0.3)
+        result = self.run_script(pairs_data, ped_data, threshold=0.3)
         self.assertIn("validated successfully", result)
 
         # Should fail with threshold=0.4
-        result = self.run_script(pairs_data, ped_data, samples_data, threshold=0.4)
+        result = self.run_script(pairs_data, ped_data, threshold=0.4)
         self.assertIn("ISSUES", result)
 
     def test_no_parents_defined(self):
@@ -196,12 +162,26 @@ mother1_N\tfemale\tEUR
         ped_data = """fam1\tsample1_N\t0\t0\t1\t-9
 fam2\tsample2_N\t0\t0\t2\t-9
 """
-        samples_data = """sample_id\tsex\tancestry
-sample1_N\tmale\tEUR
-sample2_N\tfemale\tEUR
-"""
-        result = self.run_script(pairs_data, ped_data, samples_data, threshold=0.4)
+        result = self.run_script(pairs_data, ped_data, threshold=0.4)
         self.assertIn("validated successfully", result)
+
+    def test_missing_parent_pairs(self):
+        """Test detection when expected parent-child pairs are missing from relatedness results"""
+        # Only has mother-child pair, father-child pair is missing
+        pairs_data = (
+            "#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count"
+            "\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness\n"
+            "mother1_N\tproband1_N\t0.48\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+        )
+        ped_data = """trio1\tproband1_N\tfather1_N\tmother1_N\t1\t-9
+trio1\tfather1_N\t0\t0\t1\t-9
+trio1\tmother1_N\t0\t0\t2\t-9
+"""
+        result = self.run_script(pairs_data, ped_data, threshold=0.4)
+        self.assertIn("ISSUES", result)
+        self.assertIn("Missing father-child pair", result)
+        self.assertIn("father1_N - proband1_N", result)
+        self.assertNotIn("Missing mother-child pair", result)
 
 
 if __name__ == "__main__":

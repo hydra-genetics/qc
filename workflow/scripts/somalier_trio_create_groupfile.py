@@ -60,7 +60,7 @@ with open(input_file, "r") as samplesheet:
 
     # Write complete trios to output
     with open(output_file, "w") as outfile:
-        for trio_id, members in trio_dict.items():
+        for _trio_id, members in trio_dict.items():
             if members["father"] and members["mother"] and members["proband"]:
                 # Write in format: father,mother,proband
                 # Add sample type suffix if using typed samples

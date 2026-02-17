@@ -175,8 +175,8 @@ def compile_output_list(wildcards):
                 "qc/somalier_matched/TNmismatch.txt",
             ]
 
-        # Somalier trio analysis
-        if config.get("somalier_trio_extract") and has_trio_samples(samples):
+        # Somalier trio analysis (mutually exclusive with matched)
+        elif config.get("somalier_trio_extract") and has_trio_samples(samples):
             output_files += [
                 "qc/somalier_trio/somalier_relate.pairs.tsv",
                 "qc/somalier_trio/somalier_relate.samples.tsv",

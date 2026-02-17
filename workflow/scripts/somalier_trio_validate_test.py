@@ -183,6 +183,21 @@ trio1\tmother1_N\t0\t0\t2\t-9
         self.assertIn("father1_N - proband1_N", result)
         self.assertNotIn("Missing mother-child pair", result)
 
+    def test_single_parent_validation(self):
+        """Test validation of known parent when other parent is undefined"""
+        # Only mother is defined (father is 0), and mother has good relatedness
+        pairs_data = (
+            "#sample_a\tsample_b\trelatedness\tibs0\tibs2\thomalt_count"
+            "\tshared_hets\tshared_hom_alts\tn\tx_ibs0\tx_ibs2\texpected_relatedness\n"
+            "mother1_N\tproband1_N\t0.48\t0.1\t0.8\t100\t50\t30\t1000\t0\t0\t0.5\n"
+        )
+        ped_data = """trio1\tproband1_N\t0\tmother1_N\t1\t-9
+trio1\tmother1_N\t0\t0\t2\t-9
+"""
+        result = self.run_script(pairs_data, ped_data, threshold=0.4)
+        self.assertIn("validated successfully", result)
+        self.assertNotIn("father", result.lower())  # Should not check father when undefined
+
 
 if __name__ == "__main__":
     unittest.main()

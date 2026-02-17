@@ -29,47 +29,55 @@ for _, row in ped.iterrows():
     father = row["father"]
     mother = row["mother"]
 
-    # Skip if no parents defined (0, "0", or empty)
-    if father in ["0", ".", ""] or mother in ["0", ".", ""]:
+    # Check each parent independently (validate known parents even if one is missing)
+    has_father = father not in ["0", ".", ""]
+    has_mother = mother not in ["0", ".", ""]
+
+    # Skip if neither parent is defined
+    if not has_father and not has_mother:
         continue
 
-    # Check father-child relationship
-    father_child = pairs[
-        ((pairs["#sample_a"] == father) & (pairs["sample_b"] == individual)) |
-        ((pairs["#sample_a"] == individual) & (pairs["sample_b"] == father))
-    ]
+    # Check father-child relationship (only if father is defined)
+    if has_father: (only if father is defined)
+    if has_father:
+        father_child = pairs[
+            ((pairs["#sample_a"] == father) & (pairs["sample_b"] == individual)) |
+            ((pairs["#sample_a"] == individual) & (pairs["sample_b"] == father))
+        ]
 
-    if not father_child.empty:
-        relatedness = father_child["relatedness"].values[0]
-        if relatedness < threshold:
+        if not father_child.empty:
+            relatedness = father_child["relatedness"].values[0]
+            if relatedness < threshold:
+                issues.append(
+                    f"Low father-child relatedness: {father} - {individual} "
+                    f"(relatedness={relatedness:.4f}, threshold={threshold})"
+                )
+        else:
             issues.append(
-                f"Low father-child relatedness: {father} - {individual} "
-                f"(relatedness={relatedness:.4f}, threshold={threshold})"
+                f"Missing father-child pair: {father} - {individual} "
+                f"(pair not found in relatedness results)"
             )
-    else:
-        issues.append(
-            f"Missing father-child pair: {father} - {individual} "
-            f"(pair not found in relatedness results)"
-        )
 
-    # Check mother-child relationship
-    mother_child = pairs[
-        ((pairs["#sample_a"] == mother) & (pairs["sample_b"] == individual)) |
-        ((pairs["#sample_a"] == individual) & (pairs["sample_b"] == mother))
-    ]
+    # Check mother-child relationship (only if mother is defined)
+    if has_mother: (only if mother is defined)
+    if has_mother:
+        mother_child = pairs[
+            ((pairs["#sample_a"] == mother) & (pairs["sample_b"] == individual)) |
+            ((pairs["#sample_a"] == individual) & (pairs["sample_b"] == mother))
+        ]
 
-    if not mother_child.empty:
-        relatedness = mother_child["relatedness"].values[0]
-        if relatedness < threshold:
+        if not mother_child.empty:
+            relatedness = mother_child["relatedness"].values[0]
+            if relatedness < threshold:
+                issues.append(
+                    f"Low mother-child relatedness: {mother} - {individual} "
+                    f"(relatedness={relatedness:.4f}, threshold={threshold})"
+                )
+        else:
             issues.append(
-                f"Low mother-child relatedness: {mother} - {individual} "
-                f"(relatedness={relatedness:.4f}, threshold={threshold})"
+                f"Missing mother-child pair: {mother} - {individual} "
+                f"(pair not found in relatedness results)"
             )
-    else:
-        issues.append(
-            f"Missing mother-child pair: {mother} - {individual} "
-            f"(pair not found in relatedness results)"
-        )
 
 # Write results
 with open(output_file, "w") as outfile:

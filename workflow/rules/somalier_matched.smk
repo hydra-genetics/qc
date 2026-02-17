@@ -147,12 +147,12 @@ rule somalier_matched_extract:
     shell:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
-        tmpdir=$(mktemp -d -p "$(dirname {output.somalier})")
+        tmpdir=$(mktemp -d -p "$(dirname "{output.somalier}")")
         somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} 2> {log}
-        generated_file=$(ls "$tmpdir"/*.somalier | head -n1)
+        generated_file=$(find "$tmpdir" -maxdepth 1 -name '*.somalier' -print -quit)
 
         if [ -f "$generated_file" ]; then
-            mv "$generated_file" {output.somalier}
+            mv "$generated_file" "{output.somalier}"
         else
             echo "Error: No somalier output file found in temp directory $tmpdir" >&2
             rm -rf "$tmpdir"

@@ -118,17 +118,14 @@ def has_trio_samples(samples_dict):
     Used to conditionally include the group file in somalier_trio_relate.
     Checks for presence of trio, father, and mother columns in samples.
     """
-    import pandas as pd
+    required_cols = ["trio", "father", "mother"]
 
-    try:
-        df = pd.read_csv(config["samples"], sep="\t")
-        required_cols = ["trio", "father", "mother"]
-        if all(col in df.columns for col in required_cols):
-            # Check if any sample has non-empty trio information
-            return any((df["trio"].notna()) & (df["trio"] != ".") & (df["trio"] != "0"))
-    except Exception:
-        pass
-    return False
+    # Check if required columns exist in the DataFrame
+    if not all(col in samples_dict.columns for col in required_cols):
+        return False
+
+    # Check if any sample has non-empty trio information
+    return any((samples_dict["trio"].notna()) & (samples_dict["trio"] != ".") & (samples_dict["trio"] != "0"))
 
 
 def compile_output_list(wildcards):

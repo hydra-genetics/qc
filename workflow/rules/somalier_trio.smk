@@ -138,20 +138,20 @@ rule somalier_trio_extract:
     shell:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
-        tmpdir=$(mktemp -d -p $(dirname {output.somalier}))
-        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
-        generated_file=$(ls $tmpdir/*.somalier | head -n1)
+        tmpdir=$(mktemp -d -p "$(dirname {output.somalier})")
+        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} 2> {log}
+        generated_file=$(ls "$tmpdir"/*.somalier | head -n1)
 
         if [ -f "$generated_file" ]; then
             mv "$generated_file" {output.somalier}
         else
             echo "Error: No somalier output file found in temp directory $tmpdir" >&2
-            rm -rf $tmpdir
+            rm -rf "$tmpdir"
             exit 1
         fi
 
         # Clean up
-        rm -rf $tmpdir
+        rm -rf "$tmpdir"
         """
 
 
@@ -226,7 +226,6 @@ rule somalier_trio_relate:
 rule somalier_trio_validate:
     input:
         pairs="qc/somalier_trio/somalier_relate.pairs.tsv",
-        samples="qc/somalier_trio/somalier_relate.samples.tsv",
         ped="qc/somalier_trio/somalier_all.ped",
     output:
         validation="qc/somalier_trio/trio_validation.txt",

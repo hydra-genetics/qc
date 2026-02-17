@@ -23,7 +23,7 @@ with open(input_file, "r") as samplesheet:
         trio_idx = header_line.index("trio")
         father_idx = header_line.index("father")
         mother_idx = header_line.index("mother")
-    except ValueError as e:
+    except ValueError:
         # If trio columns don't exist, create an empty group file
         with open(output_file, "w") as outfile:
             pass

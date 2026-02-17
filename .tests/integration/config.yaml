@@ -95,10 +95,10 @@ rseqc_inner_distance:
 
 somalier_matched_extract:
   sites: "reference/sites.hg19.HES45.vcf.gz"
-  container: "docker://brentp/somalier:v0.2.16"
+  container: "docker://brentp/somalier:v0.2.18"
 
 somalier_matched_relate:
-  container: "docker://brentp/somalier:v0.2.16"
+  container: "docker://brentp/somalier:v0.2.18"
 
 somalier_matched_mqc:
   mqc_config: "config/somalier_mqc_config.yaml"

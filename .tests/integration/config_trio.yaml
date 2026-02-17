@@ -54,13 +54,16 @@ picard_collect_wgs_metrics:
 
 somalier_trio_extract:
   sites: "reference/sites.hg19.HES45.vcf.gz"
-  container: "docker://brentp/somalier:v0.2.16"
+  container: "docker://brentp/somalier:v0.2.18"
 
 somalier_trio_mqc:
   mqc_config: "config/somalier_trio_mqc_config.yaml"
 
 somalier_trio_relate:
-  container: "docker://brentp/somalier:v0.2.16"
+  container: "docker://brentp/somalier:v0.2.18"
+
+somalier_trio_validate:
+  threshold: 0.4
 
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"

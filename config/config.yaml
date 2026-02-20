@@ -48,6 +48,8 @@ multiqc:
         - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
         - "prealignment/fastp_pe/{sample}_{type}_{flowcell}_{lane}_{barcode}_fastp.json"
+        # To use somalier_trio instead of somalier_matched, replace the line below with:
+        # - "qc/somalier_trio/somalier_samples_mqc.tsv"
         - "qc/somalier_matched/somalier_samples_mqc.tsv"
 
 peddy:
@@ -89,9 +91,24 @@ somalier_matched_relate:
   container: "docker://brentp/somalier:v0.2.18"
   extra: "--infer"
 
+## Uncomment the following section to use somalier_trio module instead of somalier_matched
+## Note: Only one somalier module (matched OR trio) should be configured per pipeline run
+
+# somalier_trio_mqc:
+#   mqc_config: "config/somalier_mqc_config.yaml"
+
+# somalier_trio_extract:
+#   container: "docker://brentp/somalier:v0.2.18"
+#   sites: "reference/sites.hg19.vcf.gz"
+#   extra: ""
+
+# somalier_trio_relate:
+#   container: "docker://brentp/somalier:v0.2.18"
+#   extra: "--infer"
+
+# somalier_trio_validate:
+#   threshold: 0.4
+
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"
   svd_mu: "verifybamid2/1000g.phase3.10k.b38.exome.vcf.gz.dat.mu"
-
-
-

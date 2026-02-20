@@ -18,6 +18,7 @@ include: "rules/rseqc.smk"
 include: "rules/samtools.smk"
 include: "rules/sequali.smk"
 include: "rules/somalier_matched.smk"
+include: "rules/somalier_trio.smk"
 include: "rules/verifybamid2.smk"
 
 

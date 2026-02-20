@@ -730,6 +730,173 @@ properties:
             type: string
             description: text file listing samples with mismatched tumor/normal pairs
 
+  somalier_trio_combine_fam:
+    type: object
+    description: input and output parameters for somalier_trio_combine_fam
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          fam:
+            type: array
+            description: list of individual FAM files
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          ped:
+            type: string
+            description: combined PED file with family relationships
+
+  somalier_trio_create_groupfile:
+    type: object
+    description: input and output parameters for somalier_trio_create_groupfile
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: sample sheet TSV file with trio/father/mother columns
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          groups:
+            type: string
+            description: somalier groups file with trio groupings
+
+  somalier_trio_create_ped:
+    type: object
+    description: input and output parameters for somalier_trio_create_ped
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: sample sheet TSV file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          fam:
+            type: string
+            description: individual PED/FAM file
+
+  somalier_trio_extract:
+    type: object
+    description: input and output parameters for somalier_trio_extract
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: BAM/CRAM file
+          bai:
+            type: string
+            description: BAM/CRAM index file
+          sites:
+            type: string
+            description: sites VCF file for somalier extract
+          fasta:
+            type: string
+            description: reference genome FASTA file
+          fai:
+            type: string
+            description: reference genome FASTA index
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          somalier:
+            type: string
+            description: somalier binary fingerprint file
+
+  somalier_trio_mqc:
+    type: object
+    description: input and output parameters for somalier_trio_mqc
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: string
+            description: somalier relate samples TSV file
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          mqc:
+            type: string
+            description: formatted TSV file for MultiQC custom content
+
+  somalier_trio_relate:
+    type: object
+    description: input and output parameters for somalier_trio_relate
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          samples:
+            type: array
+            description: list of somalier binary files from all samples
+          ped:
+            type: string
+            description: combined pedigree file in PED format
+          group:
+            type: string
+            description: somalier groups file for trio sample grouping
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          pairs:
+            type: string
+            description: TSV file with pairwise sample relationships
+          samples:
+            type: string
+            description: TSV file with per-sample statistics and sex inference
+          html:
+            type: string
+            description: somalier HTML report with relatedness plots
+
+  somalier_trio_validate:
+    type: object
+    description: input and output parameters for somalier_trio_validate
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          pairs:
+            type: string
+            description: somalier relate pairs TSV file
+          ped:
+            type: string
+            description: combined pedigree file in PED format
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          validation:
+            type: string
+            description: text file with trio validation results
+
   verifybamid2:
     type: object
     description: input and output parameters for verifybamid2

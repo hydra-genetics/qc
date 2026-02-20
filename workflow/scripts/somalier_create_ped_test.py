@@ -145,6 +145,27 @@ class TestSomalierCreatePed(unittest.TestCase):
             self.assertEqual(fields[1], "S2_R")
             self.assertEqual(fields[4], "2")
 
+    def test_trio_ped_creation(self):
+        """Test PED creation with trio information"""
+        input_content = (
+            "sample\tsex\ttrio\tfather\tmother\n"
+            "child1\tM\tfamily1\tfather1\tmother1\n"
+        )
+
+        write_calls = self.run_script(input_content, "child1", sample_type="N")
+
+        # Check write call
+        args, _ = write_calls[0]
+        written_line = args[0].strip()
+        # Format: FID IID PID MID SEX PHENO
+        parts = written_line.split("\t")
+
+        self.assertEqual(parts[0], "family1")      # FID
+        self.assertEqual(parts[1], "child1_N")     # IID
+        self.assertEqual(parts[2], "father1_N")    # PID
+        self.assertEqual(parts[3], "mother1_N")    # MID
+        self.assertEqual(parts[4], "1")            # SEX (M->1)
+
 
 if __name__ == "__main__":
     unittest.main()

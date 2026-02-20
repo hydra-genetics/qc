@@ -94,7 +94,10 @@ if __name__ == "__main__":
                 f.write("# T/N pairs with validation issues:\n")
                 f.write("# sample\tsample_a\tsample_b\tpair_type\trelatedness\tissue\n")
                 for m in tn_mismatches:
-                    f.write(f"{m['sample']}\t{m['sample_a']}\t{m['sample_b']}\t{m['pair_type']}\t{m['relatedness']}\t{m['issue']}\n")
+                    f.write(
+                        f"{m['sample']}\t{m['sample_a']}\t{m['sample_b']}\t"
+                        f"{m['pair_type']}\t{m['relatedness']}\t{m['issue']}\n"
+                    )
 
         # Always exit with success (warning only behavior)
         sys.exit(0)

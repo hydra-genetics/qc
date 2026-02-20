@@ -1,0 +1,4 @@
+sample	type	platform	machine	flowcell	lane	barcode	fastq1	fastq2	adapter
+HD832	N	Illumina	NDX550220	1	L001	AAAA+CCCC	fastq/HD832_R1.fastq.gz	fastq/HD832_R2.fastq.gz	ACGT
+HD833	N	Illumina	NDX550220	1	L001	GGGG+TTTT	fastq/HD833_R1.fastq.gz	fastq/HD833_R2.fastq.gz	ACGT
+HD834	N	Illumina	NDX550220	1	L001	CCCC+GGGG	fastq/HD834_R1.fastq.gz	fastq/HD834_R2.fastq.gz	ACGT

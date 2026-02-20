@@ -34,12 +34,39 @@ with open(input_file, "r") as samplesheet:
             raw_sex = line[sex_idx]
             sex = SEX_MAPPING.get(raw_sex, SEX_MAPPING.get(raw_sex.capitalize(), "0"))
 
-            output_path = snakemake.output["fam"]
+            # Default pedigree values (unrelated)
+            fam_id = target_sample
+            father_id = "0"
+            mother_id = "0"
 
+            # Check for trio columns
+            try:
+                trio_idx = header_line.index("trio")
+                father_idx = header_line.index("father")
+                mother_idx = header_line.index("mother")
+
+                # If trio info exists for this sample
+                if len(line) > max(trio_idx, father_idx, mother_idx):
+                    trio_val = line[trio_idx]
+                    if trio_val and trio_val != "." and trio_val != "0":
+                        fam_id = trio_val
+
+                        father_val = line[father_idx]
+                        if father_val and father_val != "." and father_val != "0":
+                            father_id = f"{father_val}_{sample_type}"
+
+                        mother_val = line[mother_idx]
+                        if mother_val and mother_val != "." and mother_val != "0":
+                            mother_id = f"{mother_val}_{sample_type}"
+            except ValueError:
+                # Trio columns not present, proceed with defaults
+                pass
+
+            output_path = snakemake.output["fam"]
             individual_id = f"{target_sample}_{sample_type}"
 
             with open(output_path, "w+") as pedfile:
                 pedfile.write(
-                    "\t".join([target_sample, individual_id, "0", "0", sex, "-9"]) + "\n"
+                    "\t".join([fam_id, individual_id, father_id, mother_id, sex, "-9"]) + "\n"
                 )
             break

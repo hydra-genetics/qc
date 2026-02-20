@@ -80,10 +80,10 @@ for _, row in ped.iterrows():
 # Write results
 with open(output_file, "w") as outfile:
     if issues:
-        outfile.write("TRIO VALIDATION ISSUES DETECTED:\n")
+        outfile.write("Trio validation issue detected:\n")
         outfile.write("=" * 70 + "\n\n")
         for issue in issues:
-            outfile.write(f"⚠️  {issue}\n")
+            outfile.write(f"{issue}\n")
         outfile.write("\n" + "=" * 70 + "\n")
         outfile.write(f"Total issues: {len(issues)}\n")
     else:

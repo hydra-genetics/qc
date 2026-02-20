@@ -558,6 +558,51 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
+  somalier_ungrouped_extract:
+    type: object
+    description: parameters for somalier_ungrouped_extract
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      sites:
+        type: string
+        description: path to sites VCF file for somalier extract
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  somalier_ungrouped_mqc:
+    type: object
+    description: parameters for somalier_ungrouped_mqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      mqc_config:
+        type: string
+        description: path to somalier_ungrouped MultiQC config file
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_ungrouped_relate:
+    type: object
+    description: parameters for somalier_ungrouped_relate
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
   verifybamid2:
     type: object
     description: parameters for verifybamid2

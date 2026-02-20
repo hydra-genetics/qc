@@ -97,6 +97,13 @@ def get_somalier_relate_samples(wildcards):
             for sample in get_samples(samples)
             for t in get_unit_types(units, sample)
         ]
+    # For ungrouped analysis
+    elif config.get("somalier_ungrouped_extract"):
+        return [
+            "qc/somalier_ungrouped_extract/%s_%s.somalier" % (sample, t)
+            for sample in get_samples(samples)
+            for t in get_unit_types(units, sample)
+        ]
     return []
 
 
@@ -183,6 +190,15 @@ def compile_output_list(wildcards):
                 "qc/somalier_trio/somalier_relate.html",
                 "qc/somalier_trio/somalier_samples_mqc.tsv",
                 "qc/somalier_trio/trio_validation.txt",
+            ]
+
+        # Somalier ungrouped module (for RNA or general relatedness checking)
+        elif config.get("somalier_ungrouped_extract"):
+            output_files += [
+                "qc/somalier_ungrouped/somalier_relate.pairs.tsv",
+                "qc/somalier_ungrouped/somalier_relate.samples.tsv",
+                "qc/somalier_ungrouped/somalier_relate.html",
+                "qc/somalier_ungrouped/somalier_samples_mqc.tsv",
             ]
 
     files = {

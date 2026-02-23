@@ -89,7 +89,7 @@ trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
 """
         result = self.run_script(pairs_data, ped_data, threshold=0.4)
-        self.assertIn("ISSUES", result)
+        self.assertIn("Total issues:", result)
         self.assertIn("Low father-child relatedness", result)
         self.assertIn("father1_N", result)
         self.assertIn("0.2500", result)
@@ -107,7 +107,7 @@ trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
 """
         result = self.run_script(pairs_data, ped_data, threshold=0.4)
-        self.assertIn("ISSUES", result)
+        self.assertIn("Total issues:", result)
         self.assertIn("Low mother-child relatedness", result)
         self.assertIn("mother1_N", result)
         self.assertIn("0.3000", result)
@@ -150,7 +150,7 @@ trio1\tmother1_N\t0\t0\t2\t-9
 
         # Should fail with threshold=0.4
         result = self.run_script(pairs_data, ped_data, threshold=0.4)
-        self.assertIn("ISSUES", result)
+        self.assertIn("Total issues:", result)
 
     def test_no_parents_defined(self):
         """Test samples without parents are skipped"""
@@ -178,7 +178,7 @@ trio1\tfather1_N\t0\t0\t1\t-9
 trio1\tmother1_N\t0\t0\t2\t-9
 """
         result = self.run_script(pairs_data, ped_data, threshold=0.4)
-        self.assertIn("ISSUES", result)
+        self.assertIn("Total issues:", result)
         self.assertIn("Missing father-child pair", result)
         self.assertIn("father1_N - proband1_N", result)
         self.assertNotIn("Missing mother-child pair", result)

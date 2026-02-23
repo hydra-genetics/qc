@@ -1,11 +1,12 @@
-samples: ".tests/integration/samples_trio.tsv"
-units: ".tests/integration/units_trio.tsv"
+resources: "resources.yaml"
+samples: "samples_trio.tsv"
+units: "units_trio.tsv"
 output: "qc"
 
 default_container: "docker://hydragenetics/common:0.1.9"
 
 reference:
-  fasta: "reference/genome.fasta"
+  fasta: "reference/HES45.fna"
 
 multiqc:
   reports:
@@ -57,7 +58,7 @@ somalier_trio_extract:
   container: "docker://brentp/somalier:v0.2.18"
 
 somalier_trio_mqc:
-  mqc_config: "config/somalier_trio_mqc_config.yaml"
+  mqc_config: "config/somalier_mqc_config.yaml"
 
 somalier_trio_relate:
   container: "docker://brentp/somalier:v0.2.18"

@@ -1,4 +1,4 @@
-sample	type	platform	machine	flowcell	lane	barcode	fastq1	fastq2	adapter
-HD832	N	Illumina	NDX550220	1	L001	AAAA+CCCC	fastq/HD832_R1.fastq.gz	fastq/HD832_R2.fastq.gz	ACGT
-HD833	N	Illumina	NDX550220	1	L001	GGGG+TTTT	fastq/HD833_R1.fastq.gz	fastq/HD833_R2.fastq.gz	ACGT
-HD834	N	Illumina	NDX550220	1	L001	CCCC+GGGG	fastq/HD834_R1.fastq.gz	fastq/HD834_R2.fastq.gz	ACGT
+sample	platform	barcode	type	machine	flowcell	lane	fastq1	fastq2	adapter	bam
+HD832	Illumina	AAAA+CCCC	N	NDX550220	1	L001	fastq/HD827sonic_testing1_R1.fastq.gz	fastq/HD827sonic_testing1_R2.fastq.gz	ACGT	alignment/samtools_merge_bam/HD832_N.bam
+HD833	Illumina	GGGG+TTTT	N	NDX550220	1	L001	fastq/HD827sonic_testing1_R1.fastq.gz	fastq/HD827sonic_testing1_R2.fastq.gz	ACGT	alignment/samtools_merge_bam/HD833_N.bam
+HD834	Illumina	CCCC+GGGG	N	NDX550220	1	L001	fastq/HD827sonic_testing1_R1.fastq.gz	fastq/HD827sonic_testing1_R2.fastq.gz	ACGT	alignment/samtools_merge_bam/HD834_N.bam

@@ -102,6 +102,16 @@ Extracts the final summary row (fraction 1.0) from the duplex yield metrics for 
 
 #SNAKEMAKE_RULE_TABLE__fgbio__fgbio_duplex_yield_summary#
 
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__fgbio_duplex_yield_summary#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__fgbio_duplex_yield_summary#
+
 ---
 
 ## [gatk_calculate_contamination](https://gatk.broadinstitute.org/hc/en-us/articles/360036888972-CalculateContamination)

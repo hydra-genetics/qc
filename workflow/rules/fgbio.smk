@@ -48,20 +48,18 @@ rule fgbio_duplex_yield_summary:
     input:
         "qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_metrics.txt",
     output:
-        summary="qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_summary.txt",
+        summary="qc/fgbio_duplex_yield_summary/{sample}_{type}.duplex_yield_summary.txt",
     log:
-        "qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_summary.log",
+        "qc/fgbio_duplex_yield_summary/{sample}_{type}.duplex_yield_summary.log",
     benchmark:
         repeat(
-            "qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_summary.benchmark.tsv",
+            "qc/fgbio_duplex_yield_summary/{sample}_{type}.duplex_yield_summary.benchmark.tsv",
             config.get("fgbio_duplex_yield_summary", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("fgbio_duplex_yield_summary", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("fgbio_duplex_yield_summary", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("fgbio_duplex_yield_summary", {}).get(
-            "mem_per_cpu", config["default_resources"]["mem_per_cpu"]
-        ),
+        mem_per_cpu=config.get("fgbio_duplex_yield_summary", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
         partition=config.get("fgbio_duplex_yield_summary", {}).get("partition", config["default_resources"]["partition"]),
         threads=config.get("fgbio_duplex_yield_summary", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("fgbio_duplex_yield_summary", {}).get("time", config["default_resources"]["time"]),

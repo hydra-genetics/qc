@@ -3,10 +3,10 @@ rule fgbio_collect_duplex_seq_metrics:
     input:
         bam="alignment/fgbio_group_reads_by_umi/{sample}_{type}.umi.bam",
     output:
-        family_sizes=temp("alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.family_sizes.txt"),
-        duplex_family_sizes=temp("alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_family_sizes.txt"),
-        duplex_yield_metrics=temp("alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_metrics.txt"),
-        umi_counts=temp("alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.umi_counts.txt"),
+        family_sizes=temp("qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.family_sizes.txt"),
+        duplex_family_sizes=temp("qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_family_sizes.txt"),
+        duplex_yield_metrics=temp("qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_metrics.txt"),
+        umi_counts=temp("qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.umi_counts.txt"),
     params:
         intervals=lambda wildcards: (
             "--intervals %s" % config["reference"]["design_intervals"]
@@ -16,10 +16,10 @@ rule fgbio_collect_duplex_seq_metrics:
         description=lambda wildcards: "--description %s_%s" % (wildcards.sample, wildcards.type),
         extra=config.get("fgbio_collect_duplex_seq_metrics", {}).get("extra", ""),
     log:
-        "alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.log",
+        "qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.log",
     benchmark:
         repeat(
-            "alignment/fgbio_collect_duplex_seq_metrics/{sample}_{type}.benchmark.tsv",
+            "qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.benchmark.tsv",
             config.get("fgbio_collect_duplex_seq_metrics", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("fgbio_collect_duplex_seq_metrics", {}).get("threads", config["default_resources"]["threads"])

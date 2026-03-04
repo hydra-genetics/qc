@@ -69,5 +69,5 @@ rule fgbio_duplex_yield_summary:
     message:
         "{rule}: extract fraction from {input.duplex_yield_metrics} and duplication from {input.histo} for MultiQC"
     shell:
-        "dup=$(awk 'NR>1 {{f+=$2; r+=$1*$2}} END {{if (r>0) print 100*(1-f/r); else print 0}}' {input.histo}); "
-        'awk -v d="$dup" \'BEGIN {{OFS="\\t"}} NR==1 {{print "Sample", $0, "percent_duplication"}} NR>1 && $1==1 {{print "{wildcards.sample}_{wildcards.type}", $0, d}}\' {input.duplex_yield_metrics} > {output.summary} 2> {log}'
+        'dup=$(awk \'NR>1 {{f+=$2; r+=$1*$2}} END {{if (r>0) printf "%.2f", 100*(1-f/r); else print "0"}}\' {input.histo}); '
+        'awk -v d="$dup" \'BEGIN {{OFS="\\t"}} NR==1 {{print "Sample", "ds_fraction_duplexes", "ds_duplexes", "percent_duplication"}} NR>1 && $1==1 {{printf "%s\\t%.2f\\t%.1f\\t%s\\n", "{wildcards.sample}_{wildcards.type}", $7*100, $6/1000000, d}}\' {input.duplex_yield_metrics} > {output.summary} 2> {log}'

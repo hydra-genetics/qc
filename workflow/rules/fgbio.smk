@@ -47,6 +47,7 @@ rule fgbio_collect_duplex_seq_metrics:
 rule fgbio_duplex_yield_summary:
     input:
         duplex_yield_metrics="qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_metrics.txt",
+        histo="alignment/fgbio_group_reads_by_umi/{sample}_{type}.umi.histo.tsv",
     output:
         summary="qc/fgbio_duplex_yield_summary/{sample}_{type}.duplex_yield_summary.txt",
     log:
@@ -66,6 +67,7 @@ rule fgbio_duplex_yield_summary:
     container:
         config.get("fgbio_duplex_yield_summary", {}).get("container", config["default_container"])
     message:
-        "{rule}: extract fraction 1.0 from {input} for MultiQC"
+        "{rule}: extract fraction from {input.duplex_yield_metrics} and duplication from {input.histo} for MultiQC"
     shell:
-        'awk \'NR==1 {{print "Sample\\t" $0}} NR>1 && $1==1 {{print "{wildcards.sample}_{wildcards.type}\\t" $0}}\' {input} > {output.summary} 2> {log}'
+        "dup=$(awk 'NR>1 {{f+=$2; r+=$1*$2}} END {{if (r>0) print 100*(1-f/r); else print 0}}' {input.histo}); "
+        'awk -v d="$dup" \'BEGIN {{OFS="\\t"}} NR==1 {{print "Sample", $0, "percent_duplication"}} NR>1 && $1==1 {{print "{wildcards.sample}_{wildcards.type}", $0, d}}\' {input.duplex_yield_metrics} > {output.summary} 2> {log}'

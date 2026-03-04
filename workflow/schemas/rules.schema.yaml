@@ -105,6 +105,9 @@ properties:
           duplex_yield_metrics:
             type: string
             description: duplex yield statistics
+          histo:
+            type: string
+            description: UMI histogram file
       output:
         type: object
         description: list of outputs

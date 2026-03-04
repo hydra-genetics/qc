@@ -46,7 +46,7 @@ rule fgbio_collect_duplex_seq_metrics:
 
 rule fgbio_duplex_yield_summary:
     input:
-        "qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_metrics.txt",
+        duplex_yield_metrics="qc/fgbio_collect_duplex_seq_metrics/{sample}_{type}.duplex_yield_metrics.txt",
     output:
         summary="qc/fgbio_duplex_yield_summary/{sample}_{type}.duplex_yield_summary.txt",
     log:

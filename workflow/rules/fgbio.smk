@@ -68,4 +68,4 @@ rule fgbio_duplex_yield_summary:
     message:
         "{rule}: extract fraction 1.0 from {input} for MultiQC"
     shell:
-        "awk 'NR==1 || $1==1' {input} > {output.summary} 2> {log}"
+        'awk \'NR==1 {{print "Sample\\t" $0}} NR>1 && $1==1 {{print "{wildcards.sample}_{wildcards.type}\\t" $0}}\' {input} > {output.summary} 2> {log}'

@@ -94,6 +94,25 @@ properties:
             type: string
             description: umi counts statistics
 
+  fgbio_duplex_yield_summary:
+    type: object
+    description: input and output parameters for fgbio_duplex_yield_summary
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          duplex_yield_metrics:
+            type: string
+            description: duplex yield statistics
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          summary:
+            type: string
+            description: summary duplex yield statistics (fraction 1.0)
+
   gatk_calculate_contamination:
     type: object
     description: input and output parameters for gatk_calculate_contamination

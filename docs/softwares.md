@@ -91,6 +91,19 @@ Collects a suite of metrics to QC duplex sequencing data.
 
 ---
 
+## [fgbio_duplex_yield_summary](https://fulcrumgenomics.github.io/fgbio/tools/latest/CollectDuplexSeqMetrics.html)
+Extracts the final summary row (fraction 1.0) from the duplex yield metrics for MultiQC display.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__fgbio__fgbio_duplex_yield_summary#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__fgbio__fgbio_duplex_yield_summary#
+
+---
+
 ## [gatk_calculate_contamination](https://gatk.broadinstitute.org/hc/en-us/articles/360036888972-CalculateContamination)
 Based on pileups from gatk_get_pileup_summaries calculates sample contamination.
 

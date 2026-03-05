@@ -32,7 +32,7 @@ rule somalier_matched_combine_fam:
         "{rule}: creates combined somalier_all.ped for sex check"
     shell:
         """
-        cat {input.fam} > {output.ped}
+        cat {input.fam} > {output.ped} 2> {log}
         """
 
 
@@ -64,6 +64,7 @@ rule somalier_matched_create_groupfile:
         "{rule}: Create group file for somalier input"
     shell:
         """
+        {{
         for i in $( cut -f1 {input.samples} | tail -n+2 )
         do
         var=$(awk -v sample="$i" '$1 == sample {{print $2}}' {input.units} | uniq | tr "\n" "," | sed "s/,$//")
@@ -71,6 +72,7 @@ rule somalier_matched_create_groupfile:
         then echo "${{i}}_N,${{i}}_T"
         fi
         done > {output.groups}
+        }} &> {log}
         """
 
 
@@ -148,7 +150,7 @@ rule somalier_matched_extract:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
         tmpdir=$(mktemp -d -p "$(dirname "{output.somalier}")")
-        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} 2> {log}
+        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} &> {log}
         generated_file=$(find "$tmpdir" -maxdepth 1 -name '*.somalier' -print -quit)
 
         if [ -f "$generated_file" ]; then
@@ -229,7 +231,7 @@ rule somalier_matched_relate:
     message:
         "{rule}: Running somalier relate"
     shell:
-        "somalier relate {params.extra} --ped {input.ped} {params.group_flag} -o {params.outname} {input.samples} 2> {log}"
+        "somalier relate {params.extra} --ped {input.ped} {params.group_flag} -o {params.outname} {input.samples} &> {log}"
 
 
 rule somalier_matched_tn_test:

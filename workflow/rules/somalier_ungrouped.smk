@@ -43,7 +43,7 @@ rule somalier_ungrouped_extract:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
         tmpdir=$(mktemp -d -p $(dirname {output.somalier}))
-        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
+        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} &> {log}
         generated_file=$(find $tmpdir -name "*.somalier" -type f | head -n1)
 
         if [ -f "$generated_file" ]; then
@@ -117,4 +117,4 @@ rule somalier_ungrouped_relate:
     message:
         "{rule}: Running somalier relate for ungrouped samples"
     shell:
-        "somalier relate {params.extra} -o {params.outname} {input.samples} 2> {log}"
+        "somalier relate {params.extra} -o {params.outname} {input.samples} &> {log}"

@@ -72,6 +72,34 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
+  fgbio_collect_duplex_seq_metrics:
+    type: object
+    description: parameters for fgbio_collect_duplex_seq_metrics
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  fgbio_duplex_yield_summary:
+    type: object
+    description: parameters for fgbio_duplex_yield_summary
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
   gatk_calculate_contamination:
     type: object
     description: parameters for gatk_calculate_contamination

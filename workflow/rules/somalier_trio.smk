@@ -104,7 +104,10 @@ rule somalier_trio_extract:
     output:
         somalier=temp("qc/somalier_trio_extract/{sample}_{type}.somalier"),
     params:
-        env=lambda wildcards: config.get("somalier_trio_extract", {}).get("env", "").replace("{sample}", wildcards.sample).replace("{type}", wildcards.type),
+        env=lambda wildcards: config.get("somalier_trio_extract", {})
+        .get("env", "")
+        .replace("{sample}", wildcards.sample)
+        .replace("{type}", wildcards.type),
         extra=config.get("somalier_trio_extract", {}).get("extra", ""),
         fasta_abs=lambda wildcards, input: os.path.abspath(input.fasta),
         sites_abs=lambda wildcards, input: (

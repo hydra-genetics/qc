@@ -465,6 +465,9 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
+      env:
+        type: string
+        description: environment variables to set before running somalier extract (e.g. SOMALIER_SAMPLE_NAME={sample}_{type})
 
   somalier_matched_relate:
     type: object
@@ -543,6 +546,9 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
+      env:
+        type: string
+        description: environment variables to set before running somalier extract (e.g. SOMALIER_SAMPLE_NAME={sample}_{type})
 
   somalier_trio_mqc:
     type: object
@@ -602,6 +608,9 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
+      env:
+        type: string
+        description: environment variables to set before running somalier extract (e.g. SOMALIER_SAMPLE_NAME={sample}_{type})
 
   somalier_ungrouped_mqc:
     type: object

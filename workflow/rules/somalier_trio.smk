@@ -104,6 +104,7 @@ rule somalier_trio_extract:
     output:
         somalier=temp("qc/somalier_trio_extract/{sample}_{type}.somalier"),
     params:
+        env=lambda wildcards: config.get("somalier_trio_extract", {}).get("env", "").replace("{sample}", wildcards.sample).replace("{type}", wildcards.type),
         extra=config.get("somalier_trio_extract", {}).get("extra", ""),
         fasta_abs=lambda wildcards, input: os.path.abspath(input.fasta),
         sites_abs=lambda wildcards, input: (
@@ -139,7 +140,7 @@ rule somalier_trio_extract:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
         tmpdir=$(mktemp -d -p "$(dirname "{output.somalier}")")
-        SOMALIER_SAMPLE_NAME={params.sample_name} somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} 2> {log}
+        {params.env} somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} 2> {log}
         generated_file=$(find "$tmpdir" -maxdepth 1 -name '*.somalier' -print -quit)
 
         if [ -f "$generated_file" ]; then

@@ -43,7 +43,7 @@ rule somalier_ungrouped_extract:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
         tmpdir=$(mktemp -d -p $(dirname {output.somalier}))
-        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
+        SOMALIER_SAMPLE_NAME={params.sample_name} somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
         generated_file=$(find $tmpdir -name "*.somalier" -type f | head -n1)
 
         if [ -f "$generated_file" ]; then

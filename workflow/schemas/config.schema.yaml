@@ -399,9 +399,9 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-  somalier_combine_fam:
+  somalier_matched_combine_fam:
     type: object
-    description: parameters for somalier_combine_fam
+    description: parameters for somalier_matched_combine_fam
     properties:
       benchmark_repeats:
         type: integer
@@ -411,9 +411,20 @@ properties:
         description: name or path to docker/singularity container
 
 
-  somalier_create_groupfile:
+  somalier_matched_create_groupfile:
     type: object
-    description: parameters for somalier_create_groupfile
+    description: parameters for somalier_matched_create_groupfile
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_matched_create_ped:
+    type: object
+    description: parameters for somalier_matched_create_ped
     properties:
       benchmark_repeats:
         type: integer
@@ -423,48 +434,24 @@ properties:
         description: name or path to docker/singularity container
 
 
-  somalier_create_ped_n:
+  somalier_matched_mqc:
     type: object
-    description: parameters for somalier_create_ped_n
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated
-      container:
-        type: string
-        description: name or path to docker/singularity container
-
-
-  somalier_create_ped_t:
-    type: object
-    description: parameters for somalier_create_ped_t
-    properties:
-      benchmark_repeats:
-        type: integer
-        description: set number of times benchmark should be repeated
-      container:
-        type: string
-        description: name or path to docker/singularity container
-
-
-  somalier_mqc:
-    type: object
-    description: parameters for somalier_mqc
+    description: parameters for somalier_matched_mqc
     properties:
       benchmark_repeats:
         type: integer
         description: set number of times benchmark should be repeated
       mqc_config:
         type: string
-        description: path to somalier MultiQC config file
+        description: path to somalier_matched MultiQC config file
       container:
         type: string
         description: name or path to docker/singularity container
 
 
-  somalier_extract:
+  somalier_matched_extract:
     type: object
-    description: parameters for somalier_extract
+    description: parameters for somalier_matched_extract
     properties:
       benchmark_repeats:
         type: integer
@@ -474,14 +461,14 @@ properties:
         description: name or path to docker/singularity container
       sites:
         type: string
-        description: path to sites VCF file for somalier extraction
+        description: path to sites VCF file for somalier_matched extraction
       extra:
         type: string
         description: parameters that should be forwarded
 
-  somalier_relate:
+  somalier_matched_relate:
     type: object
-    description: parameters for somalier_relate
+    description: parameters for somalier_matched_relate
     properties:
       benchmark_repeats:
         type: integer
@@ -493,9 +480,23 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-  somalier_tn_test:
+  somalier_matched_tn_test:
     type: object
-    description: parameters for somalier_tn_test
+    description: parameters for somalier_matched_tn_test
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      threshold:
+        type: number
+        description: minimum relatedness score for valid T/N pairs (default 0.8)
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_trio_combine_fam:
+    type: object
+    description: parameters for somalier_trio_combine_fam
     properties:
       benchmark_repeats:
         type: integer
@@ -504,6 +505,131 @@ properties:
         type: string
         description: name or path to docker/singularity container
 
+  somalier_trio_create_groupfile:
+    type: object
+    description: parameters for somalier_trio_create_groupfile
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_trio_create_ped:
+    type: object
+    description: parameters for somalier_trio_create_ped
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_trio_extract:
+    type: object
+    description: parameters for somalier_trio_extract
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      sites:
+        type: string
+        description: path to sites VCF file for somalier extract
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  somalier_trio_mqc:
+    type: object
+    description: parameters for somalier_trio_mqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      mqc_config:
+        type: string
+        description: path to somalier_trio MultiQC config file
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_trio_relate:
+    type: object
+    description: parameters for somalier_trio_relate
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  somalier_trio_validate:
+    type: object
+    description: parameters for somalier_trio_validate
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      threshold:
+        type: number
+        description: minimum relatedness score for valid parent-child relationships (default 0.4)
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_ungrouped_extract:
+    type: object
+    description: parameters for somalier_ungrouped_extract
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      sites:
+        type: string
+        description: path to sites VCF file for somalier extract
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
+  somalier_ungrouped_mqc:
+    type: object
+    description: parameters for somalier_ungrouped_mqc
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      mqc_config:
+        type: string
+        description: path to somalier_ungrouped MultiQC config file
+      container:
+        type: string
+        description: name or path to docker/singularity container
+
+  somalier_ungrouped_relate:
+    type: object
+    description: parameters for somalier_ungrouped_relate
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
 
   verifybamid2:
     type: object

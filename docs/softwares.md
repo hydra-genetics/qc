@@ -483,186 +483,326 @@ verifybamid2 estimates contamination in samples by simultaneously estimating gen
 
 --
 
-## somalier
+## somalier_matched
 
-## [somalier_combine_fam](https://github.com/brentp/somalier)
+## [somalier_matched_combine_fam](https://github.com/brentp/somalier)
 Combines individual tumor and normal pedigree files into a single master .fam file for batch analysis.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_combine_fam#
+#SNAKEMAKE_RULE_SOURCE__somalier_matched__somalier_matched_combine_fam#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_combine_fam#
+#SNAKEMAKE_RULE_TABLE__somalier_matched__somalier_matched_combine_fam#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_combine_fam#
+#CONFIGSCHEMA__somalier_matched_combine_fam#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_combine_fam#
+#RESOURCESSCHEMA__somalier_matched_combine_fam#
 
 --
 
-## [somalier_create_groupfile](https://github.com/brentp/somalier)
+## [somalier_matched_create_groupfile](https://github.com/brentp/somalier)
 Creates group file mapping samples to their types (tumor/normal) for somalier's ancestry and QC analysis.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_groupfile#
+#SNAKEMAKE_RULE_SOURCE__somalier_matched__somalier_matched_create_groupfile#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_groupfile#
+#SNAKEMAKE_RULE_TABLE__somalier_matched__somalier_matched_create_groupfile#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_create_groupfile#
+#CONFIGSCHEMA__somalier_matched_create_groupfile#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_create_groupfile#
+#RESOURCESSCHEMA__somalier_matched_create_groupfile#
 
 --
 
-## [somalier_create_ped_n](https://github.com/brentp/somalier)
-Creates pedigree (.fam) files from sample sheet for normal samples. Converts sex information (M→1, K→2, other→0) for somalier compatibility. Handling normal (N) samples.
+## [somalier_matched_create_ped](https://github.com/brentp/somalier)
+Creates pedigree (.fam) files from sample sheet for all samples. Converts sex information (M→1, F/K→2, other→0) for somalier compatibility. Can handle trio relationships if `trio`, `father`, and `mother` columns are present in `samples.tsv`.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_ped_n#
+#SNAKEMAKE_RULE_SOURCE__somalier_matched__somalier_matched_create_ped#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped_n#
+#SNAKEMAKE_RULE_TABLE__somalier_matched__somalier_matched_create_ped#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_create_ped_n#
+#CONFIGSCHEMA__somalier_matched_create_ped#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_create_ped_n#
+#RESOURCESSCHEMA__somalier_matched_create_ped#
 
 --
 
-## [somalier_create_ped_t](https://github.com/brentp/somalier)
-Creates pedigree (.fam) files from sample sheet for tumor samples. Converts sex information (M→1, K→2, other→0) for somalier compatibility. Handling tumor (T) samples. 
-
-### :snake: Rule
-
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_create_ped_t#
-
-#### :left_right_arrow: input / output files
-
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_create_ped_t#
-
-### :wrench: Configuration
-
-#### Software settings (`config.yaml`)
-
-#CONFIGSCHEMA__somalier_create_ped_t#
-
-#### Resources settings (`resources.yaml`)
-
-#RESOURCESSCHEMA__somalier_create_ped_t#
-
---
-
-## [somalier_mqc](https://github.com/brentp/somalier)
+## [somalier_matched_mqc](https://github.com/brentp/somalier)
 Formats somalier output files for MultiQC integration, adding custom configuration to display sample relatedness and QC metrics.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_mqc#
+#SNAKEMAKE_RULE_SOURCE__somalier_matched__somalier_matched_mqc#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_mqc#
+#SNAKEMAKE_RULE_TABLE__somalier_matched__somalier_matched_mqc#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_mqc#
+#CONFIGSCHEMA__somalier_matched_mqc#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_mqc#
+#RESOURCESSCHEMA__somalier_matched_mqc#
 
 --
 
-## [somalier_extract](https://github.com/brentp/somalier)
+## [somalier_matched_extract](https://github.com/brentp/somalier)
 Extracts genotype information from BAM/CRAM files at informative sites for fast sample QC, relatedness checks, and sex inference.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_extract#
+#SNAKEMAKE_RULE_SOURCE__somalier_matched__somalier_matched_extract#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_extract#
+#SNAKEMAKE_RULE_TABLE__somalier_matched__somalier_matched_extract#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_extract#
+#CONFIGSCHEMA__somalier_matched_extract#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_extract#
+#RESOURCESSCHEMA__somalier_matched_extract#
 
 --
 
-## [somalier_relate](https://github.com/brentp/somalier)
+## [somalier_matched_relate](https://github.com/brentp/somalier)
 Performs relatedness and ancestry inference across all samples, generating pairwise statistics and interactive HTML reports.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_relate#
+#SNAKEMAKE_RULE_SOURCE__somalier_matched__somalier_matched_relate#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_relate#
+#SNAKEMAKE_RULE_TABLE__somalier_matched__somalier_matched_relate#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_relate#
+#CONFIGSCHEMA__somalier_matched_relate#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_relate#
+#RESOURCESSCHEMA__somalier_matched_relate#
 
 --
 
-## [somalier_tn_test](https://github.com/brentp/somalier)
-Triggers somalier analysis only when both tumor and normal samples exist, ensuring proper tumor-normal matching validation.
+## [somalier_matched_tn_test](https://github.com/brentp/somalier)
+Validates that T/N pairs have high relatedness scores. Checks expected pairs from group file and reports mismatch diagnostics.
 
 ### :snake: Rule
 
-#SNAKEMAKE_RULE_SOURCE__somalier__somalier_tn_test#
+#SNAKEMAKE_RULE_SOURCE__somalier_matched__somalier_matched_tn_test#
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__somalier__somalier_tn_test#
+#SNAKEMAKE_RULE_TABLE__somalier_matched__somalier_matched_tn_test#
 
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
 
-#CONFIGSCHEMA__somalier_tn_test#
+#CONFIGSCHEMA__somalier_matched_tn_test#
 
 #### Resources settings (`resources.yaml`)
 
-#RESOURCESSCHEMA__somalier_tn_test#
+#RESOURCESSCHEMA__somalier_matched_tn_test#
+
+--
+
+## somalier_trio
+
+## [somalier_trio_combine_fam](https://github.com/brentp/somalier)
+Combines individual pedigree files into a single master .ped file with family relationships for trio analysis.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_combine_fam#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_combine_fam#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_combine_fam#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_combine_fam#
+
+--
+
+## [somalier_trio_create_groupfile](https://github.com/brentp/somalier)
+Creates group file mapping samples to their trio relationships (father,mother,proband) for somalier's trio analysis.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_create_groupfile#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_create_groupfile#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_create_groupfile#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_create_groupfile#
+
+--
+
+## [somalier_trio_create_ped](https://github.com/brentp/somalier)
+Creates pedigree (.fam) files from sample sheet for all samples. Converts sex information (M→1, F/K→2, other→0) for somalier compatibility. Handles trio relationships using `trio`, `father`, and `mother` columns from `samples.tsv`.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_create_ped#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_create_ped#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_create_ped#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_create_ped#
+
+--
+
+## [somalier_trio_extract](https://github.com/brentp/somalier)
+Extracts genotype information from BAM/CRAM files at informative sites for fast sample QC, relatedness checks, and sex inference in trio analysis.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_extract#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_extract#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_extract#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_extract#
+
+--
+
+## [somalier_trio_mqc](https://github.com/brentp/somalier)
+Formats somalier output files for MultiQC integration, adding custom configuration to display trio relatedness and QC metrics.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_mqc#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_mqc#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_mqc#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_mqc#
+
+--
+
+## [somalier_trio_relate](https://github.com/brentp/somalier)
+Performs relatedness and ancestry inference across trio samples with --infer flag, generating pairwise statistics and interactive HTML reports.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_relate#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_relate#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_relate#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_relate#
+
+--
+
+## [somalier_trio_validate](https://github.com/brentp/somalier)
+Validates parent-child relationships in family trios using relatedness scores. Checks father-child and mother-child pairs against threshold and reports validation results.
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__somalier_trio__somalier_trio_validate#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__somalier_trio__somalier_trio_validate#
+
+### :wrench: Configuration
+
+#### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__somalier_trio_validate#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__somalier_trio_validate#

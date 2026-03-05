@@ -1,0 +1,80 @@
+resources: "resources.yaml"
+samples: "samples_trio.tsv"
+units: "units_trio.tsv"
+output: "qc"
+
+default_container: "docker://hydragenetics/common:0.1.9"
+
+reference:
+  design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
+  design_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
+  fasta: "reference/HES45.fna"
+  wgs_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
+
+multiqc:
+  reports:
+    DNA:
+      included_unit_types: ['N']
+      qc_files:
+        - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
+        - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
+        - "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
+        - "qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"
+        - "qc/picard_collect_wgs_metrics/{sample}_{type}.txt"
+        - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
+        - "qc/somalier_trio/somalier_samples_mqc.tsv"
+
+fastqc:
+  container: "docker://hydragenetics/fastqc:0.11.9"
+
+gatk_calculate_contamination:
+  container: "docker://hydragenetics/gatk4:4.1.9.0"
+
+gatk_get_pileup_summaries:
+  container: "docker://hydragenetics/gatk4:4.1.9.0"
+  sites: "reference/chr1_small_exac_common_3.hg19.vcf"
+  variants: "reference/chr1_small_exac_common_3.hg19.vcf"
+
+peddy:
+  container: "docker://hydragenetics/peddy:0.4.8"
+  extra: ""
+
+picard_collect_alignment_summary_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_duplication_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_gc_bias_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_hs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_insert_size_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+picard_collect_multiple_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+  output_ext:
+    - "gc_bias.pdf"
+
+picard_collect_wgs_metrics:
+  container: "docker://hydragenetics/picard:2.25.0"
+
+somalier_trio_extract:
+  sites: "reference/sites.hg19.HES45.vcf.gz"
+  container: "docker://brentp/somalier:v0.2.18"
+
+somalier_trio_mqc:
+  mqc_config: "config/somalier_mqc_config.yaml"
+
+somalier_trio_relate:
+  container: "docker://brentp/somalier:v0.2.18"
+
+somalier_trio_validate:
+  threshold: 0.4
+
+verifybamid2:
+  container: "docker://hydragenetics/verifybamid2:2.0.1"
+  svd_mu: "verifybamid2/1000g.phase3.10k.b38.exome.vcf.gz.dat.mu"

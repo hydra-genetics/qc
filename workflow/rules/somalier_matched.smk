@@ -32,7 +32,7 @@ rule somalier_matched_combine_fam:
         "{rule}: creates combined somalier_all.ped for sex check"
     shell:
         """
-        cat {input.fam} > {output.ped} 2> {log}
+        cat {input.fam} > {output.ped} &> {log}
         """
 
 
@@ -154,7 +154,7 @@ rule somalier_matched_extract:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
         tmpdir=$(mktemp -d -p "$(dirname "{output.somalier}")")
-        {params.env} somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} 2> {log}
+        {params.env} somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} &> {log}
         generated_file=$(find "$tmpdir" -maxdepth 1 -name '*.somalier' -print -quit)
 
         if [ -f "$generated_file" ]; then

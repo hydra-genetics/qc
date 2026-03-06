@@ -27,9 +27,6 @@ multiqc:
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
-fgbio_collect_duplex_seq_metrics:
-  container: "docker://hydragenetics/fgbio:2.1.0"
-
 gatk_calculate_contamination:
   container: "docker://hydragenetics/gatk4:4.1.9.0"
 

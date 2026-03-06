@@ -87,12 +87,12 @@ somalier_matched_mqc:
   mqc_config: "config/somalier_mqc_config.yaml"
 
 somalier_matched_extract:
-  container: "docker://hydragenetics/somalier:0.3.1"
+  container: "docker://hydragenetics/somalier:0.2.18"
   sites: "reference/sites.hg19.vcf.gz"
   extra: ""
 
 somalier_matched_relate:
-  container: "docker://hydragenetics/somalier:0.3.1"
+  container: "docker://hydragenetics/somalier:0.2.18"
   extra: "--infer"
 
 ## Uncomment the following section to use somalier_trio module instead of somalier_matched
@@ -102,12 +102,12 @@ somalier_matched_relate:
 #   mqc_config: "config/somalier_mqc_config.yaml"
 
 # somalier_trio_extract:
-#   container: "docker://hydragenetics/somalier:0.3.1"
+#   container: "docker://hydragenetics/somalier:0.2.18"
 #   sites: "reference/sites.hg19.vcf.gz"
 #   extra: ""
 
 # somalier_trio_relate:
-#   container: "docker://hydragenetics/somalier:0.3.1"
+#   container: "docker://hydragenetics/somalier:0.2.18"
 #   extra: "--infer"
 
 # somalier_trio_validate:
@@ -121,12 +121,12 @@ somalier_matched_relate:
 #   mqc_config: "config/somalier_mqc_config.yaml"
 #
 # somalier_ungrouped_extract:
-#   container: "docker://hydragenetics/somalier:0.3.1"
+#   container: "docker://hydragenetics/somalier:0.2.18"
 #   sites: "reference/sites.hg19.vcf.gz"
 #   extra: ""
 #
 # somalier_ungrouped_relate:
-#   container: "docker://hydragenetics/somalier:0.3.1"
+#   container: "docker://hydragenetics/somalier:0.2.18"
 #   extra: "--infer"
 
 verifybamid2:

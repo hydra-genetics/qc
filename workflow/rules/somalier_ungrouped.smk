@@ -1,6 +1,6 @@
-__author__ = "Nina Hollfelder, Julia Höglund"
+__author__ = "Nina Hollfelder, Julia Höglund, Jonas Almlöf"
 __copyright__ = "Copyright 2021, Nina Hollfelder, Julia Höglund"
-__email__ = "nina.hollfelder@scilifelab.uu.se, julia.hoglund@scilifelab.uu.se"
+__email__ = "nina.hollfelder@scilifelab.uu.se, julia.hoglund@scilifelab.uu.se, jonas.almlof@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 
@@ -17,6 +17,10 @@ rule somalier_ungrouped_extract:
     output:
         somalier=temp("qc/somalier_ungrouped_extract/{sample}_{type}.somalier"),
     params:
+        env=lambda wildcards: config.get("somalier_ungrouped_extract", {})
+        .get("env", "")
+        .replace("{sample}", wildcards.sample)
+        .replace("{type}", wildcards.type),
         extra=config.get("somalier_ungrouped_extract", {}).get("extra", ""),
         fasta_abs=lambda wildcards, input: os.path.abspath(input.fasta),
         sites_abs=lambda wildcards, input: os.path.abspath(input.sites),
@@ -43,7 +47,7 @@ rule somalier_ungrouped_extract:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
         tmpdir=$(mktemp -d -p $(dirname {output.somalier}))
-        somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
+        {params.env} somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d $tmpdir {input.bam} 2> {log}
         generated_file=$(find $tmpdir -name "*.somalier" -type f | head -n1)
 
         if [ -f "$generated_file" ]; then

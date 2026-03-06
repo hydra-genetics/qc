@@ -1,6 +1,6 @@
-__author__ = "Nina Hollfelder, Julia Höglund"
+__author__ = "Nina Hollfelder, Julia Höglund, Jonas Almlöf"
 __copyright__ = "Copyright 2021, Nina Hollfelder, Julia Höglund"
-__email__ = "nina.hollfelder@scilifelab.uu.se, julia.hoglund@scilifelab.uu.se"
+__email__ = "nina.hollfelder@scilifelab.uu.se, julia.hoglund@scilifelab.uu.se, jonas.almlof@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 

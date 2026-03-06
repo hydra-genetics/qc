@@ -32,7 +32,7 @@ rule somalier_matched_combine_fam:
         "{rule}: creates combined somalier_all.ped for sex check"
     shell:
         """
-        cat {input.fam} > {output.ped} &> {log}
+        cat {input.fam} > {output.ped} 2> {log}
         """
 
 
@@ -72,7 +72,7 @@ rule somalier_matched_create_groupfile:
         then echo "${{i}}_N,${{i}}_T"
         fi
         done > {output.groups}
-        }} &> {log}
+        }} 2> {log}
         """
 
 

@@ -32,7 +32,7 @@ rule somalier_trio_combine_fam:
         "{rule}: creates combined somalier_all.ped for trio analysis"
     shell:
         """
-        cat {input.fam} > {output.ped} &> {log}
+        cat {input.fam} > {output.ped} 2> {log}
         """
 
 

@@ -12,6 +12,7 @@ reference:
   wgs_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
 
 multiqc:
+  container: "docker://hydragenetics/multiqc:1.11"
   reports:
     DNA:
       included_unit_types: ['N']

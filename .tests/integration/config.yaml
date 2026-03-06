@@ -13,6 +13,9 @@ reference:
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
 
+fgbio_collect_duplex_seq_metrics:
+  container: "docker://hydragenetics/fgbio:2.1.0"
+
 gatk_calculate_contamination:
   container: "docker://hydragenetics/gatk4:4.1.9.0"
 
@@ -96,6 +99,7 @@ rseqc_inner_distance:
 somalier_matched_extract:
   sites: "reference/sites.hg19.HES45.vcf.gz"
   container: "docker://hydragenetics/somalier:0.3.1"
+  env: "SOMALIER_SAMPLE_NAME={sample}_{type}"
 
 somalier_matched_relate:
   container: "docker://hydragenetics/somalier:0.3.1"

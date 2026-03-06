@@ -17,6 +17,7 @@ digraph snakemake_dag {
 	19[label = "fastq", color = "0.0 0.0 0.0", style="dotted"];
 	20[label = "vcf", color = "0.0 0.0 0.0", style="dotted"];
 	21[label = "verifybamid2", color = "0.2 0.9 0.45", style="rounded"];
+	22[label = "fgbio_collect_duplex_seq_metrics", color = "0.15 0.7 0.9", style="rounded"];
 	20 -> 2
 	19 -> 4
 	18 -> 5
@@ -25,6 +26,7 @@ digraph snakemake_dag {
 	18 -> 14
 	18 -> 17
 	18 -> 21
+	18 -> 22
 	1 -> 0
 	16 -> 1
 	5 -> 1
@@ -35,4 +37,5 @@ digraph snakemake_dag {
 	4 -> 1
 	17 -> 16
 	21 -> 1
-}            
+	22 -> 1
+}

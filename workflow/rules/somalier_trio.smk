@@ -143,7 +143,7 @@ rule somalier_trio_extract:
         """
         # Create a temp directory for this specific job to avoid race conditions and handle renaming
         tmpdir=$(mktemp -d -p "$(dirname "{output.somalier}")")
-        {params.env} somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} 2> {log}
+        {params.env} somalier extract {params.extra} -s {params.sites_abs} -f {params.fasta_abs} -d "$tmpdir" {input.bam} &> {log}
         generated_file=$(find "$tmpdir" -maxdepth 1 -name '*.somalier' -print -quit)
 
         if [ -f "$generated_file" ]; then
@@ -224,7 +224,7 @@ rule somalier_trio_relate:
     message:
         "{rule}: Running somalier relate for trio analysis with --infer"
     shell:
-        "somalier relate {params.extra} --infer --ped {input.ped} {params.group_flag} -o {params.outname} {input.samples} 2> {log}"
+        "somalier relate {params.extra} --infer --ped {input.ped} {params.group_flag} -o {params.outname} {input.samples} &> {log}"
 
 
 rule somalier_trio_validate:

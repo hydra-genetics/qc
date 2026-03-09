@@ -12,6 +12,7 @@ reference:
   wgs_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
 
 multiqc:
+  container: "docker://hydragenetics/multiqc:1.11"
   reports:
     DNA:
       included_unit_types: ['N']
@@ -64,14 +65,14 @@ picard_collect_wgs_metrics:
 
 somalier_trio_extract:
   sites: "reference/sites.hg19.HES45.vcf.gz"
-  container: "docker://brentp/somalier:v0.2.18"
+  container: "docker://hydragenetics/somalier:0.2.18"
   env: "SOMALIER_SAMPLE_NAME={sample}_{type}"
 
 somalier_trio_mqc:
   mqc_config: "config/somalier_mqc_config.yaml"
 
 somalier_trio_relate:
-  container: "docker://brentp/somalier:v0.2.18"
+  container: "docker://hydragenetics/somalier:0.2.18"
 
 somalier_trio_validate:
   threshold: 0.4

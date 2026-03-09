@@ -99,12 +99,12 @@ rseqc_inner_distance:
 
 somalier_ungrouped_extract:
   sites: "reference/sites.hg19.HES45.vcf.gz"
-  container: "docker://brentp/somalier:v0.2.18"
+  container: "docker://hydragenetics/somalier:0.2.18"
   extra: ""
   env: "SOMALIER_SAMPLE_NAME={sample}_{type}"
 
 somalier_ungrouped_relate:
-  container: "docker://brentp/somalier:v0.2.18"
+  container: "docker://hydragenetics/somalier:0.2.18"
   extra: "--infer"
 
 somalier_ungrouped_mqc:

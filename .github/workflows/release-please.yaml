@@ -17,4 +17,4 @@ jobs:
         id: release
         with:
           target-branch: master
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}

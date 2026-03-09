@@ -4,3 +4,11 @@
 .snakemake
 __pycache__
 qc
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+*.actual.fam
+*.actual.tsv
+*.actual.vcf
+*.svg

@@ -2,7 +2,7 @@ resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
-default_container: "docker://hydragenetics/common:0.1.9"
+default_container: "docker://hydragenetics/common:3.3.0"
 
 reference:
   design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
@@ -12,6 +12,9 @@ reference:
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
+
+fgbio_collect_duplex_seq_metrics:
+  container: "docker://hydragenetics/fgbio:2.1.0"
 
 gatk_calculate_contamination:
   container: "docker://hydragenetics/gatk4:4.1.9.0"
@@ -48,6 +51,7 @@ multiqc:
         - "qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"
         - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
+        - "qc/somalier_matched/somalier_samples_mqc.tsv"
         - "prealignment/fastp_pe/{sample}_{type}_{flowcell}_{lane}_{barcode}_fastp.json"
     RNA:
       included_unit_types: ['R']
@@ -91,6 +95,17 @@ rseqc_gene_body_coverage:
 rseqc_inner_distance:
   bed: "reference/gene_model.bed"
   container: "docker://hydragenetics/rseqc:4.0.0"
+
+somalier_matched_extract:
+  sites: "reference/sites.hg19.HES45.vcf.gz"
+  container: "docker://hydragenetics/somalier:0.2.18"
+  env: "SOMALIER_SAMPLE_NAME={sample}_{type}"
+
+somalier_matched_relate:
+  container: "docker://hydragenetics/somalier:0.2.18"
+
+somalier_matched_mqc:
+  mqc_config: "config/somalier_mqc_config.yaml"
 
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"

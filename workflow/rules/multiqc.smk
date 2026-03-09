@@ -8,13 +8,27 @@ rule multiqc:
     input:
         files=lambda wildcards: set(
             [
-                file.format(sample=sample, type=u.type, lane=u.lane, flowcell=u.flowcell, barcode=u.barcode, read=read, ext=ext)
+                file.format(
+                    sample=sample,
+                    type=u.type,
+                    lane=u.lane,
+                    flowcell=u.flowcell,
+                    barcode=u.barcode,
+                    read=read,
+                    ext=ext,
+                )
                 for file in config["multiqc"]["reports"][wildcards.report]["qc_files"]
                 for sample in get_samples(samples)
                 for u in units.loc[sample].dropna().itertuples()
                 if u.type in config["multiqc"]["reports"][wildcards.report]["included_unit_types"]
                 for read in ["fastq1", "fastq2"]
                 for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
+                if "{sample}" in file or "{type}" in file
+            ]
+            + [
+                file
+                for file in config["multiqc"]["reports"][wildcards.report]["qc_files"]
+                if "{sample}" not in file and "{type}" not in file
             ]
         ),
     output:
@@ -33,7 +47,10 @@ rule multiqc:
     log:
         "qc/multiqc/multiqc_{report}.html.log",
     benchmark:
-        repeat("qc/multiqc/multiqc_{report}.html.benchmark.tsv", config.get("multiqc", {}).get("benchmark_repeats", 1))
+        repeat(
+            "qc/multiqc/multiqc_{report}.html.benchmark.tsv",
+            config.get("multiqc", {}).get("benchmark_repeats", 1),
+        )
     threads: config.get("multiqc", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("multiqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -53,7 +70,12 @@ rule multiqc_longread:
     input:
         files=lambda wildcards: set(
             [
-                file.format(sample=sample, type=u.type, processing_unit=u.processing_unit, barcode=u.barcode)
+                file.format(
+                    sample=sample,
+                    type=u.type,
+                    processing_unit=u.processing_unit,
+                    barcode=u.barcode,
+                )
                 for file in config["multiqc"]["reports"][wildcards.report]["qc_files"]
                 for sample in get_samples(samples)
                 for u in units.loc[sample].dropna().itertuples()
@@ -76,7 +98,10 @@ rule multiqc_longread:
     log:
         "qc/multiqc/multiqc_{report}.html.log",
     benchmark:
-        repeat("qc/multiqc/multiqc_{report}.html.benchmark.tsv", config.get("multiqc", {}).get("benchmark_repeats", 1))
+        repeat(
+            "qc/multiqc/multiqc_{report}.html.benchmark.tsv",
+            config.get("multiqc", {}).get("benchmark_repeats", 1),
+        )
     threads: config.get("multiqc", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("multiqc", {}).get("mem_mb", config["default_resources"]["mem_mb"]),

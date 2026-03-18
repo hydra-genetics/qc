@@ -11,6 +11,8 @@ on:
       - "requirements*.txt"
       - ".github/workflows/**"
       - "config/**"
+      - "workflow/rules/**"
+      - "workflow/schemas/**"
   pull_request:
     branches:
       - develop
@@ -21,6 +23,8 @@ on:
       - "requirements*.txt"
       - ".github/workflows/**"
       - "config/**"
+      - "workflow/rules/**"
+      - "workflow/schemas/**"
   workflow_dispatch:
 
 concurrency:

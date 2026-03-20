@@ -1,10 +1,15 @@
 {
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "packages": {
     ".": {
-      "release-type": "python",
-      "bump-minor-pre-major": true,
-      "include-v-in-tag": true
+      "release-type": "simple",
+      "package-name": "qc",
+      "changelog-path": "CHANGELOG.md",
+      "include-v-in-tag": true,
+      "include-component-in-tag": false,
+      "draft": false,
+      "prerelease": false
     }
   },
-  "bootstrap-sha": "3f5a6403c7bb2cd4d195db663ccd947abfda98db"
+  "bootstrap-sha": "3f20283d7ea0b38e4cd2f65c595825f40e39d4de"
 }

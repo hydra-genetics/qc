@@ -2,7 +2,7 @@ resources: "resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
-default_container: "docker://hydragenetics/common:0.1.9"
+default_container: "docker://hydragenetics/common:3.3.0"
 
 reference:
   fasta: ""
@@ -12,6 +12,9 @@ reference:
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"
+
+fgbio_collect_duplex_seq_metrics:
+  container: "docker://hydragenetics/fgbio:2.1.0"
 
 gatk_calculate_contamination:
   container: "docker://hydragenetics/gatk4:4.1.9.0"
@@ -48,6 +51,10 @@ multiqc:
         - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
         - "prealignment/fastp_pe/{sample}_{type}_{flowcell}_{lane}_{barcode}_fastp.json"
+        # Choose one somalier module based on your use case:
+        - "qc/somalier_matched/somalier_samples_mqc.tsv"  # For T/N paired samples
+        # - "qc/somalier_trio/somalier_samples_mqc.tsv"     # For trio/family samples
+        # - "qc/somalier_ungrouped/somalier_samples_mqc.tsv"  # For ungrouped/RNA relatedness
 
 peddy:
   container: "docker://hydragenetics/peddy:0.4.8"
@@ -76,9 +83,52 @@ picard_collect_multiple_metrics:
 picard_collect_wgs_metrics:
   container: "docker://hydragenetics/picard:2.25.0"
 
+somalier_matched_mqc:
+  mqc_config: "config/somalier_mqc_config.yaml"
+
+somalier_matched_extract:
+  container: "docker://hydragenetics/somalier:0.2.18"
+  sites: "reference/sites.hg19.vcf.gz"
+  extra: ""
+
+somalier_matched_relate:
+  container: "docker://hydragenetics/somalier:0.2.18"
+  extra: "--infer"
+
+## Uncomment the following section to use somalier_trio module instead of somalier_matched
+## Note: Only one somalier module (matched OR trio) should be configured per pipeline run
+
+# somalier_trio_mqc:
+#   mqc_config: "config/somalier_mqc_config.yaml"
+
+# somalier_trio_extract:
+#   container: "docker://hydragenetics/somalier:0.2.18"
+#   sites: "reference/sites.hg19.vcf.gz"
+#   extra: ""
+
+# somalier_trio_relate:
+#   container: "docker://hydragenetics/somalier:0.2.18"
+#   extra: "--infer"
+
+# somalier_trio_validate:
+#   threshold: 0.4
+
+## Uncomment the following section to use somalier_ungrouped module
+## Note: Only one somalier module should be configured per pipeline run
+## This module is for general relatedness checking without predefined pairs/trios
+
+# somalier_ungrouped_mqc:
+#   mqc_config: "config/somalier_mqc_config.yaml"
+#
+# somalier_ungrouped_extract:
+#   container: "docker://hydragenetics/somalier:0.2.18"
+#   sites: "reference/sites.hg19.vcf.gz"
+#   extra: ""
+#
+# somalier_ungrouped_relate:
+#   container: "docker://hydragenetics/somalier:0.2.18"
+#   extra: "--infer"
+
 verifybamid2:
   container: "docker://hydragenetics/verifybamid2:2.0.1"
   svd_mu: "verifybamid2/1000g.phase3.10k.b38.exome.vcf.gz.dat.mu"
-
-
-

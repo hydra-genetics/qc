@@ -1,0 +1,9 @@
+# description: Sex check results from Somalier
+# id: somalier_sex_check
+# pconfig:
+#   id: somalier_sex_check_table
+#   title: Somalier Sex Check
+# plot_type: table
+# section_name: Somalier Sex Check
+Sample	inferred_sex	reported_sex	sex_check
+SAMPLE001_N	male	male	Pass

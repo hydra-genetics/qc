@@ -1,0 +1,51 @@
+digraph snakemake_dag {
+	graph [bb="0,0,292,180",
+		bgcolor=white,
+		margin=0
+	];
+	node [fontname=sans,
+		fontsize=10,
+		label="\N",
+		penwidth=2,
+		shape=box,
+		style=rounded
+	];
+	edge [color=grey,
+		penwidth=2
+	];
+	1	 [color="0.56 0.6 0.85",
+		height=0.5,
+		label=multiqc,
+		pos="129,90",
+		width=1.4028];
+	2	 [color="0.00 0.6 0.85",
+		height=0.5,
+		label=sequali,
+		pos="27,162",
+		width=0.75];
+	2 -> 1	 [pos="e,103.27,108.16 52.739,143.83 65.544,134.79 81.191,123.75 94.972,114.02"];
+	3	 [color="0.59 0.6 0.85",
+		height=0.5,
+		label=nanoplot,
+		pos="110,162",
+		width=0.81944];
+	3 -> 1	 [pos="e,124.14,108.41 114.79,143.83 116.85,136.05 119.3,126.77 121.58,118.13"];
+	4	 [color="0.19 0.6 0.85",
+		height=0.5,
+		label=bcftools_stats,
+		pos="204,162",
+		width=1.1806];
+	4 -> 1	 [pos="e,147.92,108.16 185.07,143.83 176.01,135.13 165.02,124.58 155.17,115.13"];
+	5	 [color="0.61 0.6 0.85",
+		height=0.5,
+		label=cramino,
+		pos="264,90",
+		width=0.77778];
+	6[label = "ubam", color = "0.0 0.0 0.0", style="dotted"];
+	7[label = "bam", color = "0.0 0.0 0.0", style="dotted"];
+	8[label = "vcf", color = "0.0 0.0 0.0", style="dotted"];
+	6 -> 2
+	7 -> 3
+	8 -> 4
+	7 -> 5
+}

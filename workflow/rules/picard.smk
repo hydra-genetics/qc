@@ -45,6 +45,8 @@ rule picard_collect_duplication_metrics:
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
     output:
         metrics=temp("qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"),
+    params:
+        extra=config.get("picard_collect_duplication_metrics", {}).get("extra", ""),
     log:
         "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt.log",
     benchmark:
@@ -68,7 +70,8 @@ rule picard_collect_duplication_metrics:
     shell:
         "(picard CollectDuplicateMetrics "
         "INPUT={input.bam} "
-        "M={output.metrics}) "
+        "M={output.metrics} "
+        "{params.extra} )"
         "&> {log}"
 
 

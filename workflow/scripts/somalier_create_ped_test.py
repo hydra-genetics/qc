@@ -146,15 +146,17 @@ class TestSomalierCreatePed(unittest.TestCase):
             self.assertEqual(fields[4], "2")
 
     def test_trio_ped_creation(self):
-        """Test PED creation with trio information"""
+        """Test PED creation with trio information, including family assignment"""
         input_content = (
             "sample\tsex\ttrio\tfather\tmother\n"
             "child1\tM\tfamily1\tfather1\tmother1\n"
+            "father1\tM\tfamily1\t0\t0\n"
+            "mother1\tF\tfamily1\t0\t0\n"
         )
 
         write_calls = self.run_script(input_content, "child1", sample_type="N")
 
-        # Check write call
+        # Check write call for child
         args, _ = write_calls[0]
         written_line = args[0].strip()
         # Format: FID IID PID MID SEX PHENO
@@ -165,6 +167,28 @@ class TestSomalierCreatePed(unittest.TestCase):
         self.assertEqual(parts[2], "father1_N")    # PID
         self.assertEqual(parts[3], "mother1_N")    # MID
         self.assertEqual(parts[4], "1")            # SEX (M->1)
+
+        # Check write call for father
+        args, _ = write_calls[1]
+        written_line = args[0].strip()
+        parts = written_line.split("\t")
+
+        self.assertEqual(parts[0], "family1")      # FID
+        self.assertEqual(parts[1], "father1_N")    # IID
+        self.assertEqual(parts[2], "0")            # PID
+        self.assertEqual(parts[3], "0")            # MID
+        self.assertEqual(parts[4], "1")            # SEX (M->1)
+
+        # Check write call for mother
+        args, _ = write_calls[2]
+        written_line = args[0].strip()
+        parts = written_line.split("\t")
+
+        self.assertEqual(parts[0], "family1")      # FID
+        self.assertEqual(parts[1], "mother1_N")    # IID
+        self.assertEqual(parts[2], "0")            # PID
+        self.assertEqual(parts[3], "0")            # MID
+        self.assertEqual(parts[4], "2")            # SEX (F->2)
 
 
 if __name__ == "__main__":

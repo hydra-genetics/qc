@@ -12,7 +12,7 @@ import unittest
 import tempfile
 import shutil
 from unittest.mock import Mock
-import pandas as pd
+import csv
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 SCRIPT_DIR = os.path.abspath(os.path.join(TEST_DIR, "../../workflow/scripts"))
@@ -38,7 +38,7 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
             fam_files_content: List of strings, each representing content of a FAM file
 
         Returns:
-            pandas.DataFrame: The output PED file as a dataframe
+            list of dict: The output PED file as a list of dictionaries
         """
         # Create input FAM files
         input_files = []
@@ -62,16 +62,21 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
         exec(self.script_content, globals())
 
         # Read and return output
+        result = []
         if os.path.exists(output_ped) and os.path.getsize(output_ped) > 0:
-            return pd.read_csv(
-                output_ped,
-                sep='\t',
-                header=None,
-                names=['family_id', 'sample_id', 'paternal_id', 'maternal_id', 'sex', 'phenotype'],
-                dtype=str
-            )
-        else:
-            return pd.DataFrame(columns=['family_id', 'sample_id', 'paternal_id', 'maternal_id', 'sex', 'phenotype'])
+            with open(output_ped, 'r') as f:
+                reader = csv.reader(f, delimiter='\t')
+                for row in reader:
+                    if len(row) == 6:
+                        result.append({
+                            'family_id': row[0],
+                            'sample_id': row[1],
+                            'paternal_id': row[2],
+                            'maternal_id': row[3],
+                            'sex': row[4],
+                            'phenotype': row[5]
+                        })
+        return result
 
     def test_combine_no_duplicates(self):
         """Test combining FAM files with no duplicates"""
@@ -84,7 +89,8 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
         result = self.run_script(fam_files)
 
         self.assertEqual(len(result), 3, "Should have 3 entries")
-        self.assertEqual(set(result['sample_id']), {'sample1_N', 'sample2_N', 'sample3_N'})
+        sample_ids = {entry['sample_id'] for entry in result}
+        self.assertEqual(sample_ids, {'sample1_N', 'sample2_N', 'sample3_N'})
 
     def test_deduplicate_trio_samples(self):
         """Test deduplication removes standalone entries for trio members"""
@@ -105,10 +111,12 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
         self.assertEqual(len(result), 3, "Should have 3 entries after deduplication")
 
         # All remaining entries should be from Trio1
-        self.assertTrue(all(result['family_id'] == 'Trio1'), "All entries should be from Trio1")
+        family_ids = {entry['family_id'] for entry in result}
+        self.assertEqual(family_ids, {'Trio1'}, "All entries should be from Trio1")
 
         # Should have proband, father, mother
-        self.assertEqual(set(result['sample_id']), {'proband_N', 'father_N', 'mother_N'})
+        sample_ids = {entry['sample_id'] for entry in result}
+        self.assertEqual(sample_ids, {'proband_N', 'father_N', 'mother_N'})
 
     def test_mixed_singletons_and_trios(self):
         """Test mixed case: singletons + trios, keep only non-trio singletons"""
@@ -131,11 +139,11 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
         self.assertEqual(len(result), 5, "Should have 5 entries")
 
         # Check family IDs
-        family_ids = set(result['family_id'])
+        family_ids = {entry['family_id'] for entry in result}
         self.assertEqual(family_ids, {'Trio1', 'singleton1', 'singleton2'})
 
         # Check sample IDs
-        sample_ids = set(result['sample_id'])
+        sample_ids = {entry['sample_id'] for entry in result}
         self.assertEqual(sample_ids, {'child_N', 'dad_N', 'mom_N', 'singleton1_N', 'singleton2_N'})
 
     def test_empty_fam_files(self):
@@ -149,7 +157,7 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
         result = self.run_script(fam_files)
 
         self.assertEqual(len(result), 1, "Should have 1 entry")
-        self.assertEqual(result.iloc[0]['sample_id'], 'sample1_N')
+        self.assertEqual(result[0]['sample_id'], 'sample1_N')
 
     def test_no_input_files(self):
         """Test handling of no input files"""
@@ -181,9 +189,9 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
         self.assertEqual(len(result), 7, "Should have 7 entries")
 
         # Check family IDs
-        trio1_entries = result[result['family_id'] == 'Trio1']
-        trio2_entries = result[result['family_id'] == 'Trio2']
-        singleton_entries = result[result['family_id'] == 'singleton']
+        trio1_entries = [e for e in result if e['family_id'] == 'Trio1']
+        trio2_entries = [e for e in result if e['family_id'] == 'Trio2']
+        singleton_entries = [e for e in result if e['family_id'] == 'singleton']
 
         self.assertEqual(len(trio1_entries), 3, "Trio1 should have 3 entries")
         self.assertEqual(len(trio2_entries), 3, "Trio2 should have 3 entries")
@@ -202,7 +210,7 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
 
         # Check sorting: should be AFamily (achild, afather), MFamily (mchild), ZFamily (zchild)
         expected_order = ['achild_N', 'afather_N', 'mchild_N', 'zchild_N']
-        actual_order = result['sample_id'].tolist()
+        actual_order = [entry['sample_id'] for entry in result]
 
         self.assertEqual(actual_order, expected_order, "Output should be sorted by family_id then sample_id")
 
@@ -220,7 +228,8 @@ class TestSomalierCombineAndDeduplicate(unittest.TestCase):
 
         # Should have 4 entries, no changes
         self.assertEqual(len(result), 4, "Should have 4 entries")
-        self.assertEqual(set(result['family_id']), {'Trio1', 'singleton'})
+        family_ids = {entry['family_id'] for entry in result}
+        self.assertEqual(family_ids, {'Trio1', 'singleton'})
 
 
 if __name__ == "__main__":

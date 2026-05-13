@@ -57,10 +57,17 @@ else:
     for entry in all_entries:
         entry['is_standalone'] = is_standalone_entry(entry)
 
-    # Find sample_ids that appear in non-standalone (trio) entries
-    trio_samples = set(
-        entry['sample_id'] for entry in all_entries if not entry['is_standalone']
-    )
+    # Find all sample_ids that are part of trios (as proband OR as parents)
+    trio_samples = set()
+    for entry in all_entries:
+        if not entry['is_standalone']:
+            # Add the proband
+            trio_samples.add(entry['sample_id'])
+            # Add parents if they're defined (not '0')
+            if entry['paternal_id'] != '0':
+                trio_samples.add(entry['paternal_id'])
+            if entry['maternal_id'] != '0':
+                trio_samples.add(entry['maternal_id'])
 
     # Remove standalone entries for samples that also appear in trios
     deduped_entries = [

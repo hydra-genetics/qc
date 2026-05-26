@@ -54,14 +54,10 @@ with open(input_file, "r") as samplesheet:
                         father_val = line[father_idx]
                         if father_val and father_val != "." and father_val != "0":
                             father_id = f"{father_val}_{sample_type}"
-                            # Ensure father inherits the same fam_id
-                            fam_id = trio_val
 
                         mother_val = line[mother_idx]
                         if mother_val and mother_val != "." and mother_val != "0":
                             mother_id = f"{mother_val}_{sample_type}"
-                            # Ensure mother inherits the same fam_id
-                            fam_id = trio_val
             except ValueError:
                 # Trio columns not present, proceed with defaults
                 pass

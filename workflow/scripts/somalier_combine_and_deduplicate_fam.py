@@ -29,9 +29,10 @@ for fam_file in fam_files:
                         'sex': row[4],
                         'phenotype': row[5]
                     })
-    except (IOError, OSError):
-        # Skip files that can't be read
-        continue
+    except (IOError, OSError) as e:
+        # Fail fast on unreadable FAM files to avoid dropping pedigree data
+        sys.stderr.write(f"ERROR: Cannot read FAM file '{fam_file}': {e}\n")
+        sys.exit(1)
 
 if not all_entries:
     # Create empty output if no entries
@@ -40,9 +41,14 @@ if not all_entries:
     deduped_entries = []
 else:
     # Detect standalone entries: family_id is the sample_id prefix (before _type suffix)
+    # AND the entry has no parents (paternal_id='0' and maternal_id='0')
     # Example: D26-01237_N has standalone entry with family_id=D26-01237
     def is_standalone_entry(entry):
-        """Check if family_id matches the sample_id prefix (before underscore)."""
+        """Check if family_id matches sample_id prefix AND entry has no parents."""
+        # A true standalone must have no parents
+        if entry['paternal_id'] != '0' or entry['maternal_id'] != '0':
+            return False
+        
         family_id = entry['family_id']
         sample_id = entry['sample_id']
         # Check if family_id is the sample prefix (sample_id without the _type suffix)
@@ -70,10 +76,26 @@ else:
                 trio_samples.add(entry['maternal_id'])
 
     # Remove standalone entries for samples that also appear in trios
-    deduped_entries = [
-        entry for entry in all_entries
-        if not (entry['is_standalone'] and entry['sample_id'] in trio_samples)
-    ]
+    # AND deduplicate exact duplicate rows across files
+    seen = set()
+    deduped_entries = []
+    for entry in all_entries:
+        # Skip standalone entries for samples in trios
+        if entry['is_standalone'] and entry['sample_id'] in trio_samples:
+            continue
+        # Create tuple key for deduplication (all PED fields)
+        entry_key = (
+            entry['family_id'],
+            entry['sample_id'],
+            entry['paternal_id'],
+            entry['maternal_id'],
+            entry['sex'],
+            entry['phenotype']
+        )
+        # Only add if not seen before
+        if entry_key not in seen:
+            seen.add(entry_key)
+            deduped_entries.append(entry)
 
 # Sort for consistent output: first by family_id, then by sample_id
 if deduped_entries:

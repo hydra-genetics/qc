@@ -66,7 +66,19 @@ with open(input_file, "r") as samplesheet:
             individual_id = f"{target_sample}_{sample_type}"
 
             with open(output_path, "w+") as pedfile:
+                # Write child entry
                 pedfile.write(
                     "\t".join([fam_id, individual_id, father_id, mother_id, sex, "-9"]) + "\n"
                 )
+
+                # Write father entry if applicable
+                if father_id != "0":
+                    pedfile.write(
+                        "\t".join([fam_id, father_id, "0", "0", "1", "-9"]) + "\n"
+                    )
+
+                # Write mother entry if applicable
+                if mother_id != "0":
+                    pedfile.write(
+                        "\t".join([fam_id, mother_id, "0", "0", "2", "-9"]) + "\n")
             break

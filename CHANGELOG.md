@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.8.0](https://github.com/hydra-genetics/qc/compare/v0.7.0...v0.8.0) (2026-05-28)
+
+
+### Features
+
+* add deduplication test script ([1f35705](https://github.com/hydra-genetics/qc/commit/1f3570527f1957a80806e15ddf78bad65d1bfa6d))
+
+
+### Bug Fixes
+
+* add missing parent trio membership for multiqc ([e0c2e29](https://github.com/hydra-genetics/qc/commit/e0c2e29bf10d5b8d4d352bcc9dd9f4ba2a98499e))
+* apply suggestions from code review ([4a29d6d](https://github.com/hydra-genetics/qc/commit/4a29d6d447ed774fab52a33f44202876adf20564))
+* apply suggestions from code review ([6f18fa1](https://github.com/hydra-genetics/qc/commit/6f18fa1579b99b18682ae93f5c83b02daeff44d6))
+* change from pandas to csv file handling ([61faa1d](https://github.com/hydra-genetics/qc/commit/61faa1d7a9ed9b73c6c8b4080c85b84e2b448aa0))
+* include parents in trio_samples for proper deduplication ([ed533eb](https://github.com/hydra-genetics/qc/commit/ed533ebed648a4645bd5026831debef475308235))
+* remove duplicate entries in combined ped ([afe0f0e](https://github.com/hydra-genetics/qc/commit/afe0f0e663b83e689db4799a7030983fcf11cbce))
+* **somalier:** solve family membership reporting ([79909b7](https://github.com/hydra-genetics/qc/commit/79909b7491e9df05f99d7b9e1277ebb172e76f43))
+
 ## [0.7.0](https://github.com/hydra-genetics/qc/compare/v0.6.0...v0.7.0) (2026-03-09)
 
 

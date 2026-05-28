@@ -1,0 +1,34 @@
+default_install_hook_types: [pre-commit, pre-push]
+
+repos:
+  - repo: local
+    hooks:
+      - id: snakefmt
+        name: snakefmt
+        entry: snakefmt
+        args: [--check, --config, .github/linters/.snakefmt.toml]
+        language: system
+        files: "^workflow/.*\\.smk$|^workflow/Snakefile$"
+        stages: [pre-commit]
+
+      - id: pycodestyle
+        name: pycodestyle
+        entry: pycodestyle
+        args: [workflow/scripts/]
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: snakemake-lint
+        name: snakemake-lint
+        entry: bash -c 'cd .tests/integration && snakemake --lint -n -s ../../workflow/Snakefile --configfile config.yaml'
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: snakemake-dry-run
+        name: snakemake-dry-run
+        entry: bash -c 'cd .tests/integration && snakemake -n -s ../../workflow/Snakefile --configfile config.yaml && snakemake -n -s ../../workflow/Snakefile --configfile config_pacbio.yaml'
+        language: system
+        pass_filenames: false
+        stages: [pre-push]

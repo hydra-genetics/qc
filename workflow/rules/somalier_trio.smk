@@ -29,11 +29,9 @@ rule somalier_trio_combine_fam:
     container:
         config.get("somalier_trio_combine_fam", {}).get("container", config["default_container"])
     message:
-        "{rule}: creates combined somalier_all.ped for trio analysis"
-    shell:
-        """
-        cat {input.fam} > {output.ped} 2> {log}
-        """
+        "{rule}: creates combined and deduplicated somalier_all.ped for trio analysis"
+    script:
+        "../scripts/somalier_combine_and_deduplicate_fam.py"
 
 
 rule somalier_trio_create_groupfile:

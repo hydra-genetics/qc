@@ -63,7 +63,7 @@ rule multiqc:
     message:
         "{rule}: generate combined qc report at {output.html}"
     wrapper:
-        "v1.7.0/bio/multiqc"
+        "v9.17.0/bio/multiqc"
 
 
 rule multiqc_longread:
@@ -114,4 +114,4 @@ rule multiqc_longread:
     message:
         "{rule}: generate combined qc report at {output.html}"
     wrapper:
-        "v1.7.0/bio/multiqc"
+        "v9.17.0/bio/multiqc"

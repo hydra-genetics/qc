@@ -29,4 +29,4 @@ rule fastqc:
     message:
         "{rule}: sequencing run stats for {input.fastq}"
     wrapper:
-        "v1.3.1/bio/fastqc"
+        "v9.17.0/bio/fastqc"

@@ -27,7 +27,7 @@ gatk_get_pileup_summaries:
 mosdepth:
   by: "500"
   container: "docker://hydragenetics/mosdepth:0.3.2"
-  extra: "--fast-mode --no-per-base"
+  extra: "--fast-mode"
 
 mosdepth_bed:
   container: "docker://hydragenetics/mosdepth:0.3.2"

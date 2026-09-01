@@ -14,7 +14,7 @@ repos:
       - id: pycodestyle
         name: pycodestyle
         entry: pycodestyle
-        args: [workflow/scripts/]
+        args: [--max-line-length=130, workflow/scripts/]
         language: system
         pass_filenames: false
         stages: [pre-commit]

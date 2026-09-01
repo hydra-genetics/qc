@@ -3,6 +3,8 @@ __copyright__ = "Copyright 2021, Jonas A"
 __email__ = "jonas.almlof@igp.uu.se"
 __license__ = "GPL-3"
 
+import re
+
 import pandas as pd
 
 from hydra_genetics.utils.resources import load_resources
@@ -12,7 +14,7 @@ from hydra_genetics.utils.misc import get_input_aligned_bam
 from snakemake.utils import validate
 from snakemake.utils import min_version
 
-min_version("7.8.0")
+min_version("9.0.0")
 
 ### Set and validate config file
 
@@ -44,7 +46,7 @@ validate(units, schema="../schemas/units.schema.yaml")
 
 wildcard_constraints:
     barcode="[A-Z+-]+",
-    sample="|".join(samples.index),
+    sample="|".join(re.escape(s) for s in samples.index),
     type="N|T|R",
 
 

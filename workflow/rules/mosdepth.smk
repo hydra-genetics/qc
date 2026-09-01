@@ -10,9 +10,8 @@ rule mosdepth:
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
     output:
         bed=temp("qc/mosdepth/{sample}_{type}.regions.bed.gz"),
-        csi=temp("qc/mosdepth/{sample}_{type}.regions.bed.gz.csi"),
-        glob=temp("qc/mosdepth/{sample}_{type}.mosdepth.global.dist.txt"),
-        region=temp("qc/mosdepth/{sample}_{type}.mosdepth.region.dist.txt"),
+        bed_dist=temp("qc/mosdepth/{sample}_{type}.mosdepth.region.dist.txt"),
+        dist=temp("qc/mosdepth/{sample}_{type}.mosdepth.global.dist.txt"),
         summary=temp("qc/mosdepth/{sample}_{type}.mosdepth.summary.txt"),
     params:
         by=config.get("mosdepth", {}).get("by", ""),
@@ -36,7 +35,7 @@ rule mosdepth:
     message:
         "{rule}: calculating coverage for {input.bam}"
     wrapper:
-        "0.80.2/bio/mosdepth"
+        "v9.17.0/bio/mosdepth"
 
 
 rule mosdepth_bed:
@@ -46,11 +45,9 @@ rule mosdepth_bed:
         bed=config.get("reference", {}).get("design_bed", ""),
     output:
         bed=temp("qc/mosdepth_bed/{sample}_{type}.regions.bed.gz"),
-        bed_csi=temp("qc/mosdepth_bed/{sample}_{type}.regions.bed.gz.csi"),
-        coverage=temp("qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"),
-        coverage_csi=temp("qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz.csi"),
-        glob=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.global.dist.txt"),
-        region=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.region.dist.txt"),
+        bed_dist=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.region.dist.txt"),
+        dist=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.global.dist.txt"),
+        per_base=temp("qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"),
         summary=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.summary.txt"),
     params:
         extra=config.get("mosdepth_bed", {}).get("extra", ""),
@@ -73,4 +70,4 @@ rule mosdepth_bed:
     message:
         "{rule}: calculating coverage for {input.bam}"
     wrapper:
-        "0.80.2/bio/mosdepth"
+        "v9.17.0/bio/mosdepth"

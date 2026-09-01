@@ -1,4 +1,4 @@
-$schema: "http://json-schema.org/draft-04/schema#"
+$schema: "https://json-schema.org/draft/2020-12/schema"
 description: snakemake rule input and output files description file
 type: object
 properties:
@@ -186,15 +186,12 @@ properties:
           bed:
             type: string
             description: Bed file with coverage per region
-          csi:
-            type: string
-            description: Bed coverage index file 
-          glob:
-            type: string
-            description: Global statistics used by MultiQC
-          region:
+          bed_dist:
             type: string
             description: Statistics for the regions specified (--by parameter) used by MultiQC
+          dist:
+            type: string
+            description: Global statistics used by MultiQC
           summary:
             type: string
             description: Summary statistics
@@ -224,21 +221,15 @@ properties:
           bed:
             type: string
             description: Bed file with coverage per region
-          bed_csi:
-            type: string
-            description: Bed coverage index file 
-          coverage:
-            type: string
-            description: Coverage per base in the regions
-          coverage_csi:
-            type: string
-            description: Coverage index file 
-          glob:
-            type: string
-            description: Global statistics used by MultiQC
-          region:
+          bed_dist:
             type: string
             description: Statistics for the regions specified (--by parameter) used by MultiQC
+          dist:
+            type: string
+            description: Global statistics used by MultiQC
+          per_base:
+            type: string
+            description: Coverage per base in the regions
           summary:
             type: string
             description: Summary statistics

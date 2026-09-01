@@ -30,4 +30,4 @@ rule verifybamid2:
     message:
         "{rule}: estimate contamination from  {input.bam}"
     wrapper:
-        "v2.6.0-35-g755343f/bio/verifybamid/verifybamid2"
+        "v9.17.0/bio/verifybamid/verifybamid2"

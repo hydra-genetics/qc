@@ -36,7 +36,7 @@ rule picard_collect_alignment_summary_metrics:
     message:
         "{rule}: calculate alignment statistics using picard for {input.bam}"
     wrapper:
-        "0.79.0/bio/picard/collectalignmentsummarymetrics"
+        "v9.17.0/bio/picard/collectalignmentsummarymetrics"
 
 
 rule picard_collect_duplication_metrics:
@@ -107,7 +107,7 @@ rule picard_collect_gc_bias_metrics:
     message:
         "{rule}: calculate gc bias using picard for {input.bam}"
     wrapper:
-        "0.80.2/bio/picard/collectgcbiasmetrics"
+        "v9.17.0/bio/picard/collectgcbiasmetrics"
 
 
 rule picard_collect_hs_metrics:
@@ -140,7 +140,7 @@ rule picard_collect_hs_metrics:
     message:
         "{rule}: calculate hs metrics using picard for {input.bam}"
     wrapper:
-        "0.79.0/bio/picard/collecthsmetrics"
+        "v9.17.0/bio/picard/collecthsmetrics"
 
 
 rule picard_collect_insert_size_metrics:
@@ -172,7 +172,7 @@ rule picard_collect_insert_size_metrics:
     message:
         "{rule}: calculate insert size using picard for {input.bam}"
     wrapper:
-        "0.79.0/bio/picard/collectinsertsizemetrics"
+        "v9.17.0/bio/picard/collectinsertsizemetrics"
 
 
 rule picard_collect_multiple_metrics:
@@ -208,7 +208,7 @@ rule picard_collect_multiple_metrics:
     message:
         "{rule}: calculate multiple metrics using picard for {input.bam}"
     wrapper:
-        "0.80.2/bio/picard/collectmultiplemetrics"
+        "v9.17.0/bio/picard/collectmultiplemetrics"
 
 
 rule picard_collect_wgs_metrics:

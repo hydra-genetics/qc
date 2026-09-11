@@ -7,8 +7,8 @@ __license__ = "GPL-3"
 rule verifybamid2:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
-        ref=config.get("reference", {}).get("fasta", ""),
-        svd_mu=config.get("verifybamid2", {}).get("svd_mu", ""),
+        ref=lambda wildcards: get_config_value("reference", "fasta"),
+        svd_mu=lambda wildcards: get_config_value("verifybamid2", "svd_mu"),
     output:
         selfsm=temp("qc/verifybamid2/{sample}_{type}.selfSM"),
         ancestry=temp("qc/verifybamid2/{sample}_{type}.ancestry"),

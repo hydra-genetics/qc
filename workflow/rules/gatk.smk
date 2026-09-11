@@ -8,8 +8,8 @@ rule gatk_get_pileup_summaries:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
-        sites=config.get("gatk_get_pileup_summaries", {}).get("sites", ""),
-        variants=config.get("gatk_get_pileup_summaries", {}).get("variants", ""),
+        sites=lambda wildcards: get_config_value("gatk_get_pileup_summaries", "sites"),
+        variants=lambda wildcards: get_config_value("gatk_get_pileup_summaries", "variants"),
     output:
         pileups_table=temp("qc/gatk_get_pileup_summaries/{sample}_{type}.pileups.table"),
     params:

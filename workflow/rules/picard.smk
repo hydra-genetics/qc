@@ -8,7 +8,7 @@ rule picard_collect_alignment_summary_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
-        ref=config.get("reference", {}).get("fasta", ""),
+        ref=lambda wildcards: get_config_value("reference", "fasta"),
     output:
         metrics=temp("qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"),
     params:
@@ -79,7 +79,7 @@ rule picard_collect_gc_bias_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
-        ref=config.get("reference", {}).get("fasta", ""),
+        ref=lambda wildcards: get_config_value("reference", "fasta"),
     output:
         chart=temp("qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.pdf"),
         metrics=temp("qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.detail_metrics"),
@@ -114,9 +114,9 @@ rule picard_collect_hs_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
-        bait_intervals=config.get("reference", {}).get("design_intervals", ""),
-        reference=config.get("reference", {}).get("fasta", ""),
-        target_intervals=config.get("reference", {}).get("design_intervals", ""),
+        bait_intervals=lambda wildcards: get_config_value("reference", "design_intervals"),
+        reference=lambda wildcards: get_config_value("reference", "fasta"),
+        target_intervals=lambda wildcards: get_config_value("reference", "design_intervals"),
     output:
         metrics=temp("qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"),
     params:
@@ -179,11 +179,11 @@ rule picard_collect_multiple_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
-        ref=config.get("reference", {}).get("fasta", ""),
+        ref=lambda wildcards: get_config_value("reference", "fasta"),
     output:
         metrices=expand(
             "qc/picard_collect_multiple_metrics/{{sample}}_{{type}}.{ext}",
-            ext=config.get("picard_collect_multiple_metrics", {}).get("output_ext", ""),
+            ext=config.get("picard_collect_multiple_metrics", {}).get("output_ext", []),
         ),
     params:
         extra=config.get("picard_collect_multiple_metrics", {}).get("extra", ""),
@@ -215,8 +215,8 @@ rule picard_collect_wgs_metrics:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
-        ref=config.get("reference", {}).get("fasta", ""),
-        interval=config.get("reference", {}).get("wgs_intervals", ""),
+        ref=lambda wildcards: get_config_value("reference", "fasta"),
+        interval=lambda wildcards: get_config_value("reference", "wgs_intervals"),
     output:
         metrics=temp("qc/picard_collect_wgs_metrics/{sample}_{type}.txt"),
     params:

@@ -107,9 +107,9 @@ rule somalier_matched_create_ped:
 
 rule somalier_matched_extract:
     input:
-        sites=config.get("somalier_matched_extract", {}).get("sites", ""),
-        fasta=config.get("reference", {}).get("fasta", ""),
-        fai=config.get("reference", {}).get("fasta", "") + ".fai",
+        sites=lambda wildcards: get_config_value("somalier_matched_extract", "sites"),
+        fasta=lambda wildcards: get_config_value("reference", "fasta"),
+        fai=lambda wildcards: get_config_value("reference", "fasta") + ".fai",
         bam=lambda wildcards: get_input_aligned_bam(wildcards, config)[0],
         bai=lambda wildcards: get_input_aligned_bam(wildcards, config)[1],
     output:

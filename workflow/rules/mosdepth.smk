@@ -42,7 +42,7 @@ rule mosdepth_bed:
     input:
         bam="alignment/samtools_merge_bam/{sample}_{type}.bam",
         bai="alignment/samtools_merge_bam/{sample}_{type}.bam.bai",
-        bed=config.get("reference", {}).get("design_bed", ""),
+        bed=lambda wildcards: get_config_value("reference", "design_bed"),
     output:
         bed=temp("qc/mosdepth_bed/{sample}_{type}.regions.bed.gz"),
         bed_dist=temp("qc/mosdepth_bed/{sample}_{type}.mosdepth.region.dist.txt"),

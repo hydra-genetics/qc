@@ -24,6 +24,15 @@ include: "rules/somalier_ungrouped.smk"
 include: "rules/verifybamid2.smk"
 
 
+if units.platform.iloc[0] in ["PACBIO", "ONT"]:
+
+    ruleorder: multiqc_longread > multiqc
+
+else:
+
+    ruleorder: multiqc > multiqc_longread
+
+
 rule all:
     input:
         unpack(compile_output_list),

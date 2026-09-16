@@ -21,6 +21,7 @@ rule multiqc:
                 for sample in get_samples(samples)
                 for u in units.loc[sample].dropna().itertuples()
                 if u.type in config["multiqc"]["reports"][wildcards.report]["included_unit_types"]
+                and not long_read_units
                 for read in ["fastq1", "fastq2"]
                 for ext in config.get("picard_collect_multiple_metrics", {}).get("output_ext", [""])
                 if "{sample}" in file or "{type}" in file
@@ -80,6 +81,7 @@ rule multiqc_longread:
                 for sample in get_samples(samples)
                 for u in units.loc[sample].dropna().itertuples()
                 if u.type in config["multiqc"]["reports"][wildcards.report]["included_unit_types"]
+                and long_read_units
             ]
         ),
     output:

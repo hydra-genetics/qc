@@ -69,8 +69,8 @@ rule picard_collect_duplication_metrics:
         "{rule}: calculate duplication metrics using picard for {input.bam}"
     shell:
         "(picard CollectDuplicateMetrics "
-        "INPUT={input.bam} "
-        "M={output.metrics} "
+        "--INPUT {input.bam} "
+        "-M {output.metrics} "
         "{params.extra} )"
         "&> {log}"
 
@@ -120,7 +120,7 @@ rule picard_collect_hs_metrics:
     output:
         metrics=temp("qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"),
     params:
-        extra=config.get("picard_collect_hs_metrics", {}).get("extra", "COVERAGE_CAP=5000"),
+        extra=config.get("picard_collect_hs_metrics", {}).get("extra", "--COVERAGE_CAP 5000"),
     log:
         "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt.log",
     benchmark:
@@ -241,9 +241,9 @@ rule picard_collect_wgs_metrics:
         "{rule}: collect wgs metrics using picard for {input.bam}"
     shell:
         "(picard CollectWgsMetrics "
-        "I={input.bam} "
-        "O={output.metrics} "
-        "R={input.ref} "
-        "INTERVALS={input.interval} "
+        "-I {input.bam} "
+        "-O {output.metrics} "
+        "-R {input.ref} "
+        "--INTERVALS {input.interval} "
         "{params.extra}) "
         "&> {log}"

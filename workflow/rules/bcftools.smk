@@ -30,4 +30,4 @@ rule bcftools_stats:
     message:
         "{rule}: Calculate variant statistcs from {input.vcf} using bcftools stats"
     wrapper:
-        "v7.2.0/bio/bcftools/stats"
+        "v9.17.0/bio/bcftools/stats"

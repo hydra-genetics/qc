@@ -26,15 +26,11 @@ The module contains rules to run different quality control tools. Most output ca
 
 In order to use this module, the following dependencies are required:
 
-[![hydra-genetics](https://img.shields.io/badge/hydragenetics-3.1.1-blue)](https://github.com/hydra-genetics/)
+[![hydra-genetics](https://img.shields.io/badge/hydragenetics-migrate--to--snakemake9-blue)](https://github.com/hydra-genetics/)
 [![pandas](https://img.shields.io/badge/pandas-1.3.1-blue)](https://pandas.pydata.org/)
-[![python](https://img.shields.io/badge/python-3.8-blue)](https://www.python.org/)
-[![snakemake](https://img.shields.io/badge/snakemake-7.13.0-blue)](https://snakemake.readthedocs.io/en/stable/)
-[![singularity](https://img.shields.io/badge/singularity-3.0.0-blue)](https://sylabs.io/docs/)
-[![drmaa](https://img.shields.io/badge/drmaa-0.7.9-blue)](https://pypi.org/project/drmaa/)
-[![tabulate](https://img.shields.io/badge/tabulate-0.8.10-blue)](https://pypi.org/project/tabulate/)
-
-**Note! Releases of qc <= v0.1.0 needs tabulate<0.9.0 added in requirements.txt**
+[![python](https://img.shields.io/badge/python-3.12-blue)](https://www.python.org/)
+[![snakemake](https://img.shields.io/badge/snakemake-9.0.0-blue)](https://snakemake.readthedocs.io/en/stable/)
+[![apptainer](https://img.shields.io/badge/apptainer-1.4.5-blue)](https://apptainer.org/)
 
 ## :school_satchel: Preparations
 
@@ -99,7 +95,7 @@ The workflow repository contains a small test dataset `.tests/integration` which
 
 ```bash
 $ cd .tests/integration
-$ snakemake -s ../../Snakefile -j1 --configfile config.yaml --use-singularity
+$ snakemake -s ../../Snakefile -j1 --configfile config.yaml --software-deployment-method apptainer
 ```
 
 ## :rocket: Usage
@@ -126,8 +122,8 @@ use rule * from qc as qc_*
 ### Compatibility
 
 Latest:
- - alignment:v0.6.0
- - prealignment:v1.2.0
+ - alignment:migrate-to-snakemake9
+ - prealignment:migrate-to-snakemake9
 
  See [COMPATIBLITY.md](../master/COMPATIBLITY.md) file for a complete list of module compatibility.
 

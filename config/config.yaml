@@ -5,10 +5,10 @@ units: "units.tsv"
 default_container: "docker://hydragenetics/common:3.3.0"
 
 reference:
-  fasta: ""
-  design_intervals: ""
-  design_bed: ""
-  wgs_intervals: ""
+  fasta: "reference/HES45.fna"
+  design_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
+  design_bed: "reference/twist_DNA_solid.HES45.annotated.bed"
+  wgs_intervals: "reference/twist_DNA_solid.HES45.annotated.interval_list"
 
 fastqc:
   container: "docker://hydragenetics/fastqc:0.11.9"

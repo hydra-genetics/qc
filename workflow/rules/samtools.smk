@@ -30,7 +30,7 @@ rule samtools_stats:
     message:
         "{rule}: calculate qc using samtools for {input.bam}"
     wrapper:
-        "v3.0.0/bio/samtools/stats"
+        "v9.17.0/bio/samtools/stats"
 
 
 rule samtools_idxstats:
@@ -60,4 +60,4 @@ rule samtools_idxstats:
     message:
         "{rule}: calculate index qc using samtools for {input.bai}"
     wrapper:
-        "v1.5.0/bio/samtools/idxstats"
+        "v9.17.0/bio/samtools/idxstats"

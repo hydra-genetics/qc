@@ -1,18 +1,22 @@
-$schema: "http://json-schema.org/draft-04/schema#"
+$schema: "https://json-schema.org/draft/2020-12/schema"
 description: snakemake configuration file
 type: object
 properties:
   resources:
     type: string
+    minLength: 1
     description: path to resources.yaml file
   samples:
     type: string
+    minLength: 1
     description: path to samples.tsv file
   units:
     type: string
+    minLength: 1
     description: path to units.tsv file
   default_container:
     type: string
+    minLength: 1
     description: name or path to a default docker/singularity container
   reference:
     type: object
@@ -20,15 +24,19 @@ properties:
     properties:
       design_bed:
         type: string
+        minLength: 1
         description: path to bed file for design regions
       design_intervals:
         type: string
+        minLength: 1
         description: path to picard-style bed file for design regions
       fasta:
         type: string
+        minLength: 1
         description: path to reference fasta file
       wgs_intervals:
         type: string
+        minLength: 1
         description: path to picard-style interval file for wgs regions
     required:
       - fasta
@@ -42,6 +50,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -56,6 +65,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -70,6 +80,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   fgbio_collect_duplex_seq_metrics:
@@ -81,6 +92,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -95,6 +107,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -109,6 +122,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -123,12 +137,15 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       sites:
         type: string
+        minLength: 1
         description: sites to pileup (eg small_exac_common.vcf from GnomAD)
       variants:
         type: string
+        minLength: 1
         description: varaints to pileup (eg small_exac_common.vcf from GnomAD, usually same as sites)
       extra:
         type: string
@@ -146,6 +163,7 @@ properties:
         description: by flag
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -160,6 +178,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -174,6 +193,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -186,6 +206,7 @@ properties:
           properties:
             config:
               type: string
+              minLength: 1
               description: path to config file
             included_unit_types:
               type: array
@@ -198,6 +219,7 @@ properties:
               description: list with path to qc-files that will be used to generate a MultiQC report
               items:
                 type: string
+                minLength: 1
             required:
               - qc_files
     required:
@@ -212,6 +234,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -224,6 +247,7 @@ properties:
           properties:
             config:
               type: string
+              minLength: 1
               description: path to config file
             included_unit_types:
               type: array
@@ -236,6 +260,7 @@ properties:
               description: list with path to qc-files that will be used to generate a MultiQC report
               items:
                 type: string
+                minLength: 1
             required:
               - qc_files
     required:
@@ -250,6 +275,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -264,6 +290,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -278,6 +305,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -292,6 +320,7 @@ properties:
         description: set number of times benchmark should be repeated for picard_collect_alignment_summary_metrics
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   picard_collect_gc_bias_metrics:
@@ -303,6 +332,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -317,6 +347,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -333,6 +364,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -347,6 +379,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -356,6 +389,7 @@ properties:
         description: list of output file extensions
         items:
           type: string
+          minLength: 1
 
   picard_collect_wgs_metrics:
     type: object
@@ -366,10 +400,53 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
         description: parameters that should be forwarded
+
+  rseqc_gene_body_coverage:
+    type: object
+    description: parameters for rseqc_gene_body_coverage
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      bed:
+        type: string
+        minLength: 1
+        description: path to the gene model bed file
+      container:
+        type: string
+        minLength: 1
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+    required:
+      - bed
+
+  rseqc_inner_distance:
+    type: object
+    description: parameters for rseqc_inner_distance
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      bed:
+        type: string
+        minLength: 1
+        description: path to the gene model bed file
+      container:
+        type: string
+        minLength: 1
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+    required:
+      - bed
 
   samtools_stats:
     type: object
@@ -380,6 +457,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -394,6 +472,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -408,6 +487,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
 
@@ -420,6 +500,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   somalier_matched_create_ped:
@@ -431,6 +512,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
 
@@ -443,9 +525,11 @@ properties:
         description: set number of times benchmark should be repeated
       mqc_config:
         type: string
+        minLength: 1
         description: path to somalier_matched MultiQC config file
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
 
@@ -458,15 +542,18 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       sites:
         type: string
+        minLength: 1
         description: path to sites VCF file for somalier_matched extraction
       extra:
         type: string
         description: parameters that should be forwarded
       env:
         type: string
+        minLength: 1
         description: environment variables to set before running somalier extract (e.g. SOMALIER_SAMPLE_NAME={sample}_{type})
 
   somalier_matched_relate:
@@ -478,6 +565,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -495,6 +583,7 @@ properties:
         description: minimum relatedness score for valid T/N pairs (default 0.8)
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   somalier_trio_combine_fam:
@@ -506,6 +595,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   somalier_trio_create_groupfile:
@@ -517,6 +607,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   somalier_trio_create_ped:
@@ -528,6 +619,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   somalier_trio_extract:
@@ -539,15 +631,18 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       sites:
         type: string
+        minLength: 1
         description: path to sites VCF file for somalier extract
       extra:
         type: string
         description: parameters that should be forwarded
       env:
         type: string
+        minLength: 1
         description: environment variables to set before running somalier extract (e.g. SOMALIER_SAMPLE_NAME={sample}_{type})
 
   somalier_trio_mqc:
@@ -559,9 +654,11 @@ properties:
         description: set number of times benchmark should be repeated
       mqc_config:
         type: string
+        minLength: 1
         description: path to somalier_trio MultiQC config file
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   somalier_trio_relate:
@@ -573,6 +670,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -590,6 +688,7 @@ properties:
         description: minimum relatedness score for valid parent-child relationships (default 0.4)
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   somalier_ungrouped_extract:
@@ -601,15 +700,18 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       sites:
         type: string
+        minLength: 1
         description: path to sites VCF file for somalier extract
       extra:
         type: string
         description: parameters that should be forwarded
       env:
         type: string
+        minLength: 1
         description: environment variables to set before running somalier extract (e.g. SOMALIER_SAMPLE_NAME={sample}_{type})
 
   somalier_ungrouped_mqc:
@@ -621,9 +723,11 @@ properties:
         description: set number of times benchmark should be repeated
       mqc_config:
         type: string
+        minLength: 1
         description: path to somalier_ungrouped MultiQC config file
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
 
   somalier_ungrouped_relate:
@@ -635,6 +739,7 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
@@ -649,10 +754,17 @@ properties:
         description: set number of times benchmark should be repeated
       container:
         type: string
+        minLength: 1
         description: name or path to docker/singularity container
       extra:
         type: string
         description: parameters that should be forwarded
+      svd_mu:
+        type: string
+        minLength: 1
+        description: path to the VerifyBamID2 .mu resource file
+    required:
+      - svd_mu
 
 required:
   - samples

@@ -48,7 +48,7 @@ else:
         # A true standalone must have no parents
         if entry['paternal_id'] != '0' or entry['maternal_id'] != '0':
             return False
-        
+
         family_id = entry['family_id']
         sample_id = entry['sample_id']
         # Check if family_id is the sample prefix (sample_id without the _type suffix)

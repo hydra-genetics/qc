@@ -8,7 +8,7 @@ rule rseqc_gene_body_coverage:
     input:
         bam="alignment/star/{sample}_{type}.bam",
         bai="alignment/star/{sample}_{type}.bam.bai",
-        bed=config.get("rseqc_gene_body_coverage", {}).get("bed", ""),
+        bed=lambda wildcards: get_config_value("rseqc_gene_body_coverage", "bed"),
     output:
         pdf=temp("qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.curves.pdf"),
         rscrpt=temp("qc/rseqc_gene_body_coverage/{sample}_{type}.geneBodyCoverage.r"),
@@ -45,7 +45,7 @@ rule rseqc_inner_distance:
     input:
         bam="alignment/star/{sample}_{type}.bam",
         bai="alignment/star/{sample}_{type}.bam.bai",
-        bed=config.get("rseqc_inner_distance", {}).get("bed", ""),
+        bed=lambda wildcards: get_config_value("rseqc_inner_distance", "bed"),
     output:
         freq=temp("qc/rseqc_inner_distance/{sample}_{type}.inner_distance_freq.txt"),
         plot=temp("qc/rseqc_inner_distance/{sample}_{type}.inner_distance_plot.pdf"),
